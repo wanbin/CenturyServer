@@ -1,6 +1,7 @@
 <?php
-$uid = 'yo_8';
-$gameuid =40330;
+$uid = 'yo';
+$gameuid =rand(1,9000000);
+$uid = 'wb'.$gameuid;
 $pid = '1';
 $authCode =14245730;
 $server = 1;
