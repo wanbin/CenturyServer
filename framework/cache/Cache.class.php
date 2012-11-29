@@ -344,13 +344,6 @@ class Cache {
 	 */
 	protected function setValue($key,$value,$expire){
 		++self::$stats['set_count'];
-		if(defined('ELEX_DEV_VERSION')){
-			if(is_array($key)){
-				self::$stats['set_keys'] = array_merge(self::$stats['set_keys'],$key);
-			}else{
-				self::$stats['set_keys'][] = $key;
-			}
-		}
 		return $this->cache->set($key,$value,$this->flag,$expire);
 	}
 
