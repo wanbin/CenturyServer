@@ -155,8 +155,8 @@ class BaseCommand {
 	 *
 	 * 同步数据,按照类别同步
 	 * 暂时还没有按照类别启用
-	 * 
-	 * @param $types array       	
+	 *
+	 * @param $types array
 	 */
 	protected function getSyncData($types = array()) {
 		$syncData = array ();
@@ -229,11 +229,11 @@ class BaseCommand {
 	 *
 	 *
 	 * accesslog按照每天记录一份所有command的log
-	 * 
-	 * @param $command unknown_type       	
-	 * @param $params unknown_type       	
-	 * @param $sig_arr unknown_type       	
-	 * @param $result unknown_type       	
+	 *
+	 * @param $command unknown_type
+	 * @param $params unknown_type
+	 * @param $sig_arr unknown_type
+	 * @param $result unknown_type
 	 */
 	protected function writeAccessLog($command, $params, $sig_arr, $result, $model = 'access_logs') {
 		$log_dir = $GLOBALS ['config'] ['log_path'] . $model . '/' . date ( 'Ymd' );
@@ -286,10 +286,10 @@ class BaseCommand {
 	 *
 	 *
 	 * 建立 Runtime model 操作对象
-	 * 
-	 * @param $gameuid int       	
-	 * @param $uid string       	
-	 * @param $new bool       	
+	 *
+	 * @param $gameuid int
+	 * @param $uid string
+	 * @param $new bool
 	 * @return RunTimesCache
 	 */
 	protected function createRunTimesModel($gameuid = null, $uid = null, $new = FALSE) {
@@ -317,10 +317,10 @@ class BaseCommand {
 	 *
 	 *
 	 * 建立 建筑物 model 操作对象
-	 * 
-	 * @param $gameuid int       	
-	 * @param $uid string       	
-	 * @param $new bool       	
+	 *
+	 * @param $gameuid int
+	 * @param $uid string
+	 * @param $new bool
 	 * @return BuildingCache
 	 */
 	protected function createBuildingMC($gameuid = null, $uid = null, $new = false) {
@@ -338,10 +338,10 @@ class BaseCommand {
 	 *
 	 *
 	 * 建立 士兵 model 操作对象
-	 * 
-	 * @param $gameuid int       	
-	 * @param $uid string       	
-	 * @param $new bool       	
+	 *
+	 * @param $gameuid int
+	 * @param $uid string
+	 * @param $new bool
 	 * @return SoldierCache
 	 */
 	protected function createSoldierMC($gameuid = null, $uid = null, $new = FALSE) {
@@ -359,10 +359,10 @@ class BaseCommand {
 	 *
 	 *
 	 * 建立 地下城 model 操作对象
-	 * 
-	 * @param $gameuid int       	
-	 * @param $uid string       	
-	 * @param $new bool       	
+	 *
+	 * @param $gameuid int
+	 * @param $uid string
+	 * @param $new bool
 	 * @return DungeonCache
 	 */
 	protected function createDungeonMC($level, $gameuid = null, $uid = null, $new = FALSE) {
@@ -380,10 +380,10 @@ class BaseCommand {
 	}
 	/**
 	 * 建立 地下城 model 操作对象
-	 * 
-	 * @param $gameuid int       	
-	 * @param $uid string       	
-	 * @param $new bool       	
+	 *
+	 * @param $gameuid int
+	 * @param $uid string
+	 * @param $new bool
 	 * @return HeroCache
 	 */
 	protected function createHeroMC($gameuid = null, $uid = null, $new = FALSE) {
@@ -416,10 +416,10 @@ class BaseCommand {
 	
 	/**
 	 * 建立 佣兵mercenary model 操作对象
-	 * 
-	 * @param $gameuid int       	
-	 * @param $uid string       	
-	 * @param $new bool       	
+	 *
+	 * @param $gameuid int
+	 * @param $uid string
+	 * @param $new bool
 	 * @return MercenaryCache
 	 */
 	protected function createMercenaryMC($gameuid = null, $uid = null, $new = FALSE) {
@@ -439,9 +439,9 @@ class BaseCommand {
 	 *
 	 * 建立 Item model 操作对象
 	 *
-	 * @param $gameuid int       	
-	 * @param $uid string       	
-	 * @param $new bool       	
+	 * @param $gameuid int
+	 * @param $uid string
+	 * @param $new bool
 	 * @return ItemCache
 	 */
 	protected function createItemMC() {
@@ -455,8 +455,8 @@ class BaseCommand {
 	 * 设置程序默认时区
 	 */
 	protected function setTimezone() {
-		
-		// 设置当地时区
+			
+			// 设置当地时区
 		if (isset ( $GLOBALS ['config'] ['sns_arr'] [$this->sns_id] )) {
 			date_default_timezone_set ( $GLOBALS ['config'] ['sns_arr'] [$this->sns_id] ['timezone'] );
 		} else {
@@ -466,7 +466,7 @@ class BaseCommand {
 	
 	/**
 	 * 建立account cache操作对象
-	 * 
+	 *
 	 * @param
 	 *       	 int gameuid
 	 * @param
@@ -478,7 +478,7 @@ class BaseCommand {
 	}
 	/**
 	 * 建立account cache操作对象
-	 * 
+	 *
 	 * @param
 	 *       	 int gameuid
 	 * @param
@@ -499,7 +499,7 @@ class BaseCommand {
 	}
 	/**
 	 * 检查用户账户
-	 * 
+	 *
 	 * @param $field array
 	 *       	 示例:array('coin'=>-50,'exp'=>-33,....)
 	 */
@@ -546,8 +546,8 @@ class BaseCommand {
 	
 	/**
 	 * 更新用户账户
-	 * 
-	 * @param $change array       	
+	 *
+	 * @param $change array
 	 */
 	protected function updateUserStatus($change = array(), $relatedId = '', $gameuid = '', $uid = '') {
 		if (empty ( $gameuid )) {
@@ -651,7 +651,7 @@ class BaseCommand {
 	
 	/**
 	 * account更新日志
-	 * 
+	 *
 	 * @param $insertArr array
 	 *       	 $insertArr['action_def']
 	 *       	 update_str
@@ -679,10 +679,10 @@ class BaseCommand {
 	/**
 	 * service层异常处理
 	 *
-	 * @param $message unknown_type       	
-	 * @param $code unknown_type       	
-	 * @param $uid unknown_type       	
-	 * @param $farmuid unknown_type       	
+	 * @param $message unknown_type
+	 * @param $code unknown_type
+	 * @param $uid unknown_type
+	 * @param $farmuid unknown_type
 	 */
 	protected function throwException($message, $code, $uid = null, $gameuid = null) {
 		$commandName = $this->commandName;
@@ -693,8 +693,8 @@ class BaseCommand {
 	// 判断magic_quotes_gpc状态
 	/**
 	 * 检查参数 防止sql注入
-	 * 
-	 * @param $array unknown_type       	
+	 *
+	 * @param $array unknown_type
 	 */
 	function sec(&$array,$lengh = 500) {
 			
@@ -793,7 +793,7 @@ class BaseCommand {
 //				'model'=>json_encode($modelArr),
 //				'modelcount'=>count($this->cacheItem),
 //				 'insertCount' => $insert,
-//				 'updateCount' => $update, 
+//				 'updateCount' => $update,
 //				'selectCount' => $select,
 //				 'delCount' => $del);
 //		$comAnaMC->addarr(array($insertArr) );
@@ -819,7 +819,6 @@ class BaseCommand {
 		$ret = $this->qqPayObject->comm_prepay_confirm ( $amt, $billno, $action );
 		return $ret;
 	}
-	
 	
 	protected function initQQPay() {
 		if (empty ( $this->qqPayObject )) {
