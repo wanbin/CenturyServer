@@ -334,69 +334,7 @@ class BaseCommand {
 		}
 		return $this->buildingObject [$gameuid];
 	}
-	/**
-	 *
-	 *
-	 * 建立 士兵 model 操作对象
-	 *
-	 * @param $gameuid int
-	 * @param $uid string
-	 * @param $new bool
-	 * @return SoldierCache
-	 */
-	protected function createSoldierMC($gameuid = null, $uid = null, $new = FALSE) {
-		if (empty ( $gameuid )) {
-			$gameuid = $this->gameuid;
-		}
-		if (empty ( $this->soldierObject ) || ! array_key_exists ( $gameuid, $this->soldierObject )) {
-			include_once PATH_CACHE . 'SoldierCache.php';
-			
-			$this->soldierObject [$gameuid] = new SoldierCache ( $gameuid, $uid );
-		}
-		return $this->soldierObject [$gameuid];
-	}
-	/**
-	 *
-	 *
-	 * 建立 地下城 model 操作对象
-	 *
-	 * @param $gameuid int
-	 * @param $uid string
-	 * @param $new bool
-	 * @return DungeonCache
-	 */
-	protected function createDungeonMC($level, $gameuid = null, $uid = null, $new = FALSE) {
-		if (empty ( $this->dungeonObject ))
-			$this->dungeonObject = array ();
-		if (! isset ( $this->dungeonObject [$level] ) || $new) {
-			include_once PATH_CACHE . 'DungeonCache.php';
-			if (empty ( $gameuid )) {
-				$this->dungeonObject [$level] = new DungeonCache ( $level, $this->gameuid, $this->uid );
-			} else {
-				$this->dungeonObject [$level] = new DungeonCache ( $level, $gameuid, $uid );
-			}
-		}
-		return $this->dungeonObject [$level];
-	}
-	/**
-	 * 建立 地下城 model 操作对象
-	 *
-	 * @param $gameuid int
-	 * @param $uid string
-	 * @param $new bool
-	 * @return HeroCache
-	 */
-	protected function createHeroMC($gameuid = null, $uid = null, $new = FALSE) {
-		if (empty ( $gameuid )) {
-			$gameuid = $this->gameuid;
-		}
-		if (empty ( $this->heroObject ) || ! array_key_exists ( $gameuid, $this->heroObject )) {
-			include_once PATH_CACHE . 'HeroCache.php';
-			
-			$this->heroObject [$gameuid] = new HeroCache ( $gameuid, $uid );
-		}
-		return $this->heroObject [$gameuid];
-	}
+
 	protected function updateRuntimes($iscommit = false) {
 		$runTimesMC = $this->createRunTimesModel ( $this->gameuid, $this->uid );
 		$sucessList = $runTimesMC->handlerRunTimes ( true );
@@ -413,27 +351,6 @@ class BaseCommand {
 		}
 		return $sucessList;
 	}
-	
-	/**
-	 * 建立 佣兵mercenary model 操作对象
-	 *
-	 * @param $gameuid int
-	 * @param $uid string
-	 * @param $new bool
-	 * @return MercenaryCache
-	 */
-	protected function createMercenaryMC($gameuid = null, $uid = null, $new = FALSE) {
-		if (empty ( $gameuid )) {
-			$gameuid = $this->gameuid;
-		}
-		if (empty ( $this->mercenaryobject ) || ! array_key_exists ( $gameuid, $this->mercenaryobject )) {
-			include_once PATH_CACHE . 'MercenaryCache.php';
-			
-			$this->mercenaryobject [$gameuid] = new MercenaryCache ( $gameuid, $uid );
-		}
-		return $this->mercenaryobject [$gameuid];
-	}
-	
 		/**
 	 *
 	 *
@@ -455,8 +372,6 @@ class BaseCommand {
 	 * 设置程序默认时区
 	 */
 	protected function setTimezone() {
-			
-			// 设置当地时区
 		if (isset ( $GLOBALS ['config'] ['sns_arr'] [$this->sns_id] )) {
 			date_default_timezone_set ( $GLOBALS ['config'] ['sns_arr'] [$this->sns_id] ['timezone'] );
 		} else {
@@ -486,13 +401,11 @@ class BaseCommand {
 	 * @return AccountCache
 	 */
 	protected function createAccountMC($gameuid = null, $uid = null, $new = false) {
-		
 		if (empty ( $gameuid )) {
 			$gameuid = $this->gameuid;
 		}
 		if (empty ( $this->accountObject ) || ! array_key_exists ( $gameuid, $this->accountObject )) {
 			require_once PATH_CACHE . 'AccountCache.php';
-			
 			$this->accountObject [$gameuid] = new AccountCache ( $gameuid, $uid );
 		}
 		return $this->accountObject [$gameuid];
@@ -517,7 +430,6 @@ class BaseCommand {
 				if ($val + $this->user_account [$key] > $this->user_account ['populationmax']) {
 					$this->throwException ( "$key is more than populationmax", 104 );
 				}
-				
 				if ($val + $this->user_account [$key] < 0) {
 					$this->throwException ( "$key is less than 0", 101 );
 				}
@@ -537,12 +449,7 @@ class BaseCommand {
 	protected function executeEx($params) {
 	
 	}
-	/**
-	 * 更新用户背包
-	 */
-	protected function updateUserPackage($item, $count, $opt = 'set') {
 	
-	}
 	
 	/**
 	 * 更新用户账户
@@ -649,27 +556,13 @@ class BaseCommand {
 		return $res;
 	}
 	
-	/**
-	 * account更新日志
-	 *
-	 * @param $insertArr array
-	 *       	 $insertArr['action_def']
-	 *       	 update_str
-	 *       	 related_id
-	 */
-	protected function writeAccountUpdateLog($insertArr) {
-		include_once PATH_DATAOBJ . 'log/UserAccountUpdateLog.php';
-		$log = new UserAccountUpdateLog ( $this->gameuid, $this->uid );
-	}
+
 	
 	protected function readParam($param) {
 		return false;
 	}
 	
-	// protected function executeEx()
-	// {
-	// return false;
-	// }
+	
 	protected function licitException($message, $code, $uid = null, $gameuid = null) {
 		$commandName = $this->commandName;
 		// 设置errorcode位移
@@ -769,34 +662,34 @@ class BaseCommand {
 	}
 	protected function saveAnalysisCount()
 	{
-//		$insert =0;
-//		$del =0;
-//		$select=0;
-//		$update = 0;
-//		$modelArr = array ();
-//		foreach ( $this->cacheItem as $key => $value ) {
-//			$temArr = $value->commandAnalysis ();
-//			$insert += $temArr ['insert'];
-//			$del += $temArr ['del'];
-//			$select += $temArr ['select'];
-//			$update += $temArr ['update'];
-//			$modelArr [$temArr ['model']] ['insert'] += $temArr ['insert'];
-//			$modelArr [$temArr ['model']] ['del'] += $temArr ['del'];
-//			$modelArr [$temArr ['model']] ['select'] += $temArr ['select'];
-//			$modelArr [$temArr ['model']] ['update'] += $temArr ['update'];
-//		}
-//		include_once PATH_CACHE . 'CommandAnalysisCache.php';
-//		$comAnaMC=new CommandAnalysisCache($this->gameuid);
-//		$insertArr=array('gameuid'=>$this->gameuid,
-//				'createtime'=>time(),
-//				'command'=>get_class($this),
-//				'model'=>json_encode($modelArr),
-//				'modelcount'=>count($this->cacheItem),
-//				 'insertCount' => $insert,
-//				 'updateCount' => $update,
-//				'selectCount' => $select,
-//				 'delCount' => $del);
-//		$comAnaMC->addarr(array($insertArr) );
+		$insert =0;
+		$del =0;
+		$select=0;
+		$update = 0;
+		$modelArr = array ();
+		foreach ( $this->cacheItem as $key => $value ) {
+			$temArr = $value->commandAnalysis ();
+			$insert += $temArr ['insert'];
+			$del += $temArr ['del'];
+			$select += $temArr ['select'];
+			$update += $temArr ['update'];
+			$modelArr [$temArr ['model']] ['insert'] += $temArr ['insert'];
+			$modelArr [$temArr ['model']] ['del'] += $temArr ['del'];
+			$modelArr [$temArr ['model']] ['select'] += $temArr ['select'];
+			$modelArr [$temArr ['model']] ['update'] += $temArr ['update'];
+		}
+		include_once PATH_CACHE . 'CommandAnalysisCache.php';
+		$comAnaMC=new CommandAnalysisCache($this->gameuid);
+		$insertArr=array('gameuid'=>$this->gameuid,
+				'createtime'=>time(),
+				'command'=>get_class($this),
+				'model'=>json_encode($modelArr),
+				'modelcount'=>count($this->cacheItem),
+				 'insertCount' => $insert,
+				 'updateCount' => $update,
+				'selectCount' => $select,
+				 'delCount' => $del);
+		$comAnaMC->addarr(array($insertArr) );
 	}
 	
 	protected function comm_prepay_base($amt) {

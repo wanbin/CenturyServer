@@ -1,10 +1,9 @@
 <?php
 /**
  * @author wanbin 2012年8月17日
- * TemplatenContent
+ * 方法性能分析工具
  */
-require_once 'BaseModel.php';
-class TemplateModel extends BaseModel {
+class CommandAnalysisModel extends BaseModel {
 	/**
 	 * 得到所有记录
 	 */
@@ -110,10 +109,10 @@ class TemplateModel extends BaseModel {
 	}
 	
 	protected function getFields() {
-		return 'templatefields';
+		return 'gameuid,command,createtime';
 	}
 	
 	protected function getTableName() {
-		return "templatetablename";
+		return "command_analysis";
 	}
 }

@@ -1,4 +1,9 @@
 <?php
+$dbHost = array();
+$cacheHost = array();
+$database_xmlpath = '';
+$webHost = '';
+$cdnHost = '';
 global $config;
 $config = array();
 $config['dbconfig'] = array (

@@ -1,4 +1,8 @@
 <?php
+/**
+ * @author wanbin
+ *
+ */
 class GameException extends Exception {
 	protected $gameuid;
 	protected $uid;
