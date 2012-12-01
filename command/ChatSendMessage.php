@@ -1,6 +1,0 @@
-<?php 
-
-/*
- * Athor WensonSmith
- */
-?>
