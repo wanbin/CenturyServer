@@ -34,8 +34,7 @@ $config['authcode_expire'] = 0;
 $config['sns_arr'] = array(
 	'default'=>array('timezone'=>'Asia/Shanghai'),
 );
-$config ['redis'] = true;
-$config ['handlersocket'] = false;
+$config ['redis'] = false;
 $config ['memcache'] = array (
 		'ItemCache' => true,
 );
