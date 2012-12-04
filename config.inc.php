@@ -1,6 +1,4 @@
 <?php
-$dbHost = array();
-$cacheHost = array();
 $database_xmlpath = '';
 $webHost = '';
 $cdnHost = '';

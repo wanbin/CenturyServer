@@ -63,7 +63,7 @@ class BaseCommand {
 			$this->version = $sign_arr['version'];
 			
 			if (isset ( $this->gameuid )) {
-				$this->updateStatic ($this->gameuid);
+				//$this->updateStatic ($this->gameuid);
 			}
 			
 			
@@ -74,7 +74,6 @@ class BaseCommand {
 				}
 			}
 			
-			$this->session_key = $param ['session_key'];
 			$this->commandName = $command;
 			$this->current_command = $command;
 			$this->setTimezone ();
@@ -87,12 +86,6 @@ class BaseCommand {
 			$re ['ecode'] = 0;
 			$re ['data'] = array ();
 			$re ['cmd'] = $command;
-			if ($GLOBALS ['config'] ['maintain'] > 100) {
-				$re ['status'] = $GLOBALS ['config'] ['maintain'];
-				return $re;
-			} else {
-				$re ['status'] = 1;
-			}
 			
 			// 处理合法错误
 			try {
@@ -112,14 +105,14 @@ class BaseCommand {
 			
 			if ($param ['sync']) {
 				$re ['sync'] = 1;
-				$re ['syncdata'] = $this->getSyncData ();
+				//$re ['syncdata'] = $this->getSyncData ();
 			} else {
 				$re ['sync'] = 0;
 			}
 			
 			//检测返回值没有null值
  			if($this->checkNull($re)){
- 				$this->writeAccessLog ( $command, $param, $sign_arr, $re ,'checkNull_logs');
+ 				//$this->writeAccessLog ( $command, $param, $sign_arr, $re ,'checkNull_logs');
  			}
 			
 			if (DEBUG) {

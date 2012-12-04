@@ -48,9 +48,9 @@ class BaseModel {
 	}
 	protected function createItemMC() {
 		if (empty ( $this->itemMC )) {
-			include_once PATH_CACHE . 'ItemCache.php';
-			$itemMC = new ItemCache ( $this->gameuid );
-			$this->itemMC = $itemMC;
+			//include_once PATH_CACHE . 'ItemCache.php';
+			//$itemMC = new ItemCache ( $this->gameuid );
+			//$this->itemMC = $itemMC;
 		}
 		return $this->itemMC;
 	}
@@ -256,7 +256,7 @@ class BaseModel {
 	 * @return mixed
 	 */
 	protected function getFromCache($key, $gameuid) {
-		if ($this->useMemcache [$this->model]) {
+		if (isset ( $this->useMemcache [$this->model] ) && $this->useMemcache [$this->model]) {
 			if (empty ( $gameuid )) {
 				$gameuid = $this->gameuid;
 			}

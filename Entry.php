@@ -4,6 +4,7 @@ define( 'PATH_ROOT', dirname(__FILE__).'/' );			// 根目录
 define( 'PATH_COMMAND', PATH_ROOT.'command/');			// 命令(逻辑)目录
 define( 'PATH_DATAOBJ', PATH_ROOT.'dataobj/');			// 数据对象目录
 define( 'PATH_CACHE', PATH_ROOT.'dataobj/cache/');      // mc层
+define( 'PATH_SQL', PATH_ROOT.'sql/');      
 define( 'FRAMEWORK', PATH_ROOT . 'framework/');         //主框架目录
 
 include PATH_ROOT . 'config.host.php';			// 全局配置文件
@@ -15,7 +16,7 @@ require_once FRAMEWORK . '/database/DBHelper2.class.php';
 //加载redies
 require_once FRAMEWORK . '/redis/Rediska.php';
 include_once PATH_DATAOBJ . 'GameException.php'; // 游戏内部异常处理
-
+error_reporting(E_ALL ^ E_NOTICE);
 //游戏当前版本
 define('DEBUG',true);
 class Entry

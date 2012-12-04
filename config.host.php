@@ -1,6 +1,6 @@
 <?php
 $dbHost = array ();
-$dbHost ['host1'] = array ('host' => 'localhost', 'user' => 'root', 'password' => '', 'dbname' => array ('game_1', 'game1' ) );
+$dbHost ['host1'] = array ('host' => 'localhost', 'user' => 'root', 'password' => '', 'dbname' => array ('game_1', 'host' ) );
 
 $cacheHost = array ();
 $cacheHost ['host1'] = array ('host' => '127.0.0.1:11211' );

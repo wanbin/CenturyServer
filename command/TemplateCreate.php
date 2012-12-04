@@ -1,7 +1,7 @@
 <?php
 //要创建的array创建完成之后别忘记删除无用的
-$createarr = array ('updateLog' );
-$createarr = array ('');
+$createarr = array ('testContent' );
+// $createarr = array ('');
 $createarray=array(
 		array(
 				'modelname' => 'action',
@@ -63,9 +63,18 @@ $createarray=array(
 				),
 				'description' => '方法性能分析',
 		),
+		
+		array(
+				'modelname' => 'testContent',
+				'singleData' => true,
+				'tablename' => 'testContent',
+				'tablefiled' => array ('gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0),
+						'count' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0),
+				),
+				'description' => '测试数据库连接',
+		),
 );
 include_once '../Entry.php';
-
 
 foreach ( $createarray as $key => $value ) {
 	if (! in_array ( $value ['modelname'], $createarr )) {
