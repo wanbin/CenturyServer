@@ -1,8 +1,9 @@
 <?php
 /**
- * @author wanbin 2012年8月17日
- * 方法性能分析工具
+ * @author WanBin @date 2012-12-05
+ * 方法性能分析
  */
+require_once 'BaseModel.php';
 class CommandAnalysisModel extends BaseModel {
 	/**
 	 * 得到所有记录
@@ -36,7 +37,7 @@ class CommandAnalysisModel extends BaseModel {
 	}
 	
 	protected function getOneSingle($templateid) {
-		$where = array ('gameuid' => $this->gameuid, 'templateid' => $templateid );
+		$where = array (  );
 		$res = $this->hsSelectOne ( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
 		return $res;
 	}
@@ -52,8 +53,8 @@ class CommandAnalysisModel extends BaseModel {
 		return $res;
 	}
 	
-	protected function updateOne($templateid, $content) {
-		$where = array ('gameuid' => $this->gameuid, 'templateid' => $templateid );
+	protected function updateOne(, $content) {
+		$where = array ( );
 		$res = $this->hsUpdate ( $this->getTableName (), $this->gameuid, $content, $where );
 		return $res;
 	}
@@ -103,13 +104,13 @@ class CommandAnalysisModel extends BaseModel {
 		return $this->hsDelete ( $this->getTableName (), $this->gameuid, $where );
 	}
 	
-	protected function delOne($templateid) {
-		$where = array ('gameuid' => $this->gameuid, 'templateid' => $templateid );
+	protected function delOne(  ) {
+		$where = array ( );
 		return $this->hsDelete ( $this->getTableName (), $this->gameuid, $where );
 	}
 	
 	protected function getFields() {
-		return 'gameuid,command,createtime';
+		return 'gameuid,command,createtime,type,count';
 	}
 	
 	protected function getTableName() {

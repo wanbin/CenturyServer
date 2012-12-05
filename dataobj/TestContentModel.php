@@ -1,9 +1,9 @@
 <?php
 /**
- * @author wanbin 2012年8月17日
+ * @author WanBin @date 2012-12-05
  * 测试数据库连接
  */
-require_once 'BaseModel.php';
+require_once PATH_DATAOBJ.'BaseModel.php';
 class TestContentModel extends BaseModel {
 	/**
 	 * 得到所有记录
@@ -14,11 +14,11 @@ class TestContentModel extends BaseModel {
 		$ret = array ();
 		foreach ( $res as $key => $value ) {
 			foreach ( $value as $jsonKey => $jsonValue )
-				if (in_array ( $jsonKey, array ('template_json' ) )) {
+				if (in_array ( $jsonKey, array ('count' ) )) {
 					$value [$jsonKey] = json_decode ( $jsonValue, true );
 				}
-			$temid = $value ['templateid'];
-			unset ( $value ['templateid'] );
+			$temid = $value ['count'];
+			unset ( $value ['count'] );
 			$ret [$temid] = $value;
 		}
 		return $ret;
@@ -36,8 +36,8 @@ class TestContentModel extends BaseModel {
 		return $res;
 	}
 	
-	protected function getOneSingle($templateid) {
-		$where = array ('gameuid' => $this->gameuid, 'templateid' => $templateid );
+	protected function getOneSingle($count) {
+		$where = array ( 'gameuid' => $this->gameuid,'count' => $count );
 		$res = $this->hsSelectOne ( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
 		return $res;
 	}
@@ -53,8 +53,8 @@ class TestContentModel extends BaseModel {
 		return $res;
 	}
 	
-	protected function updateOne($templateid, $content) {
-		$where = array ('gameuid' => $this->gameuid, 'templateid' => $templateid );
+	protected function updateOne($gameuid,$count, $content) {
+		$where = array ( 'gameuid' => $this->gameuid,'count' => $count);
 		$res = $this->hsUpdate ( $this->getTableName (), $this->gameuid, $content, $where );
 		return $res;
 	}
@@ -69,7 +69,7 @@ class TestContentModel extends BaseModel {
 		$fields = explode ( ',', $this->getFields () );
 		$insert ['gameuid'] = $this->gameuid;
 		foreach ( $content as $key => $value ) {
-			if (in_array ( $key, array ('template_json') )) {
+			if (in_array ( $key, array ('count') )) {
 				$value = json_encode ( $value );
 			}
 			if (in_array ( $key, $fields )) {
@@ -82,7 +82,7 @@ class TestContentModel extends BaseModel {
 	protected function addarr($content) {
 		foreach ( $content as $key => $value ) {
 			foreach ( $value as $jsonKey => $jsonValue ) {
-				if (in_array ( $jsonKey, array ('template_json' ) )) {
+				if (in_array ( $jsonKey, array ('count' ) )) {
 					$content [$key] [$jsonKey] = json_encode ( $jsonValue );
 				}
 			}
@@ -90,8 +90,8 @@ class TestContentModel extends BaseModel {
 		return $this->hsMultiInsert ( $this->getTableName (), $this->gameuid, $content );
 	}
 	
-	protected function init() {
-		$insert ['gameuid'] = $this->gameuid;
+	protected function init($gameuid,$count ) {
+		$insert = array ( 'gameuid' => $this->gameuid,'count' => $count);
 		return $this->hsInsert ( $this->getTableName (), $this->gameuid, $insert );
 	}
 	/**
@@ -104,8 +104,8 @@ class TestContentModel extends BaseModel {
 		return $this->hsDelete ( $this->getTableName (), $this->gameuid, $where );
 	}
 	
-	protected function delOne($templateid) {
-		$where = array ('gameuid' => $this->gameuid, 'templateid' => $templateid );
+	protected function delOne( $gameuid,$count ) {
+		$where = array ( 'gameuid' => $this->gameuid,'count' => $count);
 		return $this->hsDelete ( $this->getTableName (), $this->gameuid, $where );
 	}
 	

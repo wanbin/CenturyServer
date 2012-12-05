@@ -1,6 +1,6 @@
 <?php
 /**
- * @author wanbin 2012年8月17日
+ * @author WanBin @date 2012-12-05
  * 测试数据库连接
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
@@ -56,8 +56,8 @@ class TestContentCache extends TestContentModel{
 		return $this->delFromCache ();
 	}
 	
-	protected function updateOne($templateid, $content) {
-		parent::update ( $templateid, $content );
+	protected function updateOne($count, $content) {
+		parent::update ( $count, $content );
 		return $this->delFromCacheALL ();
 	}
 	
@@ -72,11 +72,11 @@ class TestContentCache extends TestContentModel{
 		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
 	}
 	
-	protected function addOne($templateid, $content) {
+	protected function addOne($count, $content) {
 		$this->get ();
-		$content ['templateid'] = $templateid;
+		$content ['count'] = $count;
 		parent::add ( $content );
-		$this->item [$templateid] = $content;
+		$this->item [$count] = $content;
 		$key = $this->getCacheKeyAll ();
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
 	}
@@ -85,7 +85,7 @@ class TestContentCache extends TestContentModel{
 		$this->get ();
 		parent::addarr ( $content );
 		foreach ( $content as $key => $vlaue ) {
-			$this->item [$vlaue ['templateid']] = $vlaue;
+			$this->item [$vlaue ['count']] = $vlaue;
 		}
 		$key = $this->getCacheKeyAll ();
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
@@ -101,14 +101,14 @@ class TestContentCache extends TestContentModel{
 		return $this->delFromCache ();
 	}
 	
-	protected function delOne($templateid) {
+	protected function delOne($count) {
 		$this->get ();
-		parent::delOne ( $templateid );
+		parent::delOne ( $count );
 		if (true) {
-			unset ( $this->item [$templateid] );
+			unset ( $this->item [$count] );
 		} else {
 			foreach ( $this->item as $key => $value ) {
-				if ($value ['templateid'] == $templateid) {
+				if ($value ['count'] == $count) {
 					unset ( $this->item [$key] );
 					break;
 				}

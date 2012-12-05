@@ -3,7 +3,7 @@ set_time_limit(60 * 2);
 define('PATH_SQL', dirname(__FILE__).'/' );
 
 //引入配置文件
-$configPath = PATH_SQL . '../../conf/config.host.php';
+$configPath = PATH_SQL . '../config.host.php';
 $configPath = PATH_SQL . '../config.inc.php';
 if(!file_exists($configPath)){
     exit($configPath . ' is not exits.');

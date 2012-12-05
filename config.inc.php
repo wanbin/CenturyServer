@@ -36,7 +36,7 @@ $config['sns_arr'] = array(
 );
 $config ['redis'] = false;
 $config ['memcache'] = array (
-		'ItemCache' => true,
+		'TestContentCache' => true,
 );
 //逻辑开服
 $config['dispatchCount'] = 10;//逻辑开服最大个数

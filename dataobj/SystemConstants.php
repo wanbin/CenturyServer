@@ -1,5 +1,9 @@
 <?php 
+//方法性能分析 
+define("MEMCACHE_KEY_COMMANDANALYSIS", "goe_commandAnalysis_%d");
+define("MEMCACHE_KEY_COMMANDANALYSIS_LIST", "goe_commandAnalysis_list_%d");
+
 //测试数据库连接 
-define("MEMCACHE_KEY_TESTCONTENT", "goe_testContent_%d");
-define("MEMCACHE_KEY_TESTCONTENT_ALL", "goe_testContent_all_%d");
+define("MEMCACHE_KEY_TESTCONTENT", "goe_testContent_%d_%d");
+define("MEMCACHE_KEY_TESTCONTENT_LIST", "goe_testContent_list_%d");
 

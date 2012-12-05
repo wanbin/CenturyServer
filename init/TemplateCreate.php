@@ -2,41 +2,11 @@
 //要创建的array创建完成之后别忘记删除无用的
 $createarr = array ('testContent' );
 // $createarr = array ('');
+
+$author = 'WanBin';
+$date = date ( 'Y-m-d', time () );
 $createarray=array(
-		array(
-				'modelname' => 'action',
-				'singleData' => true,
-				'tablename' => 'user_action',
-				'tablefiled' => array ('gameuid' => array('type'=>'int','lengh'=>10,'default'=>0), 
-										'id' => array('type'=>'int','lengh'=>10,'default'=>0),
-										'actions'=>array('type'=>'varchar','lengh'=>500,'default'=>'""'),
-										'updatetime'=>array('type'=>'int','lengh'=>10,'default'=>0)
-						),
-				'description' => '用户动作类',
-				),
-		array(
-				'modelname' => 'activities',
-				'singleData' => true,
-				'tablename' => 'user_activities',
-				'tablefiled' => array ('gameuid' => array('type'=>'int','lengh'=>10,'default'=>0),
-						'id' => array('type'=>'int','lengh'=>10,'default'=>0),
-						'activities'=>array('type'=>'varchar','lengh'=>500,'default'=>'""'),
-						'updatetime'=>array('type'=>'int','lengh'=>10,'default'=>0)
-				),
-				'description' => '用户活动类',
-				),
-		array(
-				'modelname' => 'Message',
-				'singleData' => true,
-				'tablename' => 'user_friend_message',
-				'tablefiled' => array ('gameuid' => array('type'=>'int','lengh'=>10,'default'=>0),
-										'fgameuid' => array('type'=>'int','lengh'=>10,'default'=>0),
-										'type' => array('type'=>'int','lengh'=>10,'default'=>0),
-										'createtime'=>array('type'=>'int','lengh'=>10,'default'=>0),
-										'content'=>array('type'=>'varchar','lengh'=>500,'default'=>'[]')
-				),
-				'description' => '用户好友间互动信息类',
-		),
+		
 		array(
 				'modelname' => 'updateLog',
 				'singleData' => true,
@@ -55,7 +25,7 @@ $createarray=array(
 				'modelname' => 'commandAnalysis',
 				'singleData' => true,
 				'tablename' => 'command_analysis',
-				'tablefiled' => array ('gameuid' => array('type'=>'int','lengh'=>10,'default'=>0),
+				'tablefiled' => array ('gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'comment'=>'玩家GAMEUID'),
 						'command'=>array('type'=>'varchar','lengh'=>100,'default'=>'[]'),
 						'createtime'=>array('type'=>'int','lengh'=>10,'default'=>0),
 						'type' => array('type'=>'varchar','lengh'=>15,'default'=>''),
@@ -66,10 +36,10 @@ $createarray=array(
 		
 		array(
 				'modelname' => 'testContent',
-				'singleData' => true,
+				'singleData' => false,
 				'tablename' => 'testContent',
 				'tablefiled' => array ('gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0),
-						'count' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0),
+						'count' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>1),
 				),
 				'description' => '测试数据库连接',
 		),
@@ -80,34 +50,7 @@ foreach ( $createarray as $key => $value ) {
 	if (! in_array ( $value ['modelname'], $createarr )) {
 		continue;
 	}
-	// 生成commodel
-	$tempModel = getSource ( 'TemplateModel' );
-	$tempModel = str_replace ( 'TemplateModel', ucfirst ( $value['modelname'] ) . 'Model', $tempModel );
-	$tempModel = str_replace ( 'TemplatenContent', $value['description'], $tempModel );
-	$tempModel = str_replace ( 'templatetablename', $value['tablename'], $tempModel );
-	$tempModel = str_replace ( 'templatefields', implode ( ',', array_keys ( $value['tablefiled'] ) ), $tempModel );
-	
-	
-	
-	
-	// 生成cache
-	$memcacheKey =  'MEMCACHE_KEY_' . strtoupper ( $value ['modelname'] );
-	$tempCache = getSource ( 'TemplateCache', PATH_CACHE );
-	$tempCache = str_replace ( 'TemplateModel', ucfirst ( $value ['modelname'] ) . 'Model', $tempCache );
-	$tempCache = str_replace ( 'TemplateCache', ucfirst ( $value ['modelname'] ) . 'Cache', $tempCache );
-	$tempCache = str_replace ( 'TemplatenContent', $value ['description'], $tempCache );
-	$tempCache = str_replace ( 'MEMCACHE_KEY_TEMPLATECACHEKEY',$memcacheKey, $tempCache );
-	
-		
-		// 生成缓存键
-	$tempSystem = getSource ( 'SystemConstants' );
-	if (strpos ( $tempSystem, $memcacheKey ) == false) {
-		$temstr = '//' . $value ['description'] . ' ' . "\r\n";
-		$temstr .= 'define("' . $memcacheKey . '", "goe_' . $value ['modelname'] . '_%d");' . "\r\n" ;
-		$temstr .= 'define("' . $memcacheKey . '_ALL", "goe_' . $value ['modelname'] . '_all_%d");' . "\r\n" . "\r\n";
-		writeAPPEND ( 'SystemConstants', $temstr );
-	}
-	
+
 	// 生成sql语句
 	$temSql = '-- ' . $value ['description'] . ' --' . "\r\n" . 'CREATE TABLE `' . $value ['tablename'] . '`(
 	replase PRIMARY KEY  (primarykey))ENGINE=InnoDB DEFAULT CHARSET=utf8;';
@@ -116,24 +59,83 @@ foreach ( $createarray as $key => $value ) {
 	$jsonstring = '';
 	$primaryKeyCount = 0;
 	$secPrimaryKey = '';
+	//以下两个参数在update中用
+	//搜索Where生成
+	$strWhere = '';
+	//定位参数生成
+	$strUnion = '';
+	//定位array
+	$strJson='';
 	foreach ( $value ['tablefiled'] as $tableKey => $tableValue ) {
 		if (in_array ( $tableValue ['type'], array ('varchar', 'int' ) )) {
-			$string .= '`' . $tableKey . '` ' . $tableValue ['type'] . '(' . $tableValue ['lengh'] . ') default "' . $tableValue ['default'] . '",'. "\r\n" ;
+			$string .= '`' . $tableKey . '` ' . $tableValue ['type'] . '(' . $tableValue ['lengh'] . ') default "' . $tableValue ['default'] . '" '."COMMENT '". $tableValue ['comment'] . "', \r\n" ;
 		}
 		if ($tableValue ['isPrimaryKey'] == 1) {
 			$keystring .= '`' . $tableKey . '`,';
+			if (in_array($tableKey,array('gameuid'))) {
+				$strWhere .= ",'$tableKey' => $"."this->$tableKey";
+			} else {
+				$strWhere .= ",'$tableKey' => $$tableKey";
+			}
+			$strUnion.=",$$tableKey";
 			$primaryKeyCount ++;
 			if ($primaryKeyCount == 2) {
 				$secPrimaryKey = $tableKey;
 			}
 		}
 		if ($tableValue ['isjson'] == 1) {
-			$jsonstring .= "'" . $tableKey . "',";
+			$strJson .= ",'" . $tableKey . "'";
 		}
 	}
+	if ($primaryKeyCount == 0) {
+		$string = rtrim($string);
+		$string = rtrim($string,',');
+		$temSql = str_replace ( 'PRIMARY KEY  (primarykey)', '', $temSql );
+	}
 	$temSql = str_replace ( 'replase', $string, $temSql );
+	
 	$temSql = str_replace ( 'primarykey', rtrim ( $keystring, ',' ), $temSql );
+	
+	
+	
+	// 生成commodel
+	$tempModel = getSource ( 'TemplateModel','./tmp/' );
+	$tempModel = str_replace ( 'TemplateModel', ucfirst ( $value ['modelname'] ) . 'Model', $tempModel );
+	$tempModel = str_replace ( 'TemplatenContent', $value ['description'], $tempModel );
+	$tempModel = str_replace ( 'templatetablename', $value ['tablename'], $tempModel );
+	$tempModel = str_replace ( 'templatefields', implode ( ',', array_keys ( $value ['tablefiled'] ) ), $tempModel );
+	$tempModel = str_replace ( '{strWhere} ',ltrim( $strWhere,','), $tempModel );
+	$tempModel = str_replace ( '{strUnion}',ltrim( $strUnion,','), $tempModel );
+	$tempModel = str_replace ( '{strJson}',ltrim( $strJson,','), $tempModel );
+	
+	$tempModel = str_replace ( '{Author}', $author, $tempModel );
+	$tempModel = str_replace ( '{Date}', $date, $tempModel );
+
+	// 生成cache
+	$memcacheKey = 'MEMCACHE_KEY_' . strtoupper ( $value ['modelname'] );
+	$tempCache = getSource ( 'TemplateCache' ,'./tmp/');
+	$tempCache = str_replace ( 'TemplateModel', ucfirst ( $value ['modelname'] ) . 'Model', $tempCache );
+	$tempCache = str_replace ( 'TemplateCache', ucfirst ( $value ['modelname'] ) . 'Cache', $tempCache );
+	$tempCache = str_replace ( 'TemplatenContent', $value ['description'], $tempCache );
+	$tempCache = str_replace ( 'MEMCACHE_KEY_TEMPLATECACHEKEY', $memcacheKey, $tempCache );
+	
+	$tempCache = str_replace ( '{Author}', $author, $tempCache );
+	$tempCache = str_replace ( '{Date}', $date, $tempCache );
 		
+		// 生成缓存键
+	$tempSystem = getSource ( 'SystemConstants' );
+	if (strpos ( $tempSystem, $memcacheKey ) == false) {
+		$temstr = '//' . $value ['description'] . ' ' . "\r\n";
+		if ($value ['singleData'] == true) {
+			$temstr .= 'define("' . $memcacheKey . '", "goe_' . $value ['modelname'] . '_%d");' . "\r\n";
+		} else {
+			$temstr .= 'define("' . $memcacheKey . '", "goe_' . $value ['modelname'] . '_%d_%d");' . "\r\n";
+		}
+		$temstr .= 'define("' . $memcacheKey . '_LIST", "goe_' . $value ['modelname'] . '_list_%d");' . "\r\n" . "\r\n";
+		writeAPPEND ( 'SystemConstants', $temstr );
+	}
+	
+	
 		// 只能处理 有两个的情况
 	if (! empty ( $secPrimaryKey )) {
 		$tempModel = str_replace ( 'templateid', $secPrimaryKey, $tempModel );
@@ -152,12 +154,20 @@ foreach ( $createarray as $key => $value ) {
 }
 
 function getSource($fileName, $path = PATH_DATAOBJ) {
-	return file_get_contents ( $path . $fileName . '.php' );
+	$filePath = $path . $fileName . '.php';
+	if (! file_exists ( $filePath )) {
+		return '';
+	}
+	return file_get_contents ( $filePath );
 }
 function writeOutPut($fileName, $content, $path = PATH_DATAOBJ, $type = 'php') {
 	file_put_contents ( $path . $fileName . '.' . $type, $content );
 }
 
 function writeAPPEND($fileName, $content, $path = PATH_DATAOBJ) {
-	file_put_contents ( $path . $fileName . '.php', $content, FILE_APPEND );
+	$filePath = $path . $fileName . '.php';
+	if (! file_exists ( $filePath )) {
+		$content = "<?php \r\n" . $content;
+	}
+	file_put_contents ( $filePath, $content, FILE_APPEND );
 }
