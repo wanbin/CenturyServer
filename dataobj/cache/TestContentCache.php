@@ -1,6 +1,6 @@
 <?php
 /**
- * @author WanBin @date 2012-12-05
+ * @author WanBin @date 2012-12-06
  * 测试数据库连接
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
@@ -118,16 +118,17 @@ class TestContentCache extends TestContentModel{
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
 	}
 	
-	protected function delFromCache() {
-		return $this->delToCache ( $this->getCacheKey (), $this->gameuid );
+	protected function delFromCache($gameuid,$count) {
+		$key =  $this->getCacheKey ($gameuid,$count);
+		return $this->delToCache ($key, $gameuid,$count);
 	}
 	
 	protected function delFromCacheALL() {
 		return $this->delToCache ( $this->getCacheKeyAll (), $this->gameuid );
 	}
 	
-	private function getCacheKey() {
-		return sprintf ( MEMCACHE_KEY_TESTCONTENT, $this->gameuid );
+	private function getCacheKey($gameuid,$count) {
+		return sprintf ( MEMCACHE_KEY_TESTCONTENT,$gameuid,$count );
 	}
 	
 	private function getCacheKeyAll() {

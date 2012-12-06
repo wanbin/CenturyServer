@@ -1,9 +1,9 @@
 <?php
 /**
- * @author WanBin @date 2012-12-05
+ * @author WanBin @date 2012-12-06
  * 方法性能分析
  */
-require_once 'BaseModel.php';
+require_once PATH_DATAOBJ.'BaseModel.php';
 class CommandAnalysisModel extends BaseModel {
 	/**
 	 * 得到所有记录
@@ -14,7 +14,7 @@ class CommandAnalysisModel extends BaseModel {
 		$ret = array ();
 		foreach ( $res as $key => $value ) {
 			foreach ( $value as $jsonKey => $jsonValue )
-				if (in_array ( $jsonKey, array ('template_json' ) )) {
+				if (in_array ( $jsonKey, array ( ) )) {
 					$value [$jsonKey] = json_decode ( $jsonValue, true );
 				}
 			$temid = $value ['templateid'];
@@ -69,7 +69,7 @@ class CommandAnalysisModel extends BaseModel {
 		$fields = explode ( ',', $this->getFields () );
 		$insert ['gameuid'] = $this->gameuid;
 		foreach ( $content as $key => $value ) {
-			if (in_array ( $key, array ('template_json') )) {
+			if (in_array ( $key, array () )) {
 				$value = json_encode ( $value );
 			}
 			if (in_array ( $key, $fields )) {
@@ -82,7 +82,7 @@ class CommandAnalysisModel extends BaseModel {
 	protected function addarr($content) {
 		foreach ( $content as $key => $value ) {
 			foreach ( $value as $jsonKey => $jsonValue ) {
-				if (in_array ( $jsonKey, array ('template_json' ) )) {
+				if (in_array ( $jsonKey, array ( ) )) {
 					$content [$key] [$jsonKey] = json_encode ( $jsonValue );
 				}
 			}
@@ -90,8 +90,8 @@ class CommandAnalysisModel extends BaseModel {
 		return $this->hsMultiInsert ( $this->getTableName (), $this->gameuid, $content );
 	}
 	
-	protected function init() {
-		$insert ['gameuid'] = $this->gameuid;
+	protected function init( ) {
+		$insert = array ( );
 		return $this->hsInsert ( $this->getTableName (), $this->gameuid, $insert );
 	}
 	/**

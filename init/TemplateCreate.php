@@ -1,56 +1,14 @@
 <?php
 //要创建的array创建完成之后别忘记删除无用的
-$createarr = array ('testContent' );
+$createarr = array ('testContent','commandAnalysis' );
 // $createarr = array ('');
-
-$author = 'WanBin';
-$date = date ( 'Y-m-d', time () );
-$createarray=array(
-		
-		array(
-				'modelname' => 'updateLog',
-				'singleData' => true,
-				'tablename' => 'user_update_log',
-				'tablefiled' => array ('gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1),
-						'createtime'=>array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1),
-						'type' => array('type'=>'int','lengh'=>2,'default'=>0,'isPrimaryKey'=>1),
-						'cost' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0),
-						'remain' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0),
-						'command'=>array('type'=>'varchar','lengh'=>50,'default'=>'[]','isPrimaryKey'=>0),
-						'content'=>array('type'=>'varchar','lengh'=>100,'default'=>'[]','isPrimaryKey'=>0,'isjson'=>1)
-				),
-				'description' => '用户消费记录',
-		),
-		array(
-				'modelname' => 'commandAnalysis',
-				'singleData' => true,
-				'tablename' => 'command_analysis',
-				'tablefiled' => array ('gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'comment'=>'玩家GAMEUID'),
-						'command'=>array('type'=>'varchar','lengh'=>100,'default'=>'[]'),
-						'createtime'=>array('type'=>'int','lengh'=>10,'default'=>0),
-						'type' => array('type'=>'varchar','lengh'=>15,'default'=>''),
-						'count' => array('type'=>'int','lengh'=>10,'default'=>0),
-				),
-				'description' => '方法性能分析',
-		),
-		
-		array(
-				'modelname' => 'testContent',
-				'singleData' => false,
-				'tablename' => 'testContent',
-				'tablefiled' => array ('gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0),
-						'count' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>1),
-				),
-				'description' => '测试数据库连接',
-		),
-);
+include_once 'CreateClass.php';
 include_once '../Entry.php';
 
 foreach ( $createarray as $key => $value ) {
 	if (! in_array ( $value ['modelname'], $createarr )) {
 		continue;
 	}
-
 	// 生成sql语句
 	$temSql = '-- ' . $value ['description'] . ' --' . "\r\n" . 'CREATE TABLE `' . $value ['tablename'] . '`(
 	replase PRIMARY KEY  (primarykey))ENGINE=InnoDB DEFAULT CHARSET=utf8;';
@@ -60,12 +18,16 @@ foreach ( $createarray as $key => $value ) {
 	$primaryKeyCount = 0;
 	$secPrimaryKey = '';
 	//以下两个参数在update中用
-	//搜索Where生成
+	//搜索Where生成(gameuid = $this->gameuid,count=>count)
 	$strWhere = '';
-	//定位参数生成
+	// 定位参数生成($gameud,$count)
 	$strUnion = '';
-	//定位array
-	$strJson='';
+	//不包括Gameuid的用户名称
+	$strWhereWithoutGameuid = '';
+	// 定位array('gameuid','count')
+	$strJson = '';
+	$strAll = '';
+	$ParamsWithoutGameuid = $strWhereWithoutGameuid;
 	foreach ( $value ['tablefiled'] as $tableKey => $tableValue ) {
 		if (in_array ( $tableValue ['type'], array ('varchar', 'int' ) )) {
 			$string .= '`' . $tableKey . '` ' . $tableValue ['type'] . '(' . $tableValue ['lengh'] . ') default "' . $tableValue ['default'] . '" '."COMMENT '". $tableValue ['comment'] . "', \r\n" ;
@@ -76,6 +38,9 @@ foreach ( $createarray as $key => $value ) {
 				$strWhere .= ",'$tableKey' => $"."this->$tableKey";
 			} else {
 				$strWhere .= ",'$tableKey' => $$tableKey";
+			}
+			if (! in_array ( $tableKey, array ('gameuid' ) )) {
+				$strWhereWithoutGameuid .= ",'$tableKey' => $$ParamsWithoutGameuid";
 			}
 			$strUnion.=",$$tableKey";
 			$primaryKeyCount ++;
@@ -117,6 +82,8 @@ foreach ( $createarray as $key => $value ) {
 	$tempCache = str_replace ( 'TemplateModel', ucfirst ( $value ['modelname'] ) . 'Model', $tempCache );
 	$tempCache = str_replace ( 'TemplateCache', ucfirst ( $value ['modelname'] ) . 'Cache', $tempCache );
 	$tempCache = str_replace ( 'TemplatenContent', $value ['description'], $tempCache );
+	$tempCache = str_replace ( '{paramsWithOutGameuid}', $ParamsWithoutGameuid, $tempCache );
+	$tempCache = str_replace ( '{strUnion}', ltrim( $strUnion,','), $tempCache );
 	$tempCache = str_replace ( 'MEMCACHE_KEY_TEMPLATECACHEKEY', $memcacheKey, $tempCache );
 	
 	$tempCache = str_replace ( '{Author}', $author, $tempCache );

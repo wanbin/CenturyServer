@@ -1,6 +1,6 @@
 <?php
 /**
- * @author WanBin @date 2012-12-05
+ * @author WanBin @date 2012-12-06
  * 测试数据库连接
  */
 require_once PATH_DATAOBJ.'BaseModel.php';
