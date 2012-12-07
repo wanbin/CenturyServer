@@ -1,6 +1,6 @@
 <?php
 /**
- * @author WanBin @date 2012-12-06
+ * @author WanBin @date 2012-12-07
  * 测试数据库连接
  */
 require_once PATH_DATAOBJ.'BaseModel.php';
@@ -53,7 +53,7 @@ class TestContentModel extends BaseModel {
 		return $res;
 	}
 	
-	protected function updateOne($gameuid,$count, $content) {
+	protected function updateOne( $content$gameuid,$count) {
 		$where = array ( 'gameuid' => $this->gameuid,'count' => $count);
 		$res = $this->hsUpdate ( $this->getTableName (), $this->gameuid, $content, $where );
 		return $res;

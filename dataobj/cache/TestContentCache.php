@@ -1,6 +1,6 @@
 <?php
 /**
- * @author WanBin @date 2012-12-06
+ * @author WanBin @date 2012-12-07
  * 测试数据库连接
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
@@ -33,8 +33,8 @@ class TestContentCache extends TestContentModel{
 	 * @param $id unknown_type       	
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
-	protected function getOne() {
-		$key = $this->getCacheKey ();
+	protected function getOne($count) {
+		$key = $this->getCacheKey ($count);
 		$ret = $this->getFromCache ( $key, $this->gameuid );
 		if (empty ( $ret )) {
 			$ret = parent::getOne ();
@@ -118,17 +118,17 @@ class TestContentCache extends TestContentModel{
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
 	}
 	
-	protected function delFromCache($gameuid,$count) {
-		$key =  $this->getCacheKey ($gameuid,$count);
-		return $this->delToCache ($key, $gameuid,$count);
+	protected function delFromCache($count) {
+		$key =  $this->getCacheKey ($count);
+		return $this->delToCache ($key,$this->gameuid);
 	}
 	
 	protected function delFromCacheALL() {
 		return $this->delToCache ( $this->getCacheKeyAll (), $this->gameuid );
 	}
 	
-	private function getCacheKey($gameuid,$count) {
-		return sprintf ( MEMCACHE_KEY_TESTCONTENT,$gameuid,$count );
+	private function getCacheKey($count) {
+		return sprintf ( MEMCACHE_KEY_TESTCONTENT,$this->gameuid ,$count );
 	}
 	
 	private function getCacheKeyAll() {

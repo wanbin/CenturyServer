@@ -1,6 +1,6 @@
 <?php
 /**
- * @author WanBin @date 2012-12-06
+ * @author WanBin @date 2012-12-07
  * 方法性能分析
  */
 require_once PATH_DATAOBJ.'BaseModel.php';
@@ -53,8 +53,8 @@ class CommandAnalysisModel extends BaseModel {
 		return $res;
 	}
 	
-	protected function updateOne(, $content) {
-		$where = array ( );
+	protected function updateOne( $content) {
+		$where = array ();
 		$res = $this->hsUpdate ( $this->getTableName (), $this->gameuid, $content, $where );
 		return $res;
 	}

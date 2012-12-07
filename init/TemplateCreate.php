@@ -27,7 +27,7 @@ foreach ( $createarray as $key => $value ) {
 	// 定位array('gameuid','count')
 	$strJson = '';
 	$strAll = '';
-	$ParamsWithoutGameuid = $strWhereWithoutGameuid;
+	$ParamsWithoutGameuid = '';
 	foreach ( $value ['tablefiled'] as $tableKey => $tableValue ) {
 		if (in_array ( $tableValue ['type'], array ('varchar', 'int' ) )) {
 			$string .= '`' . $tableKey . '` ' . $tableValue ['type'] . '(' . $tableValue ['lengh'] . ') default "' . $tableValue ['default'] . '" '."COMMENT '". $tableValue ['comment'] . "', \r\n" ;
@@ -40,7 +40,7 @@ foreach ( $createarray as $key => $value ) {
 				$strWhere .= ",'$tableKey' => $$tableKey";
 			}
 			if (! in_array ( $tableKey, array ('gameuid' ) )) {
-				$strWhereWithoutGameuid .= ",'$tableKey' => $$ParamsWithoutGameuid";
+				$ParamsWithoutGameuid .= ",$$tableKey";
 			}
 			$strUnion.=",$$tableKey";
 			$primaryKeyCount ++;
@@ -82,8 +82,9 @@ foreach ( $createarray as $key => $value ) {
 	$tempCache = str_replace ( 'TemplateModel', ucfirst ( $value ['modelname'] ) . 'Model', $tempCache );
 	$tempCache = str_replace ( 'TemplateCache', ucfirst ( $value ['modelname'] ) . 'Cache', $tempCache );
 	$tempCache = str_replace ( 'TemplatenContent', $value ['description'], $tempCache );
-	$tempCache = str_replace ( '{paramsWithOutGameuid}', $ParamsWithoutGameuid, $tempCache );
-	$tempCache = str_replace ( '{strUnion}', ltrim( $strUnion,','), $tempCache );
+	$tempCache = str_replace ( '{paramsWithOutGameuid}', ltrim($ParamsWithoutGameuid,','), $tempCache );
+	$tempCache = str_replace ( '{paramsWithOutGameuidSeparate}',$ParamsWithoutGameuid, $tempCache );
+	$tempCache = str_replace ( '{strUnion}', $strUnion, $tempCache );
 	$tempCache = str_replace ( 'MEMCACHE_KEY_TEMPLATECACHEKEY', $memcacheKey, $tempCache );
 	
 	$tempCache = str_replace ( '{Author}', $author, $tempCache );

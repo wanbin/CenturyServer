@@ -1,6 +1,6 @@
 <?php
 /**
- * @author WanBin @date 2012-12-06
+ * @author WanBin @date 2012-12-07
  * 方法性能分析
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
@@ -120,7 +120,7 @@ class CommandAnalysisCache extends CommandAnalysisModel{
 	
 	protected function delFromCache() {
 		$key =  $this->getCacheKey ();
-		return $this->delToCache ($key, );
+		return $this->delToCache ($key,$this->gameuid);
 	}
 	
 	protected function delFromCacheALL() {
@@ -128,7 +128,7 @@ class CommandAnalysisCache extends CommandAnalysisModel{
 	}
 	
 	private function getCacheKey() {
-		return sprintf ( MEMCACHE_KEY_COMMANDANALYSIS, );
+		return sprintf ( MEMCACHE_KEY_COMMANDANALYSIS,$this->gameuid  );
 	}
 	
 	private function getCacheKeyAll() {
