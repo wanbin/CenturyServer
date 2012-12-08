@@ -7,9 +7,9 @@ class ChatSendMessage extends BaseCommand {
 	
 	/**
 	 * 添加聊天信息
-	 * 
+	 * @param $params['receiver'] int      接受者
 	 * @param $params['content'] string    聊天信息
-	 * @return string   Memcache键
+	 * @return array 聊天数据和免费余量
 	 */
 	
 	protected function executeEx($params)

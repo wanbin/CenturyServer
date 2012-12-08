@@ -4,8 +4,8 @@ class ChatGetMessage extends BaseCommand {
 	/**
 	 * 添加聊天信息
 	 *
-	 * @param $params['start'] int     	 查询开始地址
-	 * @return array array('lastid'=>int,'content' => array array('username'=>int ,''content'=> string,'gameuid'=>int))
+	 * @param $params['receiver'] int     	查询用户
+	 * @return array 
 	 */
 	
 	protected function executeEx($params) {
