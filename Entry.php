@@ -13,6 +13,9 @@ include PATH_ROOT . 'config.inc.php';
 //加载framework中db操作类与cache操作类
 require_once FRAMEWORK . '/cache/Cache.class.php';
 require_once FRAMEWORK . '/database/DBHelper2.class.php';
+
+//加载数据层入口
+include_once PATH_DATAOBJ . 'DataHandler.php';
 //加载redies
 require_once FRAMEWORK . '/redis/Rediska.php';
 include_once PATH_DATAOBJ . 'GameException.php'; // 游戏内部异常处理

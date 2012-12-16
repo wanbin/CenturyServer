@@ -207,6 +207,21 @@ class BaseCommand {
 		}
 	}
 	
+	
+	/**
+	 * 建立cache操作对象
+	 *
+	 * @param
+	 *       	 int gameuid int server
+	 * @param
+	 *       	 string name
+	 * @return  MC	 * 
+	 */
+	protected function createCacheMC($name,$gameuid,$server='')
+	{
+	    return DataHandler::createMC($name, $gameuid,$server='');
+	}
+	
 	/**
 	 * 建立account cache操作对象
 	 *
