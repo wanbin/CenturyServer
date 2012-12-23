@@ -1,4 +1,5 @@
 <?php
+include 'config.host.php';
 $database_xmlpath = '';
 $webHost = '';
 $cdnHost = '';

@@ -53,7 +53,7 @@ class CommandAnalysisModel extends BaseModel {
 		return $res;
 	}
 	
-	protected function updateOne(, $content) {
+	protected function updateOne($content) {
 		$where = array ( );
 		$res = $this->hsUpdate ( $this->getTableName (), $this->gameuid, $content, $where );
 		return $res;

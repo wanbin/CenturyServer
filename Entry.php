@@ -7,8 +7,8 @@ define( 'PATH_CACHE', PATH_ROOT.'dataobj/cache/');      // mc层
 define( 'PATH_SQL', PATH_ROOT.'sql/');      
 define( 'FRAMEWORK', PATH_ROOT . 'framework/');         //主框架目录
 
-include PATH_ROOT . 'config.host.php';			// 全局配置文件
-include PATH_ROOT . 'config.inc.php';
+			
+include PATH_ROOT . 'config.inc.php'; // 全局配置文件
 
 //加载framework中db操作类与cache操作类
 require_once FRAMEWORK . '/cache/Cache.class.php';
@@ -16,6 +16,10 @@ require_once FRAMEWORK . '/database/DBHelper2.class.php';
 
 //加载数据层入口
 include_once PATH_DATAOBJ . 'DataHandler.php';
+//加载命令对象基类
+include_once PATH_COMMAND . 'BaseCommand.php';
+//加载数据对象基类
+include_once PATH_DATAOBJ . 'BaseModel.php';
 //加载redies
 require_once FRAMEWORK . '/redis/Rediska.php';
 include_once PATH_DATAOBJ . 'GameException.php'; // 游戏内部异常处理
