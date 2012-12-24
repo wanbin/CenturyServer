@@ -9,3 +9,7 @@ define("MEMCACHE_KEY_COMMANDANALYSIS_LIST", "goe_commandAnalysis_list_%d");
 define("MEMCACHE_KEY_TESTCONTENT", "goe_testContent_%d_%d");
 define("MEMCACHE_KEY_TESTCONTENT_LIST", "goe_testContent_list_%d");
 
+//用户基本信息表 
+define("MEMCACHE_KEY_ACCOUNT", "goe_Account_%d");
+define("MEMCACHE_KEY_ACCOUNT_LIST", "goe_Account_list_%d");
+

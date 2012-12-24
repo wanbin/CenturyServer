@@ -1,6 +1,6 @@
 <?php
 //要创建的array创建完成之后别忘记删除无用的
-$createarr = array ('testContent','commandAnalysis' );
+$createarr = array ('Account' );
 // $createarr = array ('');
 include_once 'CreateClass.php';
 include_once '../Entry.php';
@@ -108,6 +108,13 @@ foreach ( $createarray as $key => $value ) {
 	if (! empty ( $secPrimaryKey )) {
 		$tempModel = str_replace ( 'templateid', $secPrimaryKey, $tempModel );
 		$tempCache = str_replace ( 'templateid', $secPrimaryKey, $tempCache );
+		$tempModel = str_replace ( 'startGet', '', $tempModel );
+		$tempCache = str_replace ( 'endGet', '', $tempCache );
+	}
+	else {
+		//todu把没有用到的方法删除
+// 		$tempModel = preg_replace ( '~startGet\.*endGet', 'empty', $tempModel );
+// 		$tempCache = preg_replace ( '~startGet\.*endGet', 'empty', $tempCache );
 	}
 	
 	if (! empty ( $jsonstring )) {

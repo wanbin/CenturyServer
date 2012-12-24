@@ -53,8 +53,8 @@ class TestContentModel extends BaseModel {
 		return $res;
 	}
 	
-	protected function updateOne( $content$gameuid,$count) {
-		$where = array ( 'gameuid' => $this->gameuid,'count' => $count);
+	protected function updateOne($content, $gameuid, $count) {
+		$where = array ('gameuid' => $this->gameuid, 'count' => $count );
 		$res = $this->hsUpdate ( $this->getTableName (), $this->gameuid, $content, $where );
 		return $res;
 	}
