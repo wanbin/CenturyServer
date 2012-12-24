@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="false" context="php_gettercomment_context" deleted="false" description="Comment for getter methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.gettercomment" name="gettercomment">/**
+  +----------------------------------------------------------
+  * @return the ${bare_field_name}
+  +----------------------------------------------------------
+  */</template><template autoinsert="false" context="php_settercomment_context" deleted="false" description="Comment for setter methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.settercomment" name="settercomment">/**
+  +----------------------------------------------------------
+  * @param ${field_type} ${bare_field_name}
+  +----------------------------------------------------------
+  */</template><template autoinsert="false" context="php_constructorcomment_context" deleted="false" description="Comment for created constructors" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.constructorcomment" name="constructorcomment">/**
+  +----------------------------------------------------------
+  * ${tags}
+  +----------------------------------------------------------
+  */</template><template autoinsert="false" context="php_filecomment_context" deleted="false" description="Comment for created PHP files" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.filecomment" name="filecomment">/**
+  +----------------------------------------------------------
+  * ${file}
+  +----------------------------------------------------------
+  */
+</template><template autoinsert="false" context="php_typecomment_context" deleted="false" description="Comment for created types" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.typecomment" name="typecomment">/**
+  +----------------------------------------------------------
+  *    ${type_name}
+  +----------------------------------------------------------
+  *   功能简介
+  *
+  +----------------------------------------------------------
+  *  @author     ${user}
+  *  @version    ${date}
+  *  @package    ${package_name}
+  +----------------------------------------------------------
+  */</template><template autoinsert="false" context="php_fieldcomment_context" deleted="false" description="Comment for fields" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.fieldcomment" name="fieldcomment">/**
+  +----------------------------------------------------------
+  * @var ${field_type}
+  +----------------------------------------------------------
+  */</template><template autoinsert="false" context="php_methodcomment_context" deleted="false" description="Comment for non-overriding methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.methodcomment" name="methodcomment">/**
+  +----------------------------------------------------------
+  * ${cursor}
+  +----------------------------------------------------------
+  * ${tags}
+  +----------------------------------------------------------
+  */</template><template autoinsert="false" context="php_overridecomment_context" deleted="false" description="Comment for overriding methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.overridecomment" name="overridecomment">/**
+  +----------------------------------------------------------
+  * ${see_to_overridden}
+  +----------------------------------------------------------
+  * ${tags}
+  +----------------------------------------------------------
+  */</template><template autoinsert="false" context="php_delegatecomment_context" deleted="false" description="Comment for delegate methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.delegatecomment" name="delegatecomment">/**
+  +----------------------------------------------------------
+  * ${tags}
+  +----------------------------------------------------------
+  * ${see_to_target}
+  +----------------------------------------------------------
+  */</template><template autoinsert="true" context="php_newtype_context" deleted="false" description="Newly created files" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.newtype" name="newtype">${filecomment}
+${package_declaration}
+
+${typecomment}
+${type_declaration}</template><template autoinsert="false" context="php_classbody_context" deleted="false" description="Code in new class type bodies" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.classbody" name="classbody">
+</template><template autoinsert="false" context="php_interfacebody_context" deleted="false" description="Code in new interface type bodies" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.interfacebody" name="interfacebody">
+</template><template autoinsert="true" context="php_catchblock_context" deleted="false" description="Code in new catch blocks" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.catchblock" name="catchblock">// ${TODO} Auto-generated catch block
+${exception_var}.printStackTrace();</template><template autoinsert="true" context="php_methodbody_context" deleted="false" description="Code in created method stubs" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.methodbody" name="methodbody">// ${TODO} Auto-generated method stub
+${body_statement}</template><template autoinsert="true" context="php_constructorbody_context" deleted="false" description="Code in created constructor stubs" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.constructorbody" name="constructorbody">${body_statement}
+// ${TODO} Auto-generated constructor stub</template><template autoinsert="true" context="php_getterbody_context" deleted="false" description="Code in created getters" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.getterbody" name="getterbody">return ${field};</template><template autoinsert="true" context="php_setterbody_context" deleted="false" description="Code in created setters" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.setterbody" name="setterbody">${field} = ${param};</template><template autoinsert="false" context="php_new_file_context" deleted="false" description="Simple php file" enabled="true" id="org.eclipse.php.ui.editor.templates.php.author" name="New simple PHP file">&lt;?php
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  *    ${file}
+  *    ${user}    ${date}
+  *    
+  *+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  */
+  
+  class ${cursor} extends 
+  {
+  	
+  }
+
+?&gt;</template><template autoinsert="true" context="php_new_file_context" deleted="false" description="html 4.01 frameset" enabled="true" id="org.eclipse.php.ui.editor.templates.php.html.frameset" name="New PHP file - HTML frameset">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=${encoding}"&gt;
+&lt;title&gt;Insert title here&lt;/title&gt;
+&lt;/head&gt;
+&lt;frameset&gt;
+    &lt;frame&gt;
+    &lt;frame&gt;
+    &lt;noframes&gt;
+    &lt;body&gt;
+    &lt;p&gt;This page uses frames. The current browser you are using does not support frames.&lt;/p&gt;
+    &lt;?php
+${cursor}
+	?&gt;
+    &lt;/body&gt;
+    &lt;/noframes&gt;
+&lt;/frameset&gt;
+&lt;/html&gt;</template><template autoinsert="true" context="php_new_file_context" deleted="false" description="Zend Controller" enabled="true" id="org.zend.php.framework.templates.zend.controller" name="New Zend Controller">&lt;?php
+
+/**
+ * {0}
+ * 
+ * @author
+ * @version 
+ */
+	
+require_once 'Zend/Controller/Action.php';
+
+class {0} extends Zend_Controller_Action
+{
+	/**
+	 * The default action - show the home page
+	 */
+    public function indexAction() 
+    {
+        // TODO Auto-generated {0}::indexAction() default action
+    }
+    ${cursor}
+}
+
+</template><template autoinsert="true" context="php_new_file_context" deleted="false" description="Zend Table" enabled="true" id="org.zend.php.framework.templates.zend.model" name="New Zend Table">&lt;?php
+
+/**
+ * {0}
+ *  
+ * @author ${user}
+ * @version 
+ */
+	
+require_once 'Zend/Db/Table/Abstract.php';
+
+class {0} extends Zend_Db_Table_Abstract
+{
+	/**
+	 * The default table name 
+	 */
+    protected $$_name = '{1}';
+    ${cursor}
+}
+
+</template><template autoinsert="true" context="php_new_file_context" deleted="false" description="Zend View Helper" enabled="true" id="org.zend.php.framework.templates.zend.viewHelper" name="New Zend View Helper">&lt;?php
+/**
+ *
+ * @author ${user}
+ * @version 
+ */
+require_once 'Zend/View/Interface.php';
+
+/**
+ * {1} helper
+ *
+ * @uses viewHelper {0}
+ */
+class {0}_{1} 
+{
+
+	/**
+	 * @var Zend_View_Interface 
+	 */
+	public $$view;
+
+	/**
+	 *  
+	 */
+	public function {2}() {
+		${cursor}// TODO Auto-generated {0}_{1}::{2}() helper 
+		return null;
+	}
+
+	/**
+	 * Sets the view field 
+	 * @param $$view Zend_View_Interface
+	 */
+	public function setView(Zend_View_Interface $$view) {
+		$$this-&gt;view = $$view;
+	}
+}
+
+</template><template autoinsert="true" context="php_new_file_context" deleted="false" description="Zend Action Helper" enabled="true" id="org.zend.php.framework.templates.zend.actionHelper" name="New Zend Action Helper">&lt;?php
+/**
+ *
+ * @author ${user}
+ * @version 
+ */
+require_once 'Zend/Loader/PluginLoader.php';
+require_once 'Zend/Controller/Action/Helper/Abstract.php';
+
+/**
+ * {1} Action Helper 
+ * 
+ * @uses actionHelper {0}
+ */
+class {0}_{1} extends {3}
+{
+    /**
+     * @var Zend_Loader_PluginLoader
+     */
+    public $$pluginLoader;
+
+    /**
+     * Constructor: initialize plugin loader
+     * 
+     * @return void
+     */
+    public function __construct(){
+        // TODO Auto-generated Constructor
+        $$this-&gt;pluginLoader = new Zend_Loader_PluginLoader();
+    }
+    
+    /**
+     * Strategy pattern: call helper as broker method
+     */
+    public function direct(){
+    	// TODO Auto-generated 'direct' method
+    }
+}
+
+</template></templates>
