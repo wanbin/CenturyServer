@@ -7,4 +7,4 @@ An open source game server.
 
 Century War Game
 
-Wan Bin 2012-11-28
+Wan Bin 2012-12-24 
