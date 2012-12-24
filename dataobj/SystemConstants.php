@@ -9,3 +9,11 @@ define("MEMCACHE_KEY_COMMANDANALYSIS_LIST", "goe_commandAnalysis_list_%d");
 define("MEMCACHE_KEY_TESTCONTENT", "goe_testContent_%d_%d");
 define("MEMCACHE_KEY_TESTCONTENT_LIST", "goe_testContent_list_%d");
 
+
+//Chat 聊天数据节点
+define('MEMCACHE_KEY_NODE_SERVER_GAMEUID_POSITION', 'goe_chat_node_%d_%d_%d');
+//Chat 聊天指针
+define('MEMCACHE_KEY_SERVER_GAMEUID_POINTER', 'goe_chat_pointer_%d_%d');
+//Chat 免费余量
+define('MEMCACHE_KEY_SURPLUS_SERVER_GAMEUID', 'goe_chat_surplus_%d_%d');
+
