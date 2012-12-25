@@ -35,8 +35,11 @@ class ChatSendMessage extends BaseCommand {
 					'content' => $content
 				);
 		
-		require_once PATH_CACHE . 'ChatCache.php';
-		$receiverMC = new ChatCache($receiver);
+// 		require_once PATH_CACHE . 'ChatCache.php';
+// 		$receiverMC = new ChatCache($receiver);
+        
+		$receiver = $this->getInstance('ChatCache',$receiver,1);
+		$receiver->
 		
 		//全部频道付费时
 		if ($receiver < 0 && $receiverMC->isPay)

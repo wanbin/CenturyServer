@@ -1,7 +1,17 @@
 <?php
-//
-// 命令对象基类
-//
+
+/**
+  +----------------------------------------------------------
+  *    BaseCommand
+  +----------------------------------------------------------
+  *   命令行基类
+  *
+  +----------------------------------------------------------
+  *  @author     Wanbin  Wenson
+  *  @version    2012-12-25
+  *  @package    Command
+  +----------------------------------------------------------
+  */
 class BaseCommand {
 	protected $uid; // 用户id
 	protected $gameuid;
@@ -207,6 +217,32 @@ class BaseCommand {
 		}
 	}
 	
+	
+	
+	/**
+	 +----------------------------------------------------------
+	 * 获取Cache实例
+	 +----------------------------------------------------------
+	 * @param string $name    Cache名称
+	 * @param int $gameuid    玩家编号
+	 * @param int $server     逻辑服
+	 * @return Instance
+	 +----------------------------------------------------------
+	 */
+	public function getInstance($name,$gameuid,$server='')
+	{
+	    if (empty($this->$name))
+	    {
+	        include PATH_CACHE . 'CacheHandler.php';
+	        $instance = CacheHandler::getInstance($name,$gameuid,$server);
+	        if (isset($this->$name))
+	            $this->$name = $instance;
+	    }else{
+	        $instance = $this->$name;
+	    }
+	    
+	    Return $instance;
+	}
 	/**
 	 * 建立account cache操作对象
 	 *
