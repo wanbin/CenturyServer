@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?><templates><template autoinsert="false" context="php_gettercomment_context" deleted="false" description="Comment for getter methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.gettercomment" name="gettercomment">/**
-  +----------------------------------------------------------
-  * @return the ${bare_field_name}
-  +----------------------------------------------------------
-  */</template><template autoinsert="false" context="php_settercomment_context" deleted="false" description="Comment for setter methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.settercomment" name="settercomment">/**
-  +----------------------------------------------------------
-  * @param ${field_type} ${bare_field_name}
-  +----------------------------------------------------------
-  */</template><template autoinsert="false" context="php_constructorcomment_context" deleted="false" description="Comment for created constructors" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.constructorcomment" name="constructorcomment">/**
-  +----------------------------------------------------------
-  * ${tags}
-  +----------------------------------------------------------
-  */</template><template autoinsert="false" context="php_filecomment_context" deleted="false" description="Comment for created PHP files" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.filecomment" name="filecomment">/**
-  +----------------------------------------------------------
-  * ${file}
-  +----------------------------------------------------------
-  */
+ +----------------------------------------------------------
+ * @return the ${bare_field_name}
+ +----------------------------------------------------------
+ */</template><template autoinsert="false" context="php_settercomment_context" deleted="false" description="Comment for setter methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.settercomment" name="settercomment">/**
+ +----------------------------------------------------------
+ * @param ${field_type} ${bare_field_name}
+ +----------------------------------------------------------
+ */</template><template autoinsert="false" context="php_constructorcomment_context" deleted="false" description="Comment for created constructors" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.constructorcomment" name="constructorcomment">/**
+ +----------------------------------------------------------
+ * ${tags}
+ +----------------------------------------------------------
+ */</template><template autoinsert="false" context="php_filecomment_context" deleted="false" description="Comment for created PHP files" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.filecomment" name="filecomment">/**
+ +----------------------------------------------------------
+ * ${file}
+ +----------------------------------------------------------
+ */
 </template><template autoinsert="false" context="php_typecomment_context" deleted="false" description="Comment for created types" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.typecomment" name="typecomment">/**
-  +----------------------------------------------------------
-  *    ${type_name}
-  +----------------------------------------------------------
-  *   功能简介
-  *
-  +----------------------------------------------------------
-  *  @author     ${user}
-  *  @version    ${date}
-  *  @package    ${package_name}
-  +----------------------------------------------------------
-  */</template><template autoinsert="false" context="php_fieldcomment_context" deleted="false" description="Comment for fields" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.fieldcomment" name="fieldcomment">/**
-  +----------------------------------------------------------
-  * @var ${field_type}
-  +----------------------------------------------------------
-  */</template><template autoinsert="false" context="php_methodcomment_context" deleted="false" description="Comment for non-overriding methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.methodcomment" name="methodcomment">/**
-  +----------------------------------------------------------
-  * ${cursor}
-  +----------------------------------------------------------
-  * ${tags}
-  +----------------------------------------------------------
-  */</template><template autoinsert="false" context="php_overridecomment_context" deleted="false" description="Comment for overriding methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.overridecomment" name="overridecomment">/**
-  +----------------------------------------------------------
-  * ${see_to_overridden}
-  +----------------------------------------------------------
-  * ${tags}
-  +----------------------------------------------------------
-  */</template><template autoinsert="false" context="php_delegatecomment_context" deleted="false" description="Comment for delegate methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.delegatecomment" name="delegatecomment">/**
-  +----------------------------------------------------------
-  * ${tags}
-  +----------------------------------------------------------
-  * ${see_to_target}
-  +----------------------------------------------------------
-  */</template><template autoinsert="true" context="php_newtype_context" deleted="false" description="Newly created files" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.newtype" name="newtype">${filecomment}
+ +----------------------------------------------------------
+ *    ${type_name}
+ +----------------------------------------------------------
+ *   功能简介
+ *
+ +----------------------------------------------------------
+ *  @author     ${user}
+ *  @version    ${date}
+ *  @package    ${package_name}
+ +----------------------------------------------------------
+ */</template><template autoinsert="false" context="php_fieldcomment_context" deleted="false" description="Comment for fields" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.fieldcomment" name="fieldcomment">/**
+ +----------------------------------------------------------
+ * @var ${field_type}
+ +----------------------------------------------------------
+ */</template><template autoinsert="false" context="php_methodcomment_context" deleted="false" description="Comment for non-overriding methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.methodcomment" name="methodcomment">/**
+ +----------------------------------------------------------
+ * ${cursor}
+ +----------------------------------------------------------
+ * ${tags}
+ +----------------------------------------------------------
+ */</template><template autoinsert="false" context="php_overridecomment_context" deleted="false" description="Comment for overriding methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.overridecomment" name="overridecomment">/**
+ +----------------------------------------------------------
+ * ${see_to_overridden}
+ +----------------------------------------------------------
+ * ${tags}
+ +----------------------------------------------------------
+ */</template><template autoinsert="false" context="php_delegatecomment_context" deleted="false" description="Comment for delegate methods" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.delegatecomment" name="delegatecomment">/**
+ +----------------------------------------------------------
+ * ${tags}
+ +----------------------------------------------------------
+ * ${see_to_target}
+ +----------------------------------------------------------
+ */</template><template autoinsert="true" context="php_newtype_context" deleted="false" description="Newly created files" enabled="true" id="org.eclipse.php.ui.editor.templates.php.codetemplates.newtype" name="newtype">${filecomment}
 ${package_declaration}
 
 ${typecomment}
