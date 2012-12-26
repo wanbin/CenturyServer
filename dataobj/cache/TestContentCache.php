@@ -118,6 +118,14 @@ class TestContentCache extends TestContentModel{
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
 	}
 	
+	/**
+	 +----------------------------------------------------------
+	 * 
+	 +----------------------------------------------------------
+	 * @param unknown_type $count
+	 * @return boolean
+	 +----------------------------------------------------------
+	 */
 	protected function delFromCache($count) {
 		$key =  $this->getCacheKey ($count);
 		return $this->delToCache ($key,$this->gameuid);

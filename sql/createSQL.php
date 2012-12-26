@@ -1,6 +1,7 @@
 <?php
 set_time_limit(60 * 2);
-define('PATH_SQL', dirname(__FILE__).'/' );
+
+include_once '../Entry.php';
 
 //引入配置文件
 $configPath = PATH_SQL . '../config.host.php';
@@ -8,7 +9,7 @@ $configPath = PATH_SQL . '../config.inc.php';
 if(!file_exists($configPath)){
     exit($configPath . ' is not exits.');
 }
-include_once PATH_SQL.'../Entry.php';
+
 
 include_once $configPath;
 $dbConfig = $config['dbconfig'];
@@ -35,7 +36,9 @@ while($flist=readdir($fso)){
 }
 closedir($fso);
 $tables = $list;
-
+unlink( PATH_SQL .'output/clean.sql');
+unlink( PATH_SQL .'output/drop.sql');
+unlink( PATH_SQL .'output/localhost.sql');
 $dbNameArray = array();
 foreach ($tables as $value){
     if(file_exists(PATH_SQL . 'source/' . $value . '.sql')){

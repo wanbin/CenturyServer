@@ -1,7 +1,7 @@
 <?php
 //要创建的array创建完成之后别忘记删除无用的
-$createarr = array ('Account' );
-// $createarr = array ('');
+$createarr = array ('Mapping','Runtime','Building' );
+$createarr = array ('');
 include_once 'CreateClass.php';
 include_once '../Entry.php';
 
@@ -95,11 +95,11 @@ foreach ( $createarray as $key => $value ) {
 	if (strpos ( $tempSystem, $memcacheKey ) == false) {
 		$temstr = '//' . $value ['description'] . ' ' . "\r\n";
 		if ($value ['singleData'] == true) {
-			$temstr .= 'define("' . $memcacheKey . '", "goe_' . $value ['modelname'] . '_%d");' . "\r\n";
+			$temstr .= 'define("' . $memcacheKey . '", "centurywar_' . $value ['modelname'] . '_%d");' . "\r\n";
 		} else {
-			$temstr .= 'define("' . $memcacheKey . '", "goe_' . $value ['modelname'] . '_%d_%d");' . "\r\n";
+			$temstr .= 'define("' . $memcacheKey . '", "centurywar_' . $value ['modelname'] . '_%d_%d");' . "\r\n";
 		}
-		$temstr .= 'define("' . $memcacheKey . '_LIST", "goe_' . $value ['modelname'] . '_list_%d");' . "\r\n" . "\r\n";
+		$temstr .= 'define("' . $memcacheKey . '_LIST", "centurywar_' . $value ['modelname'] . '_list_%d");' . "\r\n" . "\r\n";
 		writeAPPEND ( 'SystemConstants', $temstr );
 	}
 	

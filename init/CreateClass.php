@@ -58,5 +58,37 @@ $createarray=array(
 				),
 				'description' => '用户基本信息表',
 		),
+		array(
+				'modelname' => 'Building',
+				'singleData' => true,
+				'tablename' => 'user_building',
+				'tablefiled' => array (
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'玩家GAMEUID'),
+						'crop' => array('type'=>'int','lengh'=>5,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'资源地1'),
+						'cropupdatetime' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'收获时间'),
+				),
+				'description' => '用户建筑表',
+		),
+		array(
+				'modelname' => 'Runtime',
+				'singleData' => true,
+				'tablename' => 'user_runtime',
+				'tablefiled' => array (
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'玩家GAMEUID'),
+						'data' => array('type'=>'varchar','lengh'=>500,'default'=>'[]','isPrimaryKey'=>0,'isjson'=>1,'comment'=>'Runtime数据'),
+						'updatetime' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'更新时间'),
+				),
+				'description' => '用户正在生产的信息表',
+		),
+		array(
+				'modelname' => 'Mapping',
+				'singleData' => true,
+				'tablename' => 'user_mapping',
+				'tablefiled' => array (
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'玩家GAMEUID'),
+						'uid' => array('type'=>'varchar','lengh'=>100,'default'=>'','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'用户UID数据'),
+				),
+				'description' => '用户Mapping映射表',
+		),
 );
 ?>
