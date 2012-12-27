@@ -68,7 +68,7 @@ class MappingCache extends MappingModel{
 		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
 	}
 	
-	public function addOne($templateid, $uid) {
+	public function addOne($uid) {
 		$this->get ();
 		parent::add ( $uid );
 		$this->item [$this->gameuid] = $uid;
