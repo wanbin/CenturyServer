@@ -46,7 +46,7 @@ class BaseCommand {
 				// 验证account
 				$accountMC = $this->createAccountModel ( $sign_arr ['gameuid'], $sign_arr ['uid'] );
 				$accountMC->setServer ( $this->server );
-				$this->user_account = $accountMC->validate ( $param, $sign_arr );
+// 				$this->user_account = $accountMC->validate ( $param, $sign_arr );
 			}
 			
 			$this->sns_id = $sign_arr ['sns_id'];
