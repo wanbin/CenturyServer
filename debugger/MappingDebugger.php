@@ -15,7 +15,7 @@ $params = array(
 				'guid' => $gameuid,
 				'uid' => $uid,
 				'pid' => $pid,
-				'server'=>1,
+				'server'=>$server,
 				'v'=>$version
 );
 print_r($s->dispatch($params));

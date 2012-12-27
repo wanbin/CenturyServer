@@ -4,6 +4,7 @@ include_once PATH_CACHE . 'MappingCache.php';
 class Mapping extends BaseCommand {
 	protected function executeEx($params) {
 		$mappingMC = new MappingCache($this->gameuid);
+		$mappingMC->setServer($this->server);
 		$mappingMC->addone($this->uid);
 	}
 }
