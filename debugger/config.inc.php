@@ -1,6 +1,6 @@
 <?php
-$uid = 'wanbin';
 $gameuid = rand(1,9000);
+$uid = 'wb'.$gameuid;
 $pid = '1';
 $authCode =14245730;
 $server = 1;
