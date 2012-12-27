@@ -8,7 +8,7 @@
 require_once PATH_DATAOBJ . 'MappingModel.php';
 class MappingCache extends MappingModel{
 	private $item = array ();
-	
+		
 	/**
 	 * 得到所有记录
 	 */
@@ -26,7 +26,7 @@ class MappingCache extends MappingModel{
 	/**
 	 * 得到一条记录
 	 *
-	 * @param $id unknown_type       	
+	 * @param $id unknown_type
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
 	protected function getOne() {
@@ -44,7 +44,7 @@ class MappingCache extends MappingModel{
 		/**
 	 * 更新信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function update($content) {
@@ -60,7 +60,7 @@ class MappingCache extends MappingModel{
 	/**
 	 * 添加一条信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function add($content) {
@@ -68,11 +68,10 @@ class MappingCache extends MappingModel{
 		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
 	}
 	
-	protected function addOne($templateid, $content) {
+	protected function addOne($templateid, $uid) {
 		$this->get ();
-		$content ['templateid'] = $templateid;
-		parent::add ( $content );
-		$this->item [$templateid] = $content;
+		parent::add ( $uid );
+		$this->item [$this->gameuid] = $uid;
 		$key = $this->getCacheKeyAll ();
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
 	}
@@ -89,7 +88,7 @@ class MappingCache extends MappingModel{
 	/**
 	 * 删除一条信息
 	 *
-	 * @param $id unknown_type       	
+	 * @param $id unknown_type
 	 * @return number
 	 */
 	protected function del() {
