@@ -10,27 +10,9 @@ class BuildingCache extends BuildingModel{
 	private $item = array ();
 	
 	/**
-	 * 得到所有记录
-	 */
-	protected function get() {
-		if (empty ( $this->item )) {
-			$key = $this->getCacheKeyAll ();
-			$ret = $this->getFromCache ( $key, $this->gameuid );
-			if (empty ( $ret )) {
-				$ret = parent::get ();
-				if (! empty ( $ret )) {
-					$this->setToCache ( $key, $ret, 0, $this->gameuid );
-				}
-			}
-			$this->item = $ret;
-		}
-		return $this->item;
-	}
-	
-	/**
 	 * 得到一条记录
 	 *
-	 * @param $id unknown_type       	
+	 * @param $id unknown_type
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
 	protected function getOneFromCache() {
@@ -45,16 +27,12 @@ class BuildingCache extends BuildingModel{
 		return $ret;
 	}
 	
-		/**
+	/**
 	 * 更新信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
-	protected function update($content) {
-		parent::update ( $content );
-		return $this->delFromCache ();
-	}
 	
 	protected function updateOne($templateid, $content) {
 		parent::update ( $templateid, $content );
@@ -62,60 +40,13 @@ class BuildingCache extends BuildingModel{
 	}
 	
 	/**
-	 * 添加一条信息
+	 * 初始化一条信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
-	protected function add($content) {
-		parent::add ( $content );
-		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
-	}
-	
-	protected function addOne($templateid, $content) {
-		$this->get ();
-		$content ['templateid'] = $templateid;
-		parent::add ( $content );
-		$this->item [$templateid] = $content;
-		$key = $this->getCacheKeyAll ();
-		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
-	}
-	
-	public function addarr($content) {
-		$this->get ();
-		parent::addarr ( $content );
-		foreach ( $content as $key => $vlaue ) {
-			$this->item [$vlaue ['templateid']] = $vlaue;
-		}
-		$key = $this->getCacheKeyAll ();
-		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
-	}
-	/**
-	 * 删除一条信息
-	 *
-	 * @param $id unknown_type       	
-	 * @return number
-	 */
-	protected function del() {
-		parent::del ();
-		return $this->delFromCache ();
-	}
-	
-	protected function delOne($templateid) {
-		$this->get ();
-		parent::delOne ( $templateid );
-		if (true) {
-			unset ( $this->item [$templateid] );
-		} else {
-			foreach ( $this->item as $key => $value ) {
-				if ($value ['templateid'] == $templateid) {
-					unset ( $this->item [$key] );
-					break;
-				}
-			}
-		}
-		$key = $this->getCacheKeyAll ();
-		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
+	protected function init() {
+		return	parent::init($this->gameuid);
 	}
 	
 	protected function delFromCache() {
@@ -123,15 +54,8 @@ class BuildingCache extends BuildingModel{
 		return $this->delToCache ($key,$this->gameuid);
 	}
 	
-	protected function delFromCacheALL() {
-		return $this->delToCache ( $this->getCacheKeyAll (), $this->gameuid );
-	}
-	
 	private function getCacheKey() {
 		return sprintf ( MEMCACHE_KEY_BUILDING,$this->gameuid  );
 	}
 	
-	private function getCacheKeyAll() {
-		return sprintf ( MEMCACHE_KEY_BUILDING_ALL, $this->gameuid );
-	}
 }
