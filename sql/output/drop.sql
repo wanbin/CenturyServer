@@ -1,1 +1,1 @@
-drop database game_1;
+drop database centurywar;

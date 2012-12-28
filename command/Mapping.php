@@ -5,6 +5,7 @@ class Mapping extends BaseCommand {
 	protected function executeEx($params) {
 		$mappingMC = new MappingCache($this->gameuid);
 		$mappingMC->setServer($this->server);
-		$mappingMC->addone($this->uid);
+		$ret = $mappingMC->getOneByUid('wb6465');
+		print_r($ret);
 	}
 }
