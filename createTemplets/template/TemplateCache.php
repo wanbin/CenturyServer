@@ -1,24 +1,28 @@
 <?php
 /**
- * @author WanBin @date 2012-12-26
- * 用户Mapping映射表
+ * @author {Author} @date {Date}
+ * TemplatenContent
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
  */
-require_once PATH_DATAOBJ . 'MappingModel.php';
-class MappingCache extends MappingModel{
+require_once PATH_DATAOBJ . 'TemplateModel.php';
+class TemplateCache extends TemplateModel{
 	private $item = array ();
-		
+	
 	/**
 	 * 得到所有记录
 	 */
-	protected function get($uidArr = array()) {
-		$hasNoGameuid = array_diff ( $this->item, $uidArr );
-		if (! empty ( $hasNoGameuid )) {
-			$ret = parent::get ( $hasNoGameuid );
-			if (! empty ( $ret )) {
-				$this->item = array_merge ( $this->item, $ret );
+	protected function get() {
+		if (empty ( $this->item )) {
+			$key = $this->getCacheKeyAll ();
+			$ret = $this->getFromCache ( $key, $this->gameuid );
+			if (empty ( $ret )) {
+				$ret = parent::get ();
+				if (! empty ( $ret )) {
+					$this->setToCache ( $key, $ret, 0, $this->gameuid );
+				}
 			}
+			$this->item = $ret;
 		}
 		return $this->item;
 	}
@@ -26,11 +30,11 @@ class MappingCache extends MappingModel{
 	/**
 	 * 得到一条记录
 	 *
-	 * @param $id unknown_type
+	 * @param $id unknown_type       	
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
-	public function getOne() {
-		$key = $this->getCacheKey ();
+	protected function getOne({paramsWithOutGameuid}) {
+		$key = $this->getCacheKey ({paramsWithOutGameuid});
 		$ret = $this->getFromCache ( $key, $this->gameuid );
 		if (empty ( $ret )) {
 			$ret = parent::getOne ();
@@ -41,23 +45,26 @@ class MappingCache extends MappingModel{
 		return $ret;
 	}
 	
-	
-	public function getOneByUid($uid) {
-		$key = $this->getUidCacheKey ($uid);
-		$ret = $this->getFromCache ( $key, $this->gameuid );
-		if (empty ( $ret )) {
-			$ret = parent::getOneUid($uid);
-			if (! empty ( $ret )) {
-				$this->setToCache ( $key, $ret, 0, $this->gameuid );
-			}
-		}
-		return $ret;
+		/**
+	 * 更新信息
+	 *
+	 * @param $content unknown_type       	
+	 * @return Ambigous <boolean, number, multitype:>
+	 */
+	protected function update($content) {
+		parent::update ( $content );
+		return $this->delFromCache ();
 	}
-		
+	
+	protected function updateOne($templateid, $content) {
+		parent::update ( $templateid, $content );
+		return $this->delFromCacheALL ();
+	}
+	
 	/**
 	 * 添加一条信息
 	 *
-	 * @param $content unknown_type
+	 * @param $content unknown_type       	
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function add($content) {
@@ -65,10 +72,11 @@ class MappingCache extends MappingModel{
 		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
 	}
 	
-	public function addOne($uid) {
+	protected function addOne($templateid, $content) {
 		$this->get ();
-		parent::add ( $uid );
-		$this->item [$this->gameuid] = $uid;
+		$content ['templateid'] = $templateid;
+		parent::add ( $content );
+		$this->item [$templateid] = $content;
 		$key = $this->getCacheKeyAll ();
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
 	}
@@ -85,7 +93,7 @@ class MappingCache extends MappingModel{
 	/**
 	 * 删除一条信息
 	 *
-	 * @param $id unknown_type
+	 * @param $id unknown_type       	
 	 * @return number
 	 */
 	protected function del() {
@@ -110,8 +118,8 @@ class MappingCache extends MappingModel{
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
 	}
 	
-	protected function delFromCache() {
-		$key =  $this->getCacheKey ();
+	protected function delFromCache({paramsWithOutGameuid}) {
+		$key =  $this->getCacheKey ({paramsWithOutGameuid});
 		return $this->delToCache ($key,$this->gameuid);
 	}
 	
@@ -119,15 +127,11 @@ class MappingCache extends MappingModel{
 		return $this->delToCache ( $this->getCacheKeyAll (), $this->gameuid );
 	}
 	
-	private function getCacheKey() {
-		return sprintf ( MEMCACHE_KEY_MAPPING,$this->server,$this->gameuid  );
-	}
-	
-	private function getUidCacheKey($uid) {
-		return sprintf ( MEMCACHE_KEY_MAPPING_UID,$this->server,$uid );
+	private function getCacheKey({paramsWithOutGameuid}) {
+		return sprintf ( MEMCACHE_KEY_TEMPLATECACHEKEY,$this->gameuid {paramsWithOutGameuidSeparate} );
 	}
 	
 	private function getCacheKeyAll() {
-		return sprintf ( MEMCACHE_KEY_MAPPING_ALL,$this->server, $this->gameuid );
+		return sprintf ( MEMCACHE_KEY_TEMPLATECACHEKEY_ALL, $this->gameuid );
 	}
 }

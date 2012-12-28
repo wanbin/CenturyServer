@@ -33,7 +33,7 @@ class BuildingCache extends BuildingModel{
 	 * @param $id unknown_type       	
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
-	protected function getOne() {
+	protected function getOneFromCache() {
 		$key = $this->getCacheKey ();
 		$ret = $this->getFromCache ( $key, $this->gameuid );
 		if (empty ( $ret )) {

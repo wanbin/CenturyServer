@@ -28,7 +28,8 @@ define("MEMCACHE_KEY_BUILDING_LIST", "centurywar_Building_list_%d");
 define("MEMCACHE_KEY_RUNTIME", "centurywar_Runtime_%d");
 define("MEMCACHE_KEY_RUNTIME_LIST", "centurywar_Runtime_list_%d");
 
-//用户建筑表 
-define("MEMCACHE_KEY_MAPPING", "centurywar_Mapping_%d");
-define("MEMCACHE_KEY_MAPPING_LIST", "centurywar_Mapping_list_%d");
+//用户MAPPING表 
+define("MEMCACHE_KEY_MAPPING", "centurywar_mapping_%d_%d");
+define("MEMCACHE_KEY_MAPPING_UID", "centurywar_mapping_uid_%d_%s");
+define("MEMCACHE_KEY_MAPPING_LIST", "centurywar_mapping_list_%d_%d");
 
