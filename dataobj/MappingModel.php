@@ -20,12 +20,12 @@ class MappingModel extends BaseModel {
 	 */
 	protected function getOne() {
 		$where = array ('gameuid' => $this->gameuid );
-		$res = $this->hsSelectAll ( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
+		$res = $this->hsSelectOne ( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
 		return $res;
 	}
 	protected function getOneUid($uid) {
 		$where = array ('uid' => $uid );
-		$res = $this->hsSelectAll ( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
+		$res = $this->hsSelectOne( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
 		return $res;
 	}
 	/**

@@ -17,6 +17,7 @@ class BaseCommand {
 	protected $gameuid;
 	protected $user_account;
 	protected $accountObject;
+	protected $buildingObject;
 	protected $marchObject;
 	protected $heroObject;
 	protected $sns_id;
@@ -46,7 +47,7 @@ class BaseCommand {
 				// 验证account
 				$accountMC = $this->createAccountModel ( $sign_arr ['gameuid'], $sign_arr ['uid'] );
 				$accountMC->setServer ( $this->server );
-				$this->user_account = $accountMC->validate ( $param, $sign_arr );
+// 				$this->user_account = $accountMC->validate ( $param, $sign_arr );
 			}
 			
 			$this->sns_id = $sign_arr ['sns_id'];
@@ -273,6 +274,25 @@ class BaseCommand {
 			$this->accountObject [$gameuid] = new AccountCache ( $gameuid, $uid );
 		}
 		return $this->accountObject [$gameuid];
+	}
+	
+
+	/**
+	 * 实例化Building类
+	 * @param unknown_type $gameuid
+	 * @param unknown_type $uid
+	 * @param unknown_type $new
+	 * @return BuildingHandler
+	 */
+	protected function createBuildingHD($gameuid = null, $uid = null, $new = false) {
+		if (empty ( $gameuid )) {
+			$gameuid = $this->gameuid;
+		}
+		if (empty ( $this->buildingObject ) || ! array_key_exists ( $gameuid, $this->buildingObject )) {
+			require_once PATH_HANDLER . 'BuildingHandler.php';
+			$this->buildingObject [$gameuid] = new BuildingHandler ( $gameuid, $uid );
+		}
+		return $this->buildingObject [$gameuid];
 	}
 	/**
 	 * 检查用户账户

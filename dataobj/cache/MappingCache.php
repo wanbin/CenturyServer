@@ -8,7 +8,7 @@
 require_once PATH_DATAOBJ . 'MappingModel.php';
 class MappingCache extends MappingModel{
 	private $item = array ();
-	
+		
 	/**
 	 * 得到所有记录
 	 */
@@ -26,10 +26,10 @@ class MappingCache extends MappingModel{
 	/**
 	 * 得到一条记录
 	 *
-	 * @param $id unknown_type       	
+	 * @param $id unknown_type
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
-	protected function getOne() {
+	public function getOne() {
 		$key = $this->getCacheKey ();
 		$ret = $this->getFromCache ( $key, $this->gameuid );
 		if (empty ( $ret )) {
@@ -41,26 +41,23 @@ class MappingCache extends MappingModel{
 		return $ret;
 	}
 	
-		/**
-	 * 更新信息
-	 *
-	 * @param $content unknown_type       	
-	 * @return Ambigous <boolean, number, multitype:>
-	 */
-	protected function update($content) {
-		parent::update ( $content );
-		return $this->delFromCache ();
-	}
 	
-	protected function updateOne($templateid, $content) {
-		parent::update ( $templateid, $content );
-		return $this->delFromCacheALL ();
+	public function getOneByUid($uid) {
+		$key = $this->getUidCacheKey ($uid);
+		$ret = $this->getFromCache ( $key, $this->gameuid );
+		if (empty ( $ret )) {
+			$ret = parent::getOneUid($uid);
+			if (! empty ( $ret )) {
+				$this->setToCache ( $key, $ret, 0, $this->gameuid );
+			}
+		}
+		return $ret;
 	}
-	
+		
 	/**
 	 * 添加一条信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function add($content) {
@@ -68,11 +65,10 @@ class MappingCache extends MappingModel{
 		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
 	}
 	
-	protected function addOne($templateid, $content) {
+	public function addOne($uid) {
 		$this->get ();
-		$content ['templateid'] = $templateid;
-		parent::add ( $content );
-		$this->item [$templateid] = $content;
+		parent::add ( $uid );
+		$this->item [$this->gameuid] = $uid;
 		$key = $this->getCacheKeyAll ();
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
 	}
@@ -89,7 +85,7 @@ class MappingCache extends MappingModel{
 	/**
 	 * 删除一条信息
 	 *
-	 * @param $id unknown_type       	
+	 * @param $id unknown_type
 	 * @return number
 	 */
 	protected function del() {
@@ -124,10 +120,14 @@ class MappingCache extends MappingModel{
 	}
 	
 	private function getCacheKey() {
-		return sprintf ( MEMCACHE_KEY_MAPPING,$this->gameuid  );
+		return sprintf ( MEMCACHE_KEY_MAPPING,$this->server,$this->gameuid  );
+	}
+	
+	private function getUidCacheKey($uid) {
+		return sprintf ( MEMCACHE_KEY_MAPPING_UID,$this->server,$uid );
 	}
 	
 	private function getCacheKeyAll() {
-		return sprintf ( MEMCACHE_KEY_MAPPING_ALL, $this->gameuid );
+		return sprintf ( MEMCACHE_KEY_MAPPING_ALL,$this->server, $this->gameuid );
 	}
 }

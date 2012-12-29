@@ -64,7 +64,7 @@ foreach ( $createarray as $key => $value ) {
 	
 	
 	// 生成commodel
-	$tempModel = getSource ( 'TemplateModel','./tmp/' );
+	$tempModel = getSource ( 'TemplateModel','./template/' );
 	$tempModel = str_replace ( 'TemplateModel', ucfirst ( $value ['modelname'] ) . 'Model', $tempModel );
 	$tempModel = str_replace ( 'TemplatenContent', $value ['description'], $tempModel );
 	$tempModel = str_replace ( 'templatetablename', $value ['tablename'], $tempModel );
@@ -78,7 +78,7 @@ foreach ( $createarray as $key => $value ) {
 
 	// 生成cache
 	$memcacheKey = 'MEMCACHE_KEY_' . strtoupper ( $value ['modelname'] );
-	$tempCache = getSource ( 'TemplateCache' ,'./tmp/');
+	$tempCache = getSource ( 'TemplateCache' ,'./template/');
 	$tempCache = str_replace ( 'TemplateModel', ucfirst ( $value ['modelname'] ) . 'Model', $tempCache );
 	$tempCache = str_replace ( 'TemplateCache', ucfirst ( $value ['modelname'] ) . 'Cache', $tempCache );
 	$tempCache = str_replace ( 'TemplatenContent', $value ['description'], $tempCache );
