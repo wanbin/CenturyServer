@@ -32,3 +32,7 @@ define("MEMCACHE_KEY_RUNTIME_LIST", "centurywar_Runtime_list_%d");
 define("MEMCACHE_KEY_MAPPING", "centurywar_Mapping_%d");
 define("MEMCACHE_KEY_MAPPING_LIST", "centurywar_Mapping_list_%d");
 
+//XML 缓存
+define("MEMCACHE_KEY_XML_FILE", "xml_cache_file_%s");
+define("MEMCACHE_KEY_XML_GROUP","xml_cache_group_%s");
+define("MEMCACHE_KEY_XML_ITEM", "xml_cache_item_%s_%s");

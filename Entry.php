@@ -6,9 +6,9 @@ define( 'PATH_DATAOBJ', PATH_ROOT.'dataobj/');			// 数据对象目录
 define( 'PATH_CACHE', PATH_ROOT.'dataobj/cache/');      // mc层
 define( 'PATH_SQL', PATH_ROOT.'sql/');      
 define( 'FRAMEWORK', PATH_ROOT . 'framework/');         //主框架目录
-
-include PATH_ROOT . 'config.host.php';			// 全局配置文件
-include PATH_ROOT . 'config.inc.php';
+define('PATH_STATIC',PATH_ROOT . 'static/');            //静态文件夹
+include_once PATH_ROOT . 'config.host.php';			// 全局配置文件
+include_once PATH_ROOT . 'config.inc.php';
 
 //加载framework中db操作类与cache操作类
 require_once FRAMEWORK . '/cache/Cache.class.php';
