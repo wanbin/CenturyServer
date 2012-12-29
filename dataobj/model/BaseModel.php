@@ -1,6 +1,6 @@
 <?php
-require_once PATH_DATAOBJ . 'SystemConstants.php';
-require_once PATH_DATAOBJ . 'Constants.php';
+require_once FRAMEWORK . 'exception/ExceptionConstants.php';
+require_once 'MemcacheConstants.php';
 
 class BaseModel {
 	const MODIFY_FLAG = 'm';

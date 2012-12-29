@@ -3,7 +3,7 @@
  * @author WanBin @date 2012-12-26
  * 用户Mapping映射表
  */
-require_once PATH_DATAOBJ.'BaseModel.php';
+require_once 'BaseModel.php';
 class MappingModel extends BaseModel {
 	/**
 	 * 得到多条记录

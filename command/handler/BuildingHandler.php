@@ -39,7 +39,7 @@ class BuildingHandler extends BuildingCache{
 				'crop' => 100
 		);
 	}
-	public function complate($id) {
+	public function complete($id) {
 		$buildingInfo = $this->getOneFromCache ();
 		// check if is in upgradeing
 		$runtimeInfo = $this->runtimeObject->get ();

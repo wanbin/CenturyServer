@@ -1,5 +1,5 @@
 <?php
-require_once PATH_DATAOBJ . 'ChatModel.php';
+require_once PATH_MODEL . 'ChatModel.php';
 
 class ChatCache extends ChatModel 
 {

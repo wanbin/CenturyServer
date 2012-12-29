@@ -102,29 +102,21 @@ class BaseCommand {
 	}
 	
 	/**
-	 *
-	 *
+	 +----------------------------------------------------------
 	 * 同步数据,按照类别同步
 	 * 暂时还没有按照类别启用
-	 *
-	 * @param $types array
+	 +----------------------------------------------------------
+	 * @param unknown_type $types
+	 * @return multitype:
+	 +----------------------------------------------------------
 	 */
 	protected function getSyncData($types = array()) {
 		$syncData = array ();
 		return $syncData;
 	}
 	
-	
-	public function setGameuid($gameuid) {
-		$this->gameuid = $gameuid;
-	}
-	
-	public function setUid($uid) {
-		$this->uid = $uid;
-	}
-	
 	/**
-	 *
+	 *@todo  把这函数分到 log 层， 把函数移到logclass
 	 *
 	 * accesslog按照每天记录一份所有command的log
 	 *
@@ -150,23 +142,6 @@ class BaseCommand {
 	
 	
 	/**
-	 * @param unknown_type $param
-	 * @return number
-	 */
-	protected function transformNum($param) {
-		foreach ( $param as $key => $v ) {
-			if (is_numeric ( $v )) {
-				$param [$key] = intval ( $v );
-			}
-			if (is_array ( $v ) || is_object ( $v )) {
-				$param [$key] = $this->transformNum ( $v );
-			}
-		}
-		return $param;
-	}
-	
-
-	/**
 	 * @param unknown_type $data
 	 * @return boolean
 	 */
@@ -188,27 +163,11 @@ class BaseCommand {
 		return $haveNull;
 	}
 	
-	
-	
+
 	/**
-	 *
-	 *
-	 * 建立 Item model 操作对象
-	 *
-	 * @param $gameuid int
-	 * @param $uid string
-	 * @param $new bool
-	 * @return ItemCache
-	 */
-	protected function createItemMC() {
-		if (empty ( $this->itemObject )) {
-			include_once PATH_CACHE . 'ItemCache.php';
-			$this->itemObject = new ItemCache ();
-		}
-		return $this->itemObject;
-	}
-	/**
-	 * 设置程序默认时区
+	 +----------------------------------------------------------
+	 * 设置默认时区
+	 +----------------------------------------------------------
 	 */
 	protected function setTimezone() {
 		if (isset ( $GLOBALS ['config'] ['sns_arr'] [$this->sns_id] )) {
@@ -234,8 +193,8 @@ class BaseCommand {
 	{
 	    if (empty($this->$name))
 	    {
-	        include PATH_CACHE . 'CacheHandler.php';
-	        $instance = CacheHandler::getInstance($name,$gameuid,$server);
+	        include PATH_DATAOBJ . 'DataHandler.php';
+	        $instance = DataHandler::getInstance($name,$gameuid,$server);
 	        if (isset($this->$name))
 	            $this->$name = $instance;
 	    }else{
@@ -244,45 +203,15 @@ class BaseCommand {
 	    
 	    Return $instance;
 	}
-	/**
-	 * 建立account cache操作对象
-	 *
-	 * @param
-	 *       	 int gameuid
-	 * @param
-	 *       	 string uid
-	 * @return AccountCache
-	 */
-	protected function createAccountModel($gameuid, $uid = null, $new = false) {
-		return $this->createAccountMC ( $gameuid, $uid, $new );
-	}
-	/**
-	 * 建立account cache操作对象
-	 *
-	 * @param
-	 *       	 int gameuid
-	 * @param
-	 *       	 string uid
-	 * @return AccountCache
-	 */
-	protected function createAccountMC($gameuid = null, $uid = null, $new = false) {
-		if (empty ( $gameuid )) {
-			$gameuid = $this->gameuid;
-		}
-		if (empty ( $this->accountObject ) || ! array_key_exists ( $gameuid, $this->accountObject )) {
-			require_once PATH_CACHE . 'AccountCache.php';
-			$this->accountObject [$gameuid] = new AccountCache ( $gameuid, $uid );
-		}
-		return $this->accountObject [$gameuid];
-	}
-	
 
 	/**
-	 * 实例化Building类
-	 * @param unknown_type $gameuid
-	 * @param unknown_type $uid
-	 * @param unknown_type $new
-	 * @return BuildingHandler
+	 +----------------------------------------------------------
+	 * 实例化Building 类
+	 +----------------------------------------------------------
+	 * @param int $gameuid
+	 * @param string $uid
+	 * @param object $new
+	 +----------------------------------------------------------
 	 */
 	protected function createBuildingHD($gameuid = null, $uid = null, $new = false) {
 		if (empty ( $gameuid )) {
@@ -306,8 +235,7 @@ class BaseCommand {
 		if (empty ( $this->user_account )) {
 			$this->user_account = $account->getAccount ();
 		}
-		// 计算各种资源的收益
-		// $this->updateResource();
+
 		$change = array ();
 		foreach ( $field as $key => $val ) {
 			if (in_array ( $key, $a )) {
@@ -340,7 +268,7 @@ class BaseCommand {
 	 *
 	 * @param $change array
 	 */
-	protected function updateUserStatus($change = array()) {
+	protected function updateUserStatus($gameuid,$change = array()) {
 		if (empty ( $gameuid )) {
 			$gameuid = $this->gameuid;
 		}

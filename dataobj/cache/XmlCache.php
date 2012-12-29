@@ -1,5 +1,5 @@
 <?php
-    include_once '../model/XmlModel.php';
+    include_once PATH_MODEL . 'XmlModel.php';
     class XmlCache extends XmlModel
     {
         function __construct($xmlName = 'DataBase')
