@@ -119,10 +119,58 @@ class AccountCache extends AccountModel{
     }
     
     
-       
+    /**
+     +----------------------------------------------------------
+     * 更新账户信息
+     +----------------------------------------------------------
+     * @param array $change  array('coin'=> -100,'crop'=>100)
+     * @return array  更新完account的全部信息
+     +----------------------------------------------------------
+     */
+    public function updateAccount($change)
+    {
+        //获取需要验证的字段
+        $validation = $this->getValidateField();
+        
+        //验证
+        foreach ($change as $key=>$value)
+        {
+            if(in_array($key, $validation))
+            {
+                $account = $this->getAccount();
+                $resaut  = $account[$key] + $value;
+                if($resaut < 0)
+                {
+                    $this->throwException('You dont have enough resourse',StatusCode::LESS_RESOURSE);
+                }
+            }
+            $change[$key] = $resaut;
+        }
+        $res = parent::updateAccount($change);
+        if($res)
+        {
+            $this->account = array_merge($this->account,$change);
+            $key = $this->getCacheKey();
+            $this->setToCache($key,$this->account,0,$this->gameuid);
+        }
+        return $this->account;
+    }
+    
+    
+    /**
+     +----------------------------------------------------------
+     * 获取更新时需要验证的字段
+     +----------------------------------------------------------
+     * @return array
+     +----------------------------------------------------------
+     */
+    private function getValidateField()
+    {
+        return array('crop','coin','ruby');
+    }
 	
 	protected function delFromCache() {
-		$key =  $this->getCacheKey ();
+		$key =  $this->getCacheKey ($this->gameuid);
 		return $this->delToCache ($key,$this->gameuid);
 	}
 	

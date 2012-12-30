@@ -9,7 +9,7 @@ require_once 'BaseModel.php';
  +----------------------------------------------------------
  *  @author     Wenson
  *  @version    2012-12-30
- *  @package    package_name
+ *  @package    dataobj
  +----------------------------------------------------------
  */
 class AccountModel extends BaseModel {
@@ -43,9 +43,17 @@ class AccountModel extends BaseModel {
         {
             $gameuid = $this->gameuid;
         }
-        $res= $this->hsSelectOne($this->getTableName(), $gameuid, $fields, array('gameuid'=>$gameuid), '');
+        $res= $this->hsSelectOne($this->getTableName(), $gameuid, $this->getFields(), array('gameuid'=>$gameuid), '');
         return $res;
     }
+    
+    public function updateAccount($change)
+    {
+        $res = $this->hsUpdate($this->getTableName(), $this->gameuid, $change, array('gameuid'=>$this->gameuid));
+        return $res;
+    }
+    
+
 
 
 }

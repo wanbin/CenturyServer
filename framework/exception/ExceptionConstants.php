@@ -19,5 +19,8 @@ class StatusCode{
 	const ITEM_NOT_EXISTS = 1002;
 	// 动作不存在
 	const ACTION_NOT_EXISTS = 1003;
+	
+	//资源不足
+	const LESS_RESOURSE  = 1004;
 }
 
