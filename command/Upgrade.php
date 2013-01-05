@@ -12,7 +12,9 @@ class Upgrade extends BaseCommand {
 		
 		$change = $buildingHD->getCost ( $buildingId );
 		$this->checkUserStatus ( $change );
+		
 		$costTime = $buildingHD->upgrade ( $buildingId );
+		
 		$this->updateUserStatus ( $change );
 		return array (
 				'change' => $change,
