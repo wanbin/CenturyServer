@@ -2,7 +2,7 @@
 // 游戏主程序调用入口
 define( 'PATH_ROOT', dirname(__FILE__).'/' );			// 根目录
 define( 'PATH_COMMAND', PATH_ROOT.'command/');			// 命令(逻辑)目录
-define( 'PATH_COMMAND', PATH_HANDLER.'command/handler/');			// 实例操作目录
+define( 'PATH_HANDLER', PATH_ROOT.'command/handler/');			// 实例操作目录
 define( 'PATH_DATAOBJ', PATH_ROOT.'dataobj/');			// 数据对象目录
 define( 'PATH_CACHE', PATH_ROOT.'dataobj/cache/');      // mc层
 define( 'PATH_MODEL', PATH_ROOT . 'dataobj/model/');

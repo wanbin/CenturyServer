@@ -69,4 +69,8 @@ class BuildingHandler extends BuildingCache{
 		$ret = array_flip ( $this->buildingArr );
 		return $ret [$type];
 	}
+	
+	public function init() {
+		parent::init ();
+	}
 }

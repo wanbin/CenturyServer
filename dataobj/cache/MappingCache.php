@@ -29,7 +29,7 @@ class MappingCache extends MappingModel{
 	 * @param $id unknown_type
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
-	public function getOne() {
+	protected  function getOne() {
 		$key = $this->getCacheKey ();
 		$ret = $this->getFromCache ( $key, $this->gameuid );
 		if (empty ( $ret )) {
@@ -42,7 +42,7 @@ class MappingCache extends MappingModel{
 	}
 	
 	
-	public function getOneByUid($uid) {
+	protected function getOneByUid($uid) {
 		$key = $this->getUidCacheKey ($uid);
 		$ret = $this->getFromCache ( $key, $this->gameuid );
 		if (empty ( $ret )) {
@@ -65,15 +65,14 @@ class MappingCache extends MappingModel{
 		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
 	}
 	
-	public function addOne($uid) {
-		$this->get ();
-		parent::add ( $uid );
-		$this->item [$this->gameuid] = $uid;
+	protected  function init($gameuid,$uid) {
+		parent::add ($gameuid, $uid );
+		$this->item [$gameuid] = $uid;
 		$key = $this->getCacheKeyAll ();
-		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
+		return $this->setToCache ( $key, $this->item, 0, $gameuid );
 	}
 	
-	public function addarr($content) {
+	protected  function addarr($content) {
 		$this->get ();
 		parent::addarr ( $content );
 		foreach ( $content as $key => $vlaue ) {

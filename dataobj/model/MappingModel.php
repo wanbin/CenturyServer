@@ -47,8 +47,8 @@ class MappingModel extends BaseModel {
 	 * @param $content unknown_type       	
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
-	protected function add($uid) {
-		$insert ['gameuid'] = $this->gameuid;
+	protected function add($gameuid,$uid) {
+		$insert ['gameuid'] = $gameuid;
 		$insert ['uid'] = $uid;
 		return $this->hsInsert ( $this->getTableName (), $this->gameuid, $insert );
 	}

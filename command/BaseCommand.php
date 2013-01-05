@@ -17,8 +17,10 @@ class BaseCommand {
 	protected $gameuid;
 	protected $user_account;
 	protected $accountObject;
+	
 	protected $buildingObject;
 	protected $marchObject;
+	protected $mappingObject;
 	protected $heroObject;
 	protected $sns_id;
 	protected $server;
@@ -45,8 +47,8 @@ class BaseCommand {
 			}
 			if (! in_array ( $command, $this->noValidateCommand )) {
 				// 验证account
-				$accountMC = $this->createAccountModel ( $sign_arr ['gameuid'], $sign_arr ['uid'] );
-				$accountMC->setServer ( $this->server );
+			//	$accountMC = $this->createAccountModel ( $sign_arr ['gameuid'], $sign_arr ['uid'] );
+				//$accountMC->setServer ( $this->server );
 // 				$this->user_account = $accountMC->validate ( $param, $sign_arr );
 			}
 			
@@ -223,6 +225,23 @@ class BaseCommand {
 		}
 		return $this->buildingObject [$gameuid];
 	}
+	
+	
+	/**
+	 +----------------------------------------------------------
+	 * 
+	 +----------------------------------------------------------
+	 * @param int $server
+	 +----------------------------------------------------------
+	 */
+	protected function createMappingHD($server) {
+		if (empty ( $this->mappingObject ) || ! array_key_exists ( $server, $this->mappingObject )) {
+			require_once PATH_HANDLER . 'MappingHandler.php';
+			$this->mappingObject [$server] = new MappingHandler($server);
+		}
+		return $this->mappingObject [$server];
+	}
+	
 	/**
 	 * 检查用户账户
 	 *
