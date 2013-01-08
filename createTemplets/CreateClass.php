@@ -90,5 +90,33 @@ $createarray=array(
 				),
 				'description' => '用户Mapping映射表',
 		),
+		
+		array(
+				'modelname' => 'UserInvadeReward',
+				'singleData' => true,
+				'tablename' => 'user_invite_reward',
+				'tablefiled' => array (
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'玩家GAMEUID'),
+						'reward' => array('type'=>'varchar','lengh'=>500,'default'=>'[]','isPrimaryKey'=>0,'isjson'=>1,'comment'=>'Runtime数据'),
+						'updatetime' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'更新时间'),
+				),
+				'description' => '用户正在生产的信息表',
+		),
+		
+		array(
+				'modelname' => 'LimitBoss',
+				'singleData' => true,
+				'tablename' => 'user_limit_boss',
+				'tablefiled' => array (
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'玩家GAMEUID'),
+						'data' => array('type'=>'varchar','lengh'=>5000,'default'=>'[]','isPrimaryKey'=>0,'isjson'=>1,'comment'=>'Runtime数据'),
+						'endtime' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'创建时间 '),
+						'boss' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'boss编号'),
+						'level' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'等级'),
+						'soldier' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'剩余兵数'),
+						'updatetime' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'更新时间'),
+				),
+				'description' => '用户限时BOSS表',
+		),
 );
 ?>
