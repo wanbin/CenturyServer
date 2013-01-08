@@ -12,7 +12,7 @@ class TemplateCache extends TemplateModel{
 	/**
 	 * 得到所有记录
 	 */
-	protected function get() {
+	protected function getAll() {
 		if (empty ( $this->item )) {
 			$key = $this->getCacheKeyAll ();
 			$ret = $this->getFromCache ( $key, $this->gameuid );
@@ -33,11 +33,11 @@ class TemplateCache extends TemplateModel{
 	 * @param $id unknown_type       	
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
-	protected function getOne({paramsWithOutGameuid}) {
+	protected function get({paramsWithOutGameuid}) {
 		$key = $this->getCacheKey ({paramsWithOutGameuid});
 		$ret = $this->getFromCache ( $key, $this->gameuid );
 		if (empty ( $ret )) {
-			$ret = parent::getOne ();
+			$ret = parent::get ();
 			if (! empty ( $ret )) {
 				$this->setToCache ( $key, $ret, 0, $this->gameuid );
 			}

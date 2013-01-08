@@ -8,15 +8,17 @@ class TemplateModel extends BaseModel {
 	/**
 	 * 得到所有记录
 	 */
-	protected function get() {
+	protected function getAll() {
 		$where = array ('gameuid' => $this->gameuid );
 		$res = $this->hsSelectAll ( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
 		$ret = array ();
 		foreach ( $res as $key => $value ) {
 			foreach ( $value as $jsonKey => $jsonValue )
+			{
 				if (in_array ( $jsonKey, array ({strJson} ) )) {
 					$value [$jsonKey] = json_decode ( $jsonValue, true );
 				}
+			}
 			$temid = $value ['templateid'];
 			unset ( $value ['templateid'] );
 			$ret [$value ['templateid']] = $value;
@@ -29,9 +31,15 @@ class TemplateModel extends BaseModel {
 	 * @param $id unknown_type       	
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
-	protected function getOne() {
+	protected function get() {
 		$where = array ('gameuid' => $this->gameuid );
 		$res = $this->hsSelectAll ( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
+		foreach ( $res as $jsonKey => $jsonValue )
+		{
+			if (in_array ( $jsonKey, array ({strJson} ) )) {
+				$res [$jsonKey] = json_decode ( $jsonValue, true );
+			}
+		}
 		return $res;
 	}
 	
@@ -91,7 +99,8 @@ class TemplateModel extends BaseModel {
 	
 	protected function init({strUnion} ) {
 		$insert = array ( {strWhere} );
-		return $this->hsInsert ( $this->getTableName (), $this->gameuid, $insert );
+		$this->hsInsert ( $this->getTableName (), $this->gameuid, $insert );
+		return $insert;
 	}
 	/**
 	 * 删除一条信息
