@@ -30,7 +30,7 @@ class AccountCache extends AccountModel{
             $this->account = $this->getFromCache ( $key, $this->gameuid );
             if (empty ( $this->account )) {
                 $this->account = parent::getAccount ();
-                $this->setToCache ( $key, $this->account, 0, $this->gameuid );
+                $this->setToCache ( $key, $this->account, 3600, $this->gameuid );
             }
         }
         return $this->account;
@@ -119,7 +119,7 @@ class AccountCache extends AccountModel{
     }
     
     
-    /**
+ /**
      +----------------------------------------------------------
      * 更新账户信息
      +----------------------------------------------------------
@@ -132,25 +132,27 @@ class AccountCache extends AccountModel{
         //获取需要验证的字段
         $validation = $this->getValidateField();
         
+        $account = array();
         //验证
         foreach ($change as $key=>$value)
         {
             if(in_array($key, $validation))
             {
                 $account = $this->getAccount();
-                $resaut  = $account[$key] + $value;
-                if($resaut < 0)
+                $value += $account[$key];
+                if($value < 0)
                 {
                     $this->throwException('You dont have enough resourse',StatusCode::LESS_RESOURSE);
                 }
             }
-            $change[$key] = $resaut;
+            $change[$key] = $value;
         }
+        
         $res = parent::updateAccount($change);
         if($res)
         {
             $this->account = array_merge($this->account,$change);
-            $key = $this->getCacheKey();
+            $key = $this->getCacheKey($this->gameuid);
             $this->setToCache($key,$this->account,0,$this->gameuid);
         }
         return $this->account;
@@ -166,8 +168,9 @@ class AccountCache extends AccountModel{
      */
     private function getValidateField()
     {
-        return array('crop','coin','ruby');
+        return array('crop','coin','ruby','points');
     }
+ 
 	
 	protected function delFromCache() {
 		$key =  $this->getCacheKey ($this->gameuid);

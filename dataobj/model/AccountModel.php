@@ -21,13 +21,13 @@ class AccountModel extends BaseModel {
      * @return string
      +----------------------------------------------------------
      */
-    private function getTableName()
+    public function getTableName()
     {
         return 'user_account';
     }
     
     protected function getFields() {
-		return 'gameuid,server,uid,exp,level,createtime,updatetime,power,ip,country,authcode';
+		return 'gameuid,server,uid,exp,level,createtime,updatetime,power,ip,country,authcode,points';
 	}
  
     /**
@@ -43,13 +43,13 @@ class AccountModel extends BaseModel {
         {
             $gameuid = $this->gameuid;
         }
-        $res= $this->hsSelectOne($this->getTableName(), $gameuid, $this->getFields(), array('gameuid'=>$gameuid), '');
+        $res= $this->hsSelectOne($this->getTableName(), $this->getFields(), array('gameuid'=>$gameuid));
         return $res;
     }
     
     public function updateAccount($change)
     {
-        $res = $this->hsUpdate($this->getTableName(), $this->gameuid, $change, array('gameuid'=>$this->gameuid));
+        $res = $this->hsUpdate($this->getTableName(),$change, array('gameuid'=>$this->gameuid));
         return $res;
     }
     
