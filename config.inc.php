@@ -5,18 +5,25 @@ $webHost = '';
 $cdnHost = '';
 global $config;
 $config = array();
-$config['dbconfig'] = array (
-	'default'=>array(
-		'host_num' => 1,
-		'host'=>'host1',
-		'db_name' => $dbHost['host1']['dbname'][0],
-		'db_num' => 1,
-		'table_num' => 1
-	)
-);
 
-//load host config
-$config['dbconfig'] = array_merge($config['dbconfig'],$dbHost);
+
+$config['host_map'] = array(10000000,20000000);       //一个服务器最多用户
+$config['DB_map'] = array(
+			
+		//服务器一
+		array(  
+				'DB_host' => $dbHost['host1'],
+				'1'=> $dbHost['host1']['dbname'][0],    //逻辑一服
+				'2'=> $dbHost['host1']['dbname'][1]     //逻辑二服
+			),
+		//服务器二
+// 		array(
+// 				'DB_host' => $dbHost['host2'],
+// 				'1'=> $dbHost['host2']['dbname'][0],    //逻辑一服
+// 				'2'=> $dbHost['host2']['dbname'][1]     //逻辑二服
+// 			)
+	);
+
 //mapping account gameuid
 $config ['cache_user_mapping'] = $cacheHost ['host1'];
 $config ['cache_redis'] = $cacheHost ['redis'];
@@ -39,10 +46,11 @@ $config ['redis'] = false;
 $config ['memcache'] = array (
 		'TestContentCache' => true,
 		'MappingCache' => true,
+		'AccountCache'=>true
 );
 //逻辑开服
-$config['dispatchCount'] = 10;//逻辑开服最大个数
-$config['dispatchTable'] = array('user_mapping');//逻辑开服的数据表
+// $config['dispatchCount'] = 10;//逻辑开服最大个数
+// $config['dispatchTable'] = array('user_mapping');//逻辑开服的数据表
 $config['noServerCommand'] = array('GameRegister');
 $config['noValidateCommand'] = array('GameInit','GameRegister','Test');
 $config['webBase'] = 'http://'.$webHost.'/';

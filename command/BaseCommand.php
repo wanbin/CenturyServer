@@ -12,16 +12,16 @@
   *  @package    Command
   +----------------------------------------------------------
   */
-class BaseCommand {
-	protected $uid; // 用户id
-	protected $gameuid;
+class BaseCommand
+{
+	protected $gameuid = NULL;
+	protected $uid     = NULL;
+	protected $server  = NULL;
 	protected $user_account;
 	protected $accountObject;
 	protected $buildingObject;
 	protected $marchObject;
 	protected $heroObject;
-	protected $sns_id;
-	protected $server;
 	protected $issync = FALSE;
 	protected $commandName = '';
 	protected $noServerCommand;
@@ -43,14 +43,12 @@ class BaseCommand {
 					$this->licitException ( 'server is empty', 1201 );
 				}
 			}
-			if (! in_array ( $command, $this->noValidateCommand )) {
+			if (!in_array ( $command, $this->noValidateCommand )) {
 				// 验证account
-				$accountMC = $this->createAccountModel ( $sign_arr ['gameuid'], $sign_arr ['uid'] );
-				$accountMC->setServer ( $this->server );
+				$accountMC = $this->getInstance ('AccountCache');
 // 				$this->user_account = $accountMC->validate ( $param, $sign_arr );
 			}
 			
-			$this->sns_id = $sign_arr ['sns_id'];
 			$this->gameuid = $sign_arr ['gameuid'];
 			$this->version = $sign_arr ['version'];
 			$this->uid = $sign_arr ['uid'];
@@ -189,18 +187,18 @@ class BaseCommand {
 	 * @return Instance
 	 +----------------------------------------------------------
 	 */
-	public function getInstance($name,$gameuid,$server='')
+	public function getInstance($name,$gameuid=null,$uid=null,$server=null)
 	{
-	    if (empty($this->$name))
-	    {
-	        include PATH_DATAOBJ . 'DataHandler.php';
-	        $instance = DataHandler::getInstance($name,$gameuid,$server);
-	        if (isset($this->$name))
-	            $this->$name = $instance;
-	    }else{
-	        $instance = $this->$name;
-	    }
-	    
+		if (empty($gameuid))
+			$gameuid = $this->gameuid;
+		if (empty($uid))
+			$uid = $this->uid;
+		if (empty($server))
+			$server = $this->server;
+	        
+		include_once PATH_DATAOBJ . 'DataHandler.php';
+	    $instance = DataHandler::getInstance($name,$gameuid,$uid,$server);
+
 	    Return $instance;
 	}
 

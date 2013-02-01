@@ -17,4 +17,5 @@ $log_path = PATH_ROOT . "../logs/";
 $payment_xmlpath = PATH_ROOT . "../static/payment.xml";
 
 $activity_xmlpath = PATH_ROOT . "../static/activity.xml";
+
 ?>

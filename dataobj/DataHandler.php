@@ -24,17 +24,20 @@
        * @return Instance
        +----------------------------------------------------------
        */
-      private static function getInstance($name,$gameuid,$server)
+      public static function getInstance($name,$gameuid,$uid,$server)
       {
-          include_once $name . '.php';
+          include_once 'cache/' .$name . '.php';
           
           switch ($name)
           {
               case 'ChatCache':
-                  return new ChatCache($gameuid,$server);
+                  return new ChatCache($gameuid,$uid,$server);
                   break;
               case 'AccountCache':
-                  return new AccountCache($gameuid,$server);
+                  return new AccountCache($gameuid,$uid,$server);
+                  break;
+              case 'TestContentCache':
+                  return new TestContentCache($gameuid,$uid,$server);
                   break;
               default:break;
           }

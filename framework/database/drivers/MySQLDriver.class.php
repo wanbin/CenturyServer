@@ -1,10 +1,7 @@
 <?php
-/**
- * 用户访问mysql数据库的dbo类
- * @author shusl
- *
- */
-class MooMySQL {
+  
+class MySQLDriver
+{
 	const ERROR_CODE_LOST_CONNECTION = 2006;
 	protected static $queryCount = 0;
 	//note:查询时间
@@ -13,7 +10,7 @@ class MooMySQL {
 	private $result;
 	private $rsType = MYSQL_ASSOC;
 	private $db_config;
-
+	
 	private $throwException = true;
 	/**
 	 * 如果运行在silent mode，则不会产生错误
@@ -44,7 +41,7 @@ class MooMySQL {
 		self::$queryTimes += $duration;
 		return $duration;
 	}
-
+	
 	/**
 	 * 获得执行查询的次数
 	 * @return int
@@ -52,7 +49,7 @@ class MooMySQL {
 	public static function getQueryCount() {
 		return self::$queryCount;
 	}
-
+	
 	
 	/**
 	 * 连接数据库
@@ -67,9 +64,9 @@ class MooMySQL {
 	 */
 	public function connect($dbHost = '', $dbUser = '', $dbPass = '', $dbName = '', $dbOpenType = false ,$dbCharset = 'utf8',$newlink = false) {
 		$this->db_config = array('host' => $dbHost,	'user' => $dbUser,
-			'pass' => $dbPass,'dbname' => $dbName,
-			'newlink' => $newlink,'charset' => $dbCharset,
-			'pconnect' => $dbOpenType);
+				'pass' => $dbPass,'dbname' => $dbName,
+				'newlink' => $newlink,'charset' => $dbCharset,
+				'pconnect' => $dbOpenType);
 		$this->conn = $this->_connect($this->db_config,$dbOpenType);
 		$this->setCharset($dbCharset);
 		$this->selectDB($dbName);
@@ -342,7 +339,7 @@ class MooMySQL {
 	public function fetchArray($query) {
 		return mysql_fetch_array($query, $this->rsType);
 	}
-
+	
 	/**
 	 * 取得结果数据
 	 *
@@ -353,13 +350,13 @@ class MooMySQL {
 		$query = mysql_result($query, $row,$field);
 		return $query;
 	}
-
+	
 	/**
 	 * 取得上一步 INSERT 操作产生的 ID
 	 *
 	 * @return integer
 	 */
-
+	
 	public function insertId() {
 		return ($id = mysql_insert_id($this->conn)) >= 0 ? $id : $this->result($this->query("SELECT last_insert_id()"), 0);
 	}
@@ -392,7 +389,7 @@ class MooMySQL {
 	public function affectedRows() {
 		return mysql_affected_rows($this->conn);
 	}
-
+	
 	/**
 	 * 取得结果中指定字段的字段名
 	 *
@@ -467,7 +464,7 @@ class MooMySQL {
 	public function getErrorMessage(){
 		return mysql_error($this->conn);
 	}
-
+	
 	/**
 	 * 错误处理
 	 *
@@ -493,3 +490,5 @@ class MooMySQL {
 		return false;
 	}
 }
+
+?>

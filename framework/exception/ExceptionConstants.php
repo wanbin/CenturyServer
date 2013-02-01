@@ -22,5 +22,8 @@ class StatusCode{
 	
 	//资源不足
 	const LESS_RESOURSE  = 1004;
+	
+	//memcache错误
+	const SET_MEMCACHE_ERROR = 1005;
 }
 

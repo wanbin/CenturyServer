@@ -28,7 +28,7 @@ class BaseService {
 				$result ['status'] = 0;
 				$result ['cmd'] = $data ['cmd'];
 				$result ['__code'] = $e->getCode ();
-				$result ['__message'] = $e->getMessage ();
+				$result ['__message'] = strrchr($e->getMessage (),'[msg]');
 				if (DEBUG) {
 					$result ['__line'] = $e->getFile () . '[' . $e->getLine () . ']';
 				}
