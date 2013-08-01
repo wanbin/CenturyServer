@@ -6,7 +6,7 @@ file_put_contents("txtWx.log",print_R($_REQUEST,true),FILE_APPEND);
 //define your token
 define("TOKEN", "weixin");
 $wechatObj = new wechatCallbackapiTest();
-$wechatObj->responseMsg();
+$wechatObj->valid();
 
 class wechatCallbackapiTestls
 {
