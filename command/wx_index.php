@@ -6,7 +6,7 @@ file_put_contents("txtWx.log",print_R($_REQUEST,true),FILE_APPEND);
 //define your token
 define("TOKEN", "weixin");
 $wechatObj = new wechatCallbackapiTest();
-$wechatObj->valid();
+$wechatObj->responseMsg();
 
 class wechatCallbackapiTestls
 {
@@ -45,7 +45,7 @@ class wechatCallbackapiTestls
 			if(!empty( $keyword ))
 			{
 				$msgType = "text";
-				$contentStr = "Welcome to wechat world!";
+				$contentStr = "Welcome to wechat world!You Say is'".$keyword."'!";
 				$resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
 				echo $resultStr;
 			}else{
