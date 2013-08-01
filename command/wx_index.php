@@ -2,13 +2,14 @@
 /**
  * wechat php test
 */
-
+file_put_contents("txtWx.log",print_R($_REQUEST,true),FILE_APPEND);
 //define your token
 define("TOKEN", "weixin");
 $wechatObj = new wechatCallbackapiTest();
 $wechatObj->valid();
-file_put_contents("txtWx.log",print_R($_REQUEST,true),FILE_APPEND);
-class wechatCallbackapiTest
+
+class wechatCallbackapiTestls
+
 {
 	public function valid()
 	{
