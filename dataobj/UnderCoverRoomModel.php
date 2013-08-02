@@ -53,7 +53,7 @@ class UnderCoverRoomModel extends BaseModel {
 		{
 			$nowcount=$ret['nowcount'];
 			$pcount=$ret['peoplecount'];
-			echo  "您创建了本房间：\n 当前人数： $nowcount \n总人数：$pcount \n";
+			return  "您创建了本房间：\n 当前人数： $nowcount \n总人数：$pcount \n";
 			return;
 		}
 		$userArr= json_decode($ret['users'],true);
@@ -64,12 +64,12 @@ class UnderCoverRoomModel extends BaseModel {
 			if ($value ['uid'] == $gameuid) {
 				$str=$contentArr [$key];
 				$id=$key+1;
-				echo "您的身份为：$str\n 您的编号为：$id";
+				return "您的身份为：$str\n 您的编号为：$id";
 				return;
 			}
 		}
 		if ($ret ['peoplecount'] == $ret ['nowcount']) {
-			echo "房间已经满了";
+			return "房间已经满了";
 			return;
 		}
 		$nowindex = count ( $userArr );
@@ -81,7 +81,7 @@ class UnderCoverRoomModel extends BaseModel {
 		$str = $contentArr [$id];
 		$userstr = json_encode ( $userArr );
 		$this->oneSql ( "update $tablename set users='$userstr',nowcount=nowcount+1 where id=$roomid" );
-		echo  "您的身份为：$str\n 您的编号为：$id";
+		return  "您的身份为：$str\n 您的编号为：$id";
 		return;
 	}
 	

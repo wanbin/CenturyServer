@@ -88,20 +88,20 @@ class wechatCallbackapiTest
 			$gameuid = $UnderCache->gameuid;
 			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
 			$UnderRoomCache = new UnderCoverRoomCache ();
-			echo $UnderRoomCache->initRoom ( $type, $gameuid );
+			return $UnderRoomCache->initRoom ( $type, $gameuid );
 		} else if ($type == 1) {
-			echo "创建谁是卧底游戏成功：请输入4-14参与人数（不包括法官）：";
+			return "创建谁是卧底游戏成功：请输入4-14参与人数（不包括法官）：";
 		} else if ($type == 2) {
-			echo "【测试】创建狼人杀游戏成功：请输入4-14参与人数（不包括法官）：";
+			return "【测试】创建狼人杀游戏成功：请输入4-14参与人数（不包括法官）：";
 		} else if ($type == 3) {
-			echo "【测试】创建杀人游戏成功：请输入4-14参与人数（不包括法官）：";
+			return "【测试】创建杀人游戏成功：请输入4-14参与人数（不包括法官）：";
 		} else if ($type >= 1000) {
 			$gameuid = $UnderCache->gameuid;
 			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
 			$UnderRoomCache = new UnderCoverRoomCache ();
-			echo $UnderRoomCache->getInfo ( $type, $gameuid );
+			return $UnderRoomCache->getInfo ( $type, $gameuid );
 		} else {
-			echo "请您选择项目:\n 4-14 创建谁是卧底游戏:";
+			return "请您选择项目:\n 4-14 创建谁是卧底游戏:";
 		}
 	}
 }
