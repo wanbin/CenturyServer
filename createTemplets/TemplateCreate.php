@@ -120,7 +120,6 @@ foreach ( $createarray as $key => $value ) {
 	if (! empty ( $jsonstring )) {
 		$tempModel = str_replace ( "'template_json'", rtrim ( $jsonstring, ',' ), $tempModel );
 	}
-	
 	writeOutPut ( ucfirst ( $value['modelname'] ) . 'Model', $tempModel );
 	writeOutPut ( ucfirst ( $value ['modelname'] ) . 'Cache', $tempCache ,PATH_CACHE);
 	writeOutPut ( $value ['tablename'], $temSql, PATH_SQL.'/source/', 'sql' );

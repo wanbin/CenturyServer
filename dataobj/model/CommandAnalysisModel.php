@@ -3,7 +3,7 @@
  * @author WanBin @date 2012-12-07
  * 方法性能分析
  */
-require_once 'BaseModel.php';
+require_once '../BaseModel.php';
 class CommandAnalysisModel extends BaseModel {
 	/**
 	 * 得到所有记录

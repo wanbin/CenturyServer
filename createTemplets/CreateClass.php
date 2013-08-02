@@ -1,5 +1,6 @@
-<?php 
+<?php
 $author = 'WanBin';
+date_default_timezone_set('Asia/Chongqing');
 $date = date ( 'Y-m-d', time () );
 $createarray=array(
 		array(
@@ -90,5 +91,42 @@ $createarray=array(
 				),
 				'description' => '用户Mapping映射表',
 		),
+		array(
+				'modelname' => 'Mapping',
+				'singleData' => true,
+				'tablename' => 'user_mapping',
+				'tablefiled' => array (
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'玩家GAMEUID'),
+						'uid' => array('type'=>'varchar','lengh'=>100,'default'=>'','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'用户UID数据'),
+				),
+				'description' => '用户Mapping映射表',
+		),
+		array(
+				'modelname' => 'UnderCover',
+				'singleData' => true,
+				'tablename' => 'wx_account',
+				'tablefiled' => array (
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'玩家GAMEUID'),
+						'uid' => array('type'=>'varchar','lengh'=>100,'default'=>'','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'用户UID数据'),
+						'lastlogin' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'最后登录时间'),
+				),
+				'description' => '微信用户表',
+		),
+		
+		array(
+				'modelname' => 'UnderCoverRoom',
+				'singleData' => true,
+				'tablename' => 'wx_undercover_room',
+				'tablefiled' => array (
+						'id' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'房间号'),
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>'','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'用户UID数据'),
+						'time' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'开房间时间'),
+						'peoplecount' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'人数'),
+						'content' => array('type'=>'varchar','lengh'=>200,'default'=>0,'isPrimaryKey'=>0,'isjson'=>1,'comment'=>'房间里面的配置信息json串'),
+						'nowcount' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'当前人数'),
+				),
+				'description' => '谁是卧底房间信息',
+		),
+		
 );
 ?>

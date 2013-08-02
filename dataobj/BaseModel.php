@@ -1,10 +1,10 @@
 <?php
 require_once FRAMEWORK . 'exception/ExceptionConstants.php';
-require_once 'MemcacheConstants.php';
+require_once 'model/MemcacheConstants.php';
 
 class BaseModel {
 	
-	protected $gameuid = NULL;
+	public $gameuid = NULL;
 	protected $uid     = NULL;
 	protected $server  = NULL;
 	protected $useMemcache = null;
@@ -47,7 +47,6 @@ class BaseModel {
 		if (isset ( $DBInstances [$tableName] )) {
 			return $DBInstances [$tableName];
 		}
-		echo "create dbhandler";
 		$DBHandler = new DBHandler($tableName,$this->gameuid,$this->server);
 		$DBInstances[$tableName] = $DBHandler;
 		return $DBHandler;
@@ -58,7 +57,7 @@ class BaseModel {
 	 * 将fields 和 values 拆分开成字符串
 	 +----------------------------------------------------------
 	 * @param array $values
-	 * @return array() 
+	 * @return array()
 	 +----------------------------------------------------------
 	 */
 	private function splitValues($values)
@@ -83,7 +82,7 @@ class BaseModel {
 	 +----------------------------------------------------------
 	 * @param string $tableName
 	 * @param array  array('field'=>$value1,'field2'=>$value2)
-	 * @return Boolean 
+	 * @return Boolean
 	 +----------------------------------------------------------
 	 */
 	public function hsInsert($tableName, $values) {
@@ -95,6 +94,21 @@ class BaseModel {
 	
 	}
 	
+	public function oneSql($sql) {
+		$DBHandler = $this->getDBInstance ( $this->getTableName () );
+		$tem = explode ( ' ', $sql );
+		if (in_array ( $tem [0], array (
+				'insert',
+				'update'
+		) )) {
+			return $DBHandler->execute ( $sql );
+		} else {
+			return $DBHandler->getOne ( $sql );
+		}
+	}
+	protected function getTableName() {
+		return '';
+	}
 	/**
 	 +----------------------------------------------------------
 	 * 插入多条记录
@@ -204,7 +218,6 @@ class BaseModel {
 		$this->selectCount ++;
 		// 使用传统的mysql方式
 		$DBHandler = $this->getDBInstance ( $tableName );
-	
 		$where_str= $this->joinWhereStr($where);
 	
 		$sql = 'SELECT ' . $fields . ' FROM ' . $tableName . ' WHERE ' . $where_str;
@@ -264,7 +277,7 @@ class BaseModel {
 
 	/**
 	 * 返回需要操作的缓存实例
-	 * 
+	 *
 	 * @param $config_key string
 	 *       	 配置缓存的key
 	 * @return Cache
@@ -285,8 +298,8 @@ class BaseModel {
 	
 	/**
 	 * 返回需要操作的缓存实例
-	 * 
-	 * @param $gameuid int       	
+	 *
+	 * @param $gameuid int
 	 * @return Cache
 	 */
 	protected function getCacheInstanceNoHash($gameuid) {
@@ -306,8 +319,8 @@ class BaseModel {
 	
 	/**
 	 * 得到当前gameuid的缓存服务器配置
-	 * 
-	 * @param $gameuid int       	
+	 *
+	 * @param $gameuid int
 	 * @return int $server_index
 	 */
 	protected function getCacheServerIndex($gameuid) {
@@ -338,9 +351,9 @@ class BaseModel {
 	
 	/**
 	 * 分缓存块，取多个gameuid不同但前缀相同的key
-	 * 
-	 * @param $keys 需要get的key的数组       	
-	 * @param $prefix 缓存key的前缀       	
+	 *
+	 * @param $keys 需要get的key的数组
+	 * @param $prefix 缓存key的前缀
 	 */
 	protected function mulitGetFromCache($keys, $prefix) {
 		$config = $this->getConfig ( 'cache_dispatch' );
@@ -367,7 +380,7 @@ class BaseModel {
 	/**
 	 * 从缓存中根据key取得相应的值
 	 *
-	 * @param $key string       	
+	 * @param $key string
 	 * @return mixed
 	 */
 	protected function getFromCache($key, $gameuid) {

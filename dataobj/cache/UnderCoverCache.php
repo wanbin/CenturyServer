@@ -1,12 +1,12 @@
 <?php
 /**
- * @author {Author} @date {Date}
- * TemplatenContent
+ * @author WanBin @date 2013-08-03
+ * 微信用户表
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
  */
-require_once PATH_DATAOBJ . 'TemplateModel.php';
-class TemplateCache extends TemplateModel{
+require_once PATH_DATAOBJ . 'UnderCoverModel.php';
+class UnderCoverCache extends UnderCoverModel{
 	private $item = array ();
 	
 	/**
@@ -30,11 +30,11 @@ class TemplateCache extends TemplateModel{
 	/**
 	 * 得到一条记录
 	 *
-	 * @param $id unknown_type       	
+	 * @param $id unknown_type
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
-	protected function getOne({paramsWithOutGameuid}) {
-		$key = $this->getCacheKey ({paramsWithOutGameuid});
+	protected function getOne() {
+		$key = $this->getCacheKey ();
 		$ret = $this->getFromCache ( $key, $this->gameuid );
 		if (empty ( $ret )) {
 			$ret = parent::getOne ();
@@ -48,7 +48,7 @@ class TemplateCache extends TemplateModel{
 		/**
 	 * 更新信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function update($content) {
@@ -64,10 +64,10 @@ class TemplateCache extends TemplateModel{
 	/**
 	 * 添加一条信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
-	protected function add($content) {
+	public function add($content) {
 		parent::add ( $content );
 		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
 	}
@@ -93,7 +93,7 @@ class TemplateCache extends TemplateModel{
 	/**
 	 * 删除一条信息
 	 *
-	 * @param $id unknown_type       	
+	 * @param $id unknown_type
 	 * @return number
 	 */
 	protected function del() {
@@ -118,8 +118,8 @@ class TemplateCache extends TemplateModel{
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
 	}
 	
-	protected function delFromCache({paramsWithOutGameuid}) {
-		$key =  $this->getCacheKey ({paramsWithOutGameuid});
+	protected function delFromCache() {
+		$key =  $this->getCacheKey ();
 		return $this->delToCache ($key,$this->gameuid);
 	}
 	
@@ -127,11 +127,11 @@ class TemplateCache extends TemplateModel{
 		return $this->delToCache ( $this->getCacheKeyAll (), $this->gameuid );
 	}
 	
-	private function getCacheKey({paramsWithOutGameuid}) {
-		return sprintf ( MEMCACHE_KEY_TEMPLATECACHEKEY,$this->gameuid {paramsWithOutGameuidSeparate} );
+	private function getCacheKey() {
+		return sprintf ( MEMCACHE_KEY_UNDERCOVER,$this->gameuid  );
 	}
 	
 	private function getCacheKeyAll() {
-		return sprintf ( MEMCACHE_KEY_TEMPLATECACHEKEY_ALL, $this->gameuid );
+		return sprintf ( MEMCACHE_KEY_UNDERCOVER_ALL, $this->gameuid );
 	}
 }

@@ -3,7 +3,7 @@
  * @author WanBin @date 2012-12-07
  * 测试数据库连接
  */
-require_once 'BaseModel.php';
+require_once '../BaseModel.php';
 class TestContentModel extends BaseModel {
 	/**
 	 * 得到所有记录

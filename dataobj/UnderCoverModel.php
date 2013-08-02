@@ -1,10 +1,39 @@
 <?php
 /**
- * @author {Author} @date {Date}
- * TemplatenContent
+ * @author WanBin @date 2013-08-03
+ * 微信用户表
  */
 require_once PATH_DATAOBJ.'BaseModel.php';
-class TemplateModel extends BaseModel {
+class UnderCoverModel extends BaseModel {
+	public function __construct( $uid = null) {
+		parent::__construct();
+		if (isset ( $uid )) {
+			$res = $this->hsSelectOne ( $this->getTableName (), $this->getFields (), array (
+					'uid' => $uid
+			) );
+			if ( empty ( $res )) {
+				$this->add ( array (
+						'uid' => $uid,
+						'regtime' => time ()
+				) );
+				$res = $this->hsSelectOne ( $this->getTableName (), $this->getFields (), array (
+						'uid' => $uid
+				) );
+			}
+			$this->uid = $res ['uid'];
+			$this->gameuid = $res ['gameuid'];
+		}
+	}
+	
+	public function Log($content) {
+		$this->hsInsert ( $this->getTableNameLog (), array (
+				'gameuid'=>$this->gameuid,
+				'content' => $content,
+				'time' => time ()
+		) );
+	}
+	
+
 	/**
 	 * 得到所有记录
 	 */
@@ -14,7 +43,7 @@ class TemplateModel extends BaseModel {
 		$ret = array ();
 		foreach ( $res as $key => $value ) {
 			foreach ( $value as $jsonKey => $jsonValue )
-				if (in_array ( $jsonKey, array ({strJson} ) )) {
+				if (in_array ( $jsonKey, array ( ) )) {
 					$value [$jsonKey] = json_decode ( $jsonValue, true );
 				}
 			$temid = $value ['templateid'];
@@ -26,7 +55,7 @@ class TemplateModel extends BaseModel {
 	/**
 	 * 得到一条记录
 	 *
-	 * @param $id unknown_type       	
+	 * @param $id unknown_type
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
 	protected function getOne() {
@@ -36,14 +65,14 @@ class TemplateModel extends BaseModel {
 	}
 	
 	protected function getOneSingle($templateid) {
-		$where = array ( {strWhere}  );
+		$where = array ( 'gameuid' => $this->gameuid );
 		$res = $this->hsSelectOne ( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
 		return $res;
 	}
 	/**
 	 * 更新信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function update($content) {
@@ -52,8 +81,8 @@ class TemplateModel extends BaseModel {
 		return $res;
 	}
 	
-	protected function updateOne( $content,{strUnion}) {
-		$where = array ( {strWhere} );
+	protected function updateOne( $content,$gameuid) {
+		$where = array ( 'gameuid' => $this->gameuid);
 		$res = $this->hsUpdate ( $this->getTableName (), $this->gameuid, $content, $where );
 		return $res;
 	}
@@ -61,27 +90,26 @@ class TemplateModel extends BaseModel {
 		/**
 	 * 添加一条信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function add($content) {
 		$fields = explode ( ',', $this->getFields () );
-		$insert ['gameuid'] = $this->gameuid;
 		foreach ( $content as $key => $value ) {
-			if (in_array ( $key, array ({strJson}) )) {
+			if (in_array ( $key, array () )) {
 				$value = json_encode ( $value );
 			}
 			if (in_array ( $key, $fields )) {
 				$insert [$key] = $value;
 			}
 		}
-		return $this->hsInsert ( $this->getTableName (), $this->gameuid, $insert );
+		return $this->hsInsert ( $this->getTableName (),$insert );
 	}
 	
 	protected function addarr($content) {
 		foreach ( $content as $key => $value ) {
 			foreach ( $value as $jsonKey => $jsonValue ) {
-				if (in_array ( $jsonKey, array ({strJson} ) )) {
+				if (in_array ( $jsonKey, array ( ) )) {
 					$content [$key] [$jsonKey] = json_encode ( $jsonValue );
 				}
 			}
@@ -89,13 +117,13 @@ class TemplateModel extends BaseModel {
 		return $this->hsMultiInsert ( $this->getTableName (), $this->gameuid, $content );
 	}
 	
-	protected function init({strUnion} ) {
-		$insert = array ( {strWhere} );
+	protected function init($gameuid ) {
+		$insert = array ( 'gameuid' => $this->gameuid);
 		return $this->hsInsert ( $this->getTableName (), $this->gameuid, $insert );
 	}
 	/**
 	 * 删除一条信息
-	 * 
+	 *
 	 * @return number
 	 */
 	protected function del() {
@@ -103,16 +131,19 @@ class TemplateModel extends BaseModel {
 		return $this->hsDelete ( $this->getTableName (), $this->gameuid, $where );
 	}
 	
-	protected function delOne( {strUnion} ) {
-		$where = array ( {strWhere} );
+	protected function delOne( $gameuid ) {
+		$where = array ( 'gameuid' => $this->gameuid);
 		return $this->hsDelete ( $this->getTableName (), $this->gameuid, $where );
 	}
 	
 	protected function getFields() {
-		return 'templatefields';
+		return 'gameuid,uid,regtime';
 	}
 	
 	protected function getTableName() {
-		return "templatetablename";
+		return "wx_account";
+	}
+	protected function getTableNameLog() {
+		return "wx_log";
 	}
 }

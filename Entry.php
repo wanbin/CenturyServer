@@ -12,6 +12,7 @@ define('PATH_STATIC',PATH_ROOT . 'static/');            //静态文件夹
 		
 include_once PATH_ROOT . 'config.inc.php';              // 全局配置文件
 include_once PATH_COMMAND . 'BaseCommand.php';
+include_once 'config.php';
 //加载framework中db操作类与cache操作类
 require_once FRAMEWORK . '/cache/Cache.class.php';
 require_once FRAMEWORK . '/database/DBHandler.class.php';

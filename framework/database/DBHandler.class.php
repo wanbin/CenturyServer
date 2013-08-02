@@ -35,7 +35,7 @@ class DBHandler
 		$this->DBConfig['host'] = $DB['DB_host']['host'];
 		$this->DBConfig['username'] = $DB['DB_host']['user'];
 		$this->DBConfig['password'] = $DB['DB_host']['password'];
-		$this->DBConfig['dbname']   = $DB['DB_host']['dbname'][$server-1];           //逻辑服的数据库
+		$this->DBConfig['dbname']   = $DB['DB_host']['dbname'][0];           //逻辑服的数据库
 	}
 	
 	public function execute($sql)
