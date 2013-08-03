@@ -2,17 +2,18 @@
 /**
   * wechat php test
   */
-
 include_once '../Entry.php';
 //define your token
 define("TOKEN", "weixin");
 $wechatObj = new wechatCallbackapiTest();
-$wechatObj->responseMsg();
-// echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> ';
-// $wechatObj->returncontent(10,105);
+//$wechatObj->responseMsg();
+echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> ';
+$wechatObj->echo=true;
+$wechatObj->returncontent(10,105);
 // exit();
 class wechatCallbackapiTest
 {
+	public $echo=false;
 	public function valid()
     {
         $echoStr = $_GET["echostr"];
@@ -88,20 +89,38 @@ class wechatCallbackapiTest
 			$gameuid = $UnderCache->gameuid;
 			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
 			$UnderRoomCache = new UnderCoverRoomCache ();
+			$UnderRoomCache->echoit = $this->echo;
 			return $UnderRoomCache->initRoom ( $type, $gameuid );
 		} else if ($type == 1) {
-			return "创建谁是卧底游戏成功：请输入4-14参与人数（不包括法官）：";
+			$str = "创建谁是卧底游戏成功：请输入4-14参与人数（不包括法官）：";
+			if ($this->echo) {
+				echo $str;
+			}
+			return $str;
 		} else if ($type == 2) {
-			return "【测试】创建狼人杀游戏成功：请输入4-14参与人数（不包括法官）：";
+			$str = "【测试】创建狼人杀游戏成功：请输入4-14参与人数（不包括法官）：";
+			if ($this->echo) {
+				echo $str;
+			}
+			return $str;
 		} else if ($type == 3) {
-			return "【测试】创建杀人游戏成功：请输入4-14参与人数（不包括法官）：";
+			$str = "【测试】创建杀人游戏成功：请输入4-14参与人数（不包括法官）：";
+			if ($this->echo) {
+				echo $str;
+			}
+			return $str;
 		} else if ($type >= 1000) {
 			$gameuid = $UnderCache->gameuid;
 			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
 			$UnderRoomCache = new UnderCoverRoomCache ();
 			return $UnderRoomCache->getInfo ( $type, $gameuid );
 		} else {
-			return "请您选择项目:\n 4-14 创建谁是卧底游戏:";
+			$str="请您选择项目:\n 4-14 创建谁是卧底游戏:";
+			if($this->echo)
+			{
+				echo $str;
+			}
+			return $str;
 		}
 	}
 }

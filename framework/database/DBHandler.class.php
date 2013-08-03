@@ -38,10 +38,13 @@ class DBHandler
 		$this->DBConfig['dbname']   = $DB['DB_host']['dbname'][0];           //逻辑服的数据库
 	}
 	
-	public function execute($sql)
-	{
-		$connection = $this->connect();
-		return $connection->query($sql);
+	public function execute($sql) {
+		try {
+			$connection = $this->connect ();
+			return $connection->query ( $sql );
+		} catch ( Exception $e ) {
+			$this->writeSqlError ( $sql, $e );
+		}
 	}
 	
 	/**
@@ -99,11 +102,22 @@ class DBHandler
 	
 	public function getOne($sql)
 	{
-		return $this->connect()->getOne($sql);
+		try {
+			return $this->connect ()->getOne ( $sql );
+		} catch ( Exception $e ) {
+			$this->writeSqlError ( $sql, $e );
+		}
 	}
 	public function getTable()
 	{
 		return $this->DBConfig['table'];
+	}
+
+	public function writeSqlError($sql, $e) {
+		$fileName = date ( "Y-m-d", time () ) . "sqlerror.sql";
+		$temtime = date ( "Y-m-d H:i:s", time () );
+		$strAdd = "#[$temtime]\n";
+		file_put_contents ( PATH_ROOT . "/log/$fileName", $strAdd . $e . $sql, FILE_APPEND );
 	}
 }
 ?>

@@ -5,7 +5,7 @@
  */
 require_once PATH_DATAOBJ.'BaseModel.php';
 class UnderCoverRoomModel extends BaseModel {
-	
+	public $echoit = false;
 	public function getEnableRoom() {
 		$endtime = time () - 3600;
 		$ret = $this->oneSql ( "select id from wx_undercover_room where id>1000 and time<$endtime limit 1" );
@@ -40,7 +40,11 @@ class UnderCoverRoomModel extends BaseModel {
 		$father=$temContent['father'];
 		$son=$temContent['son'];
 		$sonIndex=$temContent['sonindex'];
-		return "创建房间 【 $roomid 】 成功 \n 本房间人数：$peoplecount \n 平民:$father \n 卧底：$son \n 卧底编号： $sonIndex";
+		$str = "创建房间 【 $roomid 】 成功 \n 本房间人数：$peoplecount \n 平民:$father \n 卧底：$son \n 卧底编号： $sonIndex";
+		if ($this->echoit) {
+			echo $str;
+		}
+		return $str;
 	}
 	
 	
@@ -51,10 +55,14 @@ class UnderCoverRoomModel extends BaseModel {
 		$ret=$this->oneSql($sql);
 		if($ret['gameuid']==$gameuid)
 		{
-			$nowcount=$ret['nowcount'];
-			$pcount=$ret['peoplecount'];
-			return  "您创建了本房间：\n 当前人数： $nowcount \n总人数：$pcount \n";
-			return;
+			$nowcount = $ret ['nowcount'];
+			$pcount = $ret ['peoplecount'];
+			
+			$str = "您创建了本房间：\n 当前人数： $nowcount \n总人数：$pcount \n";
+			if ($this->echoit) {
+				echo $str;
+			}
+			return $str;
 		}
 		$userArr= json_decode($ret['users'],true);
 		if(!isset($userArr))
@@ -63,14 +71,20 @@ class UnderCoverRoomModel extends BaseModel {
 		foreach ( $userArr as $key => $value ) {
 			if ($value ['uid'] == $gameuid) {
 				$str=$contentArr [$key];
-				$id=$key+1;
-				return "您的身份为：$str\n 您的编号为：$id";
-				return;
+				$id = $key + 1;
+				$str = "您的身份为：$str\n 您的编号为：$id";
+				if ($this->echoit) {
+					echo $str;
+				}
+				return $str;
 			}
 		}
 		if ($ret ['peoplecount'] == $ret ['nowcount']) {
-			return "房间已经满了";
-			return;
+			$str = "房间已经满了";
+			if ($this->echoit) {
+				echo $str;
+			}
+			return $str;
 		}
 		$nowindex = count ( $userArr );
 		$userArr [] = array (
@@ -81,8 +95,11 @@ class UnderCoverRoomModel extends BaseModel {
 		$str = $contentArr [$id];
 		$userstr = json_encode ( $userArr );
 		$this->oneSql ( "update $tablename set users='$userstr',nowcount=nowcount+1 where id=$roomid" );
-		return  "您的身份为：$str\n 您的编号为：$id";
-		return;
+		$str = "您的身份为：$str\n 您的编号为：$id";
+		if ($this->echoit) {
+			echo $str;
+		}
+		return $str;
 	}
 	
 	public function initcontent($peoplecount){

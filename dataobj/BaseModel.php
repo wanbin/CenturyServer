@@ -221,7 +221,19 @@ class BaseModel {
 		$where_str= $this->joinWhereStr($where);
 	
 		$sql = 'SELECT ' . $fields . ' FROM ' . $tableName . ' WHERE ' . $where_str;
-		return $DBHandler->getOne ( $sql );
+		try {
+			return $DBHandler->getOne ( $sql );
+		} catch ( Exception $e ) {
+			$this->writeSqlError($sql, $e);
+		}
+		return '';
+	}
+	
+	public function writeSqlError($sql, $e) {
+		$fileName = date ( "Y-m-d", time () ) . "sqlerror.sql";
+		$temtime = date ( "Y-m-d H:i:s", time () );
+		$strAdd = "#[$temtime]\n";
+		file_put_contents ( PATH_ROOT . "/log/$fileName", $strAdd . $e . $sql, FILE_APPEND );
 	}
 	
 	public function hsSelectAll($tableName, $fields, $where, $limit = -1, $offset = 0) {
