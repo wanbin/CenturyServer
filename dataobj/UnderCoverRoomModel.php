@@ -61,7 +61,7 @@ class UnderCoverRoomModel extends BaseModel {
 		{
 			$nowcount = $ret ['nowcount'];
 			$pcount = $ret ['peoplecount'];
-			$str = "您创建了本房间：\n 当前人数： $nowcount \n总人数：$pcount \n";
+			$str = "您创建了本房间：\n 当前人数:$nowcount \n总人数:$pcount \n";
 			if ($this->echoit) {
 				echo $str;
 			}
@@ -75,7 +75,8 @@ class UnderCoverRoomModel extends BaseModel {
 		foreach ( $userArr as $key => $value ) {
 			if ($value ['uid'] == $gameuid) {
 				$str=$contentArr [$key];
-				$str = "您的身份为：$str\n 您的编号为：$key";
+				$id=$key+1;
+				$str = "您的身份为：$str\n 您的编号为：$id";
 				if ($this->echoit) {
 					echo $str;
 				}
