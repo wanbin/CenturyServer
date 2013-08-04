@@ -20,25 +20,21 @@ class BaseModel {
 	protected $deleteCount = 0;
 	
 	protected $itemMC = null;
-	public function __construct($gameuid = null, $uid = null,$server=null) {
+	public function __construct($uid) {
 		// 加载config
 		$config = $GLOBALS ['config'];
 		
-		if (!empty($gameuid))
-			$this->gameuid = intval ( $gameuid );
-		
-		if (!empty($gameuid))
-			$this->uid = trim ( $uid );
-
-		if (!empty($server))
-			$this->server = intval($server);
 		
 		$this->useMemcache = $config ['memcache'];
 		$this->model = get_class ( $this );
 		$this->useRedis = $config ['redis'];
+		if (isset ( $uid )) {
+			$res = $this->oneSql ( "select * from wx_account where uid='$uid'" );
+			$this->uid = $res ['uid'];
+			$this->gameuid = $res ['gameuid'];
+		}
 	}
-	
-	
+
 	//=================================MYSQL============================================//
 	
 	// 不支持同一业务的数据库水平部署在不同服务器上
