@@ -11,7 +11,7 @@ define('DEBUG',true);
 
 echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> ';
 $wechatObj->echo=true;
-$wechatObj->returncontent(10,105);
+$wechatObj->returncontent(10,"uHjQjsqWDtr_u-GeaV173nAt0h8");
 
 // // exit();
 class wechatCallbackapiTest

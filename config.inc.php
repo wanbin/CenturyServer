@@ -1,5 +1,5 @@
 <?php
-include_once '../config.host.php';
+include_once PATH_ROOT.'../config.host.php';
 $database_xmlpath = '';
 $webHost = '';
 $cdnHost = '';
@@ -12,7 +12,7 @@ $config['DB_map'] = array(
 			
 		//服务器一
 		array(
-				'DB_host' => $dbHost['host2'],
+				'DB_host' => $dbHost['host1'],
 				'1'=> $dbHost['host2']['dbname'][0],    //逻辑一服
 				'2'=> $dbHost['host2']['dbname'][1]     //逻辑二服
 			),
