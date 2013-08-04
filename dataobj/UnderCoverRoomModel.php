@@ -90,8 +90,7 @@ class UnderCoverRoomModel extends BaseModel {
 		foreach ( $userArr as $key => $value ) {
 			if ($value ['uid'] == $gameuid) {
 				$str=$contentArr [$key];
-				$id=$key+1;
-				$str = "您的身份为：$str\n 您的编号为：$id";
+				$str = "您的身份为：$str\n 您的编号为：$key";
 				if ($this->echoit) {
 					echo $str;
 				}
