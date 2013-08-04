@@ -8,17 +8,14 @@ class UnderCoverModel extends BaseModel {
 	public function __construct( $uid = null) {
 		parent::__construct();
 		if (isset ( $uid )) {
-			$res = $this->hsSelectOne ( $this->getTableName (), $this->getFields (), array (
-					'uid' => $uid
-			) );
+			$res=$this->oneSql("select * from wx_account where uid=$uid");
+			print_R ( $res );
 			if ( empty ( $res )) {
 				$this->add ( array (
 						'uid' => $uid,
 						'regtime' => time ()
 				) );
-				$res = $this->hsSelectOne ( $this->getTableName (), $this->getFields (), array (
-						'uid' => $uid
-				) );
+				$res=$this->oneSql("select * from wx_account where uid=$uid");
 			}
 			$this->uid = $res ['uid'];
 			$this->gameuid = $res ['gameuid'];

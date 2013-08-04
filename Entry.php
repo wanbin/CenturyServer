@@ -21,7 +21,7 @@ require_once FRAMEWORK . '/redis/Rediska.php';
 include_once FRAMEWORK . 'exception/GameException.php'; // 游戏内部异常处理
 error_reporting(E_ALL ^ E_NOTICE);
 //游戏当前版本
-define('DEBUG',true);
+define('DEBUG',false);
 class Entry
 {
 	// 请求分发

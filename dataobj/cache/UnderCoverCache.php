@@ -16,6 +16,9 @@ class UnderCoverCache extends UnderCoverModel{
 		if (empty ( $this->item )) {
 			$key = $this->getCacheKeyAll ();
 			$ret = $this->getFromCache ( $key, $this->gameuid );
+			if (DEBUG) {
+				print_R ( $ret );
+			}
 			if (empty ( $ret )) {
 				$ret = parent::get ();
 				if (! empty ( $ret )) {

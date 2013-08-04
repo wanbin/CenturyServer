@@ -6,8 +6,14 @@ include_once '../Entry.php';
 //define your token
 define("TOKEN", "weixin");
 $wechatObj = new wechatCallbackapiTest();
- $wechatObj->responseMsg();
+define('DEBUG',true);
+// $wechatObj->responseMsg();
 
+echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> ';
+$wechatObj->echo=true;
+$wechatObj->returncontent(10,105);
+
+// // exit();
 class wechatCallbackapiTest
 {
 	//public $echo=false;

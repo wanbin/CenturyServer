@@ -1,6 +1,7 @@
 <?php
 $dbHost = array ();
-$dbHost ['host1'] = array ('host' => '127.0.0.1', 'user' => 'root', 'password' => '', 'dbname' => array ('wx', 'host' ) );
+$dbHost ['host1'] = array ('host' => '42.121.123.185', 'user' => 'root', 'password' => 'abc123', 'dbname' => array ('wx', 'host' ) );
+$dbHost ['host2'] = array ('host' => '127.0.0.1', 'user' => 'root', 'password' => '', 'dbname' => array ('wx', 'host' ) );
 
 $cacheHost = array ();
 $cacheHost ['host1'] = array ('host' => '127.0.0.1:11211' );

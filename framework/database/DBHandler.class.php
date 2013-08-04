@@ -38,13 +38,16 @@ class DBHandler
 		$this->DBConfig['dbname']   = $DB['DB_host']['dbname'][0];           //逻辑服的数据库
 	}
 	
-	public function execute($sql) {
+	public function execute($sql)
+	{
 		try {
 			$connection = $this->connect ();
 			return $connection->query ( $sql );
 		} catch ( Exception $e ) {
 			$this->writeSqlError ( $sql, $e );
 		}
+		
+		
 	}
 	
 	/**

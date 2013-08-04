@@ -1,5 +1,5 @@
 <?php
-include_once 'config.host.php';
+include_once '../config.host.php';
 $database_xmlpath = '';
 $webHost = '';
 $cdnHost = '';
@@ -11,10 +11,10 @@ $config['host_map'] = array(10000000,20000000);       //一个服务器最多用
 $config['DB_map'] = array(
 			
 		//服务器一
-		array(  
-				'DB_host' => $dbHost['host1'],
-				'1'=> $dbHost['host1']['dbname'][0],    //逻辑一服
-				'2'=> $dbHost['host1']['dbname'][1]     //逻辑二服
+		array(
+				'DB_host' => $dbHost['host2'],
+				'1'=> $dbHost['host2']['dbname'][0],    //逻辑一服
+				'2'=> $dbHost['host2']['dbname'][1]     //逻辑二服
 			),
 		//服务器二
 // 		array(
