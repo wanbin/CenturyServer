@@ -18,7 +18,7 @@ class UnderCoverRoomModel extends BaseModel {
 	}
 	public function initRoom($peoplecount, $gameuid = 0) {
 		$tablename = 'wx_undercover_room';
-		$endtime = time () - 600;
+		$endtime = time () - 3600;
 		$newroom = false;
 		$content = array ();
 		$ret = $this->oneSql ( "select id from wx_undercover_room where id>=1000 and time<$endtime limit 1" );
@@ -30,8 +30,12 @@ class UnderCoverRoomModel extends BaseModel {
 			$roomid = $ret ['id'];
 		}
 		$time = time ();
-		$temContent = $this->initcontent ( 16 );
-		$conjson = json_encode ( $temContent ['content'] );
+		$temContent = $this->initcontent ( $peoplecount );
+		$conjson='';
+		foreach ($temContent['content'] as $key=>$value)
+		{
+			$conjson.=$value.'_';
+		}
 		if ($newroom == true) {
 			$this->oneSql ( "insert into $tablename values($roomid,$gameuid,$time,$peoplecount,'$conjson',0,'')" );
 		} else {
@@ -57,7 +61,6 @@ class UnderCoverRoomModel extends BaseModel {
 		{
 			$nowcount = $ret ['nowcount'];
 			$pcount = $ret ['peoplecount'];
-			
 			$str = "您创建了本房间：\n 当前人数： $nowcount \n总人数：$pcount \n";
 			if ($this->echoit) {
 				echo $str;
@@ -67,12 +70,12 @@ class UnderCoverRoomModel extends BaseModel {
 		$userArr= json_decode($ret['users'],true);
 		if(!isset($userArr))
 			$userArr=array();
-		$contentArr = json_decode ( $ret ['content'], true );
+		$contentStr =  $ret ['content'];
+		$contentArr=explode('_', $contentStr);
 		foreach ( $userArr as $key => $value ) {
 			if ($value ['uid'] == $gameuid) {
 				$str=$contentArr [$key];
-				$id = $key + 1;
-				$str = "您的身份为：$str\n 您的编号为：$id";
+				$str = "您的身份为：$str\n 您的编号为：$key";
 				if ($this->echoit) {
 					echo $str;
 				}
@@ -101,6 +104,9 @@ class UnderCoverRoomModel extends BaseModel {
 		}
 		return $str;
 	}
+	public  function hexDecode($s) {
+    return preg_replace('/(\w{2})/e',"chr(hexdec('\\1'))",$s);
+}
 	
 	public function initcontent($peoplecount){
 		global $word;
@@ -124,7 +130,6 @@ class UnderCoverRoomModel extends BaseModel {
 			} while ( $arraycontent [$tem] == $son );
 			$arraycontent [$tem] = $son;
 			$sonArr[$tem + 1]=$tem + 1;
-			
 		}
 		
 		sort($sonArr);

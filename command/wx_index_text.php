@@ -11,7 +11,7 @@ define('DEBUG',true);
 
 echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> ';
 $wechatObj->echo=true;
-$wechatObj->returncontent(10,"uHjQjsqWDtr_u-GeaV173nAt0h8");
+$wechatObj->returncontent(1019,"uHjQjsqWDtru-GeaV13nAtd0h8".rand(1, 100000));
 
 // // exit();
 class wechatCallbackapiTest
@@ -114,7 +114,12 @@ class wechatCallbackapiTest
 			$gameuid = $UnderCache->gameuid;
 			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
 			$UnderRoomCache = new UnderCoverRoomCache ();
-			return $UnderRoomCache->getInfo ( $type, $gameuid );
+			
+			$str = $UnderRoomCache->getInfo ( $type, $gameuid );
+			if ($this->echo) {
+				echo $str;
+			}
+			return $str;
 		} else {
 			$str="请您选择项目:\n 4-14 创建谁是卧底游戏:";
 			if($this->echo)
