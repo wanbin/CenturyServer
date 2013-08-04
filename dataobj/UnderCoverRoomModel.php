@@ -54,13 +54,11 @@ class UnderCoverRoomModel extends BaseModel {
 		global $chengfa;
 		$getArr = array ();
 		$returnArr = array ();
-		$stradd="";
+		$stradd = "(本地版)";
 		if ($type == 2) {
-			$stradd="(网络版)";
-		} else {
-			$stradd="(本地版)";
+			$stradd = "(网络版)";
 		}
-		$returnStr = "真心话大冒险$stradd：\n";
+		$returnStr = "真心话大冒险 $stradd :\n";
 		for($i = 0; $i < 6; $i ++) {
 			do {
 				$rand = rand ( 1, count ( $chengfa ) );
