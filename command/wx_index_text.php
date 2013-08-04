@@ -11,7 +11,7 @@ define('DEBUG',true);
 
 echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> ';
 $wechatObj->echo=true;
-$wechatObj->returncontent(1019,"uHjQjsqWDtru-GeaV13nAtd0h8".rand(1, 100000));
+$wechatObj->returncontent(22,"uHjQjsqWDtru-GeaV13nAtd0h8");
 
 // // exit();
 class wechatCallbackapiTest
@@ -91,7 +91,11 @@ class wechatCallbackapiTest
 			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
 			$UnderRoomCache = new UnderCoverRoomCache ();
 			$UnderRoomCache->echoit = $this->echo;
-			return $UnderRoomCache->initRoom ( $type, $gameuid );
+			$str= $UnderRoomCache->initRoom ( $type, $gameuid );
+			if ($this->echo) {
+				echo $str;
+			}
+			return $str;
 		} else if ($type == 1) {
 			$str = "创建谁是卧底游戏成功：请输入4-14参与人数（不包括法官）：";
 			if ($this->echo) {
@@ -110,18 +114,25 @@ class wechatCallbackapiTest
 				echo $str;
 			}
 			return $str;
+		} else if ($type == 20) {
+			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
+			$UnderRoomCache = new UnderCoverRoomCache ();
+			$str = $UnderRoomCache->getChengfa ( $type, $gameuid );
+			if ($this->echo) {
+				echo $str;
+			}
+			return $str;
 		} else if ($type >= 1000) {
 			$gameuid = $UnderCache->gameuid;
 			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
 			$UnderRoomCache = new UnderCoverRoomCache ();
-			
 			$str = $UnderRoomCache->getInfo ( $type, $gameuid );
 			if ($this->echo) {
 				echo $str;
 			}
 			return $str;
 		} else {
-			$str="请您选择项目:\n 4-14 创建谁是卧底游戏:";
+			$str="请您选择项目：\n 4-14 创建谁是卧底游戏: \n 输入 20 返回真心话大冒险：";
 			if($this->echo)
 			{
 				echo $str;

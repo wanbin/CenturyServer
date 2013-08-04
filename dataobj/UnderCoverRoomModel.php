@@ -50,6 +50,21 @@ class UnderCoverRoomModel extends BaseModel {
 		}
 		return $str;
 	}
+	public function getChengfa(){
+		global $chengfa;
+		$getArr = array ();
+		$returnArr = array ();
+		$returnStr="接受惩罚吧：\n";
+		for($i = 0; $i < 6; $i ++) {
+			do {
+				$rand = rand ( 1, count ( $chengfa ) );
+			} while ( in_array ( $rand, $getArr ) );
+			$getArr [] = $rand;
+			$id=$i+1;
+			$returnStr.= "$id.".$chengfa [$rand - 1]."\n";
+		}
+		return $returnStr;
+	}
 	
 	
 	public function getInfo($roomid,$gameuid=0)
