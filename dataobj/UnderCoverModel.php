@@ -36,11 +36,11 @@ class UnderCoverModel extends BaseModel {
 		$this->Log ( $keyword );
 		$helpStr = $this->getSampleHelpStr ();
 		$type = $keyword ;
-		if ($type == "帮助" || $type == "【帮助】" || $type == "help") {
-			return $this->getHelpStr ().$helpStr;
+		if ($type == "帮助" || $type == "【帮助】" || $type == "help" || $type == "?") {
+			return $this->getHelpStr () . $helpStr;
 		}
-		if ($type == "规则" || $type == "【规则】" || $type == "rule") {
-			return $this->getRuleStr ().$helpStr;
+		if ($type == "规则" || $type == "【规则】" || $type == "rule" || $type == "*") {
+			return $this->getRuleStr () . $helpStr;
 		}
 		$type=intval($keyword);
 		if ($type > 3 && $type <= 15) {
@@ -72,7 +72,7 @@ class UnderCoverModel extends BaseModel {
 		}
 	}
 	protected function getHelpStr() {
-		return "欢迎使用谁是卧底游戏助手，回复以下内容快速开始：\n 1.创建谁是卧底游戏\n 2.真心话大冒险（网络版)\n 3.真心话大冒险（本地版）\n 4-15.创建谁是卧底房间\n 1000-9999.进入相应的房间";
+		return "一起来玩吧，体验不一样的谁是卧底游戏！回复以下内容快速开始：\n 1.创建谁是卧底游戏\n 2.真心话大冒险（网络版)\n 3.真心话大冒险（本地版）\n 4-15.创建谁是卧底房间\n 1000-9999.进入相应的房间";
 	}
 	//返回制作团队
 	protected function getEmail() {
@@ -82,14 +82,14 @@ class UnderCoverModel extends BaseModel {
 		return "\n\n【帮助】帮助内容 \n【规则】游戏规则";
 	}
 	protected function getRuleStr() {
-		return "\n【谁是卧底】游戏规则 \n"
+		return "【谁是卧底】游戏规则 \n"
 				."【人数】：法官1人，玩家4至15人\n"
 				."【开局】：法官回复参与人数，返回平民及卧底身份及编号，以及房间号\n"
 				."【参与】：把房间号通过群告诉所有玩家，参与者向我发送房间号，我会给他们发送身份及说明编号\n"
 				."【进行】：法官组织每位玩家依次发言，每位玩家说自己编号及简短的描述自己的身份以\n"
 				."【投票】：描述一轮结束后，玩家投票选择卧底，票数较多的玩家身亡。分出结果后，法官公布结果（冤死或卧底）\n"
 				."【胜利】：卧底全被揪出，则平民胜利，卧底数大于等于平民数，卧底胜利\n"
-				."【惩罚】：回复2或3返回真心话大冒险，输的无家掷骰子选择惩罚\n";
+				."【惩罚】：回复2或3返回真心话大冒险，输的玩家掷骰子选择惩罚\n";
 	}
 	
 
