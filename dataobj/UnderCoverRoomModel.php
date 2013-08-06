@@ -60,7 +60,7 @@ class UnderCoverRoomModel extends BaseModel {
 			$stradd = "(网络版)";
 			$chengfa = $chengfaonline;
 		}
-		$returnStr = "真心话大冒险 $stradd :\n【请输的同学摇骰子选择】";
+		$returnStr = "真心话大冒险 $stradd :\n【请输的同学摇骰子选择】\n";
 		for($i = 0; $i < 6; $i ++) {
 			do {
 				$rand = rand ( 1, count ( $chengfa ) );
