@@ -52,13 +52,15 @@ class UnderCoverRoomModel extends BaseModel {
 	}
 	public function getChengfa($type) {
 		global $chengfa;
+		global $chengfaonline;
 		$getArr = array ();
 		$returnArr = array ();
 		$stradd = "(本地版)";
 		if ($type == 2) {
 			$stradd = "(网络版)";
+			$chengfa = $chengfaonline;
 		}
-		$returnStr = "真心话大冒险 $stradd :\n";
+		$returnStr = "请输的同学摇骰子选择：\n真心话大冒险 $stradd :\n";
 		for($i = 0; $i < 6; $i ++) {
 			do {
 				$rand = rand ( 1, count ( $chengfa ) );
@@ -91,7 +93,7 @@ class UnderCoverRoomModel extends BaseModel {
 			if ($value ['uid'] == $this->gameuid) {
 				$str = $contentArr [$key];
 				$id=$key+1;
-				$str = "您的身份为：$str\n 您的编号为：$id";
+				$str = "您的身份为：$str\n您的编号为：$id";
 				if ($this->echoit) {
 					echo $str;
 				}
@@ -99,7 +101,7 @@ class UnderCoverRoomModel extends BaseModel {
 			}
 		}
 		if ($ret ['peoplecount'] == $ret ['nowcount']) {
-			$str = "此房间已满，回复1重新开一局吧";
+			$str = "此房间已满或已经超时，召集自己的好友回复1重新开一局吧~~";
 			if ($this->echoit) {
 				echo $str;
 			}
@@ -114,7 +116,7 @@ class UnderCoverRoomModel extends BaseModel {
 		$id = $nowindex + 1;
 		$userstr = json_encode ( $userArr );
 		$this->oneSql ( "update $tablename set users='$userstr',nowcount=nowcount+1 where id=$roomid" );
-		$str = "您的身份为：$str\n 您的编号为：$id";
+		$str = "您的身份为：$str\n您的编号为：$id";
 		if ($this->echoit) {
 			echo $str;
 		}
