@@ -24,6 +24,7 @@ class wechatCallbackapiTest {
 			$postObj = simplexml_load_string ( $postStr, 'SimpleXMLElement', LIBXML_NOCDATA );
 			$fromUsername = $postObj->FromUserName;
 			$toUsername = $postObj->ToUserName;
+			$event=$postObj->Event;
 			$keyword = trim ( $postObj->Content );
 			$time = time ();
 			$textTpl = "<xml>
@@ -34,7 +35,19 @@ class wechatCallbackapiTest {
 							<Content><![CDATA[%s]]></Content>
 							<FuncFlag>0</FuncFlag>
 							</xml>";
-			if (! empty ( $keyword )) {
+			if(!empty($event))
+			{
+				if($event=='subscribe')
+				{
+					$msgType = "text";
+					include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
+					$UnderCache = new UnderCoverCache ( $fromUsername );
+					$contentStr = $UnderCache->returncontent ( 'help' );
+					$resultStr = sprintf ( $textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr );
+					echo $resultStr;
+				}
+			}
+			else if (! empty ( $keyword )) {
 				$msgType = "text";
 				include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
 				$UnderCache = new UnderCoverCache ( $fromUsername );
