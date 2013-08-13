@@ -8,6 +8,10 @@ define ( "TOKEN", "weixin" );
 $wechatObj = new wechatCallbackapiTest ();
 $wechatObj->responseMsg ();
 class wechatCallbackapiTest {
+	private $fromUsername = "";
+	private $toUsername = "";
+	private $msgType = "text";
+	private $event = "";
 	public function valid() {
 		$echoStr = $_GET ["echostr"];
 		if ($this->checkSignature ()) {
@@ -22,38 +26,34 @@ class wechatCallbackapiTest {
 		// extract post data
 		if (! empty ( $postStr )) {
 			$postObj = simplexml_load_string ( $postStr, 'SimpleXMLElement', LIBXML_NOCDATA );
-			$fromUsername = $postObj->FromUserName;
-			$toUsername = $postObj->ToUserName;
-			$event=$postObj->Event;
+			$this->fromUsername = $postObj->FromUserName;
+			$this->toUsername = $postObj->ToUserName;
+			$this->event = $postObj->Event;
 			$keyword = trim ( $postObj->Content );
-			$time = time ();
-			$textTpl = "<xml>
-							<ToUserName><![CDATA[%s]]></ToUserName>
-							<FromUserName><![CDATA[%s]]></FromUserName>
-							<CreateTime>%s</CreateTime>
-							<MsgType><![CDATA[%s]]></MsgType>
-							<Content><![CDATA[%s]]></Content>
-							<FuncFlag>0</FuncFlag>
-							</xml>";
-			if(!empty($event))
-			{
-				if($event=='subscribe')
-				{
-					$msgType = "text";
-					include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
-					$UnderCache = new UnderCoverCache ( $fromUsername );
-					$contentStr = $UnderCache->returncontent ( 'help' );
-					$resultStr = sprintf ( $textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr );
-					echo $resultStr;
-				}
-			}
-			else if (! empty ( $keyword )) {
-				$msgType = "text";
+			$messageType = $postObj->MsgType;
+				
+				// 如果是语音及图片，直接返回
+			if (in_array ( $messageType, array (
+					"image",
+					"location",
+					"link"
+			) )) {
 				include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
-				$UnderCache = new UnderCoverCache ( $fromUsername );
+				$UnderCache = new UnderCoverCache ( $this->fromUsername );
+				$contentStr = $UnderCache->returncontent ( 'help' );
+				$this->responseMsg ("我们现在处理不了您发来的信息！\n看看这能不能给你带来帮助\n".$contentStr );
+			} else if (! empty ( $this->event )) {
+				if ($this->event == 'subscribe') {
+					include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
+					$UnderCache = new UnderCoverCache ( $this->fromUsername );
+					$contentStr = $UnderCache->returncontent ( 'help' );
+					$this->responseMsg ( $contentStr );
+				}
+			} else if (! empty ( $keyword )) {
+				include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
+				$UnderCache = new UnderCoverCache ( $this->fromUsername );
 				$contentStr = $UnderCache->returncontent ( $keyword );
-				$resultStr = sprintf ( $textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr );
-				echo $resultStr;
+				$this->responseMsg ( $contentStr );
 			} else {
 				echo "Input something...";
 			}
@@ -61,6 +61,18 @@ class wechatCallbackapiTest {
 			echo "";
 			exit ();
 		}
+	}
+	public function returnMsg($msg) {
+		$textTpl = "<xml>
+							<ToUserName><![CDATA[%s]]></ToUserName>
+							<FromUserName><![CDATA[%s]]></FromUserName>
+							<CreateTime>%s</CreateTime>
+							<MsgType><![CDATA[%s]]></MsgType>
+							<Content><![CDATA[%s]]></Content>
+							<FuncFlag>0</FuncFlag>
+							</xml>";
+		$resultStr = sprintf ( $textTpl, $this->fromUsername, $this->toUsername, time (), $this->msgType, $msg );
+		echo $resultStr;
 	}
 	private function checkSignature() {
 		$signature = $_GET ["signature"];
