@@ -52,7 +52,7 @@ class UnderCoverModel extends BaseModel {
 			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
 			$UnderRoomCache = new UnderCoverRoomCache ( $this->uid );
 			$str = $UnderRoomCache->initRoom ( $type );
-			return $str . $helpStr;
+			return $str . $helpStr."\n回复2或3显示本局惩罚";
 		} else if ($type == 1) {
 			$str = "谁是卧底游戏创建成功，您为法官，请输入参与人数（不包括法官 4-15人）：";
 			return $str.$helpStr;
