@@ -33,7 +33,7 @@ class wechatCallbackapiTest {
 			$messageType = $postObj->MsgType;
 				
 				// 如果是语音及图片，直接返回
-			if (in_array ( $messageType, array (
+			if (!in_array ( $messageType, array (
 					"text"
 			) )) {
 				$this->returnMsg ( "Sorry~我们现在不能识别您发来的信息\n试着回复'?'能不能给你带来帮助\n$messageType");
