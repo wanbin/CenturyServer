@@ -38,22 +38,19 @@ class wechatCallbackapiTest {
 					"location",
 					"link"
 			) )) {
-				include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
-				$UnderCache = new UnderCoverCache ( $this->fromUsername );
-				$contentStr = $UnderCache->returncontent ( 'help' );
-				$this->responseMsg ("我们现在处理不了您发来的信息！\n看看这能不能给你带来帮助\n".$contentStr );
+				$this->returnMsg ( "我们现在处理不了您发来的信息！\n看看回复'?'能不能给你带来帮助\n");
 			} else if (! empty ( $this->event )) {
 				if ($this->event == 'subscribe') {
 					include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
 					$UnderCache = new UnderCoverCache ( $this->fromUsername );
 					$contentStr = $UnderCache->returncontent ( 'help' );
-					$this->responseMsg ( $contentStr );
+					$this->returnMsg ( $contentStr );
 				}
 			} else if (! empty ( $keyword )) {
 				include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
 				$UnderCache = new UnderCoverCache ( $this->fromUsername );
 				$contentStr = $UnderCache->returncontent ( $keyword );
-				$this->responseMsg ( $contentStr );
+				$this->returnMsg ( $contentStr );
 			} else {
 				echo "Input something...";
 			}
