@@ -50,6 +50,10 @@ class UnderCoverRoomModel extends BaseModel {
 		}
 		return $str;
 	}
+	public function getRepentCount($msg){
+			
+	}
+	
 	public function getChengfa($type) {
 		global $chengfa;
 		global $chengfaonline;

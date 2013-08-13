@@ -36,7 +36,7 @@ class wechatCallbackapiTest {
 			if (!in_array ( $messageType, array (
 					"text"
 			) )) {
-				$this->returnMsg ( "Sorry~我们现在不能识别您发来的信息\n试着回复'?'能不能给你带来帮助\n$messageType");
+				$this->returnMsg ( "Sorry~我们现在不能识别您发来的信息\n试着回复'?'能不能给你带来帮助\n");
 			} else if (! empty ( $this->event )) {
 				if ($this->event == 'subscribe') {
 					include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";

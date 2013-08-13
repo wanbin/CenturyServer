@@ -24,7 +24,12 @@ class UnderCoverModel extends BaseModel {
 				'time' => time ()
 		) );
 	}
-	
+	public function getMessageCount($msg){
+		$tableName = $this->getTableNameLog ();
+		$sql = "select count(DISTINCT gameuid) count from $tableName where content='$msg'";
+		$ret = $this->oneSql ( $sql );
+		return $ret['count'];
+	}
 	/**
 	 * 返回信息类
 	 *
@@ -42,7 +47,7 @@ class UnderCoverModel extends BaseModel {
 		if ($type == "规则" || $type == "【规则】" || $type == "rule" || $type == "*") {
 			return $this->getRuleStr () . $helpStr;
 		}
-		$type=intval($keyword);
+		$type = $this->changeKeyword ( $keyword );
 		if ($type > 3 && $type <= 15) {
 			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
 			$UnderRoomCache = new UnderCoverRoomCache ( $this->uid );
@@ -68,7 +73,28 @@ class UnderCoverModel extends BaseModel {
 			$str = $UnderRoomCache->getInfo ( $type );
 			return $str.$helpStr;
 		} else {
-			return $this->getHelpStr();
+			include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
+			$UnderCoverCache = new UnderCoverCache ( $this->uid );
+			$msgCount = $UnderCoverCache->getMessageCount($keyword);
+			if ($msgCount > 1) {
+				$strtem = "你是本游戏中第 $msgCount 位用户发送这条信息了！这或许就是缘分吧，虽然小编一时半会回答不了你的问题，但相信您一定会在游戏中找到乐趣的~\n先发个游戏帮助，您先看着，看有需要的内容吗\n";
+			} else {
+				$strtem = "小编找遍了所有用户发来的信息，没有发和和你这条重复的，不知如何是好，先发个游戏帮助，您先看着，看有需要的内容吗？\n";
+			}
+			return $strtem.$this->getHelpStr();
+		}
+	}
+	public function changeKeyword($keyword) {
+		switch ($keyword) {
+			case "玩" :
+			case "开始" :
+			case "开局" :
+				return 1;
+			case "怎么玩" :
+			case "帮忙" :
+			case "帮助内容" :
+			case "怎么开始" :
+				return "help";
 		}
 	}
 	protected function getHelpStr() {
