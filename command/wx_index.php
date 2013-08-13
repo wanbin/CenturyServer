@@ -34,11 +34,9 @@ class wechatCallbackapiTest {
 				
 				// 如果是语音及图片，直接返回
 			if (in_array ( $messageType, array (
-					"image",
-					"location",
-					"link"
+					"text"
 			) )) {
-				$this->returnMsg ( "我们现在处理不了您发来的信息！\n看看回复'?'能不能给你带来帮助\n");
+				$this->returnMsg ( "Sorry~我们现在不能识别您发来的信息\n试着回复'?'能不能给你带来帮助\n$messageType");
 			} else if (! empty ( $this->event )) {
 				if ($this->event == 'subscribe') {
 					include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
