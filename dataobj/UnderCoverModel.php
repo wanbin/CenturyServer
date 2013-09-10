@@ -41,7 +41,7 @@ class UnderCoverModel extends BaseModel {
 		$this->Log ( $keyword );
 		$helpStr = $this->getSampleHelpStr ();
 		$type = $keyword ;
-		if ($type == "帮助" || $type == "【帮助】" || $type == "help" || $type == "?") {
+		if ($type == "帮助" || $type == "【帮助】" || $type == "help" || $type == "?"|| $type == "？") {
 			return $this->getHelpStr () . $helpStr;
 		}
 		if ($type == "规则" || $type == "【规则】" || $type == "rule" || $type == "*") {
