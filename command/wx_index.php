@@ -31,19 +31,21 @@ class wechatCallbackapiTest {
 			$this->event = $postObj->Event;
 			$keyword = trim ( $postObj->Content );
 			$messageType = $postObj->MsgType;
-				
+			
+			if ($this->event == 'subscribe') {
+				include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
+				$UnderCache = new UnderCoverCache ( $this->fromUsername );
+				$contentStr = $UnderCache->returncontent ( 'help' );
+				$this->returnMsg ( $contentStr );
+			}
+			
 				// 如果是语音及图片，直接返回
 			if (!in_array ( $messageType, array (
 					"text"
 			) )) {
 				$this->returnMsg ( "Sorry~我们现在不能识别您发来的信息\n试着回复'?'能不能给你带来帮助\n");
 			} else if (! empty ( $this->event )) {
-				if ($this->event == 'subscribe') {
-					include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
-					$UnderCache = new UnderCoverCache ( $this->fromUsername );
-					$contentStr = $UnderCache->returncontent ( 'help' );
-					$this->returnMsg ( $contentStr );
-				}
+				
 			} else if (! empty ( $keyword )) {
 				include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
 				$UnderCache = new UnderCoverCache ( $this->fromUsername );
