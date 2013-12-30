@@ -3,7 +3,7 @@
  * @author WanBin @date 2012-12-26
  * 用户正在生产的信息表
  */
-require_once '../BaseModel.php';
+require_once 'BaseModel.php';
 class RuntimeModel extends BaseModel {
 	
 	/**

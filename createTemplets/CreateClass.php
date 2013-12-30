@@ -127,6 +127,34 @@ $createarray=array(
 				),
 				'description' => '谁是卧底房间信息',
 		),
+		array(
+				'modelname' => 'Publish',
+				'singleData' => false,
+				'tablename' => 'user_publish',
+				'tablefiled' => array (
+						'id' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'id'),
+						'user_id' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'发表的玩家UID'),
+						'content' => array('type'=>'varchar','lengh'=>500,'default'=>'','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'真心话大冒险内容'),
+						'time' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'创建时间'),
+						'type' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'类型:1真心话，2大冒险'),
+						'like' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'好评次数'),
+						'dislike' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'差评次数'),
+						'show' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'是否显示'),
+				),
+				'description' => '惩罚与真心话',
+		),
 		
+		array(
+				'modelname' => 'Collect',
+				'singleData' => false,
+				'tablename' => 'user_collect',
+				'tablefiled' => array (
+						'user_id' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'用户ID'),
+						'publish_id' => array('type'=>'int','lengh'=>10,'default'=>'0','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'真心话大冒险ID'),
+						'type' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'1收藏,2喜欢，3不喜欢'),
+						'time' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'收藏时间'),
+				),
+				'description' => '用户收藏表、点赞',
+		),
 );
 ?>

@@ -20,6 +20,7 @@ class BaseCommand
 	protected $user_account;
 	protected $accountObject;
 	protected $buildingObject;
+	protected $publishObject;
 	protected $marchObject;
 	protected $heroObject;
 	protected $issync = FALSE;
@@ -221,6 +222,31 @@ class BaseCommand
 		}
 		return $this->buildingObject [$gameuid];
 	}
+	
+	/**
+	 * +----------------------------------------------------------
+	 * 实例化Pubilish
+	 * +----------------------------------------------------------
+	 *
+	 * @param int $gameuid
+	 * @param string $uid
+	 * @param object $new
+	 * +----------------------------------------------------------
+	 */
+	protected function createPublishHD($gameuid = null, $uid = null, $new = false) {
+		if (empty ( $gameuid )) {
+			$gameuid = $this->gameuid;
+		}
+		if (empty ( $this->publishObject ) || ! array_key_exists ( $gameuid, $this->publishObject )) {
+			require_once PATH_HANDLER . 'BuildingHandler.php';
+			$this->publishObject [$gameuid] = new BuildingHandler ( $gameuid, $uid );
+		}
+		return $this->publishObject [$gameuid];
+	}
+	
+	
+	
+	
 	/**
 	 * 检查用户账户
 	 *
@@ -405,6 +431,18 @@ class BaseCommand
 				'selectCount' => $select,
 				 'delCount' => $del);
 		$comAnaMC->addarr(array($insertArr) );
+	}
+	
+	/**
+	 * 行为返回值统一入口
+	 */
+	protected function reutrnDate($code, $data = array()) {
+		$ret = array (
+				'code' => $code,
+				'data' => json_encode ( $data ),
+				time => 'time'
+		);
+		return json_encode ( $ret );
 	}
 }
 

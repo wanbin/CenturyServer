@@ -10,9 +10,9 @@ define( 'PATH_SQL', PATH_ROOT.'sql/');
 define( 'FRAMEWORK', PATH_ROOT . 'framework/');         //主框架目录
 define('PATH_STATIC',PATH_ROOT . 'static/');            //静态文件夹
 		
+date_default_timezone_set("Asia/Chongqing");
 include_once PATH_ROOT . 'config.inc.php';              // 全局配置文件
 include_once PATH_COMMAND . 'BaseCommand.php';
-include_once 'config.php';
 //加载framework中db操作类与cache操作类
 require_once FRAMEWORK . '/cache/Cache.class.php';
 require_once FRAMEWORK . '/database/DBHandler.class.php';
@@ -25,9 +25,8 @@ define('DEBUG',false);
 class Entry
 {
 	// 请求分发
-	public static function callCommand( $command, $param=array(), $sign_arr)
+	public static function callCommand( $command, $param=array(), $sign_arr="")
 	{
-		
 		static $commandInstance = array();
 		if(!empty($commandInstance[$command]))
 		{
@@ -47,5 +46,8 @@ class Entry
 		}
 	}
 }
-
+file_put_contents("getFromClient.log", print_R($_REQUEST,true),FILE_APPEND);
+$command = $_REQUEST ['cmd'];
+$data = json_decode ( str_replace ( "\\", "", $_REQUEST ['data'] ), true );
+Entry::callCommand ( $command, $data );
 ?>

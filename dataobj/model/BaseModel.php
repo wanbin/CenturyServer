@@ -1,6 +1,6 @@
 <?php
 require_once FRAMEWORK . 'exception/ExceptionConstants.php';
-require_once 'model/MemcacheConstants.php';
+require_once 'MemcacheConstants.php';
 
 class BaseModel {
 	
@@ -58,6 +58,7 @@ class BaseModel {
 	 */
 	private function splitValues($values)
 	{
+		print_R($values);
 		$key = $val = $sec = '';
 		foreach ($values as $tKey => $tVal )
 		{

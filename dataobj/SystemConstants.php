@@ -15,3 +15,11 @@ define("MEMCACHE_KEY_UNDERCOVER_LIST", "centurywar_UnderCover_list_%d");
 define("MEMCACHE_KEY_UNDERCOVERROOM", "centurywar_UnderCoverRoom_%d");
 define("MEMCACHE_KEY_UNDERCOVERROOM_LIST", "centurywar_UnderCoverRoom_list_%d");
 
+//惩罚与真心话 
+define("MEMCACHE_KEY_PUBLISH", "centurywar_Publish_%d_%d");
+define("MEMCACHE_KEY_PUBLISH_LIST", "centurywar_Publish_list_%d");
+
+//用户收藏表、点赞 
+define("MEMCACHE_KEY_COLLECT", "centurywar_Collect_%d_%d");
+define("MEMCACHE_KEY_COLLECT_LIST", "centurywar_Collect_list_%d");
+

@@ -3,7 +3,7 @@
  * @author WanBin @date 2012-12-07
  * 测试数据库连接
  */
-require_once '../BaseModel.php';
+require_once PATH_MODEL.'BaseModel.php';
 class TestContentModel extends BaseModel {
 	/**
 	 * 得到所有记录
@@ -27,7 +27,7 @@ class TestContentModel extends BaseModel {
 	/**
 	 * 得到一条记录
 	 *
-	 * @param $id unknown_type       	
+	 * @param $id unknown_type
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
 	protected function getOne() {
@@ -44,7 +44,7 @@ class TestContentModel extends BaseModel {
 	/**
 	 * 更新信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function update($content) {
@@ -62,7 +62,7 @@ class TestContentModel extends BaseModel {
 		/**
 	 * 添加一条信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function add($content) {
@@ -96,7 +96,7 @@ class TestContentModel extends BaseModel {
 	}
 	/**
 	 * 删除一条信息
-	 * 
+	 *
 	 * @return number
 	 */
 	protected function del() {

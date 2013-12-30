@@ -3,7 +3,7 @@
  * @author WanBin @date 2012-12-26
  * 用户建筑表
  */
-require_once '../BaseModel.php';
+require_once 'BaseModel.php';
 class BuildingModel extends BaseModel {
 
 	/**
