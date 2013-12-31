@@ -9,6 +9,15 @@ require_once PATH_DATAOBJ . 'PublishModel.php';
 class PublishCache extends PublishModel{
 	private $item = array ();
 	
+	
+	/*返回第n页的内容
+	 * @see PublishModel::getPage()
+	 */
+	protected function getPage($page) {
+		return parent::getPage ($page);
+	}
+	
+	
 	/**
 	 * 得到所有记录
 	 */

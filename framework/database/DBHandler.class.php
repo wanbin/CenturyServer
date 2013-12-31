@@ -111,6 +111,16 @@ class DBHandler
 			$this->writeSqlError ( $sql, $e );
 		}
 	}
+	public function getAll($sql)
+	{
+		try {
+			$this->writeSqlError ( $sql,"" );
+			return $this->connect ()->getAll ( $sql );
+		} catch ( Exception $e ) {
+			$this->writeSqlError ( $sql, $e );
+		}
+	}
+	
 	public function getTable()
 	{
 		return $this->DBConfig['table'];
@@ -120,7 +130,7 @@ class DBHandler
 		$fileName = date ( "Y-m-d", time () ) . "sqlerror.sql";
 		$temtime = date ( "Y-m-d H:i:s", time () );
 		$strAdd = "#[$temtime]\n";
-		file_put_contents ( PATH_ROOT . "/log/$fileName", $strAdd . $e . $sql, FILE_APPEND );
+		file_put_contents ( PATH_ROOT . "/log/$fileName", $strAdd . $e . $sql."\n", FILE_APPEND );
 	}
 }
 ?>

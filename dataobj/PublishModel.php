@@ -23,6 +23,13 @@ class PublishModel extends BaseModel {
 		}
 		return $ret;
 	}
+	protected function getPage($page) {
+		$where = array (
+				'isshow' => 1
+		);
+		$res = $this->hsSelectAll ( $this->getTableName (), "*", $where, 50, $page );
+		return $res;
+	}
 	/**
 	 * 得到一条记录
 	 *
@@ -109,7 +116,7 @@ class PublishModel extends BaseModel {
 	}
 	
 	protected function getFields() {
-		return 'id,gameuid,content,time,type,like,dislike,show';
+		return 'id,gameuid,content,time,type,like,dislike,isshow';
 	}
 	
 	protected function getTableName() {

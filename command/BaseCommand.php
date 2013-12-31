@@ -440,6 +440,7 @@ class BaseCommand
 		$ret = array (
 				'code' => $code,
 				'data' => json_encode ( $data ),
+				'cmd' =>$this->commandName,
 				'time' => time()
 		);
 		echo json_encode ( $ret );

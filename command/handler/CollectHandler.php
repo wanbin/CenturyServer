@@ -5,18 +5,18 @@
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
  */
-require_once PATH_CACHE . 'PublishCache.php';
-class PublishHandler extends PublishCache{
+require_once PATH_CACHE . 'CollectCache.php';
+class CollectHandler extends CollectCache{
 	
 	/**
 	 * 添加一个新闻公告
 	 */
-	public function newPublish($message,$type){
+	public function newCollect($id,$type){
 		$content=array(
-				'content'=>$message,
+				'gameuid'=>$this->gameuid,
 				'time'=>time(),
 				'type'=>$type,
-				'isshow'=>0,
+				'publish_id'=>$id,
 				);
 		$this->add($content);
 	}

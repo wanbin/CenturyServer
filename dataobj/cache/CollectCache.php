@@ -5,7 +5,7 @@
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
  */
-require_once PATH_DATAOBJ . 'CollectModel.php';
+require_once PATH_MODEL . 'CollectModel.php';
 class CollectCache extends CollectModel{
 	private $item = array ();
 	
@@ -30,7 +30,7 @@ class CollectCache extends CollectModel{
 	/**
 	 * 得到一条记录
 	 *
-	 * @param $id unknown_type       	
+	 * @param $id unknown_type
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
 	protected function getOne() {
@@ -48,7 +48,7 @@ class CollectCache extends CollectModel{
 		/**
 	 * 更新信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function update($content) {
@@ -64,12 +64,12 @@ class CollectCache extends CollectModel{
 	/**
 	 * 添加一条信息
 	 *
-	 * @param $content unknown_type       	
+	 * @param $content unknown_type
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function add($content) {
 		parent::add ( $content );
-		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
+// 		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
 	}
 	
 	protected function addOne($templateid, $content) {
@@ -93,7 +93,7 @@ class CollectCache extends CollectModel{
 	/**
 	 * 删除一条信息
 	 *
-	 * @param $id unknown_type       	
+	 * @param $id unknown_type
 	 * @return number
 	 */
 	protected function del() {

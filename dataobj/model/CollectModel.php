@@ -3,7 +3,7 @@
  * @author WanBin @date 2013-12-30
  * 用户收藏表、点赞
  */
-require_once PATH_DATAOBJ.'BaseModel.php';
+require_once PATH_MODEL.'BaseModel.php';
 class CollectModel extends BaseModel {
 	/**
 	 * 得到所有记录
@@ -75,7 +75,7 @@ class CollectModel extends BaseModel {
 				$insert [$key] = $value;
 			}
 		}
-		return $this->hsInsert ( $this->getTableName (), $this->gameuid, $insert );
+		return $this->hsInsert ( $this->getTableName (), $insert );
 	}
 	
 	protected function addarr($content) {
@@ -109,7 +109,7 @@ class CollectModel extends BaseModel {
 	}
 	
 	protected function getFields() {
-		return 'user_id,publish_id,type,time';
+		return 'gameuid,publish_id,type,time';
 	}
 	
 	protected function getTableName() {
