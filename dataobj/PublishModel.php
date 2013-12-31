@@ -58,7 +58,7 @@ class PublishModel extends BaseModel {
 		return $res;
 	}
 	
-		/**
+	/**
 	 * 添加一条信息
 	 *
 	 * @param $content unknown_type
@@ -75,8 +75,7 @@ class PublishModel extends BaseModel {
 				$insert [$key] = $value;
 			}
 		}
-		print_R($insert);
-		return $this->hsInsert ( $this->getTableName (),  $insert );
+		return $this->hsInsert ( $this->getTableName (), $insert );
 	}
 	
 	protected function addarr($content) {

@@ -39,11 +39,11 @@ class BaseCommand
 		}
 		try {
 			$this->server = $sign_arr ['server'];
-			if (! in_array ( $command, $this->noServerCommand )) {
-				if (! isset ( $this->server )) {
-					$this->licitException ( 'server is empty', 1201 );
-				}
-			}
+// 			if (! in_array ( $command, $this->noServerCommand )) {
+// 				if (! isset ( $this->server )) {
+// 					$this->licitException ( 'server is empty', 1201 );
+// 				}
+// 			}
 			if (!in_array ( $command, $this->noValidateCommand )) {
 				// 验证account
 				$accountMC = $this->getInstance ('AccountCache');
@@ -440,8 +440,9 @@ class BaseCommand
 		$ret = array (
 				'code' => $code,
 				'data' => json_encode ( $data ),
-				time => 'time'
+				'time' => time()
 		);
+		echo json_encode ( $ret );
 		return json_encode ( $ret );
 	}
 }

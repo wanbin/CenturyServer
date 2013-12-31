@@ -9,9 +9,9 @@ class PublishNew extends BaseCommand {
 		if (empty ( $content )) {
 			$this->throwException ( 'content is empty', 1101 );
 		}
-		$publish = new PublishHandler ("wabbbb");
+		$publish = new PublishHandler ($this->gameuid);
 		$publish->newPublish ( $content, $type );
-		return $this->reutrnDate ( 1000 );
+		return $this->reutrnDate ( COMMAND_SUCCESS );
 	}
 
 }

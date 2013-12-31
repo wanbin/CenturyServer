@@ -19,13 +19,14 @@ require_once FRAMEWORK . '/database/DBHandler.class.php';
 //加载redies
 require_once FRAMEWORK . '/redis/Rediska.php';
 include_once FRAMEWORK . 'exception/GameException.php'; // 游戏内部异常处理
+include_once 'config.code.php'; //常量处理类
 error_reporting(E_ALL ^ E_NOTICE);
 //游戏当前版本
 define('DEBUG',false);
 class Entry
 {
 	// 请求分发
-	public static function callCommand( $command, $param=array(), $sign_arr="")
+	public static function callCommand( $command, $param=array(), $sign_arr=array())
 	{
 		static $commandInstance = array();
 		if(!empty($commandInstance[$command]))
@@ -49,5 +50,7 @@ class Entry
 file_put_contents("getFromClient.log", print_R($_REQUEST,true),FILE_APPEND);
 $command = $_REQUEST ['cmd'];
 $data = json_decode ( str_replace ( "\\", "", $_REQUEST ['data'] ), true );
-Entry::callCommand ( $command, $data );
+$sign = json_decode ( str_replace ( "\\", "", $_REQUEST ['sign'] ), true );
+Entry::callCommand ( $command, $data,$sign );
+
 ?>

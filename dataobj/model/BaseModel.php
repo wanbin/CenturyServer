@@ -23,13 +23,17 @@ class BaseModel {
 	public function __construct($uid) {
 		// 加载config
 		$config = $GLOBALS ['config'];
-		
-		
 		$this->useMemcache = $config ['memcache'];
 		$this->model = get_class ( $this );
 		$this->useRedis = $config ['redis'];
 		if (isset ( $uid )) {
 			$res = $this->oneSql ( "select * from wx_account where uid='$uid'" );
+			if (empty ( $res )) {
+				$time = time ();
+				$sql = "insert into wx_account(uid,regtime) values('$uid',$time)";
+				$this->oneSql ( $sql );
+				$res = $this->oneSql ( "select * from wx_account where uid='$uid'" );
+			}
 			$this->uid = $res ['uid'];
 			$this->gameuid = $res ['gameuid'];
 		}
@@ -58,7 +62,6 @@ class BaseModel {
 	 */
 	private function splitValues($values)
 	{
-		print_R($values);
 		$key = $val = $sec = '';
 		foreach ($values as $tKey => $tVal )
 		{
