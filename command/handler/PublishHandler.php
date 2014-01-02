@@ -20,9 +20,15 @@ class PublishHandler extends PublishCache{
 				);
 		$this->add($content);
 	}
+	public function getPage($page) {
+		return parent::getPage ( $page );
+	}
 	
-	
-	public function getPage($page){
-		return parent::getPage($page);
+	public function addLike($id, $type) {
+		if ($type == 1) {
+			parent::addLike ( $id, 1, 0 );
+		} else {
+			parent::addLike ( $id, 0, 1 );
+		}
 	}
 }

@@ -49,10 +49,9 @@ class BaseCommand
 				$accountMC = $this->getInstance ('AccountCache');
 // 				$this->user_account = $accountMC->validate ( $param, $sign_arr );
 			}
-			
-			$this->gameuid = $sign_arr ['gameuid'];
-			$this->version = $sign_arr ['version'];
 			$this->uid = $sign_arr ['uid'];
+			$this->gameuid = $this->getGameuid ( $this->uid );
+			$this->version = $sign_arr ['version'];
 			$this->commandName = $command;
 			$this->setTimezone ();
 			$re ['ecode'] = 0;
@@ -98,6 +97,12 @@ class BaseCommand
 			$this->throwException ( $message, $errorCode );
 		}
 		return $re;
+	}
+	
+	private function getGameuid($uid) {
+		require_once PATH_CACHE . 'AccountCache.php';
+		$accountCatch = new AccountCache ($uid);
+		return $accountCatch->gameuid;
 	}
 	
 	/**
@@ -440,9 +445,12 @@ class BaseCommand
 		$ret = array (
 				'code' => $code,
 				'data' => json_encode ( $data ),
-				'cmd' =>$this->commandName,
-				'time' => time()
+				'cmd' => $this->commandName,
+				'time' => time ()
 		);
+		if (DEBUG) {
+			file_put_contents ( "Entry.log", "[" . date ( "Y-m-n H:i:s" ) . "]" . print_R($ret,true) );
+		}
 		echo json_encode ( $ret );
 		return json_encode ( $ret );
 	}

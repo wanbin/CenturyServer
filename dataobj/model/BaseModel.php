@@ -27,18 +27,24 @@ class BaseModel {
 		$this->model = get_class ( $this );
 		$this->useRedis = $config ['redis'];
 		if (isset ( $uid )) {
-			$res = $this->oneSql ( "select * from wx_account where uid='$uid'" );
+			$this->uid = $uid;
+			$this->gameuid = $this->getGameuid($uid);
+		}
+	}
+
+	public function getGameuid($uid){
+		if (isset ( $uid )) {
+			$res = $this->oneSqlSignle ( "select * from wx_account where uid='$uid'" );
 			if (empty ( $res )) {
 				$time = time ();
 				$sql = "insert into wx_account(uid,regtime) values('$uid',$time)";
 				$this->oneSql ( $sql );
-				$res = $this->oneSql ( "select * from wx_account where uid='$uid'" );
+				$res = $this->oneSqlSignle ( "select * from wx_account where uid='$uid'" );
 			}
-			$this->uid = $res ['uid'];
-			$this->gameuid = $res ['gameuid'];
 		}
+		return $res['gameuid'];
 	}
-
+	
 	//=================================MYSQL============================================//
 	
 	// 不支持同一业务的数据库水平部署在不同服务器上
@@ -94,6 +100,11 @@ class BaseModel {
 	
 	}
 	
+	public function oneSqlSignle($sql) {
+		$ret=$this->oneSql($sql);
+		return $ret[0];
+	}
+	
 	public function oneSql($sql) {
 		$DBHandler = $this->getDBInstance ( $this->getTableName () );
 		$tem = explode ( ' ', $sql );
@@ -103,7 +114,7 @@ class BaseModel {
 		) )) {
 			return $DBHandler->execute ( $sql );
 		} else {
-			return $DBHandler->getOne ( $sql );
+			return $DBHandler->getAll ( $sql );
 		}
 	}
 	protected function getTableName() {

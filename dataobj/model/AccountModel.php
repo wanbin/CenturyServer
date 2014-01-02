@@ -29,23 +29,23 @@ class AccountModel extends BaseModel {
     protected function getFields() {
 		return 'gameuid,server,uid,exp,level,createtime,updatetime,power,ip,country,authcode,points';
 	}
- 
-    /**
-     +----------------------------------------------------------
-     * 获取用户全部信息
-     +----------------------------------------------------------
-     * @return array
-     +----------------------------------------------------------
-     */
-    public function getAccount($gameuid='')
-    {
-        if (empty($gameuid))
-        {
-            $gameuid = $this->gameuid;
-        }
-        $res= $this->hsSelectOne($this->getTableName(), $this->getFields(), array('gameuid'=>$gameuid));
-        return $res;
-    }
+	
+	/**
+	 * +----------------------------------------------------------
+	 * 获取用户全部信息
+	 * +----------------------------------------------------------
+	 *
+	 * @return array +----------------------------------------------------------
+	 */
+	public function getAccount($gameuid = '') {
+		if (empty ( $gameuid )) {
+			$gameuid = $this->gameuid;
+		}
+		$res = $this->hsSelectOne ( $this->getTableName (), $this->getFields (), array (
+				'gameuid' => $gameuid
+		) );
+		return $res;
+	}
     
     public function updateAccount($change)
     {
@@ -53,6 +53,7 @@ class AccountModel extends BaseModel {
         return $res;
     }
     
+
 
 
 

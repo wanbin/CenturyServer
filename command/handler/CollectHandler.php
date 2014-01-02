@@ -11,14 +11,21 @@ class CollectHandler extends CollectCache{
 	/**
 	 * 添加一个新闻公告
 	 */
-	public function newCollect($id,$type){
-		$content=array(
-				'gameuid'=>$this->gameuid,
-				'time'=>time(),
-				'type'=>$type,
-				'publish_id'=>$id,
-				);
-		$this->add($content);
+	public function newCollect($id, $type) {
+		$content = array (
+				'gameuid' => $this->gameuid,
+				'time' => time (),
+				'type' => $type,
+				'publish_id' => $id
+		);
+		if ($this->checkCollete ( $id, $type ) > 0) {
+			return false;
+		}
+		include_once 'PublishHandler.php';
+		$publish = new PublishHandler ( $this->uid );
+		$publish->addLike($id, $type);
+		$this->add ( $content );
+		return true;
 	}
 	
 	

@@ -9,8 +9,11 @@ class PublishCollect extends BaseCommand {
 		if (empty ( $id ) || empty ( $type )) {
 			$this->throwException ( 'id or type is empty', 1101 );
 		}
-		$cillect = new CollectHandler ( $this->gameuid );
-		$cillect->newCollect ( $id, $type );
-		return $this->reutrnDate ( COMMAND_SUCCESS );
+		$cillect = new CollectHandler ( $this->uid );
+		if ($cillect->newCollect ( $id, $type )) {
+			$this->reutrnDate ( COMMAND_SUCCESS );
+		} else {
+			$this->reutrnDate ( COMMAND_FAILE );
+		}
 	}
 }

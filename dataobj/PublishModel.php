@@ -23,13 +23,34 @@ class PublishModel extends BaseModel {
 		}
 		return $ret;
 	}
+	
+	
+	
 	protected function getPage($page) {
 		$where = array (
 				'isshow' => 1
 		);
-		$res = $this->hsSelectAll ( $this->getTableName (), "*", $where, 50, $page );
+		$res=$this->oneSql("select * from user_publish where isshow=1 order by id desc limit $page,30");
 		return $res;
 	}
+	
+	/**
+	 * 添加喜欢
+	 * @param unknown_type $id
+	 * @param unknown_type $like
+	 * @param unknown_type $dislike
+	 * @param unknown_type $collete
+	 */
+	protected function addLike($id,$like=0,$dislike=0){
+		$sql="update user_publish set `like`=`like`+$like,dislike=dislike+$dislike where id=$id";
+		if(DEBUG)
+		{
+			file_put_contents("deb.log", $sql);
+		}
+		$this->oneSql($sql);
+	}
+	
+	
 	/**
 	 * 得到一条记录
 	 *

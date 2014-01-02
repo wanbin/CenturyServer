@@ -5,6 +5,13 @@
  */
 require_once PATH_MODEL.'BaseModel.php';
 class CollectModel extends BaseModel {
+	
+	
+	protected function checkCollete($id,$type) {
+		$res=$this->oneSqlSignle("select count(*) count from user_collect where publish_id=$id and type=$type");
+		return $res['count'];
+	}
+	
 	/**
 	 * 得到所有记录
 	 */

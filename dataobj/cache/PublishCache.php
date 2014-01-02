@@ -18,6 +18,9 @@ class PublishCache extends PublishModel{
 	}
 	
 	
+
+	
+	
 	/**
 	 * 得到所有记录
 	 */
