@@ -36,12 +36,21 @@ class AccountCache extends AccountModel{
         return $this->account;
     }
     
+    
+	/**
+	 * 取得用户信息
+	 * @param unknown_type $uid
+	 */
+	public function getAccountByUid($uid) {
+		return parent::getAccountByUid ($uid);
+	}
+    
     /**
      +----------------------------------------------------------
      * 获取用户指定字段信息
      +----------------------------------------------------------
      * @param array 字段数组                 array('gameuid','displayname' ...)
-     * @return array  
+     * @return array
      +----------------------------------------------------------
      */
     public function getAccountField($fieldArr)
@@ -53,7 +62,7 @@ class AccountCache extends AccountModel{
         }
         foreach ($fieldArr as $field)
         {
-            $res[$field] = $this->account[$field]; 
+            $res[$field] = $this->account[$field];
         }
         
         return $res;
@@ -66,7 +75,7 @@ class AccountCache extends AccountModel{
      * 获取多个用户信息
      +----------------------------------------------------------
      * @param array $gameuidArr  用户gameuid数组
-     * @return array 
+     * @return array
      +----------------------------------------------------------
      */
     public function getMultiAccount($gameuidArr)

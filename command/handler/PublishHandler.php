@@ -14,10 +14,14 @@ class PublishHandler extends PublishCache{
 	public function newPublish($message,$type){
 		$content=array(
 				'content'=>$message,
-				'time'=>time(),
-				'type'=>$type,
-				'isshow'=>0,
-				);
+				'time' => time (),
+				'type' => $type,
+				'isshow' => 0
+		);
+		//如果是测试，则直接显示出来
+		if (TEST) {
+			$content ['isshow'] = 1;
+		}
 		$this->add($content);
 	}
 	public function getPage($page) {

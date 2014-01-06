@@ -24,6 +24,7 @@ include_once 'config.code.php'; // 常量处理类
 error_reporting ( E_ALL ^ E_NOTICE );
 // 游戏当前版本
 define ( 'DEBUG', true );
+define ( 'TEST', true );
 class Entry {
 	// 请求分发
 	public static function callCommand($command, $param = array(), $sign_arr = array()) {

@@ -25,6 +25,9 @@ class AccountModel extends BaseModel {
     {
         return 'user_account';
     }
+    public function getTableWeixin(){
+    	return 'wx_account';
+    }
     
     protected function getFields() {
 		return 'gameuid,server,uid,exp,level,createtime,updatetime,power,ip,country,authcode,points';
@@ -43,6 +46,15 @@ class AccountModel extends BaseModel {
 		}
 		$res = $this->hsSelectOne ( $this->getTableName (), $this->getFields (), array (
 				'gameuid' => $gameuid
+		) );
+		return $res;
+	}
+	public function getAccountByUid($uid = '') {
+		if (empty ( $uid )) {
+			$uid = $this->uid;
+		}
+		$res = $this->hsSelectOne ( $this->getTableWeixin (),"*", array (
+				'uid' => $uid
 		) );
 		return $res;
 	}
