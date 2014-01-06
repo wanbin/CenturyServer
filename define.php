@@ -19,4 +19,8 @@ require_once FRAMEWORK . '/database/DBHandler.class.php';
 // 加载redies
 require_once FRAMEWORK . '/redis/Rediska.php';
 include_once FRAMEWORK . 'exception/GameException.php'; // 游戏内部异常处理
+include_once PATH_ROOT . 'config.inc.php'; // 全局配置文件
+include_once PATH_COMMAND . 'BaseCommand.php';
+include_once 'config.code.php'; // 常量处理类
+include_once 'config.php'; // 常量处理类
 ?>

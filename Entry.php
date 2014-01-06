@@ -1,10 +1,6 @@
 <?php
 include_once 'define.php';
 date_default_timezone_set ( "Asia/Chongqing" );
-include_once PATH_ROOT . 'config.inc.php'; // 全局配置文件
-include_once PATH_COMMAND . 'BaseCommand.php';
-
-include_once 'config.code.php'; // 常量处理类
 error_reporting ( E_ALL ^ E_NOTICE );
 // 游戏当前版本
 define ( 'DEBUG', true );

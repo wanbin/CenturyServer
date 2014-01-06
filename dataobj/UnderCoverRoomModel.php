@@ -3,15 +3,15 @@
  * @author WanBin @date 2013-08-03
  * 谁是卧底房间信息
  */
-require_once PATH_DATAOBJ . 'BaseModel.php';
+require_once PATH_MODEL . 'BaseModel.php';
 class UnderCoverRoomModel extends BaseModel {
 	public $echoit = false;
 	public function getEnableRoom() {
 		$endtime = time () - 3600;
-		$ret = $this->oneSql ( "select id from wx_undercover_room where id>1000 and time<$endtime limit 1" );
+		$ret = $this->oneSqlSignle ( "select id from wx_undercover_room where id>1000 and time<$endtime limit 1" );
 		if (empty ( $ret )) {
-			$maxroom = $this->oneSql ( "select max(id) roomid from wx_undercover_room" );
-			return max ( 1000, $maxroom [0] ['roomid'] );
+			$maxroom = $this->oneSqlSignle ( "select max(id) roomid from wx_undercover_room" );
+			return max ( 1000, $maxroom ['roomid'] );
 		} else {
 			return $ret ['id'];
 		}
@@ -21,9 +21,10 @@ class UnderCoverRoomModel extends BaseModel {
 		$endtime = time () - 3600;
 		$newroom = false;
 		$content = array ();
-		$ret = $this->oneSql ( "select id from $tablename where id>=1000 and time<$endtime limit 1" );
+		$ret = $this->oneSqlSignle ( "select id from $tablename where id>=1000 and time<$endtime limit 1" );
+		$ret=$ret[0];
 		if (empty ( $ret )) {
-			$maxroom = $this->oneSql ( "select max(id) roomid from wx_undercover_room" );
+			$maxroom = $this->oneSqlSignle ( "select max(id) roomid from wx_undercover_room" );
 			$roomid = max ( 1000, $maxroom ['roomid'] + 1 );
 			$newroom = true;
 		} else {
@@ -79,7 +80,7 @@ class UnderCoverRoomModel extends BaseModel {
 	public function getInfo($roomid) {
 		$tablename = 'wx_undercover_room';
 		$sql = "select * from $tablename where id=$roomid ";
-		$ret = $this->oneSql ( $sql );
+		$ret = $this->oneSqlSignle ( $sql );
 		if ($ret ['gameuid'] == $this->gameuid) {
 			$nowcount = $ret ['nowcount'];
 			$pcount = $ret ['peoplecount'];
