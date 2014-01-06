@@ -16,9 +16,23 @@ class PublishCache extends PublishModel{
 	protected function getPage($page) {
 		return parent::getPage ($page);
 	}
+		
+	/**
+	 * 审核词汇
+	 * @param unknown_type $id
+	 * @param unknown_type $type
+	 */
+	public function changeShow($id,$type){
+		return parent::changeShow ( $id,$type );
+	}
 	
+	/*
+	 * 返回第n页的内容 @see PublishModel::getPage()
+	 */
+	protected function getPageShenHe($page) {
+		return parent::getPageShenHe ( $page );
+	}
 	
-
 	
 	
 	/**

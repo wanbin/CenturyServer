@@ -24,8 +24,21 @@ class PublishHandler extends PublishCache{
 		}
 		$this->add($content);
 	}
+	/**
+	 * 审核词汇
+	 * @param unknown_type $id
+	 * @param unknown_type $type
+	 */
+	public function changeShow($id,$type){
+		return parent::changeShow ( $id,$type );
+	}
+	
 	public function getPage($page) {
 		return parent::getPage ( $page );
+	}
+	
+	public function getPageShenHe($page) {
+		return parent::getPageShenHe ( $page );
 	}
 	
 	public function addLike($id, $type) {

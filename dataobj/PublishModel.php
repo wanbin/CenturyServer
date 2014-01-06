@@ -25,6 +25,16 @@ class PublishModel extends BaseModel {
 	}
 	
 	
+	/**
+	 * 审核词汇
+	 * @param unknown_type $id
+	 * @param unknown_type $type
+	 */
+	public function changeShow($id,$type){
+		$sql="update user_publish set isshow=$type where id=$id";
+		return	$this->oneSql($sql);
+	}
+	
 	
 	protected function getPage($page) {
 		$where = array (
@@ -33,6 +43,21 @@ class PublishModel extends BaseModel {
 		$res=$this->oneSql("select * from user_publish where isshow=1 order by id desc limit $page,30");
 		return $res;
 	}
+	
+	
+	/**
+	 * 返回需要审核的词汇
+	 * @param unknown_type $page
+	 * @return unknown
+	 */
+	protected function getPageShenHe($page) {
+		$where = array (
+				'isshow' => 0
+		);
+		$res=$this->oneSql("select * from user_publish where isshow=0 order by id desc limit $page,30");
+		return $res;
+	}
+	
 	
 	/**
 	 * 添加喜欢
