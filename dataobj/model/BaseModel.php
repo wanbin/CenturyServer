@@ -44,17 +44,17 @@ class BaseModel {
 		}
 		return $res['gameuid'];
 	}
-	
-	//=================================MYSQL============================================//
-	
+		
+		// =================================MYSQL============================================//
+		
 	// 不支持同一业务的数据库水平部署在不同服务器上
 	protected function getDBInstance($tableName) {
 		static $DBInstances = array ();
 		if (isset ( $DBInstances [$tableName] )) {
 			return $DBInstances [$tableName];
 		}
-		$DBHandler = new DBHandler($tableName,$this->gameuid,$this->server);
-		$DBInstances[$tableName] = $DBHandler;
+		$DBHandler = new DBHandler ( $tableName, $this->gameuid, $this->server );
+		$DBInstances [$tableName] = $DBHandler;
 		return $DBHandler;
 	}
 	

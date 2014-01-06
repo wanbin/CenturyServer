@@ -2,7 +2,7 @@
 /**
   * wechat php test
   */
-include_once '../Entry.php';
+include_once '../define.php';
 $fromUsername="uHjQjsqWDtru-GeaV13nAtd0dh8";
 $fromUsername.=886812;
 // $fromUsername.=rand(1,10000);

@@ -2,7 +2,7 @@
 /**
   * wechat php test
   */
-include_once '../Entry.php';
+include_once '../define.php';
 // define your token
 define ( "TOKEN", "weixin" );
 $wechatObj = new wechatCallbackapiTest ();

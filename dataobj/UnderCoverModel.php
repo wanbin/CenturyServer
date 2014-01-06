@@ -3,7 +3,7 @@
  * @author WanBin @date 2013-08-03
  * 微信用户表
  */
-require_once PATH_DATAOBJ.'BaseModel.php';
+require_once PATH_MODEL.'BaseModel.php';
 class UnderCoverModel extends BaseModel {
 	public function __construct( $uid = null) {
 		parent::__construct($uid);
