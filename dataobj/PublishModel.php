@@ -36,14 +36,36 @@ class PublishModel extends BaseModel {
 	}
 	
 	
+	protected function delSample(){
+		$sql = "select id,content from user_publish";
+		$ret = $this->oneSql ( $sql );
+		$tem = array ();
+		foreach ( $ret as $key => $value ) {
+			if (in_array ( $value ['content'], $tem )) {
+				$this->oneSql ( "delete from user_publish where id=" . $value ['id'] );
+			} else {
+				$tem [] = $value ['content'];
+			}
+		}
+		file_put_contents("new.log", print_R($tem,true));
+		exit();
+		
+	}
+	
 	protected function getPage($page) {
+// 		$this->delSample();
 		$where = array (
 				'isshow' => 1
 		);
-		$res=$this->oneSql("select * from user_publish where isshow=1 order by id desc limit $page,30");
+		$pages = ($page - 1) * PAGECOUNT;
+		$res = $this->oneSql ( "select user_publish.*,date(FROM_UNIXTIME(time)) sendtime from user_publish where isshow=1 and type=2 order by id desc limit $pages,".PAGECOUNT );
 		return $res;
 	}
 	
+	protected  function getCount(){
+		$ret=$this->oneSqlSignle("select count(*) count from user_publish where isshow=1 and type=2");
+		return $ret['count'];
+	}
 	
 	/**
 	 * 返回需要审核的词汇

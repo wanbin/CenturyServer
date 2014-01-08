@@ -34,7 +34,30 @@ class PublishHandler extends PublishCache{
 	}
 	
 	public function getPage($page) {
-		return parent::getPage ( $page );
+		$ret = parent::getPage ( $page );
+		$idarr = array ();
+		// 这里取到所有的喜欢不喜欢，进行查询返回
+		foreach ( $ret as $key => $valuse ) {
+			$idarr [] = $valuse ['id'];
+		}
+		
+		
+		include_once 'CollectHandler.php';
+		$collectHandler = new CollectHandler ( $this->uid );
+		$result = $collectHandler->getAllByIds ( $idarr );
+			
+		// 取得了所有的喜欢与非喜欢
+		$temarray = array ();
+		foreach ( $result as $key => $value ) {
+			$temarray [$value ['publish_id']] [$value ['type']] = $value ['time'];
+		}
+		foreach ( $ret as $key => $value ) {
+			$ret [$key] ['liked'] = !empty ( $temarray [$value ['id']] [1] );
+			$ret [$key] ['disliked'] = !empty ( $temarray [$value ['id']] [2] );
+			$ret [$key] ['collected'] = !empty ( $temarray [$value ['id']] [3] );
+			$ret [$key] ['type']=rand(1,6);
+		}
+		return $ret;
 	}
 	
 	public function getPageShenHe($page) {

@@ -9,12 +9,13 @@ require_once PATH_DATAOBJ . 'PublishModel.php';
 class PublishCache extends PublishModel{
 	private $item = array ();
 	
-	
-	/*返回第n页的内容
-	 * @see PublishModel::getPage()
+	/*
+	 * 返回第n页的内容 @see PublishModel::getPage()
 	 */
 	protected function getPage($page) {
-		return parent::getPage ($page);
+		$count = $this->getCount ();
+		$pages = floor ( $count / PAGECOUNT );
+		return parent::getPage ( rand ( 1, $pages+1 ) );
 	}
 		
 	/**

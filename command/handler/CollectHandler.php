@@ -6,6 +6,10 @@
  * 都写为受保护的方法，实际使用时要手动修改
  */
 require_once PATH_CACHE . 'CollectCache.php';
+/**
+ * @author wanhin
+ *
+ */
 class CollectHandler extends CollectCache{
 	
 	/**
@@ -31,5 +35,12 @@ class CollectHandler extends CollectCache{
 	
 	public function getPage($page){
 		return parent::getPage($page);
+	}
+	
+	/**
+	 *通过id数组返回相应的状态
+	 */
+	public function getAllByIds($idarray){
+		return parent::getAllByIds($idarray);
 	}
 }
