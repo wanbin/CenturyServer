@@ -14,7 +14,7 @@ class PublishAll extends BaseCommand {
 		} else {
 			$ret = $publish->getPage ( $page );
 		}
-		return $this->reutrnDate ( COMMAND_SUCCESS, $ret );
+		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
 	}
 
 }
