@@ -14,8 +14,7 @@ class PublishCache extends PublishModel{
 	 */
 	protected function getPage($page) {
 		$count = $this->getCount ();
-		$pages = floor ( $count / PAGECOUNT );
-		return parent::getPage ( rand ( 1, $pages+1 ) );
+		return parent::getPage ( rand ( 1, $count-PAGECOUNT ) );
 	}
 		
 	/**
