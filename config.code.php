@@ -3,6 +3,6 @@
 define("COMMAND_SUCCESS", 1000);
 define("COMMAND_ENPTY", 0);
 define("COMMAND_FAILE", 1001);
-define("PAGECOUNT", 60);
+define("PAGECOUNT", 5);
 
 ?>

@@ -156,5 +156,18 @@ $createarray=array(
 				),
 				'description' => '用户收藏表、点赞',
 		),
+		array(
+				'modelname' => 'Behave',
+				'singleData' => false,
+				'tablename' => 'user_behave',
+				'tablefiled' => array (
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'用户ID'),
+						'time' => array('type'=>'int','lengh'=>10,'default'=>'0','isPrimaryKey'=>1,'isjson'=>0,'comment'=>'时间'),
+						'behave' => array('type'=>'varchar','lengh'=>20,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'行为'),
+						'data' => array('type'=>'varchar','lengh'=>200,'default'=>'','isPrimaryKey'=>0,'isjson'=>1,'comment'=>'附加信息'),
+						'sec' => array('type'=>'varchar','lengh'=>32,'default'=>'','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'加密串'),
+				),
+				'description' => '用户行为LOG',
+		),
 );
 ?>

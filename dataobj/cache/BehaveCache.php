@@ -1,12 +1,12 @@
 <?php
 /**
- * @author {Author} @date {Date}
- * TemplatenContent
+ * @author WanBin @date 2014-01-12
+ * 用户行为LOG
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
  */
-require_once PATH_MODEL . 'TemplateModel.php';
-class TemplateCache extends TemplateModel{
+require_once PATH_MODEL . 'BehaveModel.php';
+class BehaveCache extends BehaveModel{
 	private $item = array ();
 	
 	/**
@@ -33,8 +33,8 @@ class TemplateCache extends TemplateModel{
 	 * @param $id unknown_type
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
-	protected function getOne({paramsWithOutGameuid}) {
-		$key = $this->getCacheKey ({paramsWithOutGameuid});
+	protected function getOne($time,$behave) {
+		$key = $this->getCacheKey ($time,$behave);
 		$ret = $this->getFromCache ( $key, $this->gameuid );
 		if (empty ( $ret )) {
 			$ret = parent::getOne ();
@@ -56,8 +56,8 @@ class TemplateCache extends TemplateModel{
 		return $this->delFromCache ();
 	}
 	
-	protected function updateOne($templateid, $content) {
-		parent::update ( $templateid, $content );
+	protected function updateOne($time, $content) {
+		parent::update ( $time, $content );
 		return $this->delFromCacheALL ();
 	}
 	
@@ -68,15 +68,15 @@ class TemplateCache extends TemplateModel{
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function add($content) {
-		parent::add ( $content );
-		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
+		return parent::add ( $content );
+// 		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
 	}
 	
-	protected function addOne($templateid, $content) {
+	protected function addOne($time, $content) {
 		$this->get ();
-		$content ['templateid'] = $templateid;
+		$content ['time'] = $time;
 		parent::add ( $content );
-		$this->item [$templateid] = $content;
+		$this->item [$time] = $content;
 		$key = $this->getCacheKeyAll ();
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
 	}
@@ -85,7 +85,7 @@ class TemplateCache extends TemplateModel{
 		$this->get ();
 		parent::addarr ( $content );
 		foreach ( $content as $key => $vlaue ) {
-			$this->item [$vlaue ['templateid']] = $vlaue;
+			$this->item [$vlaue ['time']] = $vlaue;
 		}
 		$key = $this->getCacheKeyAll ();
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
@@ -101,14 +101,14 @@ class TemplateCache extends TemplateModel{
 		return $this->delFromCache ();
 	}
 	
-	protected function delOne($templateid) {
+	protected function delOne($time) {
 		$this->get ();
-		parent::delOne ( $templateid );
+		parent::delOne ( $time );
 		if (true) {
-			unset ( $this->item [$templateid] );
+			unset ( $this->item [$time] );
 		} else {
 			foreach ( $this->item as $key => $value ) {
-				if ($value ['templateid'] == $templateid) {
+				if ($value ['time'] == $time) {
 					unset ( $this->item [$key] );
 					break;
 				}
@@ -118,8 +118,8 @@ class TemplateCache extends TemplateModel{
 		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
 	}
 	
-	protected function delFromCache({paramsWithOutGameuid}) {
-		$key =  $this->getCacheKey ({paramsWithOutGameuid});
+	protected function delFromCache($time,$behave) {
+		$key =  $this->getCacheKey ($time,$behave);
 		return $this->delToCache ($key,$this->gameuid);
 	}
 	
@@ -127,11 +127,11 @@ class TemplateCache extends TemplateModel{
 		return $this->delToCache ( $this->getCacheKeyAll (), $this->gameuid );
 	}
 	
-	private function getCacheKey({paramsWithOutGameuid}) {
-		return sprintf ( MEMCACHE_KEY_TEMPLATECACHEKEY,$this->gameuid {paramsWithOutGameuidSeparate} );
+	private function getCacheKey($time,$behave) {
+		return sprintf ( MEMCACHE_KEY_BEHAVE,$this->gameuid ,$time,$behave );
 	}
 	
 	private function getCacheKeyAll() {
-		return sprintf ( MEMCACHE_KEY_TEMPLATECACHEKEY_ALL, $this->gameuid );
+		return sprintf ( MEMCACHE_KEY_BEHAVE_ALL, $this->gameuid );
 	}
 }

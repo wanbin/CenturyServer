@@ -3,7 +3,7 @@
 $createarr = array ('Mapping','Runtime','Building' );
 $createarr = array ();
 include_once 'CreateClass.php';
-include_once '../Entry.php';
+include_once '../define.php';
 
 foreach ( $createarray as $key => $value ) {
 	if (! in_array ( $value ['modelname'], $createarr )) {

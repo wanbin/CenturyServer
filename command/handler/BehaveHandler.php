@@ -1,27 +1,41 @@
 <?php
+require_once PATH_CACHE . 'BehaveCache.php';
 /**
- * @author WanBin @date 2012-12-26
- * 用户建筑类，此类进行操作细化
- * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
- * 都写为受保护的方法，实际使用时要手动修改
+ * @author wanhin
+ * 用户行为统计类
+ *
  */
-require_once PATH_CACHE . 'PublishCache.php';
-class PublishHandler extends PublishCache{
+class BehaveHandler extends BehaveCache{
+	public function addArray($contentArr) {
+		$value ['sec']=array();
+		foreach ( $contentArr as $key => $value ) {
+			if ($this->checkSec ( $value )) {
+				$this->newBehave ( $value ['behave'], $value ['data'], $value ['sec'] );
+				$recArray[]=$value ['sec'];
+			}
+		}
+		//把验证通过的sec返回到客户端，让客户端进行删除处理
+		return $value ['sec'];
+	}
+	/**
+	 * 检查一下是否密码是否正常
+	 */
+	public function checkSec($array) {
+		return true;
+	}
+	
 	
 	/**
-	 * 添加一个新闻公告
+	 * 添加一个用户行为
 	 */
-	public function newPublish($message,$type){
+	public function newBehave($beahve,$data,$sec){
 		$content=array(
-				'content'=>$message,
+				'gameuid'=>$this->gameuid,
 				'time' => time (),
-				'type' => $type,
-				'isshow' => 0
+				'behave' => $beahve,
+				'data' => $data,
+				'sec'=>$sec,
 		);
-		//如果是测试，则直接显示出来
-		if (TEST) {
-			$content ['isshow'] = 1;
-		}
 		$this->add($content);
 	}
 	/**

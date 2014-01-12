@@ -96,6 +96,9 @@ class BaseModel {
 		$DBHandler = $this->getDBInstance ( $tableName );
 		$param = $this->splitValues($values);
 		$sql = 'INSERT INTO ' . $tableName . ' (' . $param['fields'] . ') VALUES (' . $param['values'] . ')';
+		if(TEST){
+			file_put_contents("insert.sql", $sql);
+		}
 		return $DBHandler->execute ( $sql );
 	
 	}
