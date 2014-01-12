@@ -8,7 +8,7 @@ class CollectModel extends BaseModel {
 	
 	
 	protected function checkCollete($id,$type) {
-		$res=$this->oneSqlSignle("select count(*) count from user_collect where publish_id=$id and type=$type");
+		$res=$this->oneSqlSignle("select count(*) count from user_collect where publish_id=$id and type=$type and gameuid=".$this->gameuid);
 		return $res['count'];
 	}
 	
