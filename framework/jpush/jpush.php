@@ -68,9 +68,7 @@ class jpush {
 		$param .= '&msg_type='.$msg_type;
 		$param .= '&msg_content='.$msg_content;
 		$param .= '&platform='.$platform;
-		echo $url;
 		$res = $this->request_post($url, $param);
-		print_R($res);
 		if ($res === false) {
 			return false;
 		}
@@ -135,12 +133,6 @@ class jpush {
 		$sql = "INSERT INTO  ".DB_NAME.".`".DB_TAB."` (`id` ,`sendno` ,`n_title` ,`n_content` ,`errcode` ,`errmsg` ,`total_user` ,`send_cnt` ,`created`)VALUES ( NULL ,'".$sendno."','".$msg_content['n_title']."','".$msg_content['n_content']."', '".$res_arr['errcode']."', '".$res_arr['errmsg']."', '',  '','".$created."')";
 		$query = mysql_query($sql);
 				
-		if (intval($res_arr['errcode'])==0){
-				$str= "<li>第".$res_arr['sendno']."条发送".$res_arr['errmsg']."！</li>";
-			}else{
-				$str= "<li>第".$res_arr['sendno']."条发送失败：".$res_arr['errmsg']."</li>";
-			}
-	    print_r($str);
 	}
 	
 }

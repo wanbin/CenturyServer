@@ -38,7 +38,7 @@ class PublishHandler extends PublishCache{
 		if ($ret ['type'] == "2") {
 			$typestr = "大冒险";
 		} else if ($ret ['type'] == "3") {
-			$typestr = "演艺人生";
+			$typestr = "看演技";
 		}
 		
 		$satus = "已经被审核通过";
@@ -47,7 +47,12 @@ class PublishHandler extends PublishCache{
 		} else if ($type == 3) {
 			$satus = "被管理员删除";
 		}
-		$account->sendJPush ( $account->getUidFromGameuid ( $ret ['gameuid'] ), "您提交的$typestr'".$ret['content']."'$satus" );
+		
+		include_once PATH_HANDLER.'MailHandler.php';
+		$mail = new MailHandler ( $this->uid );
+		$mailstr="您提交的$typestr [".$ret['content']."] $satus";
+		$mail->addMail($ret ['gameuid'] , -1, $mailstr);
+		$account->sendJPush ( $account->getUidFromGameuid ( $ret ['gameuid'] ), $mailstr );
 		return parent::changeShow ( $id, $type );
 	}
 	
@@ -73,6 +78,7 @@ class PublishHandler extends PublishCache{
 			$ret [$key] ['liked'] = !empty ( $temarray [$value ['id']] [1] );
 			$ret [$key] ['disliked'] = !empty ( $temarray [$value ['id']] [2] );
 			$ret [$key] ['collected'] = !empty ( $temarray [$value ['id']] [3] );
+			$ret [$key] ['username']=empty($value['username'])?"匿名":$value['username'];
 			$ret [$key] ['type']=rand(1,6);
 		}
 		return $ret;

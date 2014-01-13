@@ -4,7 +4,7 @@ date_default_timezone_set ( "Asia/Chongqing" );
 error_reporting ( E_ALL ^ E_NOTICE );
 // 游戏当前版本
 define ( 'DEBUG', true );
-define ( 'TEST', true );
+define ( 'TEST', false );
 class Entry {
 	// 请求分发
 	public static function callCommand($command, $param = array(), $sign_arr = array()) {

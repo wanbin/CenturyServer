@@ -1,1 +1,1 @@
-INSERT INTO user_behave (`gameuid`, `time`, `behave`, `data`, `sec`) VALUES ('838', '1389627288', 'click_intenet', '""', '')
+INSERT INTO user_behave (`gameuid`, `time`, `behave`, `data`, `sec`) VALUES ('838', '1389628562', 'click_reflash', '""', '')

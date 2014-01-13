@@ -1,10 +1,10 @@
 <?php
 /**
- * @author {Author} @date {Date}
- * TemplatenContent
+ * @author WanBin @date 2014-01-14
+ * 用户行为LOG
  */
 require_once PATH_MODEL.'BaseModel.php';
-class TemplateModel extends BaseModel {
+class MailModel extends BaseModel {
 	/**
 	 * 得到所有记录
 	 */
@@ -14,7 +14,7 @@ class TemplateModel extends BaseModel {
 		$ret = array ();
 		foreach ( $res as $key => $value ) {
 			foreach ( $value as $jsonKey => $jsonValue )
-				if (in_array ( $jsonKey, array ({strJson} ) )) {
+				if (in_array ( $jsonKey, array ('content' ) )) {
 					$value [$jsonKey] = json_decode ( $jsonValue, true );
 				}
 			$temid = $value ['templateid'];
@@ -35,8 +35,24 @@ class TemplateModel extends BaseModel {
 		return $res;
 	}
 	
+	
+	protected function getOneMail(){
+		$sql="select * from user_mail where is_read=0 and gameuid=".$this->gameuid." limit 1";
+		$ret=$this->oneSqlSignle($sql);
+		if(empty($ret))
+			return ;
+		$this->readMail($ret['id']);
+		return $ret;
+	}
+	protected function readMail($id) {
+		if ($id > 0) {
+			$sql = "update user_mail set is_read=1 where id=$id";
+			$this->oneSql ( $sql );
+		}
+	}
+	
 	protected function getOneSingle($templateid) {
-		$where = array ( {strWhere}  );
+		$where = array ( 'id' => $id );
 		$res = $this->hsSelectOne ( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
 		return $res;
 	}
@@ -52,8 +68,8 @@ class TemplateModel extends BaseModel {
 		return $res;
 	}
 	
-	protected function updateOne( $content,{strUnion}) {
-		$where = array ( {strWhere} );
+	protected function updateOne( $content,$id) {
+		$where = array ( 'id' => $id);
 		$res = $this->hsUpdate ( $this->getTableName (), $this->gameuid, $content, $where );
 		return $res;
 	}
@@ -66,9 +82,8 @@ class TemplateModel extends BaseModel {
 	 */
 	protected function add($content) {
 		$fields = explode ( ',', $this->getFields () );
-		$insert ['gameuid'] = $this->gameuid;
 		foreach ( $content as $key => $value ) {
-			if (in_array ( $key, array ({strJson}) )) {
+			if (in_array ( $key, array () )) {
 				$value = json_encode ( $value );
 			}
 			if (in_array ( $key, $fields )) {
@@ -81,7 +96,7 @@ class TemplateModel extends BaseModel {
 	protected function addarr($content) {
 		foreach ( $content as $key => $value ) {
 			foreach ( $value as $jsonKey => $jsonValue ) {
-				if (in_array ( $jsonKey, array ({strJson} ) )) {
+				if (in_array ( $jsonKey, array ('content' ) )) {
 					$content [$key] [$jsonKey] = json_encode ( $jsonValue );
 				}
 			}
@@ -89,8 +104,8 @@ class TemplateModel extends BaseModel {
 		return $this->hsMultiInsert ( $this->getTableName (), $this->gameuid, $content );
 	}
 	
-	protected function init({strUnion} ) {
-		$insert = array ( {strWhere} );
+	protected function init($id ) {
+		$insert = array ( 'id' => $id);
 		return $this->hsInsert ( $this->getTableName (), $this->gameuid, $insert );
 	}
 	/**
@@ -103,16 +118,16 @@ class TemplateModel extends BaseModel {
 		return $this->hsDelete ( $this->getTableName (), $this->gameuid, $where );
 	}
 	
-	protected function delOne( {strUnion} ) {
-		$where = array ( {strWhere} );
+	protected function delOne( $id ) {
+		$where = array ( 'id' => $id);
 		return $this->hsDelete ( $this->getTableName (), $this->gameuid, $where );
 	}
 	
 	protected function getFields() {
-		return 'templatefields';
+		return 'id,gameuid,fromgameuid,time,content,is_read';
 	}
 	
 	protected function getTableName() {
-		return "templatetablename";
+		return "user_mail";
 	}
 }

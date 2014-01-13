@@ -23,7 +23,7 @@ class AccountModel extends BaseModel {
      */
     public function getTableName()
     {
-        return 'user_account';
+        return 'wx_account';
     }
     public function getTableWeixin(){
     	return 'wx_account';
@@ -75,7 +75,6 @@ class AccountModel extends BaseModel {
         return $res;
     }
     
-
 
 
 

@@ -27,4 +27,9 @@ class AccountHandler extends AccountCache {
 		) );
 		$res = $obj->send ( rand ( 100000000, 999999999 ), 3, $useralise, 1, $msg_content, "android" );
 	}
+	public function changeUserName($username) {
+		$this->updateAccount ( array (
+				'username' => $username
+		) );
+	}
 }

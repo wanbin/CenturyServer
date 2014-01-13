@@ -1,39 +1,13 @@
 <?php
 /**
- * @author WanBin @date 2013-12-30
- * 惩罚与真心话
+ * @author WanBin @date 2014-01-14
+ * 用户行为LOG
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
  */
-require_once PATH_MODEL . 'PublishModel.php';
-class PublishCache extends PublishModel{
+require_once PATH_MODEL . 'MailModel.php';
+class MailCache extends MailModel{
 	private $item = array ();
-	
-	/*
-	 * 返回第n页的内容 @see PublishModel::getPage()
-	 */
-	protected function getPage($page) {
-		$count = $this->getCount ();
-		return parent::getPage ( rand ( 1, $count-PAGECOUNT ) );
-	}
-		
-	/**
-	 * 审核词汇
-	 * @param unknown_type $id
-	 * @param unknown_type $type
-	 */
-	public function changeShow($id,$type){
-		return parent::changeShow ( $id,$type );
-	}
-	
-	/*
-	 * 返回第n页的内容 @see PublishModel::getPage()
-	 */
-	protected function getPageShenHe($page) {
-		return parent::getPageShenHe ( $page );
-	}
-	
-	
 	
 	/**
 	 * 得到所有记录
@@ -60,7 +34,14 @@ class PublishCache extends PublishModel{
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
 	protected function getOne($id) {
-			$ret = parent::getOne ($id);
+		$key = $this->getCacheKey ($id);
+		$ret = $this->getFromCache ( $key, $this->gameuid );
+		if (empty ( $ret )) {
+			$ret = parent::getOne ();
+			if (! empty ( $ret )) {
+				$this->setToCache ( $key, $ret, 0, $this->gameuid );
+			}
+		}
 		return $ret;
 	}
 	
@@ -87,8 +68,7 @@ class PublishCache extends PublishModel{
 	 * @return Ambigous <boolean, number, multitype:>
 	 */
 	protected function add($content) {
-		parent::add ( $content );
-// 		return $this->setToCache ( $this->getCacheKey (), $content, 0, $this->gameuid );
+		return parent::add ( $content );
 	}
 	
 	protected function addOne($templateid, $content) {
@@ -147,10 +127,10 @@ class PublishCache extends PublishModel{
 	}
 	
 	private function getCacheKey($id) {
-		return sprintf ( MEMCACHE_KEY_PUBLISH,$this->gameuid ,$id );
+		return sprintf ( MEMCACHE_KEY_MAIL,$this->gameuid ,$id );
 	}
 	
 	private function getCacheKeyAll() {
-		return sprintf ( MEMCACHE_KEY_PUBLISH_ALL, $this->gameuid );
+		return sprintf ( MEMCACHE_KEY_MAIL_ALL, $this->gameuid );
 	}
 }

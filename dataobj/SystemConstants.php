@@ -27,3 +27,7 @@ define("MEMCACHE_KEY_COLLECT_LIST", "centurywar_Collect_list_%d");
 define("MEMCACHE_KEY_BEHAVE", "centurywar_Behave_%d_%d");
 define("MEMCACHE_KEY_BEHAVE_LIST", "centurywar_Behave_list_%d");
 
+//用户行为LOG 
+define("MEMCACHE_KEY_MAIL", "centurywar_Mail_%d_%d");
+define("MEMCACHE_KEY_MAIL_LIST", "centurywar_Mail_list_%d");
+

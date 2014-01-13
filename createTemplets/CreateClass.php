@@ -169,5 +169,19 @@ $createarray=array(
 				),
 				'description' => '用户行为LOG',
 		),
+		array(
+				'modelname' => 'Mail',
+				'singleData' => false,
+				'tablename' => 'user_mail',
+				'tablefiled' => array (
+						'id' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'ID'),
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'收件人gameuid'),
+						'fromgameuid' => array('type'=>'int','lengh'=>10,'default'=>'0','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'发信人gameuid'),
+						'time' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'发信时间'),
+						'content' => array('type'=>'varchar','lengh'=>200,'default'=>'','isPrimaryKey'=>0,'isjson'=>1,'comment'=>'邮件信息'),
+						'is_read' => array('type'=>'int','lengh'=>10,'default'=>'','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'是否已读'),
+				),
+				'description' => '用户行为LOG',
+		),
 );
 ?>
