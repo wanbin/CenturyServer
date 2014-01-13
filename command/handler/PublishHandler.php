@@ -26,11 +26,29 @@ class PublishHandler extends PublishCache{
 	}
 	/**
 	 * 审核词汇
+	 *
 	 * @param unknown_type $id
 	 * @param unknown_type $type
 	 */
-	public function changeShow($id,$type){
-		return parent::changeShow ( $id,$type );
+	public function changeShow($id, $type) {
+		$ret = $this->getOne ( $id );
+		include_once PATH_HANDLER.'AccountHandler.php';
+		$account = new AccountHandler ( $this->uid );
+		$typestr="真心话";
+		if ($ret ['type'] == "2") {
+			$typestr = "大冒险";
+		} else if ($ret ['type'] == "3") {
+			$typestr = "演艺人生";
+		}
+		
+		$satus = "已经被审核通过";
+		if ($type == 2) {
+			$satus = "不符合要求，请适度修改后再提交";
+		} else if ($type == 3) {
+			$satus = "被管理员删除";
+		}
+		$account->sendJPush ( $account->getUidFromGameuid ( $ret ['gameuid'] ), "您提交的$typestr'".$ret['content']."'$satus" );
+		return parent::changeShow ( $id, $type );
 	}
 	
 	public function getPage($page) {

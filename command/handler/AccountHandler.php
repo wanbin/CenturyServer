@@ -11,6 +11,12 @@ class AccountHandler extends AccountCache {
 		return parent::getAccountByUid ( $uid );
 	}
 	
+	
+	/**
+	 * 玩家发送GM推送
+	 * @param unknown_type $useralise
+	 * @param unknown_type $content
+	 */
 	public function sendJPush($useralise, $content) {
 		require_once FRAMEWORK . 'jpush/jpush.php';
 		$obj = new jpush ( masterSecret, appkeys );

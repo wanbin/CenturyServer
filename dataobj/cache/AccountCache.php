@@ -44,6 +44,11 @@ class AccountCache extends AccountModel{
 	public function getAccountByUid($uid) {
 		return parent::getAccountByUid ($uid);
 	}
+	
+	public function getUidFromGameuid($gameuid){
+		$ret=$this->getAccountByGameuid($gameuid);
+		return $ret['uid'];
+	}
     
     /**
      +----------------------------------------------------------

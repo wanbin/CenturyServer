@@ -58,6 +58,16 @@ class AccountModel extends BaseModel {
 		) );
 		return $res;
 	}
+	
+	public function getAccountByGameuid($gameuid = '') {
+		if (empty ( $gameuid )) {
+			$gameuid = $this->gameuid;
+		}
+		$res = $this->hsSelectOne ( $this->getTableWeixin (),"*", array (
+				'gameuid' => $gameuid
+		) );
+		return $res;
+	}
     
     public function updateAccount($change)
     {

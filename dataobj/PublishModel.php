@@ -103,10 +103,10 @@ class PublishModel extends BaseModel {
 	 * @param $id unknown_type
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
-	protected function getOne() {
-		$where = array ('gameuid' => $this->gameuid );
-		$res = $this->hsSelectAll ( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
-		return $res;
+	protected function getOne($id) {
+		$where = array ('id' =>$id );
+		$res = $this->hsSelectAll ( $this->getTableName (), $this->getFields (), $where );
+		return $res[0];
 	}
 	
 	protected function getOneSingle($templateid) {

@@ -12,7 +12,8 @@ class UserGetInfo extends BaseCommand {
 		
 		$account = new AccountHandler ( $this->uid );
 		$ret= $account->getAccountByUid($uid);
-		$account->sendJPush("A0000043A574DC","测试成功");
+		
+// 		$account->sendJPush($account->getUidFromGameuid(838), "测试gameuid");
 		
 		$behavea = new BehaveHandler ( $this->uid );
 		$behavea->newBehave ( "getUserInfo","","" );

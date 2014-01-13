@@ -253,11 +253,22 @@ class BaseModel {
 	public function hsSelectAll($tableName, $fields, $where, $limit = -1, $offset = 0) {
 		$this->selectCount ++;
 		// 使用传统的mysql方式
+		$fieldsarr=explode(',', $fields);
+		$filedsnew="";
+		if(trim($fields)=="*")
+		{
+			$filedsnew=" * ";
+		}else {
+			foreach ( $fieldsarr as $key => $value ) {
+				$filedsnew .= "`$value`,";
+			}
+			$filedsnew = trim ( $filedsnew, "," );
+		}
 		$DBHandler = $this->getDBInstance ( $tableName );
-	
-		$where_str = $this->joinWhereStr( $where );
-	
-		$sql = 'SELECT ' . $fields . ' FROM ' . $tableName . ' WHERE ' . $where_str;
+		
+		$where_str = $this->joinWhereStr ( $where );
+		
+		$sql = 'SELECT ' . $filedsnew . ' FROM ' . $tableName . ' WHERE ' . $where_str;
 	
 		if ($limit > 0)
 		{

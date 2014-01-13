@@ -60,14 +60,7 @@ class PublishCache extends PublishModel{
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
 	protected function getOne($id) {
-		$key = $this->getCacheKey ($id);
-		$ret = $this->getFromCache ( $key, $this->gameuid );
-		if (empty ( $ret )) {
-			$ret = parent::getOne ();
-			if (! empty ( $ret )) {
-				$this->setToCache ( $key, $ret, 0, $this->gameuid );
-			}
-		}
+			$ret = parent::getOne ($id);
 		return $ret;
 	}
 	
