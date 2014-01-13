@@ -61,7 +61,13 @@ class PublishHandler extends PublishCache{
 	}
 	
 	public function getPageShenHe($page) {
-		return parent::getPageShenHe ( $page );
+		$ret= parent::getPageShenHe ( $page );
+		foreach ($ret as $key=>$value){
+			$ret [$key] ['liked'] = false;
+			$ret [$key] ['disliked'] = false;
+			$ret [$key] ['collected'] = false;
+		}
+		return $ret;
 	}
 	
 	public function addLike($id, $type) {

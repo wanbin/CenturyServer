@@ -57,4 +57,16 @@ $config['webBase'] = 'http://'.$webHost.'/';
 $config['cdnBase'] = 'http://'.$cdnHost.'/';
 $config['version'] = array('0.0.1');
 $config['version_default'] = '0.0.1';
+
+
+//JPUSH相关配置
+define('DB_HOST', '42.121.123.185');
+define('DB_USER', 'root');
+define('DB_PWD', 'abc123');
+define('DB_NAME', 'wx');
+define('DB_TAB', 'zxzbcar_push');
+define('DB_CODE','utf8');
+define('appkeys','d0085b49b0682dbbb3a36ff5');
+define('masterSecret', 'fd838eceb6aaf5276b75f542');
+define('platform', 'android');
 ?>

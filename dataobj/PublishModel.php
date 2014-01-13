@@ -75,7 +75,7 @@ class PublishModel extends BaseModel {
 		$where = array (
 				'isshow' => 0
 		);
-		$res=$this->oneSql("select * from user_publish where isshow=0 order by id desc limit $page,30");
+		$res=$this->oneSql("select user_publish.*,date(FROM_UNIXTIME(time)) sendtime from user_publish where isshow=0 order by id desc limit 30");
 		return $res;
 	}
 	

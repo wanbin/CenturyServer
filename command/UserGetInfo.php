@@ -9,9 +9,10 @@ class UserGetInfo extends BaseCommand {
 		if (empty ( $uid )) {
 			$uid=$this->uid;
 		}
+		
 		$account = new AccountHandler ( $this->uid );
 		$ret= $account->getAccountByUid($uid);
-		
+		$account->sendJPush("A0000043A574DC","测试成功");
 		
 		$behavea = new BehaveHandler ( $this->uid );
 		$behavea->newBehave ( "getUserInfo","","" );

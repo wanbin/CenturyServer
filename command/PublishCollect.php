@@ -11,7 +11,7 @@ class PublishCollect extends BaseCommand {
 		}
 		$cillect = new CollectHandler ( $this->uid );
 		if ($cillect->newCollect ( $id, $type )) {
-			$this->reutrnDate ( COMMAND_SUCCESS );
+			$this->reutrnDate ( COMMAND_ENPTY );
 		} else {
 			$this->reutrnDate ( COMMAND_FAILE );
 		}

@@ -2,7 +2,7 @@
 /**
  * The newest version of the MySQL adapter includes a hack to type number column
  * types as numbers, despite the fact that PHP does not offer this kind of info by default
- * 
+ *
  * @license http://opensource.org/licenses/gpl-license.php GNU Public License
  * @copyright (c) 2003 amfphp.org
  * @package flashservices
@@ -16,7 +16,7 @@ class mysqlAdapter extends RecordSetAdapter {
 	/**
 	 * Constructor method for the adapter.  This constructor implements the setting of the
 	 * 3 required properties for the object.
-	 * 
+	 *
 	 * @param resource $d The datasource resource
 	 */
 	 

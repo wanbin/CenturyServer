@@ -1,1 +1,1 @@
-INSERT INTO user_behave (`gameuid`, `time`, `behave`, `data`, `sec`) VALUES ('831', '1389543163', 'count_bottle', '""', '')
+INSERT INTO user_behave (`gameuid`, `time`, `behave`, `data`, `sec`) VALUES ('838', '1389625783', 'getUserInfo', '""', '')
