@@ -57,7 +57,7 @@ class PublishModel extends BaseModel {
 		$where = array (
 				'isshow' => 1
 		);
-		$res = $this->oneSql ( "select user_publish.*,username,date(FROM_UNIXTIME(time)) sendtime from user_publish,wx_account where wx_account.gameuid=user_publish.gameuid and isshow=1 and type=2 order by id desc limit $page,".PAGECOUNT );
+		$res = $this->oneSql ( "select user_publish.*,username,date(FROM_UNIXTIME(time)) sendtime from user_publish,wx_account where wx_account.gameuid=user_publish.gameuid and isshow=1  order by id desc limit $page,".PAGECOUNT );
 		return $res;
 	}
 	

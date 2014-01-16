@@ -79,7 +79,7 @@ class PublishHandler extends PublishCache{
 			$ret [$key] ['disliked'] = !empty ( $temarray [$value ['id']] [2] );
 			$ret [$key] ['collected'] = !empty ( $temarray [$value ['id']] [3] );
 			$ret [$key] ['username']=empty($value['username'])?"匿名":$value['username'];
-			$ret [$key] ['type']=rand(1,6);
+			$ret [$key] ['type']=$value['type'];
 		}
 		return $ret;
 	}
