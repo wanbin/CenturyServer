@@ -56,6 +56,11 @@ class PublishHandler extends PublishCache{
 		return parent::changeShow ( $id, $type );
 	}
 	
+	public function getRandomOne($type){
+		$ret= parent::getRandomOne();
+		return $ret;
+	}
+	
 	public function getPage($page) {
 		$ret = parent::getPage ( $page );
 		$idarr = array ();
