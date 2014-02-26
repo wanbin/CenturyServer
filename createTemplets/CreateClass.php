@@ -183,5 +183,20 @@ $createarray=array(
 				),
 				'description' => '用户行为LOG',
 		),
+		array(
+				'modelname' => 'Words',
+				'singleData' => false,
+				'tablename' => 'user_words',
+				'tablefiled' => array (
+						'id' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'ID'),
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'添加人gameuid'),
+						'word1' => array('type'=>'varchar','lengh'=>10,'default'=>'0','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'词汇1'),
+						'word2' => array('type'=>'varchar','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'词汇2'),
+						'type' => array('type'=>'int','lengh'=>10,'default'=>'','isPrimaryKey'=>0,'isjson'=>1,'comment'=>'类型'),
+						'status' => array('type'=>'int','lengh'=>10,'default'=>'','isPrimaryKey'=>0,'isjson'=>1,'comment'=>'是否审核通过'),
+						'time' => array('type'=>'int','lengh'=>10,'default'=>'','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'添加时间'),
+				),
+				'description' => '谁是卧底词汇',
+		),
 );
 ?>

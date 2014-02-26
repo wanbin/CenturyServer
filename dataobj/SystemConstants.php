@@ -31,3 +31,7 @@ define("MEMCACHE_KEY_BEHAVE_LIST", "centurywar_Behave_list_%d");
 define("MEMCACHE_KEY_MAIL", "centurywar_Mail_%d_%d");
 define("MEMCACHE_KEY_MAIL_LIST", "centurywar_Mail_list_%d");
 
+//谁是卧底词汇 
+define("MEMCACHE_KEY_WORDS", "centurywar_Words_%d_%d");
+define("MEMCACHE_KEY_WORDS_LIST", "centurywar_Words_list_%d");
+
