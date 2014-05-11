@@ -3,6 +3,7 @@ include_once 'define.php';
 date_default_timezone_set ( "Asia/Chongqing" );
 error_reporting ( E_ALL ^ E_NOTICE );
 // 游戏当前版本
+
 define ( 'DEBUG', true );
 define ( 'TEST', false );
 class Entry {
@@ -23,6 +24,7 @@ class Entry {
 		}
 	}
 }
+
 file_put_contents ( "getFromClient.log", print_R ( $_REQUEST, true ), FILE_APPEND );
 $command = $_REQUEST ['cmd'];
 $data = json_decode ( str_replace ( "\\", "", $_REQUEST ['data'] ), true );

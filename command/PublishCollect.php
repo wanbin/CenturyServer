@@ -10,7 +10,7 @@ class PublishCollect extends BaseCommand {
 			$this->throwException ( 'id or type is empty', 1101 );
 		}
 		$cillect = new CollectHandler ( $this->uid );
-		if ($cillect->newCollect ( $id, $type )) {
+		if ($cillect->newCollect ( $id, $type )) {;
 			$this->reutrnDate ( COMMAND_ENPTY );
 		} else {
 			$this->reutrnDate ( COMMAND_FAILE );

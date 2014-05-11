@@ -25,7 +25,7 @@ class AccountHandler extends AccountCache {
 				'n_title' => "谁是卧底-爱上聚会",
 				'n_content' => $content
 		) );
-		$res = $obj->send ( rand ( 100000000, 999999999 ), 3, $useralise, 1, $msg_content, "android" );
+		$res = $obj->send ( rand ( 100000000, 999999999 ), 3, str_replace("-", "", $useralise), 1, $msg_content, "android,ios" );
 	}
 	public function changeUserName($username) {
 		$this->updateAccount ( array (

@@ -44,6 +44,7 @@ class MailModel extends BaseModel {
 		$this->readMail($ret['id']);
 		return $ret;
 	}
+	
 	protected function readMail($id) {
 		if ($id > 0) {
 			$sql = "update user_mail set is_read=1 where id=$id";

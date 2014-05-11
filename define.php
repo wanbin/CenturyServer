@@ -1,5 +1,6 @@
 <?php
 // 游戏主程序调用入口
+
 define ( 'PATH_ROOT', dirname ( __FILE__ ) . '/' ); // 根目录
 define ( 'PATH_COMMAND', PATH_ROOT . 'command/' ); // 命令(逻辑)目录
 define ( 'PATH_HANDLER', PATH_COMMAND . 'handler/' ); // 实例操作目录
@@ -12,14 +13,12 @@ define ( 'PATH_STATIC', PATH_ROOT . 'static/' ); // 静态文件夹
 date_default_timezone_set ( "Asia/Chongqing" );
 include_once PATH_ROOT . 'config.inc.php'; // 全局配置文件
 include_once PATH_COMMAND . 'BaseCommand.php';
-
 // 加载framework中db操作类与cache操作类
 require_once FRAMEWORK . '/cache/Cache.class.php';
 require_once FRAMEWORK . '/database/DBHandler.class.php';
 // 加载redies
 require_once FRAMEWORK . '/redis/Rediska.php';
 include_once FRAMEWORK . 'exception/GameException.php'; // 游戏内部异常处理
-include_once PATH_ROOT . 'config.inc.php'; // 全局配置文件
 include_once PATH_COMMAND . 'BaseCommand.php';
 include_once 'config.code.php'; // 常量处理类
 include_once 'config.php'; // 常量处理类

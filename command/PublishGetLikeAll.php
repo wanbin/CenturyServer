@@ -1,5 +1,5 @@
 <?php
-// 随机返回一条词汇
+// 从网上获取喜欢的真心话大冒险，只在第一次的时候取
 include_once 'BaseCommand.php';
 include_once 'handler/PublishHandler.php';
 class PublishRandomOne extends BaseCommand {

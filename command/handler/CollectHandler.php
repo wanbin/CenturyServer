@@ -16,12 +16,14 @@ class CollectHandler extends CollectCache{
 	 * 添加一个新闻公告
 	 */
 	public function newCollect($id, $type) {
+		
 		$content = array (
 				'gameuid' => $this->gameuid,
 				'time' => time (),
 				'type' => $type,
 				'publish_id' => $id
 		);
+	
 		if ($this->checkCollete ( $id, $type ) > 0) {
 			return false;
 		}

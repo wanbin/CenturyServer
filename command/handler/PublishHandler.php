@@ -69,11 +69,9 @@ class PublishHandler extends PublishCache{
 			$idarr [] = $valuse ['id'];
 		}
 		
-		
 		include_once 'CollectHandler.php';
 		$collectHandler = new CollectHandler ( $this->uid );
-		$result = $collectHandler->getAllByIds ( $idarr );
-			
+// 		$result = $collectHandler->getAllByIds ( $idarr );
 		// 取得了所有的喜欢与非喜欢
 		$temarray = array ();
 		foreach ( $result as $key => $value ) {
@@ -98,12 +96,20 @@ class PublishHandler extends PublishCache{
 		}
 		return $ret;
 	}
-	
 	public function addLike($id, $type) {
 		if ($type == 1) {
-			parent::addLike ( $id, 1, 0 );
-		} else {
-			parent::addLike ( $id, 0, 1 );
+			$dislike = 0;
+			//如果有不喜欢则标记为喜欢
+			if ($this->checkCollete ( $id, 2 ) > 0) {
+				$dislike = - 1;
+			}
+			parent::addLike ( $id, 1, $dislike );
+		} else if ($type == 2) {
+			$like = 0;
+			if ($this->checkCollete ( $id, 1 ) > 0) {
+				$like = - 1;
+			}
+			parent::addLike ( $id, $like, 1 );
 		}
 	}
 }
