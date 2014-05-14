@@ -12,6 +12,7 @@ class BaseModel {
 	protected $rediska = null;
 	protected $useRedis = null;
 	protected $commandAnalysis = null;
+	protected $channel="ANDROID";
 	
 	//数据分析参数
 	protected $selectCount = 0;
@@ -37,7 +38,12 @@ class BaseModel {
 			$res = $this->oneSqlSignle ( "select * from wx_account where uid='$uid'" );
 			if (empty ( $res )) {
 				$time = time ();
-				$sql = "insert into wx_account(uid,regtime) values('$uid',$time)";
+				if(strlen($uid)==strlen("5A74E27E8AC44C778731B7A8A8207250")){
+					$this->channel='IOS';
+				}elseif(substr($uid, 1,5)==substr("ouHjQjpu175ug-jVh0Wdw5i--Xgw", 1,5)){
+					$this->channel='WX';
+				}
+				$sql = "insert into wx_account(uid,regtime,channel) values('$uid',$time,'".$this->channel."')";
 				$this->oneSql ( $sql );
 				$res = $this->oneSqlSignle ( "select * from wx_account where uid='$uid'" );
 			}
