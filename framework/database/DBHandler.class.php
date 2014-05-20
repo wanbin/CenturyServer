@@ -37,17 +37,13 @@ class DBHandler
 		$this->DBConfig['password'] = $DB['DB_host']['password'];
 		$this->DBConfig['dbname']   = $DB['DB_host']['dbname'][0];           //逻辑服的数据库
 	}
-	
-	public function execute($sql)
-	{
+	public function execute($sql) {
 		try {
 			$connection = $this->connect ();
 			return $connection->query ( $sql );
 		} catch ( Exception $e ) {
 			$this->writeSqlError ( $sql, $e );
 		}
-		
-		
 	}
 	
 	/**
@@ -114,7 +110,6 @@ class DBHandler
 	public function getAll($sql)
 	{
 		try {
-			$this->writeSqlError ( $sql,"" );
 			return $this->connect ()->getAll ( $sql );
 		} catch ( Exception $e ) {
 			$this->writeSqlError ( $sql, $e );

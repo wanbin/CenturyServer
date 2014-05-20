@@ -35,3 +35,7 @@ define("MEMCACHE_KEY_MAIL_LIST", "centurywar_Mail_list_%d");
 define("MEMCACHE_KEY_WORDS", "centurywar_Words_%d_%d");
 define("MEMCACHE_KEY_WORDS_LIST", "centurywar_Words_list_%d");
 
+//游戏房间 
+define("MEMCACHE_KEY_ROOMS", "centurywar_Rooms_%d_%d");
+define("MEMCACHE_KEY_ROOMS_LIST", "centurywar_Rooms_list_%d");
+

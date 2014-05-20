@@ -1,6 +1,6 @@
 <?php
 //要创建的array创建完成之后别忘记删除无用的
-$createarr = array ('Mapping','Runtime','Building' );
+$createarr = array ('Mapping','Runtime','Building','Rooms');
 $createarr = array ();
 include_once 'CreateClass.php';
 include_once '../define.php';

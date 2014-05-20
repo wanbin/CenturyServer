@@ -113,15 +113,19 @@ class BaseModel {
 		$ret=$this->oneSql($sql);
 		return $ret[0];
 	}
-	
 	public function oneSql($sql) {
 		$DBHandler = $this->getDBInstance ( $this->getTableName () );
 		$tem = explode ( ' ', $sql );
 		if (in_array ( $tem [0], array (
 				'insert',
-				'update'
+				'update',
+				'replace',
 		) )) {
-			return $DBHandler->execute ( $sql );
+			$sqlarr=explode(';', $sql);
+			foreach ($sqlarr as $key=>$value){
+				$DBHandler->execute ( $value );
+			}
+			return;
 		} else {
 			return $DBHandler->getAll ( $sql );
 		}
