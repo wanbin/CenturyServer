@@ -11,7 +11,7 @@ class RoomJoin extends BaseCommand {
 		if ($ret) {
 			return $this->reutrnDate ( COMMAND_SUCCESS );
 		} else {
-			return $this->reutrnDate ( COMMAND_FAILE );
+			return $this->reutrnDate ( ERROR_ROOM );
 		}
 		
 	}

@@ -48,11 +48,9 @@ class PublishHandler extends PublishCache{
 			$satus = "被管理员删除";
 		}
 		
-		include_once PATH_HANDLER.'MailHandler.php';
-		$mail = new MailHandler ( $this->uid );
 		$mailstr="您提交的$typestr [".$ret['content']."] $satus";
-		$mail->addMail($ret ['gameuid'] , -1, $mailstr);
-		$account->sendJPush ( $account->getUidFromGameuid ( $ret ['gameuid'] ), $mailstr );
+		$account->sendPushByGameuid($ret ['gameuid'], $mailstr,true);
+		
 		return parent::changeShow ( $id, $type );
 	}
 	

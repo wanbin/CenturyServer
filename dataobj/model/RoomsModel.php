@@ -28,6 +28,14 @@ class RoomsModel extends BaseModel {
 		return true;
 	}
 	
+	protected function GetRoomInfo($roomid) {
+		$sql = "select * from room where gameuid=$roomid";
+		$ret = $this->oneSqlSignle ( $sql );
+		$sql2 = "select user_rooms.*,username from user_rooms,wx_account where wx_account.gameuid=user_rooms.gameuid and  roomid=$roomid order by createtime";
+		$ret2 = $this->oneSql ( $sql2 );
+		$ret ['room_user'] = $ret2;
+		return $ret;
+	}
 	
 	
 	/**

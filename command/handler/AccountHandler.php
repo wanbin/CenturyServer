@@ -12,6 +12,25 @@ class AccountHandler extends AccountCache {
 	}
 	
 	
+	public function sendPushByGameuid($gameuid,$content,$addMail=false){
+		if ($addMail) {
+			include_once PATH_HANDLER . 'MailHandler.php';
+			$mail = new MailHandler ( $this->uid );
+			$mail->addMail ( $gameuid, - 1, $content );
+		}
+		include_once PATH_HANDLER.'AccountHandler.php';
+		$account = new AccountHandler ( $this->uid );
+		$userInfo=$account->getAccountByGameuid ( $gameuid );
+		require_once FRAMEWORK . 'jpush/jpush.php';
+		$obj = new jpush ( masterSecret, appkeys );
+		$msg_content = json_encode ( array (
+				'n_builder_id' => 0,
+				'n_title' => "谁是卧底-爱上聚会",
+				'n_content' => $content
+		) );
+		$res = $obj->send ( rand ( 100000000, 999999999 ), 3, str_replace("-", "", $userInfo['uid']), 1, $msg_content, strtolower($userInfo['channel']) );
+		
+	}
 	/**
 	 * 玩家发送GM推送
 	 * @param unknown_type $useralise
