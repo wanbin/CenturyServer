@@ -15,6 +15,11 @@ class RoomsModel extends BaseModel {
 		return true;
 	}
 	
+	protected function StartGame($type){
+		
+		
+	}
+	
 	//离开房间
 	protected function LevelRoom() {
 		$gameuid = $this->gameuid;
@@ -62,10 +67,31 @@ class RoomsModel extends BaseModel {
 		$ret = $this->oneSqlSignle ( $sql );
 		$sql2 = "select user_rooms.*,username from user_rooms,wx_account where wx_account.gameuid=user_rooms.gameuid and  roomid=$roomid order by createtime";
 		$ret2 = $this->oneSql ( $sql2 );
+// 		if($ret['type']==1)
+// 		{
+// 			$ret['gamename']="谁是卧底";
+// 		}
 		$ret ['room_user'] = $ret2;
 		return $ret;
 	}
+	protected function setUserContent($gameuid,$content){
+		$udpatetime=time();
+		$sql = "update user_rooms set content='$content',updatetime=now() where gameuid=$gameuid";
+		$this->oneSql($sql);
+		return true;
+	}
 	
+	protected function setRoomType($type){
+		$udpatetime=time();
+		$gameuid=$this->gameuid;
+		if($type==1)
+		{
+			$name="谁是卧底";
+		}
+		$sql = "update room set type=$type,name='$name',updatetime=now() where gameuid=$gameuid";
+		$this->oneSql($sql);
+		return true;
+	}
 	
 	protected function GetRoomInfoOne() {
 		$roomid=$this->gameuid;

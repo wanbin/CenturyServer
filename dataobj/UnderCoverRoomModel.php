@@ -134,6 +134,7 @@ class UnderCoverRoomModel extends BaseModel {
 	public function initcontent($peoplecount) {
 		global $word;
 		$ramdom = $word [array_rand ( $word )];
+// 		$ramdom='wan_bin_ddd';
 		$tem = explode ( '_', $ramdom );
 		$ramdomfather = rand ( 1, 2 );
 		if ($ramdomfather == 1) {
