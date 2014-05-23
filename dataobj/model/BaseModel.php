@@ -120,6 +120,7 @@ class BaseModel {
 				'insert',
 				'update',
 				'replace',
+				'delete'
 		) )) {
 			$sqlarr=explode(';', $sql);
 			foreach ($sqlarr as $key=>$value){

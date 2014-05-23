@@ -7,6 +7,6 @@ class RoomNew extends BaseCommand {
 		include_once PATH_HANDLER . 'RoomsHandler.php';
 		$room = new RoomsHandler ( $this->uid );
 		$room->NewRoom ();
-		return $this->reutrnDate ( COMMAND_SUCCESS );
+		return $this->reutrnDate ( COMMAND_SUCCESS,array('roomid'=>$room->gameuid) );
 	}
 }

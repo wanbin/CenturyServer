@@ -15,6 +15,35 @@ class RoomsModel extends BaseModel {
 		return true;
 	}
 	
+	//离开房间
+	protected function LevelRoom() {
+		$gameuid = $this->gameuid;
+		$sql = "select * from user_rooms where gameuid=$gameuid";
+		$ret = $this->oneSqlSignle ( $sql );
+		$roomid = $ret ['roomid'];
+		if (empty ( $roomid )) {
+			return - 1;
+		}
+		if($roomid==$gameuid){
+			return -2;
+		}
+		$sql = "update room set nowcount=nowcount-1 where gameuid=$roomid;";
+		$sql2 = "delete from user_rooms where gameuid=$gameuid";
+		$this->oneSql ( $sql . $sql2 );
+		return $roomid;
+	}
+		
+		// 销毁自己创建的房间
+	protected function distroyRoom() {
+		$gameuid = $this->gameuid;
+// 		$sql = "select gameuid from user_rooms where roomid=$gameuid;";
+// 		$ret = $this->oneSql ( $sql );
+		$sql = "delete from user_rooms where roomid=$gameuid;";
+		$sql2 = "delete from room where gameuid=$gameuid;";
+		$this->oneSql ( $sql . $sql2 );
+		return true;
+	}
+	
 	protected function JoinRoom($id){
 		$gameuid = $this->gameuid;
 		$sql="select * from room where gameuid=$id";
@@ -23,7 +52,7 @@ class RoomsModel extends BaseModel {
 			return false;
 		}
 		$sql="update room set nowcount=nowcount+1 where gameuid=$id;";
-		$sql2 ="replace into user_rooms(gameuid,roomid,createtime)values($gameuid,$id,now());";
+		$sql2 ="replace into user_rooms(gameuid,roomid,content,createtime)values($gameuid,$id,'已经加入游戏，还未开始',now());";
 		$this->oneSql ( $sql . $sql2 );
 		return true;
 	}
@@ -37,6 +66,13 @@ class RoomsModel extends BaseModel {
 		return $ret;
 	}
 	
+	
+	protected function GetRoomInfoOne() {
+		$roomid=$this->gameuid;
+		$sql = "select user_rooms.*,name gamename from user_rooms,room where room.gameuid=user_rooms.roomid and user_rooms.gameuid=$roomid";
+		$ret = $this->oneSqlSignle ( $sql );
+		return $ret;
+	}
 	
 	/**
 	 * 得到所有记录

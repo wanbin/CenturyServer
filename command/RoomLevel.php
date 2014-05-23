@@ -2,14 +2,14 @@
 // 新建一个房间
 include_once 'BaseCommand.php';
 include_once 'handler/PublishHandler.php';
-class RoomJoin extends BaseCommand {
+class RoomLevel extends BaseCommand {
 	protected function executeEx($params) {
 		$roomid = $params ['roomid'];
 		include_once PATH_HANDLER . 'RoomsHandler.php';
 		$room = new RoomsHandler ( $this->uid );
-		$ret = $room->JoinRoom ( $roomid );
+		$ret = $room->LevelRoom();
 		if ($ret) {
-			return $this->reutrnDate ( COMMAND_SUCCESS,array('roomid'=>$roomid) );
+			return $this->reutrnDate ( COMMAND_SUCCESS );
 		} else {
 			return $this->reutrnDate ( ERROR_ROOM );
 		}
