@@ -67,10 +67,6 @@ class RoomsModel extends BaseModel {
 		$ret = $this->oneSqlSignle ( $sql );
 		$sql2 = "select user_rooms.*,username from user_rooms,wx_account where wx_account.gameuid=user_rooms.gameuid and  roomid=$roomid order by createtime";
 		$ret2 = $this->oneSql ( $sql2 );
-// 		if($ret['type']==1)
-// 		{
-// 			$ret['gamename']="谁是卧底";
-// 		}
 		$ret ['room_user'] = $ret2;
 		return $ret;
 	}

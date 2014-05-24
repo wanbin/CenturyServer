@@ -8,6 +8,6 @@ class RoomStartGame extends BaseCommand {
 		$room = new RoomsHandler ( $this->uid );
 		$type=$params['type'];
 		$ret= $room->StartGame($type);
-		return $this->reutrnDate ( COMMAND_SUCCESS,array('roomid'=>$room->gameuid) );
+		return $this->reutrnDate ( COMMAND_SUCCESS,$ret );
 	}
 }
