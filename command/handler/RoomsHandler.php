@@ -90,10 +90,13 @@ class RoomsHandler extends RoomsCache{
 			return false;
 		}		// 代表是自己创建的房间
 		else if ($roomid == - 2) {
-			parent::distroyRoom ();
+			$retuser=parent::distroyRoom ();
 			$userInfo = $account->getAccountByUid ( $this->uid );
 			$str = $userInfo ['username'] . "解散了房间" . $this->gameuid;
-			$account->sendPushByTag ( "ROOM_" . $this->gameuid, $str );
+			foreach ( $retuser as $key => $value ) {
+				$temgameuid = $value ['gameuid'];
+				$account->sendPushByGameuid ( $temgameuid, $str );
+			}
 			return true;
 		} else {
 			$userInfo = $account->getAccountByUid ( $this->uid );

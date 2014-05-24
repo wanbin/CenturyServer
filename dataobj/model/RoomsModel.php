@@ -41,12 +41,12 @@ class RoomsModel extends BaseModel {
 		// 销毁自己创建的房间
 	protected function distroyRoom() {
 		$gameuid = $this->gameuid;
-// 		$sql = "select gameuid from user_rooms where roomid=$gameuid;";
-// 		$ret = $this->oneSql ( $sql );
+		$sql = "select gameuid from user_rooms where roomid=$gameuid and gameuid!=$gameuid;";
+		$ret = $this->oneSql ( $sql );
 		$sql = "delete from user_rooms where roomid=$gameuid;";
 		$sql2 = "delete from room where gameuid=$gameuid;";
 		$this->oneSql ( $sql . $sql2 );
-		return true;
+		return $ret;
 	}
 	
 	protected function JoinRoom($id){
