@@ -53,7 +53,7 @@ class PublishModel extends BaseModel {
 	}
 	
 	protected function getRandomOne(){
-		$sql="select count(*) count from user_publish";
+		$sql="select count(*) count from user_publish where isshow=1";
 		$ret=$this->oneSql($sql);
 		$index=rand(0,$ret[0]['count']);
 		$res=$this->oneSql("select user_publish.*,username,date(FROM_UNIXTIME(time)) sendtime from user_publish,wx_account where wx_account.gameuid=user_publish.gameuid and isshow=1  order by id desc limit $index,1");
