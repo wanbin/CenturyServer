@@ -69,7 +69,7 @@ class PublishHandler extends PublishCache{
 		
 		include_once 'CollectHandler.php';
 		$collectHandler = new CollectHandler ( $this->uid );
-// 		$result = $collectHandler->getAllByIds ( $idarr );
+		$result = $collectHandler->getAllByIds ( $idarr );
 		// 取得了所有的喜欢与非喜欢
 		$temarray = array ();
 		foreach ( $result as $key => $value ) {
