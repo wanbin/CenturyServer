@@ -32,10 +32,10 @@ class DBHandler
 		}
 		
 		$DB = $DB_map[$host];
-		$this->DBConfig['host'] = $DB['DB_host']['host'];
-		$this->DBConfig['username'] = $DB['DB_host']['user'];
-		$this->DBConfig['password'] = $DB['DB_host']['password'];
-		$this->DBConfig['dbname']   = $DB['DB_host']['dbname'][0];           //逻辑服的数据库
+		$this->DBConfig['host'] = DB_HOST;
+		$this->DBConfig['username'] = DB_USER;
+		$this->DBConfig['password'] = DB_PWD;
+		$this->DBConfig['dbname']   = DB_NAME;           //逻辑服的数据库
 	}
 	public function execute($sql) {
 		try {

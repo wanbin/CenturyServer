@@ -38,7 +38,7 @@ class BaseCommand
 			$this->isQQPoints = $GLOBALS ['config'] ['syncQQpay'];
 		}
 		try {
-			$this->server = $sign_arr ['server'];
+//			$this->server = $sign_arr ['server'];
 // 			if (! in_array ( $command, $this->noServerCommand )) {
 // 				if (! isset ( $this->server )) {
 // 					$this->licitException ( 'server is empty', 1201 );
