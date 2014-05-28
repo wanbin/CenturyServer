@@ -80,9 +80,10 @@ class RoomsModel extends BaseModel {
 	protected function setRoomType($type){
 		$udpatetime=time();
 		$gameuid=$this->gameuid;
-		if($type==1)
-		{
-			$name="谁是卧底";
+		if ($type == 1) {
+			$name = "谁是卧底";
+		} else if ($type == 2) {
+			$name = "杀人游戏";
 		}
 		$sql = "update room set type=$type,name='$name',updatetime=now() where gameuid=$gameuid";
 		$this->oneSql($sql);

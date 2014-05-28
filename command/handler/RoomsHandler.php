@@ -45,13 +45,21 @@ class RoomsHandler extends RoomsCache{
 // 		$userCount=10;
 		if ($type == 1) {
 			if($userCount<4){
-				// 			return false;
+// 						return false;
 			}
 			$this->setRoomType($type);
 			include_once PATH_HANDLER . 'UnderCoverRoomHandler.php';
 			$ucroom = new UnderCoverRoomHandler ( $this->uid );
 			$roomContent = $ucroom->initcontent ( $userCount );
 		}
+		else if($type==2){
+			//杀人游戏分配身份
+			include_once PATH_HANDLER . 'UnderCoverRoomHandler.php';
+			$ucroom = new UnderCoverRoomHandler ( $this->uid );
+			$roomContent=$ucroom->initKiller($userCount);
+		}
+		
+		
 	
 		//准备发送推送
 		include_once PATH_HANDLER . 'AccountHandler.php';
@@ -63,6 +71,7 @@ class RoomsHandler extends RoomsCache{
 			$account->sendPushByGameuid($value['gameuid'], $content);
 		}
 		$roomInfo['room_contente']=$roomContent;
+		$roomInfo['roomtype']=$type;
 		return $roomInfo;
 	}
 	

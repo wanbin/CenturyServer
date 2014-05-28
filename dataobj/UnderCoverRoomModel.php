@@ -131,6 +131,46 @@ class UnderCoverRoomModel extends BaseModel {
 	public function hexDecode($s) {
 		return preg_replace ( '/(\w{2})/e', "chr(hexdec('\\1'))", $s );
 	}
+	
+	public function initKiller($peoplecount){
+		if($peoplecount<6)
+		{
+// 			return false;
+		}
+		$killer=floor( $peoplecount/4);
+		$police=$killer;
+		$result=array();
+		for($i=0;$i<$peoplecount;$i++){
+			$result[$i]="平民";
+		}
+		
+		$faguanrate=rand(0, $peoplecount-1);
+		$result[$faguanrate]='法官';
+		
+		while ($killer>0){
+			$killerindex=rand(0, $peoplecount-1);
+			if($result[$killerindex]=='平民')
+			{
+				$result[$killerindex]='杀手';
+				$killer--;
+			}
+		}
+		
+		while ($police>0){
+			$policeindex=rand(0, $peoplecount-1);
+			if($result[$policeindex]=='平民')
+			{
+				$result[$policeindex]='杀手';
+				$police--;
+			}
+		}
+		return array (
+				'content' => $result,
+				'killer' => $killer,
+				'police' => $police
+		);
+	}
+	
 	public function initcontent($peoplecount) {
 		global $word;
 		$ramdom = $word [array_rand ( $word )];
