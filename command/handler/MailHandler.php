@@ -19,4 +19,7 @@ class MailHandler extends MailCache{
 	public function getOneMail() {
 		return parent::getOneMail ();
 	}
+	public function mailSend($sendto,$content){
+		return parent::SendMail($sendto, $content);
+	}
 }

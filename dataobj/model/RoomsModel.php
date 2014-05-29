@@ -77,6 +77,15 @@ class RoomsModel extends BaseModel {
 		return true;
 	}
 	
+	protected  function delSomeOne($gameuid){
+		$roomid=$this->gameuid;
+		$sql="update room set nowcount=nowcount-1 where gameuid=$roomid;";
+		$sql2 ="delete from  user_rooms where gameuid=$gameuid";
+		$this->oneSql ( $sql . $sql2 );
+// 		echo  $sql . $sql2 ;
+		return true;
+	}
+	
 	protected function setRoomType($type){
 		$udpatetime=time();
 		$gameuid=$this->gameuid;

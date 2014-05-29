@@ -34,6 +34,16 @@ class RoomsHandler extends RoomsCache{
 		return $result;
 	}
 	
+	public function delSomeOne($gameuid){
+		$ret= parent::delSomeOne($gameuid);
+		if($ret){
+			include_once PATH_HANDLER . 'AccountHandler.php';
+			$account = new AccountHandler ( $this->uid );
+			$content='您被管理员移出房间';
+			$account->sendPushByGameuid($gameuid, $content);
+		}
+		return $ret;
+	}
 	/**
 	 * 
 	 * @param unknown_type $type 1,谁是卧底 2，杀人游戏

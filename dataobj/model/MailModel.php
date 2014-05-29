@@ -45,6 +45,15 @@ class MailModel extends BaseModel {
 		return $ret;
 	}
 	
+	
+	protected function SendMail($sendto,$content){
+		$gameuid=$this->gameuid;
+		$time=time();
+		$sql="insert into user_mail(gameuid,fromgameuid,time,content) values($sendto,$gameuid,$time,'$content')";
+		$ret=$this->oneSql($sql);
+		return $ret;
+	}
+	
 	protected function readMail($id) {
 		if ($id > 0) {
 			$sql = "update user_mail set is_read=1 where id=$id";
