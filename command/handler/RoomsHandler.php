@@ -23,12 +23,23 @@ class RoomsHandler extends RoomsCache{
 		//先判断一下玩家是否都在房间里，如果不在房间里，则
 		$result=array();
 		foreach ($gameuidarr as $key=>$value){
-			if(key_exists($value, $gameuid_name)){
+			if(key_exists($value, $gameuid_name)||in_array($value, array(-1,-2))){
 				$temPublish=$punish->getRandomOne(1);
 				$content="惩罚：".$temPublish[0]['content'];
-				$this->setUserContent($value, $content);
-				$result[]=array('username'=>$gameuid_name[$value],'content'=>$content,'gameuid'=>$value);
-				$account->sendPushByGameuid($value, $content);
+				$username = $gameuid_name [$value];
+				if ($value < 0) {
+					$username = "NO." . abs ( $value );
+				}
+				$result [] = array (
+						'username' => $username,
+						'content' => $content,
+						'gameuid' => $value 
+				);
+				
+				if($value>0){
+					$this->setUserContent($value, $content);
+					$account->sendPushByGameuid($value, $content);
+				}
 			}
 		}
 		return $result;
@@ -48,9 +59,9 @@ class RoomsHandler extends RoomsCache{
 	 * 
 	 * @param unknown_type $type 1,谁是卧底 2，杀人游戏
 	 */
-	public function StartGame($type){
+	public function StartGame($type,$addPeople){
 		$this->setRoomType($type);
-		$roomInfo=$this->GetRoomInfo($this->gameuid);
+		$roomInfo=$this->GetRoomInfo($this->gameuid,$addPeople);
 		$userCount=count($roomInfo['room_user']);
 // 		$userCount=10;
 		if ($type == 1) {
@@ -69,17 +80,21 @@ class RoomsHandler extends RoomsCache{
 			$roomContent=$ucroom->initKiller($userCount);
 		}
 		
-		
 	
 		//准备发送推送
 		include_once PATH_HANDLER . 'AccountHandler.php';
 		$account = new AccountHandler ( $this->uid );
 		foreach ($roomInfo['room_user'] as $key=>$value){
 			$content="身份：".$roomContent['content'][$key];
-			$this->setUserContent($value['gameuid'], $content);
 			$roomInfo['room_user'][$key]['content']=$roomContent['content'][$key];
+			if(!isset($value['gameuid'])){
+				continue;
+			}
+			$this->setUserContent($value['gameuid'], $content);
 			$account->sendPushByGameuid($value['gameuid'], $content);
 		}
+		
+		
 		$roomInfo['room_contente']=$roomContent;
 		$roomInfo['roomtype']=$type;
 		return $roomInfo;
@@ -93,8 +108,8 @@ class RoomsHandler extends RoomsCache{
 		
 	}
 	
-	public function GetRoomInfo($roomid){
-			return parent::GetRoomInfo($roomid);
+	public function GetRoomInfo($roomid,$addPeople=0){
+			return parent::GetRoomInfo($roomid,$addPeople);
 	}
 	public function GetRoomInfoOne(){
 		return parent::GetRoomInfoOne();

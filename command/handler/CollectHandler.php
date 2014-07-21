@@ -29,7 +29,7 @@ class CollectHandler extends CollectCache{
 		}
 		include_once 'PublishHandler.php';
 		$publish = new PublishHandler ( $this->uid );
-		$publish->addLike($id, $type);
+		$publish->addLikeWith($id, $type);
 		$this->add ( $content );
 		return true;
 	}

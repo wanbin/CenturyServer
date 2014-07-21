@@ -23,13 +23,13 @@ class AccountCache extends AccountModel{
      * @return multitype:
      +----------------------------------------------------------
      */
-    public function getAccount()
+    public function getAccount($gameuid='')
     {
         if (empty ( $this->account )) {
             $key = $this->getCacheKey($this->gameuid);
             $this->account = $this->getFromCache ( $key, $this->gameuid );
             if (empty ( $this->account )) {
-                $this->account = parent::getAccount ();
+                $this->account = parent::getAccount ($this->gameuid);
                 $this->setToCache ( $key, $this->account, 3600, $this->gameuid );
             }
         }
@@ -41,7 +41,7 @@ class AccountCache extends AccountModel{
 	 * 取得用户信息
 	 * @param unknown_type $uid
 	 */
-	public function getAccountByUid($uid) {
+	public function getAccountByUid($uid='') {
 		return parent::getAccountByUid ($uid);
 	}
 	

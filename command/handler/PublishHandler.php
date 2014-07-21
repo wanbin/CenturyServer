@@ -55,7 +55,7 @@ class PublishHandler extends PublishCache{
 	}
 	
 	public function getRandomOne($type){
-		$ret= parent::getRandomOne();
+		$ret= parent::getRandomOne($type);
 		return $ret;
 	}
 	
@@ -94,10 +94,10 @@ class PublishHandler extends PublishCache{
 		}
 		return $ret;
 	}
-	public function addLike($id, $type) {
+	public function addLikeWith($id, $type) {
 		if ($type == 1) {
 			$dislike = 0;
-			//如果有不喜欢则标记为喜欢
+			// 如果有不喜欢则标记为喜欢
 			if ($this->checkCollete ( $id, 2 ) > 0) {
 				$dislike = - 1;
 			}

@@ -10,6 +10,11 @@ define ( 'PATH_MODEL', PATH_ROOT . 'dataobj/model/' );
 define ( 'PATH_SQL', PATH_ROOT . 'sql/' );
 define ( 'FRAMEWORK', PATH_ROOT . 'framework/' ); // 主框架目录
 define ( 'PATH_STATIC', PATH_ROOT . 'static/' ); // 静态文件夹
+
+define ( 'PATH_CONTROL', PATH_ROOT . 'www/control/' ); // control
+define ( 'PATH_VIEW', PATH_ROOT . 'www/view/' ); // control
+
+
 date_default_timezone_set ( "Asia/Chongqing" );
 include_once PATH_ROOT . 'config.inc.php'; // 全局配置文件
 include_once PATH_COMMAND . 'BaseCommand.php';

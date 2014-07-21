@@ -27,23 +27,7 @@ class BehaveCache extends BehaveModel{
 		return $this->item;
 	}
 	
-	/**
-	 * 得到一条记录
-	 *
-	 * @param $id unknown_type
-	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
-	 */
-	protected function getOne($time,$behave) {
-		$key = $this->getCacheKey ($time,$behave);
-		$ret = $this->getFromCache ( $key, $this->gameuid );
-		if (empty ( $ret )) {
-			$ret = parent::getOne ();
-			if (! empty ( $ret )) {
-				$this->setToCache ( $key, $ret, 0, $this->gameuid );
-			}
-		}
-		return $ret;
-	}
+
 	
 		/**
 	 * 更新信息
@@ -56,11 +40,7 @@ class BehaveCache extends BehaveModel{
 		return $this->delFromCache ();
 	}
 	
-	protected function updateOne($time, $content) {
-		parent::update ( $time, $content );
-		return $this->delFromCacheALL ();
-	}
-	
+
 	/**
 	 * 添加一条信息
 	 *
@@ -101,22 +81,6 @@ class BehaveCache extends BehaveModel{
 		return $this->delFromCache ();
 	}
 	
-	protected function delOne($time) {
-		$this->get ();
-		parent::delOne ( $time );
-		if (true) {
-			unset ( $this->item [$time] );
-		} else {
-			foreach ( $this->item as $key => $value ) {
-				if ($value ['time'] == $time) {
-					unset ( $this->item [$key] );
-					break;
-				}
-			}
-		}
-		$key = $this->getCacheKeyAll ();
-		return $this->setToCache ( $key, $this->item, 0, $this->gameuid );
-	}
 	
 	protected function delFromCache($time,$behave) {
 		$key =  $this->getCacheKey ($time,$behave);

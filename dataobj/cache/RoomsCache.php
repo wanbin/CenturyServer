@@ -37,7 +37,7 @@ class RoomsCache extends RoomsModel{
 		$key = $this->getCacheKey ($id);
 		$ret = $this->getFromCache ( $key, $this->gameuid );
 		if (empty ( $ret )) {
-			$ret = parent::getOne ();
+			$ret = parent::getOne ($id);
 			if (! empty ( $ret )) {
 				$this->setToCache ( $key, $ret, 0, $this->gameuid );
 			}

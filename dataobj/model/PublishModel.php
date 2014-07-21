@@ -52,7 +52,7 @@ class PublishModel extends BaseModel {
 		
 	}
 	
-	protected function getRandomOne(){
+	protected function getRandomOne($type){
 		$sql="select count(*) count from user_publish where isshow=1";
 		$ret=$this->oneSql($sql);
 		$index=rand(0,$ret[0]['count']);

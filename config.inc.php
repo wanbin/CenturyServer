@@ -12,9 +12,9 @@ $config['DB_map'] = array(
 			
 		//服务器一
 		array(
-				'DB_host' => $dbHost['host1'],
-				'1'=> $dbHost['host2']['dbname'][0],    //逻辑一服
-				'2'=> $dbHost['host2']['dbname'][1]     //逻辑二服
+// 				'DB_host' => $dbHost['host1'],
+// 				'1'=> $dbHost['host2']['dbname'][0],    //逻辑一服
+// 				'2'=> $dbHost['host2']['dbname'][1]     //逻辑二服
 			),
 		//服务器二
 // 		array(

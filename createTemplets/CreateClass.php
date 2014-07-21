@@ -213,5 +213,18 @@ $createarray=array(
 				),
 				'description' => '游戏房间',
 		),
+		array(
+				'modelname' => 'FeedBack',
+				'singleData' => false,
+				'tablename' => 'feedback',
+				'tablefiled' => array (
+						'id' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>1,'isjson'=>0,'comment'=>'ID'),
+						'gameuid' => array('type'=>'int','lengh'=>10,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'添加人gameuid'),
+						'roomid' => array('type'=>'int','lengh'=>10,'default'=>'0','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'所在房间ID'),
+						'content' => array('type'=>'varchar','lengh'=>200,'default'=>0,'isPrimaryKey'=>0,'isjson'=>0,'comment'=>'发送的内容'),
+						'updatetime' => array('type'=>'int','lengh'=>10,'default'=>'','isPrimaryKey'=>0,'isjson'=>0,'comment'=>'最后更新时间'),
+				),
+				'description' => '游戏房间',
+		),
 );
 ?>

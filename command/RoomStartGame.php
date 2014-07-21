@@ -7,7 +7,8 @@ class RoomStartGame extends BaseCommand {
 		include_once PATH_HANDLER . 'RoomsHandler.php';
 		$room = new RoomsHandler ( $this->uid );
 		$type=$params['type'];
-		$ret= $room->StartGame($type);
+		$addPeople=$params['addPeople'];
+		$ret= $room->StartGame($type,$addPeople);
 		return $this->reutrnDate ( COMMAND_SUCCESS,$ret );
 	}
 }

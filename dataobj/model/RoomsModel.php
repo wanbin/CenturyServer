@@ -15,11 +15,7 @@ class RoomsModel extends BaseModel {
 		return true;
 	}
 	
-	protected function StartGame($type){
-		
-		
-	}
-	
+
 	//离开房间
 	protected function LevelRoom() {
 		$gameuid = $this->gameuid;
@@ -62,12 +58,22 @@ class RoomsModel extends BaseModel {
 		return true;
 	}
 	
-	protected function GetRoomInfo($roomid) {
+	protected function GetRoomInfo($roomid,$addPeople=0) {
 		$sql = "select * from room where gameuid=$roomid";
 		$ret = $this->oneSqlSignle ( $sql );
 		$sql2 = "select user_rooms.*,username from user_rooms,wx_account where wx_account.gameuid=user_rooms.gameuid and  roomid=$roomid order by createtime";
 		$ret2 = $this->oneSql ( $sql2 );
-		$ret ['room_user'] = $ret2;
+		$retpeople=array();
+		//添加两个多余的玩家
+		for($i=1;$i<=$addPeople;$i++){
+			$retpeople[]=array('username'=>"NO. $i",'gameuid'=>"-".$i);
+		}
+		
+		foreach ($ret2 as $key=>$value){
+			$retpeople[]=$value;
+		}
+		
+		$ret ['room_user'] = $retpeople;
 		return $ret;
 	}
 	protected function setUserContent($gameuid,$content){
@@ -131,7 +137,7 @@ class RoomsModel extends BaseModel {
 	 * @param $id unknown_type
 	 * @return Ambigous <boolean, multitype:, multitype:multitype: >
 	 */
-	protected function getOne() {
+	protected function getOne($id) {
 		$where = array ('gameuid' => $this->gameuid );
 		$res = $this->hsSelectAll ( $this->getTableName (), $this->gameuid, $this->getFields (), $where );
 		return $res;
