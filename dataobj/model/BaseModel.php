@@ -111,7 +111,7 @@ class BaseModel {
 		if (! $this->mysqlConnect) {
 			die ( "Connect Server Failed: " . mysql_error () );
 		}
-		echo "$user \n $pwd \n $dbname";
+// 		echo "$user \n $pwd \n $dbname";
 		if (! mysql_select_db ( $dbname, $this->mysqlConnect )) {
 			die ( "Select Database Failed: " . mysql_error ( $this->mysqlConnect ) );
 		}

@@ -55,7 +55,7 @@ $config['version_default'] = '0.0.1';
 
 
 define('BAIDU_AK','v2OxzHT5dXTmzIu9pAtdhkTP');
-define('BAIDU_SK','Y8N7ndlppFdxFAbN01To2W81RNFdOVxy');
+define('BAIDU_SK','cAIVgDgquixj3nCvACyEWwdT0vjynxTe');
 
 define('BAIDU_MYSQL_HOST','sqld.duapp.com');
 define('BAIDU_MYSQL_DBNAME','vGqVSTLBAJuMcqzGlevs');
