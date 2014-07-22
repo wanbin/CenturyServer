@@ -25,30 +25,13 @@ class BaseCommand
 	protected $heroObject;
 	protected $issync = FALSE;
 	protected $commandName = '';
-	protected $noServerCommand;
 	protected $cacheItem = array();
 	protected $version = '0.0.0';
 	protected $questrStr = 'quest';
 	
 	public function execute($command, $param, $sign_arr) {
 		$errorCode = 0;
-		$this->noValidateCommand = $GLOBALS ['config'] ['noValidateCommand'];
-		$this->noServerCommand = $GLOBALS ['config'] ['noServerCommand'];
-		if (isset ( $GLOBALS ['config'] ['syncQQpay'] )) {
-			$this->isQQPoints = $GLOBALS ['config'] ['syncQQpay'];
-		}
 		try {
-//			$this->server = $sign_arr ['server'];
-// 			if (! in_array ( $command, $this->noServerCommand )) {
-// 				if (! isset ( $this->server )) {
-// 					$this->licitException ( 'server is empty', 1201 );
-// 				}
-// 			}
-			if (!in_array ( $command, $this->noValidateCommand )) {
-				// 验证account
-				$accountMC = $this->getInstance ('AccountCache');
-// 				$this->user_account = $accountMC->validate ( $param, $sign_arr );
-			}
 			$this->uid = $sign_arr ['uid'];
 			$this->gameuid = $this->getGameuid ( $this->uid );
 			$this->version = $sign_arr ['version'];
