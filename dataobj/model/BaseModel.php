@@ -106,7 +106,7 @@ class BaseModel {
 			$user = BAIDU_AK;
 			$pwd = BAIDU_SK;
 			$dbname = BAIDU_MYSQL_DBNAME;
-			$link = @mysql_connect ( "{$host}:{$port}", $user, $pwd, true );
+			$this->mysqlConnect = @mysql_connect ( "{$host}:{$port}", $user, $pwd, true );
 		}
 		if (! $this->mysqlConnect) {
 			die ( "Connect Server Failed: " . mysql_error () );
