@@ -72,17 +72,6 @@ class BaseModel {
 	}
 	
 	public function oneSql($sql) {
-		if (ISBAIDU) {
-			$sqlarr = explode ( ';', $sql );
-			$ret = null;
-			foreach ( $sqlarr as $key => $value ) {
-				echo $sql;
-				$ret = $this->BaiduContent ( $sql );
-				print_R($ret);
-			}
-			return $ret;
-		}
-		
 		$DBHandler = $this->getDBInstance ( $this->getTableName () );
 		$tem = explode ( ' ', $sql );
 		if (in_array ( $tem [0], array (
@@ -93,10 +82,17 @@ class BaseModel {
 		) )) {
 			$sqlarr=explode(';', $sql);
 			foreach ($sqlarr as $key=>$value){
-				$DBHandler->execute ( $value );
+				if (ISBAIDU) {
+					$this->BaiduExecute ( $sql );
+				} else {
+					$DBHandler->execute ( $value );
+				}
 			}
 			return;
 		} else {
+			if (ISBAIDU) {
+				return $this->BaiduContent($sql);
+			}
 			return $DBHandler->getAll ( $sql );
 		}
 	}
@@ -108,7 +104,6 @@ class BaseModel {
 		$pwd = BAIDU_SK;
 		$dbname = BAIDU_MYSQL_DBNAME;
 		$link = @mysql_connect ( "{$host}:{$port}", $user, $pwd, true );
-		
 		if (! $link) {
 			die ( "Connect Server Failed: " . mysql_error () );
 		}
@@ -116,7 +111,26 @@ class BaseModel {
 			die ( "Select Database Failed: " . mysql_error ( $link ) );
 		}
 		$ret = mysql_query ( $sql, $link );
-		return $ret;
+		$result=array();
+		while ($row = mysql_fetch_assoc($ret)) {
+			$result[]=$row;
+		}
+		return $result;
+	}
+	protected function BaiduExecute($sql) {
+		$host = BAIDU_MYSQL_HOST;
+		$port = BAIDU_MYSQL_PORT;
+		$user = BAIDU_AK;
+		$pwd = BAIDU_SK;
+		$dbname = BAIDU_MYSQL_DBNAME;
+		$link = @mysql_connect ( "{$host}:{$port}", $user, $pwd, true );
+		if (! $link) {
+			die ( "Connect Server Failed: " . mysql_error () );
+		}
+		if (! mysql_select_db ( $dbname, $link )) {
+			die ( "Select Database Failed: " . mysql_error ( $link ) );
+		}
+		mysql_query ( $sql, $link );
 	}
 	
 	protected function getTableName() {
