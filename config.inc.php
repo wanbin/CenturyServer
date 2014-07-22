@@ -1,5 +1,4 @@
 <?php
-include_once PATH_ROOT.'../config.host.php';
 global $config;
 $config = array();
 $cacheHost=array();
