@@ -8,30 +8,12 @@ class DBHandler
 	private $pconnect = False;
 	private $charset  = 'utf8';
 	
-	public function __construct($table,$gameuid,$server)
-	{
-		self::initialize($table,$gameuid,$server);
+	public function __construct($table,$gameuid,$server) {
+			self::initialize($table,$gameuid,$server);
 	}
 	
 	private function initialize($table,$gameuid,$server)
 	{
-		// 获取数据库配置
-	
-		$host_map = $GLOBALS['config']['host_map'];
-		$DB_map   = $GLOBALS['config']['DB_map'];
-		
-		$host = 0;
-		foreach ($host_map as $key => $val)
-		{
-			$gameuid -= $val;
-			if ($gameuid <= 0)
-			{
-				$host = $key;
-				break;
-			}
-		}
-		
-		$DB = $DB_map[$host];
 		$this->DBConfig['host'] = DB_HOST;
 		$this->DBConfig['username'] = DB_USER;
 		$this->DBConfig['password'] = DB_PWD;
@@ -58,7 +40,7 @@ class DBHandler
 		if (isset($this->conn)){
 			return $this->conn;
 		}
-		
+
 		$this->conn = $this->getDriver();
 		$this->conn->connect
 					(

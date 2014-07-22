@@ -5,7 +5,7 @@ $webHost = '';
 $cdnHost = '';
 global $config;
 $config = array();
-
+$cacheHost=array();
 
 $config['host_map'] = array(10000000,20000000);       //一个服务器最多用户
 $config['DB_map'] = array(
@@ -44,20 +44,22 @@ $config['sns_arr'] = array(
 );
 $config ['redis'] = false;
 $config ['memcache'] = array (
-		'TestContentCache' => true,
-		'MappingCache' => true,
 		'AccountCache'=>true
 );
-//逻辑开服
-// $config['dispatchCount'] = 10;//逻辑开服最大个数
-// $config['dispatchTable'] = array('user_mapping');//逻辑开服的数据表
+
 $config['noServerCommand'] = array('GameRegister');
-$config['noValidateCommand'] = array('GameInit','GameRegister','Test');
 $config['webBase'] = 'http://'.$webHost.'/';
 $config['cdnBase'] = 'http://'.$cdnHost.'/';
 $config['version'] = array('0.0.1');
 $config['version_default'] = '0.0.1';
 
+
+define('BAIDU_AK','v2OxzHT5dXTmzIu9pAtdhkTP');
+define('BAIDU_SK','Y8N7ndlppFdxFAbN01To2W81RNFdOVxy');
+
+define('BAIDU_MYSQL_HOST','sqld.duapp.com');
+define('BAIDU_MYSQL_DBNAME','vGqVSTLBAJuMcqzGlevs');
+define('BAIDU_MYSQL_PORT','4050');
 
 //JPUSH相关配置
 define('DB_HOST', '42.121.123.185');
