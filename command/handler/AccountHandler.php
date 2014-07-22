@@ -57,8 +57,6 @@ class AccountHandler extends AccountCache {
 		$res = $obj->send ( rand ( 100000000, 999999999 ), 3, str_replace("-", "", $useralise), 1, $msg_content, "android,ios" );
 	}
 	public function changeUserName($username) {
-		$this->updateAccount ( array (
-				'username' => $username
-		) );
+		parent::updateUserName($username);
 	}
 }
