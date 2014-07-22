@@ -12,17 +12,7 @@ class PublishHandler extends PublishCache{
 	 * 添加一个新闻公告
 	 */
 	public function newPublish($message,$type){
-		$content=array(
-				'content'=>$message,
-				'time' => time (),
-				'type' => $type,
-				'isshow' => 0
-		);
-		//如果是测试，则直接显示出来
-		if (TEST) {
-			$content ['isshow'] = 1;
-		}
-		$this->add($content);
+		return $this->add($message,$type);
 	}
 	/**
 	 * 审核词汇

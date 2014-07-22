@@ -79,6 +79,11 @@ class PublishModel extends BaseModel {
 		$this->oneSql($sql);
 	}
 	
+	public function add($content, $type) {
+		$time = time ();
+		$sql = "insert into user_publish(gameuid,content,type,time) values ($this->gameuid,'$content',$type,$time)";
+		return $this->oneSql ( $sql );
+	}
 	
 	protected function getFields() {
 		return 'id,gameuid,content,time,type,like,dislike,isshow';
