@@ -61,6 +61,7 @@ define('BAIDU_MYSQL_HOST','sqld.duapp.com');
 define('BAIDU_MYSQL_DBNAME','vGqVSTLBAJuMcqzGlevs');
 define('BAIDU_MYSQL_PORT','4050');
 
+
 //JPUSH相关配置
 define('DB_HOST', '42.121.123.185');
 define('DB_USER', 'root');
