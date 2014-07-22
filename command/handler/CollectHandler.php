@@ -17,6 +17,11 @@ class CollectHandler extends CollectCache{
 	 */
 	public function newCollect($id, $type) {
 		
+		$nowtype=$this->checkCollete ( $id) ;
+		if($nowtype==$type){
+			return false;
+		}
+		
 		$content = array (
 				'gameuid' => $this->gameuid,
 				'time' => time (),
@@ -24,13 +29,10 @@ class CollectHandler extends CollectCache{
 				'publish_id' => $id
 		);
 	
-		if ($this->checkCollete ( $id, $type ) > 0) {
-			return false;
-		}
+		$this->add ( $content );
 		include_once 'PublishHandler.php';
 		$publish = new PublishHandler ( $this->uid );
-		$publish->addLikeWith($id, $type);
-		$this->add ( $content );
+		$publish->addLikeWith ( $id, $type );
 		return true;
 	}
 	

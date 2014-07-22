@@ -94,20 +94,12 @@ class PublishHandler extends PublishCache{
 		}
 		return $ret;
 	}
-	public function addLikeWith($id, $type) {
+	public function addLikeWith($id, $type,$costOther=0) {
+			// 这个是标记为喜欢或不喜欢 1，喜欢 2，不喜欢
 		if ($type == 1) {
-			$dislike = 0;
-			// 如果有不喜欢则标记为喜欢
-			if ($this->checkCollete ( $id, 2 ) > 0) {
-				$dislike = - 1;
-			}
-			parent::addLike ( $id, 1, $dislike );
+			parent::addLike ( $id, 1, $costOther );
 		} else if ($type == 2) {
-			$like = 0;
-			if ($this->checkCollete ( $id, 1 ) > 0) {
-				$like = - 1;
-			}
-			parent::addLike ( $id, $like, 1 );
+			parent::addLike ( $id, $costOther, 1 );
 		}
 	}
 }

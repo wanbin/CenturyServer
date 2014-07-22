@@ -7,9 +7,9 @@ require_once PATH_MODEL.'BaseModel.php';
 class CollectModel extends BaseModel {
 	
 	
-	protected function checkCollete($id,$type) {
-		$res=$this->oneSqlSignle("select count(*) count from user_collect where publish_id=$id and type=$type and gameuid=".$this->gameuid);
-		return $res['count'];
+	protected function checkCollete($id) {
+		$res=$this->oneSqlSignle("select type from user_collect where publish_id=$id and gameuid=".$this->gameuid);
+		return $res['type'];
 	}
 	
 	/**
