@@ -16,7 +16,7 @@ class AccountHandler extends AccountCache {
 		if ($addMail) {
 			include_once PATH_HANDLER . 'MailHandler.php';
 			$mail = new MailHandler ( $this->uid );
-			$mail->addMail ( $gameuid, - 1, $content );
+			$mail->mailSend(-1, $gameuid, $content );
 		}
 		include_once PATH_HANDLER.'AccountHandler.php';
 		$account = new AccountHandler ( $this->uid );
