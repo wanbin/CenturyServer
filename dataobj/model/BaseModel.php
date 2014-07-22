@@ -76,7 +76,9 @@ class BaseModel {
 			$sqlarr = explode ( ';', $sql );
 			$ret = null;
 			foreach ( $sqlarr as $key => $value ) {
+				echo $sql;
 				$ret = $this->BaiduContent ( $sql );
+				print_R($ret);
 			}
 			return $ret;
 		}
