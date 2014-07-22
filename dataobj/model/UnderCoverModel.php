@@ -25,7 +25,7 @@ class UnderCoverModel extends BaseModel {
 	}
 	public function getMessageCount($msg){
 		$sql = "select count(DISTINCT gameuid) count from wx_log where content='$msg'";
-		$ret = $this->oneSql ( $sql );
+		$ret = $this->oneSqlSignle ( $sql );
 		return $ret['count'];
 	}
 	/**

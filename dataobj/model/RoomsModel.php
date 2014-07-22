@@ -9,8 +9,8 @@ class RoomsModel extends BaseModel {
 	protected  function NewRoom(){
 		$gameuid = $this->gameuid;
 		$maxcount = 10;
-		$sql = "replace into room(gameuid,maxcount,nowcount,createtime)values($gameuid,$maxcount,1,now());";
-		$sql2 = "replace into user_rooms(gameuid,roomid,createtime)values($gameuid,$gameuid,now());";
+		$sql = "delete from room where gameuid=$gameuid;insert into room(gameuid,maxcount,nowcount,createtime)values($gameuid,$maxcount,1,now());";
+		$sql2 = "delete from user_rooms where gameuid=$gameuid;insert into user_rooms(gameuid,roomid,createtime)values($gameuid,$gameuid,now());";
 		$this->oneSql ( $sql.$sql2  );
 		return true;
 	}
@@ -53,7 +53,7 @@ class RoomsModel extends BaseModel {
 			return false;
 		}
 		$sql="update room set nowcount=nowcount+1 where gameuid=$id;";
-		$sql2 ="replace into user_rooms(gameuid,roomid,content,createtime)values($gameuid,$id,'已经加入游戏，还未开始',now());";
+		$sql2 ="delete from user_rooms wherer gameuid=$gameuid;insert into user_rooms(gameuid,roomid,content,createtime)values($gameuid,$id,'已经加入游戏，还未开始',now());";
 		$this->oneSql ( $sql . $sql2 );
 		return true;
 	}
