@@ -100,22 +100,20 @@ class BaseModel {
 	}
 	
 	protected function BaiduContent($sql) {
-		if ($this->mysqlConnect == null) {
-			$host = BAIDU_MYSQL_HOST;
-			$port = BAIDU_MYSQL_PORT;
-			$user = BAIDU_AK;
-			$pwd = BAIDU_SK;
-			$dbname = BAIDU_MYSQL_DBNAME;
-			$this->mysqlConnect = @mysql_connect ( "{$host}:{$port}", $user, $pwd, true );
-		}
-		if (! $this->mysqlConnect) {
+		$host = BAIDU_MYSQL_HOST;
+		$port = BAIDU_MYSQL_PORT;
+		$user = BAIDU_AK;
+		$pwd = BAIDU_SK;
+		$dbname = BAIDU_MYSQL_DBNAME;
+		$link = @mysql_connect ( "{$host}:{$port}", $user, $pwd, true );
+		
+		if (! $link) {
 			die ( "Connect Server Failed: " . mysql_error () );
 		}
-// 		echo "$user \n $pwd \n $dbname";
-		if (! mysql_select_db ( $dbname, $this->mysqlConnect )) {
-			die ( "Select Database Failed: " . mysql_error ( $this->mysqlConnect ) );
+		if (! mysql_select_db ( $dbname, $link )) {
+			die ( "Select Database Failed: " . mysql_error ( $link ) );
 		}
-		$ret = mysql_query ( $sql, $this->mysqlConnect );
+		$ret = mysql_query ( $sql, $link );
 		return $ret;
 	}
 	
