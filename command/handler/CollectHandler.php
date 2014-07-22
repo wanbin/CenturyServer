@@ -16,20 +16,11 @@ class CollectHandler extends CollectCache{
 	 * 添加一个新闻公告
 	 */
 	public function newCollect($id, $type) {
-		
 		$nowtype=$this->checkCollete ( $id) ;
 		if($nowtype==$type){
 			return false;
 		}
-		
-		$content = array (
-				'gameuid' => $this->gameuid,
-				'time' => time (),
-				'type' => $type,
-				'publish_id' => $id
-		);
-	
-		$this->add ( $content );
+		$this->add ( $id,$type );
 		include_once 'PublishHandler.php';
 		$publish = new PublishHandler ( $this->uid );
 		$publish->addLikeWith ( $id, $type );
