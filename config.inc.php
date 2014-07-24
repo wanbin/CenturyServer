@@ -20,9 +20,9 @@ define('BAIDU_MYSQL_PORT','4050');
 
 
 //JPUSH相关配置
-define('DB_HOST', '42.121.123.185');
+define('DB_HOST', '127.0.0.1');
 define('DB_USER', 'root');
-define('DB_PWD', 'abc123');
+define('DB_PWD', '');
 define('DB_NAME', 'wx');
 define('DB_TAB', 'zxzbcar_push');
 define('DB_CODE','utf8');

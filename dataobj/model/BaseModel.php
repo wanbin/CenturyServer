@@ -72,6 +72,7 @@ class BaseModel {
 	}
 	
 	public function oneSql($sql) {
+		$this->baidudebug($sql);
 		$DBHandler = $this->getDBInstance ( $this->getTableName () );
 		$tem = explode ( ' ', $sql );
 		if (in_array ( $tem [0], array (
@@ -82,7 +83,7 @@ class BaseModel {
 		) )) {
 			$sqlarr=explode(';', $sql);
 			foreach ($sqlarr as $key=>$value){
-				if (ISBAIDU) {
+				if (ISBAIDU==1) {
 					$this->BaiduExecute ( $sql );
 				} else {
 					$DBHandler->execute ( $value );
@@ -90,7 +91,7 @@ class BaseModel {
 			}
 			return;
 		} else {
-			if (ISBAIDU) {
+			if (ISBAIDU==1) {
 				return $this->BaiduContent($sql);
 			}
 			return $DBHandler->getAll ( $sql );
@@ -110,7 +111,7 @@ class BaseModel {
 		if (! mysql_select_db ( $dbname, $link )) {
 			die ( "Select Database Failed: " . mysql_error ( $link ) );
 		}
-		$this->debug($sql);
+		
 		$ret = mysql_query ( $sql, $link );
 		if (! $ret) {
 			$this->writeSqlError ( $sql, mysql_error ( $link ) );
@@ -135,7 +136,6 @@ class BaseModel {
 		if (! mysql_select_db ( $dbname, $link )) {
 			die ( "Select Database Failed: " . mysql_error ( $link ) );
 		}
-		$this->debug($sql);
 		$ret = mysql_query ( $sql, $link );
 		if (! $ret) {
 			$this->writeSqlError ( $sql, mysql_error ( $link ) );
@@ -168,7 +168,7 @@ class BaseModel {
 	
 	
 	public function writeSqlError($sql, $e) {
-		if (ISBAIDU) {
+		if (ISBAIDU==1) {
 			require_once FRAMEWORK."/BaeLog.class.php";
 			$user = BAIDU_AK;
 			$pwd = BAIDU_SK;
@@ -184,8 +184,8 @@ class BaseModel {
 		}
 	}
 	
-	public function debug($message){
-		if (ISBAIDU) {
+	public function baidudebug($message){
+		if (ISBAIDU==1) {
 			require_once FRAMEWORK."/BaeLog.class.php";
 			$user = BAIDU_AK;
 			$pwd = BAIDU_SK;
