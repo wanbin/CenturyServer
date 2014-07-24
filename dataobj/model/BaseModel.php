@@ -111,6 +111,10 @@ class BaseModel {
 			die ( "Select Database Failed: " . mysql_error ( $link ) );
 		}
 		$ret = mysql_query ( $sql, $link );
+		if (! $ret) {
+			$this->writeSqlError ( $sql, mysql_error ( $link ) );
+			return array();
+		}
 		$result=array();
 		while ($row = mysql_fetch_assoc($ret)) {
 			$result[]=$row;
@@ -130,7 +134,12 @@ class BaseModel {
 		if (! mysql_select_db ( $dbname, $link )) {
 			die ( "Select Database Failed: " . mysql_error ( $link ) );
 		}
-		mysql_query ( $sql, $link );
+		$ret = mysql_query ( $sql, $link );
+		if (! $ret) {
+			$this->writeSqlError ( $sql, mysql_error ( $link ) );
+			return false;
+		}
+		return true;
 	}
 	
 	protected function getTableName() {
@@ -157,10 +166,20 @@ class BaseModel {
 	
 	
 	public function writeSqlError($sql, $e) {
-		$fileName = date ( "Y-m-d", time () ) . "sqlerror.sql";
-		$temtime = date ( "Y-m-d H:i:s", time () );
-		$strAdd = "#[$temtime]\n";
-		file_put_contents ( PATH_ROOT . "/log/$fileName", $strAdd . $e . $sql, FILE_APPEND );
+		if (ISBAIDU) {
+			require_once FRAMEWORK."/BaeLog.class.php";
+			$user = BAIDU_AK;
+			$pwd = BAIDU_SK;
+			$logger=BaeLog::getInstance(array('user'=>$user, 'passwd'=> $pwd));
+			$logger->setLogLevel(16);
+			$logger->setLogTag("sql_error");
+			$logger->Fatal($e);
+		}else{
+			$fileName = date ( "Y-m-d", time () ) . "sqlerror.sql";
+			$temtime = date ( "Y-m-d H:i:s", time () );
+			$strAdd = "#[$temtime]\n";
+			file_put_contents ( PATH_ROOT . "/log/$fileName", $strAdd . $e . $sql, FILE_APPEND );
+		}
 	}
 	
 	//=========================================Cache=====================================//
