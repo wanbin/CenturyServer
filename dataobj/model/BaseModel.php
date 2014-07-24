@@ -110,6 +110,7 @@ class BaseModel {
 		if (! mysql_select_db ( $dbname, $link )) {
 			die ( "Select Database Failed: " . mysql_error ( $link ) );
 		}
+		$this->debug($sql);
 		$ret = mysql_query ( $sql, $link );
 		if (! $ret) {
 			$this->writeSqlError ( $sql, mysql_error ( $link ) );
@@ -134,6 +135,7 @@ class BaseModel {
 		if (! mysql_select_db ( $dbname, $link )) {
 			die ( "Select Database Failed: " . mysql_error ( $link ) );
 		}
+		$this->debug($sql);
 		$ret = mysql_query ( $sql, $link );
 		if (! $ret) {
 			$this->writeSqlError ( $sql, mysql_error ( $link ) );
@@ -179,6 +181,18 @@ class BaseModel {
 			$temtime = date ( "Y-m-d H:i:s", time () );
 			$strAdd = "#[$temtime]\n";
 			file_put_contents ( PATH_ROOT . "/log/$fileName", $strAdd . $e . $sql, FILE_APPEND );
+		}
+	}
+	
+	public function debug($message){
+		if (ISBAIDU) {
+			require_once FRAMEWORK."/BaeLog.class.php";
+			$user = BAIDU_AK;
+			$pwd = BAIDU_SK;
+			$logger=BaeLog::getInstance(array('user'=>$user, 'passwd'=> $pwd));
+			$logger->setLogLevel(16);
+			$logger->setLogTag("sql_query");
+			$logger->Debug($message);
 		}
 	}
 	
