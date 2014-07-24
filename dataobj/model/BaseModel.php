@@ -84,7 +84,7 @@ class BaseModel {
 			$sqlarr=explode(';', $sql);
 			foreach ($sqlarr as $key=>$value){
 				if (ISBAIDU==1) {
-					$this->BaiduExecute ( $sql );
+					$this->BaiduExecute ( $value );
 				} else {
 					$DBHandler->execute ( $value );
 				}
