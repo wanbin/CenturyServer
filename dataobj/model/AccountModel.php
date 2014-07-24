@@ -19,7 +19,7 @@ class AccountModel extends BaseModel {
 	}
 	
 	public function getAccountByGameuid($gameuid = '') {
-		$sql="select * from wx_account  where gameuid=".$this->gameuid;
+		$sql="select * from wx_account  where gameuid=$gameuid";
 		return $this->oneSqlSignle($sql);
 	}
     

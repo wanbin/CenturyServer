@@ -87,7 +87,7 @@ class RoomsHandler extends RoomsCache{
 		foreach ($roomInfo['room_user'] as $key=>$value){
 			$content="身份：".$roomContent['content'][$key];
 			$roomInfo['room_user'][$key]['content']=$roomContent['content'][$key];
-			if(!isset($value['gameuid'])){
+			if(!isset($value['gameuid'])||$value['gameuid']<0){
 				continue;
 			}
 			$this->setUserContent($value['gameuid'], $content);
