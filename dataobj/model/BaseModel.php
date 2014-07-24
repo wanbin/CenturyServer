@@ -124,6 +124,9 @@ class BaseModel {
 		return $result;
 	}
 	protected function BaiduExecute($sql) {
+		if (empty ( $sql )) {
+			return false;
+		}
 		$host = BAIDU_MYSQL_HOST;
 		$port = BAIDU_MYSQL_PORT;
 		$user = BAIDU_AK;
