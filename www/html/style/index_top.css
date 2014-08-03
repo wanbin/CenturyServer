@@ -1,0 +1,517 @@
+@charset "utf-8";
+/* CSS Document */
+*{ margin:0;padding:0;}
+img{overflow:hidden; border:0 none;outline:none;}
+li{list-style:none;}
+a{text-decoration:none;outline:none;}
+a:link{ color:#CCC;}
+body{font-family:"微软雅黑";font-size:12px;}
+a:hover{color:#30C;text-decoration:none;}
+.box {
+	color: #CCC; 
+	height: 872px;
+	width: 100%;
+	overflow:hidden;	
+}
+.boxcover{
+	height: 2033px;	width: 100%;
+	position:absolute;
+	top:0px; left:0px;
+	z-index:150;	display:none;
+	background: url(../imges/boxcover_gb.png) repeat center center;
+	}
+.topin {
+	float: left;
+	height: 872px;	width: 100%;
+	overflow: hidden;
+	position: relative;
+	background-image: url(../imges/bg_top_top.jpg);	background-repeat: repeat-x;	background-position: center top;
+	}
+.top {
+	float: left;
+	height: 872px;	width: 100%;
+	overflow: hidden;
+	position: relative;
+	background-image: url(../imges/bg_top_main.jpg);	background-repeat: no-repeat;	background-position: center bottom;
+}
+/*##################################################################*/
+.top_up_left{
+	height: 147px;	width: 35%;
+	position:absolute;
+	top:0px;
+	right:65%;
+	z-index:10;
+}
+.top_up_center {
+	height:191px; /*315px;*/	width: 356px;
+	left:35%;
+	position:absolute;
+	top:0px;
+	z-index:10;
+}
+.top_up_right {
+	height: 147px;	width:35%;
+	position:absolute;
+	top:0px;
+	left:65%;
+	z-index:10;
+}
+/*##################################################################*/
+.top_up_left_up {
+	float: right;
+	height: 62px;	width: 100%;
+	position: relative;
+}
+.top_up_left_down {
+	float: right;
+	height: 85px;	width: 100%;
+	position: relative;
+	overflow:hidden;
+}
+		.top_up_left_up .logo {
+			float: right;            position:relative;
+			right:10px;
+			height: 100%;			 width: 230px;
+		}
+		.top_up_left_up .sousuo {
+			height: 62px;			width: 159px;
+			float: right;            position: relative;
+						
+			background-image: url(../imges/sousuo/ss_border.png);			background-repeat: no-repeat;			background-position: left center;
+		}
+		.sousuo form {
+			float: left;
+			height: 25px;			width: 140px;
+			position: absolute;
+			left: 10px;			top: 18px;
+			color: #FFF;
+			background:none;
+		}
+		.sstxt {
+			outline:none;
+			color:#999;
+			margin: 0px;			padding: 0px;
+			height: 25px;			width: 110px;
+			border-top-style: none;
+			border-right-style: none;
+			border-bottom-style: none;
+			border-left-style: none;
+			float: left;
+			position: relative;
+			background: none;
+		}
+		.ssimg{
+			height: 25px;
+			width: 25px;
+			background:none;
+			border:none;
+			float: left;
+			position: relative;
+		}
+/*##################################################################*/
+.top_up_center_touxiang {
+	margin: 0px;				  padding: 0px;
+	float: left;
+	height: 147px;				  width: 356px;
+	position: relative;
+   }
+.top_up_center_xingbtn {
+	float: left;
+	height: 44px;				  width: 356px;
+	position: relative;
+	background-image: url(../imges/btn/border_btn.png);
+	background-repeat: no-repeat;
+   }
+.top_up_center_xingword {
+	margin: 0px;				  padding: 0px;
+	float: left;
+	height: 124px;				  width: 356px;
+	position: relative;
+	}
+.top_up_center_xingbtn a span{  
+	float: left; position: relative;
+	height: 39px;				  width: 112px;
+	text-align: center;
+	margin-top:5px;				  margin-left: 4px;
+	padding-top: 10px;
+	color:#FFF;
+	border:none;
+	}
+.xxbtn1{ background-image: url(../imges/btn/btn1.png); background-repeat: no-repeat;   background-position: top center;   }
+.xxbtn1_1{ background-image: url(../imges/btn/btn1_1.png);   background-repeat: no-repeat;   background-position: top center;      }
+.xxbtn2 {  background-image: url(../imges/btn/btn2.png);  background-repeat: no-repeat; background-position: top center;	      }
+.xxbtn2_1 {  background-image: url(../imges/btn/btn2_1.png); background-repeat: no-repeat; background-position: top center;  }
+/*####################################################################################*/
+.top_up_right_up {
+	margin: 0px;	padding: 0px;
+	float: left;
+	height: 62px;	width: 100%;
+	position: relative;
+}
+          
+.top_up_right_down{
+	margin: 0px;	padding: 0px;
+	height: 85px;	width:100%;
+	float: left;
+	position: relative;
+	overflow:hidden;
+}
+.top_up_right_up a:hover{ color:#063;}
+/*##################################################################*/
+.xingzuo {
+	color:#CCC;
+	padding-top: 0px;
+	padding-bottom: 5px;	
+	height: 85px;	width: 60px;
+	float:right;    position: relative;
+	border:none;	background-color:#;	
+	z-index:100;
+}
+.xingzuo a{
+	border:none;	background:none;	outline:none;	position:absolute;
+	top:0px	left:0px;	z-index:100;
+}
+.xingzuo span {
+	text-align: center;
+	width:100%;
+	position:absolute;
+	bottom:0px;	top:65px;
+}
+.xingzuo1 {
+	color:#CCC;
+	padding-top: 0px;
+	padding-bottom: 5px;	
+	height: 85px;	width: 60px;
+	float:left;    position: relative;
+	border:none;	background-color:#;	
+}
+.xingzuo1 a{
+	border:none;	background:none;	outline:none;	position:absolute;
+	top:0px	left:0px;	
+}
+.xingzuo1 span {
+	text-align: center;
+	width:100%;
+	position:absolute;
+	bottom:0px;	top:65px;
+}
+/*###################################################################################*/
+.top_down_left{
+	height: 124px;	width: 100px;
+	top:748px;
+	float: left;
+	position: relative;
+}
+.top_down_center{ 	width: 510px;
+	top:730px; left:200px;
+	position:absolute;
+}
+
+#home_edit_xq_k{
+	border-radius:10px;
+	height:68px;	
+	width: 580px;
+	top:654px; 
+	left:540px;
+	position:absolute;
+	padding:8px 10px;
+	background-image:url("../imges/home_edit_xq_bg.png");
+	z-index:9999;
+}
+
+#home_edit_xq_k a{
+position: relative;
+				float: left;
+}
+
+.top_down_right{
+	height: 124px;	width: 300px;
+	top:748px;left:800px;
+	position:absolute;
+}
+              .top_down_center_huixie {
+				  margin: 0px;
+				  float: left;  height: 56px;  width: 100%;
+				  position: relative;
+			      }
+			  .top_down_center_huixie a{
+				position: relative;
+				float: left;
+			  }
+			  .huixie {
+				  color: #fff;
+					float: left;
+					height: 52px;
+					line-height: 52px;
+					position: relative;
+					text-align: center;
+					width: 52px;
+			      }
+			  a:link .huixie {
+				  background-image: url(../imges/huixie.png);
+				  background-repeat: no-repeat;
+				  background-position: center center;
+			      }
+			  a:hover .huixie {
+				  background-image: url(../imges/huixie_1.png);
+				  background-repeat: no-repeat;
+				  background-position: center center;
+			      }
+			  a:active .huixie {
+				  background-image: url(../imges/huixie_2.png);
+				  background-repeat: no-repeat;
+				  background-position: center center;
+			      }
+			.edit_edit{
+				color:#fcc04b;
+				float: left;
+				height: 52px;
+				line-height: 52px;
+				position: relative;
+				text-align: center;
+				width:52px;
+				background-image: url(../imges/home_edit_edit_bg.png);
+				  background-repeat: no-repeat;
+				  background-position: center center;
+			}
+				.edit_xq_con {
+					color: #fff;
+					float: left;
+					height: 52px;
+					line-height: 52px;
+					position: relative;
+					text-align: center;
+					width: 52px;
+			      }
+				
+				a:link .edit_xq_con {
+				  background-image: url(../imges/huixie.png);
+				  background-repeat: no-repeat;
+				  background-position: center center;
+			      }
+			  a:hover .edit_xq_con {
+				  background-image: url(../imges/huixie_1.png);
+				  background-repeat: no-repeat;
+				  background-position: center center;
+			      }
+			  a:active .edit_xq_con {
+				  background-image: url(../imges/huixie_2.png);
+				  background-repeat: no-repeat;
+				  background-position: center center;
+			      }
+				.edit_xq_del_k{
+					position:absolute; 
+					top:0px;
+					right:4px;
+					width:14px;
+					height:14px;
+					cursor: pointer;
+					display:none;
+					margin:0;
+					z-index:9999;
+				}
+
+				.edit_xq_del_k img{
+					width:14px;
+					height:14px;
+					cursor: pointer;
+				} 
+				.edit_xq_add_k{
+					position:absolute; 
+					top:0px;
+					right:4px;
+					width:14px;
+					height:14px;
+					cursor: pointer; 
+					margin:0;
+					z-index:9999;
+				}
+
+				.edit_xq_add_k img{
+					width:14px;
+					height:14px;
+					cursor: pointer;
+				} 
+
+				
+
+			  .top_down_center_gongneng {
+				  float: left;
+				  height: 75px;	  width: 100%;
+				  position: relative;
+			      }
+			  .ggbox{
+				  margin-left:20px;	  padding-top: 0px;		  padding-bottom:0px;	
+				  height: 75px;	width: 50px;
+				  float:left;    position: relative;
+				  border:none;	 background-color:#;	
+				  z-index:100;
+			     }
+			  .ggbox a{
+				  border:none;	background:none;	outline:none;	position:absolute;
+				  top:0px	left:0px;	z-index:100;
+				  }
+			  .ggbox span {
+				  text-align: center;				  width:100%;
+				  position:absolute;
+				  bottom:0px;	top:55px;
+				  }
+			  #gg1{	width:50px;	height:50px;}
+			  #gg2{	width:50px;	height:50px;} 
+			  #gg3{	width:50px;	height:50px;} 
+			  #gg4{	width:50px;	height:50px;} 
+			  #gg5{	width:50px;	height:50px;} 
+			  #gg6{	width:50px;	height:50px;} 
+			 .ggbox a:link #gg1{background-image: url(../imges/gongneng/1.png);background-position: center center;}
+			 .ggbox a:hover #gg1{background-image: url(../imges/gongneng/11.png);	background-position: center center;}
+			 .ggbox a:active #gg1{background-image: url(../imges/gongneng/1_1.png);background-position: center center;	}
+			  
+			 .ggbox a:link #gg2{background-image: url(../imges/gongneng/2.png);background-position: center center;}
+			 .ggbox a:hover #gg2{background-image: url(../imges/gongneng/22.png);	background-position: center center;}
+			 .ggbox a:active #gg2{background-image: url(../imges/gongneng/2_2.png);background-position: center center;	}
+			 
+			 .ggbox a:link #gg3{background-image: url(../imges/gongneng/3.png);background-position: center center;}
+			 .ggbox a:hover #gg3{background-image: url(../imges/gongneng/33.png);	background-position: center center;}
+			 .ggbox a:active #gg3{background-image: url(../imges/gongneng/3_3.png);background-position: center center;	}
+			
+			 .ggbox a:link #gg4{background-image: url(../imges/gongneng/4.png);background-position: center center;}
+			 .ggbox a:hover #gg4{background-image: url(../imges/gongneng/44.png);	background-position: center center;}
+			 .ggbox a:active #gg4{background-image: url(../imges/gongneng/4_4.png);background-position: center center;	}
+			 
+			 .ggbox a:link #gg5{background-image: url(../imges/gongneng/5.png);background-position: center center;}
+			 .ggbox a:hover #gg5{background-image: url(../imges/gongneng/55.png);	background-position: center center;}
+			 .ggbox a:active #gg5{background-image: url(../imges/gongneng/5_5.png);background-position: center center;	}
+			
+			 .ggbox a:link #gg6{background-image: url(../imges/gongneng/6.png);background-position: center center;}
+			 .ggbox a:hover #gg6{background-image: url(../imges/gongneng/66.png);	background-position: center center;}
+			 .ggbox a:active #gg6{background-image: url(../imges/gongneng/6_6.png);background-position: center center;	}
+/*##################################################################*/
+.tuodong {
+	color:#CCC;
+	background-image: url(../imges/shujikuang/b1.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	text-align: center;
+	line-height: 24px;
+	float: left; position: relative;
+	width: 70px; height: 24px;	
+   }
+                 .tuodong_1 {
+					  color:#CCC;
+					  background-image: url(../imges/shujikuang/b1_1.png);
+					  background-repeat: no-repeat;
+					  background-position: center center;
+					  text-align: center;
+					  line-height: 24px;
+					  float: left; position: relative;
+					  width: 70px; height: 24px;	
+				     }
+.tuodong1 {
+    color:#CCC;
+	background-image: url(../imges/shujikuang/b2.png);
+	background-repeat: no-repeat;
+	background-position: center center;
+	text-align: center;
+	line-height: 24px;
+	float: left;position: relative;
+	width: 32px;height: 24px;	
+   }
+			  .tuodong1_1 {
+				  color:#CCC;
+				  background-image: url(../imges/shujikuang/b2_1.png);
+				  background-repeat: no-repeat;
+				  background-position: center center;
+				  text-align: center;
+				  line-height: 24px;
+				  float: left;position: relative;
+				  width: 32px; height: 24px;	
+			     }
+/*#############################################################################################################*/
+.top_center{
+	width:1500px; height:557px;
+	top:191px; left:0px;
+	float:left; position:relative;
+	z-index:50;
+	}
+.top_center div{
+	height: 60px;	width:auto; /*320px;*/
+	position:absolute;
+    }
+.top_center div a span{
+	width:60px; height:60px;	
+	float:left; position:relative;
+    }
+.top_center div div {
+	width:260px; height:60px;	
+	float:left; position:relative;
+	z-index:60;
+	display:none;
+    }
+.top_center div div a{
+	width:260px; height:60px;	
+	background:url(../imges/xingxing/xx_msgbox_1.png) no-repeat left center;
+	float:left; position:relative;
+    }	
+.top_center div div a:active,a:hover,a:visited{ color:#CCC;}
+.top_center div div a:hover{
+	background:url(../imges/xingxing/xx_msgbox_2.png) no-repeat left center;
+	}
+	.xx_app_2 { top:409px;  left:350px;		}
+	.xx_app_2 a span{background: url(../imges/xingxing/xx_app_2.png) no-repeat center center;}
+	
+    .xx_app_1 {    top:100px;  left:150px;		}
+	.xx_app_1 a span{   background: url(../imges/xingxing/xx_app_1.png) no-repeat center center;}
+	
+	.xx_yy_1 {  top:280px;  left:50px;		}
+	.xx_yy_1 a span{ background: url(../imges/xingxing/xx_yy_1.png) no-repeat center center;}
+	.xx_yy_2 {  top:50px;  left:660px;		}
+	.xx_yy_2 a span{ background: url(../imges/xingxing/xx_yy_2.png) no-repeat center center;}
+	.xx_yy_3 {  top:10px;  left:760px;		}
+	.xx_yy_3 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	.xx_yy_4 {  top:10px;  left:470px;		}
+	.xx_yy_4 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	.xx_yy_5 {  top:200px;  left:470px;		}
+	.xx_yy_5 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	.xx_yy_6 {  top:330px;  left:570px;		}
+	.xx_yy_6 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	.xx_yy_7 {  top:270px;  left:660px;		}
+	.xx_yy_7 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	.xx_yy_8 {  top:200px;  left:1000px;		}
+	.xx_yy_8 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	.xx_yy_9 {  top:100px;  left:300px;		}
+	.xx_yy_9 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	.xx_yy_10 {  top:300px;  left:300px;		}
+	.xx_yy_10 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	.xx_yy_11 {  top:240px;  left:200px;		}
+	.xx_yy_11 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	.xx_yy_12 {  top:70px;  left:50px;		}
+	.xx_yy_12 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	.xx_yy_13 {  top:0px;  left:1150px;		}
+	.xx_yy_13 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	.xx_yy_14 {  top:400px;  left:0px;		}
+	.xx_yy_14 a span{ background: url(../imges/xingxing/xx_yy_3.png) no-repeat center center;}
+	
+	.xx_w_1{  top:30px;  left:240px;		}
+	.xx_w_1 a span{ background: url(../imges/xingxing/xx_w_1.png) no-repeat center center;}
+	.xx_w_2{  top:309px;  left:901px;		}
+	.xx_w_2 a span{ background: url(../imges/xingxing/xx_w_2.png) no-repeat center center;}
+	
+	.xx_ban_1 {  top:120px;  left:580px;		}
+	.xx_ban_1 a span{ background: url(../imges/xingxing/xx_ban_1.png) no-repeat center center;}
+	.xx_ban_2 {  top:10px;  left:0px;		    }
+	.xx_ban_2 a span{ background: url(../imges/xingxing/xx_ban_3.png) no-repeat center center;}
+	.xx_ban_3 {  top:150px;  left:850px;		}
+	.xx_ban_3 a span{ background: url(../imges/xingxing/xx_ban_2.png) no-repeat center center;}
+	.xx_ban_4 {  top:320px;  left:1040px;		}
+	.xx_ban_4 a span{ background: url(../imges/xingxing/xx_ban_2.png) no-repeat center center;}
+	.xx_ban_5 {  top:350px;  left:1150px;		}
+	.xx_ban_5 a span{ background: url(../imges/xingxing/xx_ban_2.png) no-repeat center center;}
+	.xx_ban_6 {  top:15px;  left:150px;		}
+	.xx_ban_6 a span{ background: url(../imges/xingxing/xx_ban_2.png) no-repeat center center;}
+	
+	.xx_fk_1 {  top:55px;  left:400px;		}
+	.xx_fk_1 a span{ background: url(../imges/xingxing/xx_fk_1.png) no-repeat center center;}
+	
+	.xx_xiaolian_1 {  top:420px;  left:990px;		}
+	.xx_xiaolian_1 a span{ background: url(../imges/xingxing/xx_xiaolian.png) no-repeat center center;}
+     

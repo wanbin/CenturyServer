@@ -22,6 +22,7 @@ include_once PATH_COMMAND . 'BaseCommand.php';
 require_once FRAMEWORK . '/cache/Cache.class.php';
 require_once FRAMEWORK . '/database/DBHandler.class.php';
 // 加载redies
+require_once PATH_ROOT."framework/MooPHP/MooPHP.php";
 require_once FRAMEWORK . '/redis/Rediska.php';
 include_once FRAMEWORK . 'exception/GameException.php'; // 游戏内部异常处理
 include_once PATH_COMMAND . 'BaseCommand.php';

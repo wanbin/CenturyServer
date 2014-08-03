@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+.pinglun {	
+	height: 1495px;	width: 1000px;
+	z-index: 250;
+	left: 0px;	top: 50px;
+	position:absolute;
+	/*display: none;*/
+	background-color:#FFF;
+	margin:0 auto; 
+	color:#333; font-size:13px;
+}
+.pl_left{
+	height: 115px;	width: 77px;
+	float:left;
+	margin-left:50px; margin-top:20px;
+	font-size:14px;
+	}
+    .pl_left img{ float:left;}
+    .pl_left span{width:77px; height:20px; padding-top:5px; text-align:center; float:left; }
+	.pl_left_jgz{
+		line-height:21px; text-align:center;
+		font-size:15px; font-weight:600; 
+		width:77px; height:21px;
+		float:left;
+		background:url(/xingzuo/imges/pinglun/pl_btn_jgz.png) no-repeat center top;
+		}
+	.pl_left  a:link{ color:#FFF;}
+	.pl_left  a:hover { background-position:0 -21px;}
+.pl_center{
+	height: 100%;	width: 632px;
+	float:left;padding-left:70px;
+/*	background-color:#09F;*/
+	}
+    .pl_center div{ float:left; width:100%;}
+	.pl_center div p{
+		text-indent:0px; font-size:16px; 	line-height: 25px; padding-top:10px;
+		}
+	.pl_center_huixie {
+	    height: 50px;
+	    font-size:13px; line-height:20px background-color:#033; position:relative;
+        }
+
+    .pl_center_huixie div{ float:right; height:40px; width:100px; padding-top:10px;}
+	.pl_center_huixie div img{ position:absolute; right:0px;}
+	.pl_neirong {
+		background-image: url(../imges/pinglun/pl_bg_1.png);
+		background-repeat: no-repeat;
+		background-position: left top;
+		float: left;
+		height: 75px;
+	}
+	.pl_neirong a{ color:#03C; font-weight:500;}
+	.pl_center a:hover{ text-decoration: underline;}
+	.plarea{ width:570px; height:60px;}
+.pl_right{
+	width:170px; height:100px; float:left;
+	}
+.pl_right img{ float: right; padding:10px;}		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
