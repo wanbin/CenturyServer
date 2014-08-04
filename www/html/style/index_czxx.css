@@ -1,0 +1,224 @@
+@charset "utf-8";
+/* CSS Document */
+.czxx {
+	height: 382px;
+	width: 1150px;
+	position: absolute;
+	left: 0px;
+	top: 400px;
+	background-image: url(../imges/chuangzaoXX/bg_xzxx.png);
+	background-repeat: repeat-x;
+	background-position: center center;
+	display:block;
+	z-index:200;
+}
+.czxx_left{
+	width:305px; height:210px;
+	float:left; position:relative;
+	top:65px; /*background-color:#FC6;*/
+	font-family:"宋体";
+	}
+
+
+	.czxxfont_1{
+		  font-size: 18px;		  color:#666;	
+		  font-weight: 600;
+		  height: 30px;		  width: 305px;
+		  float: left; position: relative;
+		  text-align:center;	
+		}
+
+
+	.czxxfont_2{
+		  font-size: 15px;		  color:#999;		  
+		  height: 35px;		  width: 185px;
+		  float: left; position: relative;
+		  padding-left:120px;		
+		}
+	.czxxfont_3{
+		  font-size: 15px;		  color: #999;		  
+		  height: 30px;		  width: 235px;
+		  float: left; position: relative;
+		  padding-left:70px;				
+		}
+	.czxxfont_4{
+		  font-size: 16px;		  color:#06F;
+		  font-weight: bold;		  
+		  height: 45px;		  width:265px;
+		  float: left; position: relative;
+		  padding-left:40px;		
+		}
+	.czxxfont_5{
+		  font-size: 16px;		  color:#F63;
+		  font-weight: bold;		  
+		  height: 40px;		  width: 245px;
+		  float: left; position: relative;	
+		  padding-left:60px;	
+		}
+	.czxxfont_6{
+		  font-size: 16px;		  color:#3C0;
+		  font-weight: bold;		  
+		  height: 30px;		  width: 245px;
+		  float: left; position: relative;	
+		  padding-left:60px;	
+		}
+.czxx_center{
+	width:600px; height:283px;
+	float:left; position:relative;
+	top:38px;/*background-color:#FC9;*/
+	}
+	.czxx_bq_box {
+		float: left;position: relative;
+		height: 45px;		width: 365px;
+		color:#333;
+	   }
+    .czxx_bq {
+		float: left;position: relative;
+		height: 25px;		width: 55px;
+		padding-top:10px; margin-right:18px;
+		font-size:14px;
+	   }
+	.czxx_bq a{
+		float: left;
+		height: 25px;		width: 25px;
+		position: relative;
+	   }
+	 .czxx_bq span{
+		float: left;position: relative;
+		height: 30px;		width: 30px;
+		padding-top:5px;
+	   }
+	 .czxx_btn_cz{
+		float: left;position: relative;
+		height: 35px;		width: 110px;
+		padding-top:5px; margin-left:120px;
+		   }
+.czxx_right{
+	width:245px; height:250px;
+	float:left; position:relative;
+	top:0px;
+	}
+.czxx_down{
+	width:610px;height:35px;
+	position:absolute;
+	/*background-color:#C60;*/
+	font-weight:900;
+	top:320px; left:450px;
+	}
+	.czxx_down div{
+		  width:auto;height:100%;
+		  float:left; position:relative;
+		  margin-left:30px;color:#FFF; 
+		  }
+	.czxx_tuodong {
+		  background-image: url(../imges/chuangzaoXX/czxxTL/b1.png);
+		  background-repeat: no-repeat;
+		  background-position: center center;
+		  text-align: center;color:#FFF; 
+		  padding-top: 10px;
+		  float: left; position: relative;
+		  width: 70px; height: 24px;	
+		 }
+					   .czxx_tuodong_1 {
+							background-image: url(../imges/chuangzaoXX/czxxTL/b1_1.png);
+							background-repeat: no-repeat;
+							background-position: center center;
+							text-align: center;color:#FFF; 
+							padding-top: 10px;
+							float: left; position: relative;
+							width: 70px; height: 24px;	
+						   }
+	  .czxx_tuodong1 {
+		  background-image: url(../imges/chuangzaoXX/czxxTL/b2.png);
+		  background-repeat: no-repeat;
+		  background-position: center center;
+		  text-align: center;color:#FFF; 
+		  padding-top: 10px;
+		  float: left;position: relative;
+		  width: 32px;height: 24px;	
+		 }
+					.czxx_tuodong1_1 {
+						background-image: url(../imges/chuangzaoXX/czxxTL/b2_1.png);
+						background-repeat: no-repeat;
+						background-position: center center;
+						text-align: center;color:#FFF; 
+						padding-top: 10px;
+						float: left;position: relative;
+						width: 32px; height: 24px;	
+					   }
+/*######################################################################*/
+.hmxxTime {
+	height: 18px;
+	width: 60px;
+	border: 1px solid #CCC;
+}
+.czxxArea {
+	height: 185px;
+	width: 600px;
+	border: none;
+	border-left-style: none;
+	font-size:16px; font-weight:600; color:#06F;
+}
+.czxxcheck {
+	color: #F00;
+	margin:0px;
+	border:none;
+}
+.czxx_exit {
+	float: left;position: relative;
+	height: 80px;	width: 100%;	
+}
+    .czxx_exit img{
+		top:10px; right:10px;
+		position:absolute;
+		}
+.czxx_font {
+	float: left;position: relative;
+	height: 32px;	width: 100%;
+	color:#06F; font-size:17px;
+}
+.czxx_xsx {
+	float: left;
+	height: 80px;
+	width: 100%;
+	position: relative;
+}
+    .czxx_xsx a img{
+		float: left;position: relative;
+		height: 35px;		width: 35px;
+		margin-left:20px;
+	}
+.czxx_huibtn {
+	float: left;	position: relative;
+	height: 80px;	width: 100%;
+}
+
+   .czxx_huibtn form input{
+		float: left;position: relative;
+		height: 25px;		width: 45px;
+		border: solid #CCC 1px; background-color:#F5F5F5;
+		margin-left:10px; margin-top:5px;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,3255 @@
+Array
+(
+    [date] => 2012-12-28 17:04:58
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:19:45
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb5296
+            [sns_id] => 1
+            [gameuid] => 5296
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:19:48
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb5827
+            [sns_id] => 1
+            [gameuid] => 5827
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:20:29
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb1285
+            [sns_id] => 1
+            [gameuid] => 1285
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:25:25
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb4266
+            [sns_id] => 1
+            [gameuid] => 4266
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:25:27
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb2182
+            [sns_id] => 1
+            [gameuid] => 2182
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:25:27
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6092
+            [sns_id] => 1
+            [gameuid] => 6092
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:25:27
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb2305
+            [sns_id] => 1
+            [gameuid] => 2305
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:25:41
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6488
+            [sns_id] => 1
+            [gameuid] => 6488
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:25:52
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6944
+            [sns_id] => 1
+            [gameuid] => 6944
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:26:03
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb4217
+            [sns_id] => 1
+            [gameuid] => 4217
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:26:23
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb1635
+            [sns_id] => 1
+            [gameuid] => 1635
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:26:23
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb8552
+            [sns_id] => 1
+            [gameuid] => 8552
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:26:31
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:26:32
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:26:40
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:27:08
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:09
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:10
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:11
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:11
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:17
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:24
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:24
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:25
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:45
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:46
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:46
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:46
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:29:47
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:30:08
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:30:09
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:30:50
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:31:18
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:31:19
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:31:19
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:31:45
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:31:55
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:31:56
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:31:56
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:31:56
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:32:01
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:32:02
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:32:02
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:32:21
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:32:22
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:32:22
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:32:28
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:32:29
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:34:35
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:34:47
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:34:47
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:34:48
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:34:48
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:34:49
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:34:49
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:34:49
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:24
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:24
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:25
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:25
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:25
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:25
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:26
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:26
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:26
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:27
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:27
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:27
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:27
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:45
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:47
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:35:48
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:36:06
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:36:08
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:38:56
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:42:09
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:42:09
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:42:10
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:42:10
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:42:10
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:42:10
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:42:11
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:42:11
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:42:11
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:42:11
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:42:48
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:43:21
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:43:22
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:43:32
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:43:34
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:43:34
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:43:35
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:43:35
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:43:36
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:44:41
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:44:43
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:49:55
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:49:55
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:49:56
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:49:56
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:50:09
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:50:10
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:50:10
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)
+Array
+(
+    [date] => 2012-12-28 17:50:10
+    [commandName] => Mapping
+    [params] => Array
+        (
+            [sync] => 1
+            [sns_id] => 1
+        )
+
+    [sig] => Array
+        (
+            [uid] => wb6465
+            [sns_id] => 1
+            [gameuid] => 6465
+            [server] => 1
+            [version] => 0.0.1
+        )
+
+    [result] => Array
+        (
+            [ecode] => 0
+            [data] => 
+            [cmd] => Mapping
+            [syncdata] => Array
+                (
+                )
+
+        )
+
+)

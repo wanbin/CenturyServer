@@ -1,0 +1,33 @@
+#################
+## Eclipse
+#################
+
+*.pydevproject
+.project
+.idea
+.metadata
+.buildpath
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+*.svn
+local.properties
+.classpath
+.settings/
+.loadpath
+
+############
+## Windows
+############
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Logs
+*.log

@@ -1,0 +1,105 @@
+@charset "utf-8";
+/* CSS Document */
+
+.main {
+	float: left; position: relative;
+	height: 852px;	width: 1200px;
+	left:0px;
+	color#CCC;
+}
+.main_up{
+	float: left; position: relative;
+	height:132px;	width: 1200px;
+	/*background-color:#6FC;*/
+}
+    .main_up p{
+		width:100%;
+		height:100px;
+		margin-top: 20px;
+		line-height: 20px;
+	}
+.main_center {
+	float: left; position: relative;
+	height:272px;	width: 1200px;
+}
+    .main_center p{line-height: 20px;	}
+   .main_center_left {
+		float: left; position: relative;
+		height:251px;	width: 487px;
+		margin-top:20px; margin-left:5px;
+		border:solid 1px #CCC;
+	}
+	.main_center_right {
+		float: left; position: relative;
+		height:272px;	width: 663px;
+		margin-left:43px;
+	}
+	     .cxx_hk{
+			 width:100%; height:21px;
+			 float:left; position:relative;
+			 text-align:center; margin-top:10px;
+			 background:url(../imges/chaoxinxing/hk.png) no-repeat center top;
+			 color:#000;		
+			 }
+			 
+		.cxx_box{
+			  float: left;    position: relative;
+			  height: 120px;			  width: 100%;			 
+			  }
+	    .jrcjxz{
+			 width:90px; height:100%;
+			 margin-left:23px;
+			 float:left; position:relative;
+			 }
+			 .jrcjxz a{
+				 float:left; position:relative;
+				 }
+			 .jrcjxz span{
+				 top:10px; width:100%;
+				 text-align:center;
+				 float:left; position:relative;
+				 }
+	      
+.main_down{
+	float: left; position: relative;
+	height:380px;	width: 1200px;
+	/*background-color:#acC;*/
+}	
+	.main_down_box {		
+		height: 185px;		width: 100%;
+		float: left; position: relative;
+	    }
+	.main_down_box_title {
+		width:100%; height:30px;
+		padding-top:10px;
+		float: left;position: relative;
+	}
+	.main_down_box_con {
+		width:100%; height:145px;
+		float: left;position: relative;
+	}
+	.main_down_box_con  .cxx{
+		 width:180px; height:100%;
+	     margin-left:23px;
+		 float:left; position:relative;
+		 }
+		.cxx a{
+			 float:left; position:relative;
+			 }
+		.cxx span{
+			 top:10px; width:100%;
+			 text-align:center;
+			 float:left; position:relative;
+			 }
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,3 +1,3 @@
 <?php
-	echo "Welcome to Baidu Cloud";
+	echo "Mail Me:wanbinr@gmail.com.A joy is waiting for you!! from wanbin";
 ?>
