@@ -14,6 +14,8 @@ define ( 'PATH_STATIC', PATH_ROOT . 'static/' ); // 静态文件夹
 define ( 'PATH_CONTROL', PATH_ROOT . 'www/control/' ); // control
 define ( 'PATH_VIEW', PATH_ROOT . 'www/view/' ); // control
 
+define("MOOPHP_DATA_DIR", PATH_VIEW.'/cache/');
+define("MOOPHP_TEMPLATE_DIR", PATH_VIEW);
 
 date_default_timezone_set ( "Asia/Chongqing" );
 include_once PATH_ROOT . 'config.inc.php'; // 全局配置文件
