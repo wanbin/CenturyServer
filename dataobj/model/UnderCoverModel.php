@@ -28,6 +28,14 @@ class UnderCoverModel extends BaseModel {
 		$ret = $this->oneSqlSignle ( $sql );
 		return $ret['count'];
 	}
+	
+	
+	public function changeName($name){
+		$gameuid=$this->gameuid;
+		$sql="update wx_account set username='$name' where gameuid=".$this->gameuid;
+		$this->oneSql($sql);
+		return true;
+	}
 	/**
 	 * 返回信息类
 	 *
@@ -45,6 +53,21 @@ class UnderCoverModel extends BaseModel {
 		if ($type == "规则" || $type == "【规则】" || $type == "rule" || $type == "*") {
 			return $this->getRuleStr () . $helpStr;
 		}
+		
+		
+		$temarr = explode ( ' ', trim ( $keyword ) );
+		if (in_array($temarr [0], array("名字","姓名","昵称"))) {
+			$this->changeName($temarr[1]);
+			return "修改名字成功";
+		}
+		
+		if(in_array(trim($keyword), array("身份","刷新"))){
+			include_once PATH_HANDLER . 'RoomsHandler.php';
+			$room = new RoomsHandler ( $this->uid );
+			$ret=$room->GetRoomInfoOne ();
+			return $ret['content'];
+		}
+		
 		$type = $this->changeKeyword ( $keyword );
 		if ($type > 3 && $type <= 15) {
 			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
@@ -64,7 +87,21 @@ class UnderCoverModel extends BaseModel {
 			$UnderRoomCache = new UnderCoverRoomCache ($this->uid);
 			$str = $UnderRoomCache->getChengfa ( 3);
 			return $str.$helpStr;
-		}  else if ($type >= 1000) {
+		}else if ($type >= 10000) {
+			$gameuid = $UnderCache->gameuid;
+			include_once PATH_HANDLER . "/RoomsHandler.php";
+			$room = new RoomsHandler ( $this->uid );
+			$ret = $room->JoinRoom ( $type );
+			echo $type;
+			print_R($ret);
+			if ($ret) {
+				return "加入房间成功";
+			} else {
+				return "加入房间失败";
+			}
+			return $str.$helpStr;
+		}  
+		else if ($type >= 1000) {
 			$gameuid = $UnderCache->gameuid;
 			include_once PATH_DATAOBJ . "/cache/UnderCoverRoomCache.php";
 			$UnderRoomCache = new UnderCoverRoomCache ($this->uid);
@@ -99,7 +136,7 @@ class UnderCoverModel extends BaseModel {
 		}
 	}
 	protected function getHelpStr() {
-		return "一起来玩吧，体验不一样的谁是卧底游戏！回复以下内容快速开始：\n 1.创建谁是卧底游戏\n 2.真心话大冒险（网络版）\n 3.真心话大冒险（本地版）\n 4-15.创建谁是卧底房间\n 1000-9999.进入相应的房间\n ?.帮助\n *.谁是卧底规则\n 快快来试试吧~";
+		return "一起来玩吧，体验不一样的谁是卧底游戏！回复以下内容快速开始：\n 1.创建谁是卧底游戏\n 2.真心话大冒险（网络版）\n 3.真心话大冒险（本地版）\n 4-15.创建谁是卧底房间\n姓名 **  修改自己的昵称 \n 1000至100000 加入线上房间 \n刷新 \n ?.帮助\n *.谁是卧底规则\n 快快来试试吧~";
 	}
 	//返回制作团队
 	protected function getEmail() {

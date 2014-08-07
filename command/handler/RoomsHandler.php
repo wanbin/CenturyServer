@@ -148,7 +148,7 @@ class RoomsHandler extends RoomsCache{
 			$account = new AccountHandler ( $this->uid );
 			$userInfo = $account->getAccountByUid($this->uid);
 			$content = $userInfo ['username'] . "已经加入到游戏中";
-			$account->sendPushByGameuid ( $roomid, $content );
+// 			$account->sendPushByGameuid ( $roomid, $content );
 			return true;
 		}
 		return false;
