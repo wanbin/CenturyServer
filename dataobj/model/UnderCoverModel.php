@@ -61,7 +61,7 @@ class UnderCoverModel extends BaseModel {
 			return "修改名字成功";
 		}
 		
-		if(in_array(trim($keyword), array("身份","刷新"))){
+		if(in_array(trim($keyword), array("身份","刷新","r"))){
 			include_once PATH_HANDLER . 'RoomsHandler.php';
 			$room = new RoomsHandler ( $this->uid );
 			$ret=$room->GetRoomInfoOne ();

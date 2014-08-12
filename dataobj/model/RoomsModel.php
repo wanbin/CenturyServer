@@ -52,7 +52,6 @@ class RoomsModel extends BaseModel {
 		if(empty($ret)||$ret['maxcount']<=$ret['newcount']){
 			return false;
 		}
-
 		$sql="update room set nowcount=nowcount+1 where gameuid=$id;";
 		$sql2 ="delete from user_rooms where gameuid=$gameuid;insert into user_rooms(gameuid,roomid,content,createtime)values($gameuid,$id,'已经加入游戏，还未开始',now());";
 		$this->oneSql ( $sql);
