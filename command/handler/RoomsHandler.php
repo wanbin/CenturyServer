@@ -22,6 +22,8 @@ class RoomsHandler extends RoomsCache{
 		$punish = new PublishHandler ( $this->uid );
 		//先判断一下玩家是否都在房间里，如果不在房间里，则
 		$result=array();
+		var_dump($gameuidarr);
+		
 		foreach ($gameuidarr as $key=>$value){
 			if(key_exists($value, $gameuid_name)||in_array($value, array(-1,-2))){
 				$temPublish=$punish->getRandomOne(1);
@@ -41,12 +43,15 @@ class RoomsHandler extends RoomsCache{
 					$account->sendPushByGameuid($value, $content);
 				}
 			}
-			else{
-				$content="游戏胜利:".$ret['content'];
-				$this->setUserContent($value, $content);
+		}
+		foreach ($gameuid_name as $key=>$value){
+			if(!in_array($key, $gameuidarr)){
+				$content="游戏胜利【".$ret['content'].'】';
+				$this->setUserContent($key, $content);
 				$account->sendPushByGameuid($value, $content);
 			}
 		}
+		
 		return $result;
 	}
 	
