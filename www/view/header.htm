@@ -18,3 +18,27 @@
       <script src="html/dist/respond.min.js"></script>
 <![endif]-->
 </head>
+  <div class="login_top navbar navbar-inverse navbar-fixed-top" style='height:50px'>
+         <div class="container">
+		    <div class="row">            
+                <div class="pull-left logo">
+                    <a href="index.php" style="z-index:10000">
+                       <img src="image/party_03.png" style='height:50px'>
+                    </a>
+                </div>
+                <div class="login_navbar" style="padding-left:120px">
+               	 <p class="navbar-text pull-left" style="padding-left:20px"><a href="index.php?showpage=help">帮助</a></p>
+                 <p class="navbar-text pull-left" style="padding-left:20px"><a href="index.php?showpage=home">关于</a></p>
+                </div>
+            </div>
+         </div>
+    </div>
+    <div style="height:50px;"></div>
+    <script>
+function showlogo(){
+	$("#logo_index").animate({marginTop:"0px"});
+}
+function hidelogo(){
+	$("#logo_index").animate({marginTop:"-50px"});
+}
+</script>
