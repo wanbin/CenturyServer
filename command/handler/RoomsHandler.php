@@ -41,6 +41,11 @@ class RoomsHandler extends RoomsCache{
 					$account->sendPushByGameuid($value, $content);
 				}
 			}
+			else{
+				$content="游戏胜利:".$ret['content'];
+				$this->setUserContent($value, $content);
+				$account->sendPushByGameuid($value, $content);
+			}
 		}
 		return $result;
 	}
@@ -60,26 +65,28 @@ class RoomsHandler extends RoomsCache{
 	 * @param unknown_type $type 1,谁是卧底 2，杀人游戏
 	 */
 	public function StartGame($type,$addPeople){
-		$this->setRoomType($type);
+		
 		$roomInfo=$this->GetRoomInfo($this->gameuid,$addPeople);
 		$userCount=count($roomInfo['room_user']);
 // 		$userCount=10;
+		$roomcontent='';
 		if ($type == 1) {
 			if($userCount<4){
 // 						return false;
 			}
-			$this->setRoomType($type);
 			include_once PATH_HANDLER . 'UnderCoverRoomHandler.php';
 			$ucroom = new UnderCoverRoomHandler ( $this->uid );
 			$roomContent = $ucroom->initcontent ( $userCount );
+			$roomcontent="平民：".$roomContent['father']." 卧底：".$roomContent['son'];
 		}
 		else if($type==2){
 			//杀人游戏分配身份
 			include_once PATH_HANDLER . 'UnderCoverRoomHandler.php';
 			$ucroom = new UnderCoverRoomHandler ( $this->uid );
 			$roomContent=$ucroom->initKiller($userCount);
+			$roomcontent="警察：".$roomContent['police']."人 平民：".$roomContent['killer'].'人';
 		}
-		
+		$this->setRoomType($type,$roomcontent);
 	
 		//准备发送推送
 		include_once PATH_HANDLER . 'AccountHandler.php';
@@ -148,7 +155,7 @@ class RoomsHandler extends RoomsCache{
 			$account = new AccountHandler ( $this->uid );
 			$userInfo = $account->getAccountByUid($this->uid);
 			$content = $userInfo ['username'] . "已经加入到游戏中";
-// 			$account->sendPushByGameuid ( $roomid, $content );
+ 			$account->sendPushByGameuid ( $roomid, $content );
 			return true;
 		}
 		return false;

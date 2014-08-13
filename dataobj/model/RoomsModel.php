@@ -93,7 +93,7 @@ class RoomsModel extends BaseModel {
 		return true;
 	}
 	
-	protected function setRoomType($type){
+	protected function setRoomType($type,$content=''){
 		$udpatetime=time();
 		$gameuid=$this->gameuid;
 		if ($type == 1) {
@@ -101,7 +101,7 @@ class RoomsModel extends BaseModel {
 		} else if ($type == 2) {
 			$name = "杀人游戏";
 		}
-		$sql = "update room set type=$type,name='$name',updatetime=now() where gameuid=$gameuid";
+		$sql = "update room set type=$type,name='$name',content='$content',updatetime=now() where gameuid=$gameuid";
 		$this->oneSql($sql);
 		return true;
 	}
