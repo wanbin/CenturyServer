@@ -8,7 +8,7 @@ include( Mootemplate( 'header' ) );
 
 $showPage=$_REQUEST['showpage'];
 
-$pageArr=array('help','home');
+$pageArr=array('help','home','gamenow');
 
 if(in_array($showPage, $pageArr)){
 	include_once PATH_CONTROL."/$showPage.php";
