@@ -20,3 +20,4 @@ else{
 }
 
 
+include( Mootemplate( 'footer' ) );
