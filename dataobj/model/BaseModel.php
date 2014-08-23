@@ -108,27 +108,23 @@ class BaseModel {
 	
 	public function getGameuid($uid){
 		$gameuid=$this->redis->HGET("REDIS_USER_GAMEUID",$uid);
+		
 		if($gameuid>0){
 			return $gameuid;
 		}
-		$res = $this->getUserInfo ( $uid );
-		$gameuid = $res ['_id'];
-		if (empty ( $res )) {
-			if (strlen ( $uid ) == strlen ( "5A74E27E8AC44C778731B7A8A8207250" )) {
-				$this->channel = 'IOS';
-			} elseif (substr ( $uid, 1, 5 ) == substr ( "ouHjQjpu175ug-jVh0Wdw5i--Xgw", 1, 5 )) {
-				$this->channel = 'WX';
-			}
-			$userinfo = array (
-					'uid' => $uid,
-					'channel' => $this->channel 
-			);
-			return $this->insertMongo($userinfo, 'users');
-		} else {
-			$this->redis->HMSET ( "REDIS_USER_GAMEUID", array (
-					$uid => $gameuid 
-			) );
+		if (strlen ( $uid ) == strlen ( "5A74E27E8AC44C778731B7A8A8207250" )) {
+			$this->channel = 'IOS';
+		} elseif (substr ( $uid, 1, 5 ) == substr ( "ouHjQjpu175ug-jVh0Wdw5i--Xgw", 1, 5 )) {
+			$this->channel = 'WX';
 		}
+		$userinfo = array (
+				'uid' => $uid,
+				'channel' => $this->channel 
+		);
+		$gameuid = $this->insertMongo ( $userinfo, 'users' );
+		$this->redis->HMSET ( "REDIS_USER_GAMEUID", array (
+				$uid => $gameuid 
+		) );
 		return $gameuid;
 	}
 	
