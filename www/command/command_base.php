@@ -13,8 +13,9 @@ $uid = isset ( $_SESSION ['username'] ) ? $_SESSION ['username'] : "";
 if (DEBUG) {
 	//print_R ( $_REQUEST );
 }
-
+if(!empty($uid)){
 include_once PATH_VIEW_COMMAND . '/command_' . $modle . '_' . $action . '.php';
+}
 
 $timer->stop ();
 $usertime = $timer->spent ();
