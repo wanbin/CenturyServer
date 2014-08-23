@@ -27,6 +27,8 @@ class BaseModel {
 		$this->model = get_class ( $this );
 		
 		$redis_config=ISBAIDU?$config ['redis_base_baidu']:$config ['redis_base'];
+		$this->baidudebug(print_r($redis_config,true));
+		
 		$this->redis = new Rediska ( $redis_config );
 		
 		if (isset ( $uid )) {
