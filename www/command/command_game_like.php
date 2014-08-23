@@ -3,6 +3,6 @@
 include_once PATH_HANDLER . 'GameHandler.php';
 $gameid=$_REQUEST['gameid'];
 
-$game = new GameHandler ( $uid );
+$game = new GameHandler ( $_REQUEST ['username'] );
 echo $game->like ( $gameid );
 

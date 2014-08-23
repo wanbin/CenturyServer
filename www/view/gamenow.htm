@@ -1,14 +1,16 @@
 <script>
 function likeGame(id){
 	$.post("command/command_base.php?mod=game&action=like", {
-		gameid : id
+		gameid : id,
+		username:$("#username").val()
 	}, function(data) {
 		$("#likeval").html(data);
 	}, "html");
 }
 function dislikeGame(id){
 	$.post("command/command_base.php?mod=game&action=dislike", {
-		gameid : id
+		gameid : id,
+		username:$("#username").val()
 	}, function(data) {
 		$("#dislikeval").html(data);
 	}, "html");
