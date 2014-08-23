@@ -32,7 +32,6 @@ class BaseModel {
 		$this->model = get_class ( $this );
 		
 		$redis_config=ISBAIDU?$config ['redis_base_baidu']:$config ['redis_base'];
-		$this->baidudebug($redis_config);
 		
 		$this->redis  = new Redis();
 		$this->redis ->connect($redis_config['host'], $redis_config['port']);
