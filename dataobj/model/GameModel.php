@@ -7,9 +7,8 @@ require_once PATH_MODEL.'BaseModel.php';
 class GameModel extends BaseModel {
 	protected function addLikeDislike($gameid, $type='like') {
 		$newid=$this->getIdNew("game");
-		$this->baidudebug("game:$newid");
 		$content=array(
-				//'_id'=>$newid,
+				'_id'=>$newid,
 				'gameuid'=>$this->gameuid,
 				'gameid'=>$gameid,
 				'type'=>$type,

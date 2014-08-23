@@ -36,9 +36,7 @@ class BaseModel {
 		$this->redis  = new Redis();
 		$this->redis ->connect($redis_config['host'], $redis_config['port']);
 		$this->redis->auth($redis_config['password']);
-		
-		
-		if (isset ( $uid )) {
+		if (isset ( $uid )&&!empty($uid)) {
 			$this->uid = $uid;
 			$this->gameuid = $this->getGameuid($uid);
 		}
