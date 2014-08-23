@@ -14,12 +14,12 @@ class GameCache extends GameModel {
 	 * @param unknown_type $id        	
 	 */
 	protected function like($id) {
-		$fromRedis = new Rediska_Key_Hash ( $this->getGameLikeGameKey ( $id ) );
-		if (! $fromRedis->exists ( $this->gameuid )) {
-			$fromRedis [$this->gameuid] = time ();
+		$likeKey = $this->getGameLikeGameKey ( $id );
+		if (! $this->redis->HEXISTS ( $likeKey, 8)) {
+			$this->redis->HMSET ( $likeKey,array($this->gameuid=>time()));
 			parent::addLikeDislike ( $id, 'like' );
 		}
-		return $fromRedis->count ();
+		return $this->redis->HLEN ($likeKey);
 	}
 	
 	/**
@@ -28,21 +28,21 @@ class GameCache extends GameModel {
 	 * @param unknown_type $id        	
 	 */
 	protected function dislike($id) {
-		$fromRedis = new Rediska_Key_Hash ( $this->getGameDisLikeGameKey ( $id ) );
-		if (! $fromRedis->exists ( $this->gameuid )) {
-			$fromRedis [$this->gameuid] = time ();
-			parent::addLikeDislike ( $id, 'dislike' );
+		$dislikeKey = $this->getGameDisLikeGameKey ( $id );
+		if (! $this->redis->HEXISTS ( $dislikeKey, $this->gameuid )) {
+			$this->redis->HMSET ( $dislikeKey,array($this->gameuid=>time()));
+			parent::addLikeDislike ( $id, 'dis' );
 		}
-		return $fromRedis->count ();
+		return $this->redis->HLEN ($dislikeKey);
 	}
 	public function getLikeInfo($id) {
-		$fromlike = new Rediska_Key_Hash ( $this->getGameLikeGameKey ( $id ) );
-		$fromdislike = new Rediska_Key_Hash ( $this->getGameDisLikeGameKey ( $id ) );
+		$likeKey= $this->getGameLikeGameKey ( $id ) ;
+		$dislikeKey= $this->getGameDisLikeGameKey ( $id ) ;
 		return array (
-				'likecount' => $fromlike->count (),
-				'dislikecount' => $fromdislike->count (),
-				'isliked'=>$fromlike->exists($this->gameuid),
-				'isdisliked'=>$fromdislike->exists($this->gameuid),
+				'likecount' => $this->redis->HLEN($likeKey),
+				'dislikecount' => $this->redis->HLEN($dislikeKey),
+				'isliked'=>$this->redis->HEXISTS($dislikeKey,$this->gameuid),
+				'isdisliked'=>$this->redis->HEXISTS($dislikeKey,$this->gameuid),
 		);
 	}
 	private function getGameLikeGameKey($gameid) {

@@ -44,8 +44,8 @@ define('masterSecret', 'fd838eceb6aaf5276b75f542');
 define('platform', 'android');
 
 
-$config ['redis_base_baidu'] = array ('servers' => array (array ('host' => BAIDU_REDIS_HOST, 'port' => BAIDU_REDIS_PORT, 'password' => BAIDU_AK . "-" . BAIDU_SK . "-" . BAIDU_REDIS_DBNAME )) );
-$config ['redis_base'] = array ('servers' => array (array ('host' => 'localhost', 'port' => 6379, 'password' => '' )) );	
+$config ['redis_base_baidu'] = array ('host' => BAIDU_REDIS_HOST, 'port' => BAIDU_REDIS_PORT, 'password' => BAIDU_AK . "-" . BAIDU_SK . "-" . BAIDU_REDIS_DBNAME );
+$config ['redis_base'] = array ('host' => 'localhost', 'port' => 6379, 'password' => '' );	
 
 
 

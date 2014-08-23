@@ -12,6 +12,11 @@ class BaseModel {
 	protected $commandAnalysis = null;
 	protected $channel="ANDROID";
 	
+	/**
+	 * @var Redis
+	 */
+	protected $redis = null;
+	
 	//数据分析参数
 	protected $selectCount = 0;
 	protected $insertCount = 0;
@@ -27,9 +32,12 @@ class BaseModel {
 		$this->model = get_class ( $this );
 		
 		$redis_config=ISBAIDU?$config ['redis_base_baidu']:$config ['redis_base'];
-		$this->baidudebug(print_r($redis_config,true));
+		$this->baidudebug($redis_config);
 		
-		$this->redis = new Rediska ( $redis_config );
+		$this->redis  = new Redis();
+		$this->redis ->connect($redis_config['host'], $redis_config['port']);
+		$this->redis->auth($redis_config['password']);
+		
 		
 		if (isset ( $uid )) {
 			$this->uid = $uid;
@@ -298,8 +306,7 @@ class BaseModel {
 	}
 	
 	protected function getIdNew($idname) {
-		$Name = new Rediska_Key_Hash ( "REDIS_KEY_ADD_ID" );
-		return $Name->increment ($idname, 1 );
+		return $this->redis->HINCRBY( "REDIS_KEY_ADD_ID",$idname,1);
 	}
 	protected function getMongdb() {
 		if(ISBAIDU){
