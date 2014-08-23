@@ -43,24 +43,22 @@ class BaseModel {
 	}
 
 	public function getGameuid($uid){
-		if (isset ( $uid )) {
-			$res=$this->getUserInfo($uid);
-			if (empty ( $res )) {
-				if(strlen($uid)==strlen("5A74E27E8AC44C778731B7A8A8207250")){
-					$this->channel='IOS';
-				}elseif(substr($uid, 1,5)==substr("ouHjQjpu175ug-jVh0Wdw5i--Xgw", 1,5)){
-					$this->channel='WX';
-				}
-				$userinfo=array(
-						'_id'=>$this->getIdNew("users"),
-						'uid'=>$uid,
-						'regtime'=>time(),
-						'channel'=>$this->channel
-						);
-				return $this->insertUser($userinfo);
+		$res = $this->getUserInfo ( $uid );
+		if (empty ( $res )) {
+			if (strlen ( $uid ) == strlen ( "5A74E27E8AC44C778731B7A8A8207250" )) {
+				$this->channel = 'IOS';
+			} elseif (substr ( $uid, 1, 5 ) == substr ( "ouHjQjpu175ug-jVh0Wdw5i--Xgw", 1, 5 )) {
+				$this->channel = 'WX';
 			}
+			$userinfo = array (
+					'_id' => $this->getIdNew ( "users" ),
+					'uid' => $uid,
+					'regtime' => time (),
+					'channel' => $this->channel 
+			);
+			return $this->insertUser ( $userinfo );
 		}
-		return $res['_id'];
+		return $res ['_id'];
 	}
 	
 	public function insertUser($content){
@@ -71,12 +69,10 @@ class BaseModel {
 	}
 	
 	public function getUserInfo($uid){
-		if (empty ( $uid )) {
-			return array ();
-		}
 		$monogdb = $this->getMongdb ();
 		$collection =  $monogdb->selectCollection('users');
 		$ret = $collection->findOne ( array ('uid' => $uid ) );
+		print_r($ret);
 		return $ret;
 	}	
 	
