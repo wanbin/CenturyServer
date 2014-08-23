@@ -7,7 +7,9 @@ $base=2327;
 $weekshowindex=$weekcount-$base;
 $ret=$partyGameArr[$weekshowindex];
 $ret2=$partyGameArr[$weekshowindex+1];
-include_once PATH_HANDLER . 'GameHandler.php';
-$game = new GameHandler ($uid);
-$likeInfo=$game->getLikeInfo($weekshowindex);
+if(!empty($uid)){
+	include_once PATH_HANDLER . 'GameHandler.php';
+	$game = new GameHandler ($uid);
+	$likeInfo=$game->getLikeInfo($weekshowindex);
+}
 ?>
