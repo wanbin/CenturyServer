@@ -46,6 +46,7 @@ class BaseModel {
 		
 		
 		if(ISBAIDU){
+			require_once FRAMEWORK.'/sdk/BaeMemcache.class.php';
 			$cacheConfig=$config ['memcache_base_baidu'];
 			$this->memcache = new BaeMemcache($cacheConfig['cacheid'], $cacheConfig['host'].':'.$cacheConfig['port'], $cacheConfig['user'], $cacheConfig['password']);
 		}
