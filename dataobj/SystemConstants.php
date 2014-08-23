@@ -39,3 +39,11 @@ define("MEMCACHE_KEY_WORDS_LIST", "centurywar_Words_list_%d");
 define("MEMCACHE_KEY_ROOMS", "centurywar_Rooms_%d_%d");
 define("MEMCACHE_KEY_ROOMS_LIST", "centurywar_Rooms_list_%d");
 
+define("REDIS_KEY_GAMELIKE_USER","redis_key_gamelike_user_%d");
+
+define("REDIS_KEY_GAMELIKE_GAME","redis_gamelike_game_%d");
+define("REDIS_KEY_GAMEDISLIKE_GAME","redis_gamedislike_game_%d");
+
+//redis自增建
+define ( "REDIS_KEY_ADD_ID", "redis_key_add_id_%s" );
+

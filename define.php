@@ -11,6 +11,7 @@ define ( 'PATH_SQL', PATH_ROOT . 'sql/' );
 define ( 'FRAMEWORK', PATH_ROOT . 'framework/' ); // 主框架目录
 define ( 'PATH_STATIC', PATH_ROOT . 'static/' ); // 静态文件夹
 
+define ( 'PATH_VIEW_COMMAND', PATH_ROOT . 'www/command/' ); // control
 define ( 'PATH_CONTROL', PATH_ROOT . 'www/control/' ); // control
 define ( 'PATH_VIEW', PATH_ROOT . 'www/view/' ); // control
 
@@ -19,7 +20,11 @@ define("MOOPHP_TEMPLATE_DIR", PATH_VIEW);
 
 date_default_timezone_set ( "Asia/Chongqing" );
 include_once PATH_ROOT . 'config.inc.php'; // 全局配置文件
+if(file_exists(PATH_ROOT . 'config.local.php')){
+	include_once PATH_ROOT . 'config.local.php'; // 全局配置文件	
+}
 include_once PATH_COMMAND . 'BaseCommand.php';
+include_once PATH_DATAOBJ.'SystemConstants.php';
 // 加载framework中db操作类与cache操作类
 require_once FRAMEWORK . '/cache/Cache.class.php';
 require_once FRAMEWORK . '/database/DBHandler.class.php';

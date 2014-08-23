@@ -1,10 +1,16 @@
 <?php
+session_start ();
 include_once '../define.php';
 require_once PATH_ROOT."framework/MooPHP/MooPHP.php";
 
 include_once PATH_CONTROL.'/header.php';
 include( Mootemplate( 'header' ) );
 
+
+if (isset ( $_REQUEST ['username'] )) {
+	$_SESSION ['username'] = $_REQUEST ['username'];
+	$uid=$_SESSION ['username'];
+}
 
 $showPage=$_REQUEST['showpage'];
 

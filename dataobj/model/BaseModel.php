@@ -9,8 +9,6 @@ class BaseModel {
 	protected $server  = NULL;
 	protected $useMemcache = null;
 	protected $model = null;
-	protected $rediska = null;
-	protected $useRedis = null;
 	protected $commandAnalysis = null;
 	protected $channel="ANDROID";
 	
@@ -27,7 +25,10 @@ class BaseModel {
 		$config = $GLOBALS ['config'];
 		$this->useMemcache = $config ['memcache'];
 		$this->model = get_class ( $this );
-		$this->useRedis = $config ['redis'];
+		
+		$redis_config=ISBAIDU?$config ['redis_base_baidu']:$config ['redis_base'];
+		$this->redis = new Rediska ( $redis_config );
+		
 		if (isset ( $uid )) {
 			$this->uid = $uid;
 			$this->gameuid = $this->getGameuid($uid);
@@ -36,22 +37,44 @@ class BaseModel {
 
 	public function getGameuid($uid){
 		if (isset ( $uid )) {
-			$res = $this->oneSqlSignle ( "select * from wx_account where uid='$uid'" );
+			$res=$this->getUserInfo($uid);
 			if (empty ( $res )) {
-				$time = time ();
 				if(strlen($uid)==strlen("5A74E27E8AC44C778731B7A8A8207250")){
 					$this->channel='IOS';
 				}elseif(substr($uid, 1,5)==substr("ouHjQjpu175ug-jVh0Wdw5i--Xgw", 1,5)){
 					$this->channel='WX';
 				}
-				$sql = "insert into wx_account(uid,regtime,channel) values('$uid',$time,'".$this->channel."')";
-				$this->oneSql ( $sql );
-				$res = $this->oneSqlSignle ( "select * from wx_account where uid='$uid'" );
+				$userinfo=array(
+						'_id'=>$this->getIdNew("users"),
+						'uid'=>$uid,
+						'regtime'=>time(),
+						'channel'=>$this->channel
+						);
+				return $this->insertUser($userinfo);
 			}
 		}
-		return $res['gameuid'];
+		return $res['_id'];
 	}
-		
+	
+	public function insertUser($content){
+		$monogdb = $this->getMongdb ();
+		$db = $monogdb->centurywar;
+		$collection = $db->users;
+		$ret = $collection->insert ( $content );
+		return $content['_id'];
+	}
+	
+	public function getUserInfo($uid){
+		if (empty ( $uid )) {
+			return array ();
+		}
+		$monogdb = $this->getMongdb ();
+		$db = $monogdb->centurywar;
+		$collection = $db->users;
+		$ret = $collection->findOne ( array ('uid' => $uid ) );
+		return $ret;
+	}	
+	
 		// =================================MYSQL============================================//
 		
 	// 不支持同一业务的数据库水平部署在不同服务器上
@@ -72,6 +95,7 @@ class BaseModel {
 	}
 	
 	public function oneSql($sql) {
+		
 		$this->baidudebug($sql);
 		$DBHandler = $this->getDBInstance ( $this->getTableName () );
 		$tem = explode ( ' ', $sql );
@@ -83,55 +107,64 @@ class BaseModel {
 		) )) {
 			$sqlarr=explode(';', $sql);
 			foreach ($sqlarr as $key=>$value){
-				if (ISBAIDU==1) {
-					$this->BaiduExecute ( $value );
-				} else {
-					$DBHandler->execute ( $value );
-				}
+				 $this->BaiduExecute ( $value );
 			}
 			return;
 		} else {
-			if (ISBAIDU==1) {
-				return $this->BaiduContent($sql);
-			}
-			return $DBHandler->getAll ( $sql );
+			return $this->BaiduContent($sql);
 		}
 	}
 	
 	protected function BaiduContent($sql) {
-		$host = BAIDU_MYSQL_HOST;
-		$port = BAIDU_MYSQL_PORT;
-		$user = BAIDU_AK;
-		$pwd = BAIDU_SK;
-		$dbname = BAIDU_MYSQL_DBNAME;
-		$link = @mysql_connect ( "{$host}:{$port}", $user, $pwd, true );
+		$host = DB_HOST;
+		$user = DB_USER;
+		$pwd = DB_PWD;
+		$port=DB_PORT;
+		$dbname=DB_NAME;
+		if (ISBAIDU == 1) {
+			$host = BAIDU_MYSQL_HOST;
+			$port = BAIDU_MYSQL_PORT;
+			$user = BAIDU_AK;
+			$pwd = BAIDU_SK;
+			$dbname = BAIDU_MYSQL_DBNAME;
+		}
+		
+		//$link = mysql_connect ( );
+		$link = mysql_connect ( "localhost:3306", 'root', '', true );
+		echo "dd";
 		if (! $link) {
 			die ( "Connect Server Failed: " . mysql_error () );
 		}
 		if (! mysql_select_db ( $dbname, $link )) {
 			die ( "Select Database Failed: " . mysql_error ( $link ) );
 		}
-		
 		$ret = mysql_query ( $sql, $link );
 		if (! $ret) {
 			$this->writeSqlError ( $sql, mysql_error ( $link ) );
+			echo "errot";
 			return array();
 		}
 		$result=array();
 		while ($row = mysql_fetch_assoc($ret)) {
 			$result[]=$row;
 		}
+	
+		print_R($result);
 		return $result;
 	}
 	protected function BaiduExecute($sql) {
 		if (empty ( $sql )) {
 			return false;
 		}
+		
 		$host = BAIDU_MYSQL_HOST;
 		$port = BAIDU_MYSQL_PORT;
 		$user = BAIDU_AK;
 		$pwd = BAIDU_SK;
 		$dbname = BAIDU_MYSQL_DBNAME;
+		
+		
+		
 		$link = @mysql_connect ( "{$host}:{$port}", $user, $pwd, true );
 		if (! $link) {
 			die ( "Connect Server Failed: " . mysql_error () );
@@ -266,29 +299,26 @@ class BaseModel {
 			}
 		}
 	}
-	/**
-	 * 是否在配置文件配置了该项配置
-	 * @param $config_key string
-	 *       	 配置项名称
-	 * @return bool
-	 */
-	protected function issetConfig($config_key) {
-		return array_key_exists ( $config_key, $GLOBALS ['config'] );
-	}
 	
-	/**
-	 * 获取配置的config
-	 *
-	 * @param $config_key string
-	 * @return mixed
-	 */
-	protected function getConfig($config_key) {
-		if (empty ( $config_key ) || is_array ( $config_key )) {
-			return null;
+	protected function getIdNew($idname) {
+		$Name = new Rediska_Key_Hash ( "REDIS_KEY_ADD_ID" );
+		return $Name->increment ($idname, 1 );
+	}
+	protected function getMongdb() {
+		return new MongoClient("mongodb://localhost:27017");
+		if(ISBAIDU&&false){
+			$host=BAIDU_MONGO_HOST;
+			$port=BAIDU_MONGO_PORT;
+			$dbname=BAIDU_MONGO_DBNAME;
+			$user = BAIDU_AK;
+			$pwd = BAIDU_SK;
+			$mongoClient = new MongoClient("mongodb://{$host}:{$port}");
+			$mongoDB = $mongoClient->selectDB($dbname);
+			$mongoDB->authenticate($user, $pwd);
+			return $mongoDB;
 		}
-		if (isset ( $GLOBALS ['config'] [$config_key] )) {
-			return $GLOBALS ['config'] [$config_key];
+		else{
+			return new MongoClient("mongodb://localhost:27017");
 		}
-		return null;
 	}
 }

@@ -1,3 +1,20 @@
+<script>
+function likeGame(id){
+	$.post("command/command_base.php?mod=game&action=like", {
+		gameid : id
+	}, function(data) {
+		$("#likeval").html(data);
+	}, "html");
+}
+function dislikeGame(id){
+	$.post("command/command_base.php?mod=game&action=dislike", {
+		gameid : id
+	}, function(data) {
+		$("#dislikeval").html(data);
+	}, "html");
+}
+</script>
+
 <body youdao="bind" ryt12173="1">
 	<div class="container">
 		<h1>{$ret['name']}</h1>
@@ -13,20 +30,17 @@
 		<p class="info">{$ret['recommand']}</p>
 		<hr />
 
-		<button type="button" class="btn btn-default btn-sm">
-			<span class="glyphicon glyphicon-thumbs-up"></span> 喜欢
+		<button type="button" class="btn btn-default btn-sm" onclick="likeGame({$weekshowindex})">
+			<span class="glyphicon glyphicon-thumbs-up"></span>喜欢<span id='likeval'>{$likeInfo['likecount']}</span>
 		</button>
-		<button type="button" class="btn btn-default btn-sm">
-			<span class="glyphicon glyphicon-thumbs-down"></span> 讨厌
+		<button type="button" class="btn btn-default btn-sm" onclick="dislikeGame({$weekshowindex})">
+			<span class="glyphicon glyphicon-thumbs-down"></span>讨厌<span id='dislikeval'>{$likeInfo['dislikecount']}</span>
 		</button>
-		<button type="button" class="btn btn-default btn-sm">
-			<span class="glyphicon glyphicon-share-alt"></span> 推荐
-		</button>
-		
+		{SHARE}
 		<hr />
 		<p class="lead">下期游戏：</p>
 		<p class="info">{$ret2['name']}</p>
-
 		<a href="index.php?showpage=gamelist">精彩回顾</a>
+		
 	</div>
 </body>
