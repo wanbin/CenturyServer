@@ -15,7 +15,7 @@ class GameCache extends GameModel {
 	 */
 	protected function like($id) {
 		$likeKey = $this->getGameLikeGameKey ( $id );
-		if (! $this->redis->HEXISTS ( $likeKey, 8)) {
+		if (! $this->redis->HEXISTS ( $likeKey, 8)||true) {
 			$this->redis->HMSET ( $likeKey,array($this->gameuid=>time()));
 			parent::addLikeDislike ( $id, 'like' );
 		}
