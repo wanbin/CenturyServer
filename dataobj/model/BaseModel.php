@@ -45,7 +45,12 @@ class BaseModel {
 	}
 
 	public function getGameuid($uid){
+		$gameuid=$this->redis->HGET("REDIS_USER_GAMEUID",$uid);
+		if($gameuid>0){
+			return $gameuid;
+		}
 		$res = $this->getUserInfo ( $uid );
+		$gameuid = $res ['_id'];
 		if (empty ( $res )) {
 			if (strlen ( $uid ) == strlen ( "5A74E27E8AC44C778731B7A8A8207250" )) {
 				$this->channel = 'IOS';
@@ -59,8 +64,12 @@ class BaseModel {
 					'channel' => $this->channel 
 			);
 			return $this->insertUser ( $userinfo );
+		} else {
+			$this->redis->HMSET ( "REDIS_USER_GAMEUID", array (
+					$uid => $gameuid 
+			) );
 		}
-		return $res ['_id'];
+		return $gameuid;
 	}
 	
 	public function insertUser($content){
@@ -71,6 +80,7 @@ class BaseModel {
 	}
 	
 	public function getUserInfo($uid){
+		//先从redis取
 		$monogdb = $this->getMongdb ();
 		$collection =  $monogdb->selectCollection('users');
 		$ret = $collection->findOne ( array ('uid' => $uid ) );
