@@ -1,5 +1,7 @@
 <?php
-session_start ();
+if(!ISBAIDU){
+	session_start ();
+}
 include '../../define.php';
 $modle = $_REQUEST ['mod'];
 $action = $_REQUEST ['action'];
