@@ -128,10 +128,8 @@ class BaseModel {
 			$pwd = BAIDU_SK;
 			$dbname = BAIDU_MYSQL_DBNAME;
 		}
-		
 		//$link = mysql_connect ( );
 		$link = mysql_connect ( "localhost:3306", 'root', '', true );
-		echo "dd";
 		if (! $link) {
 			die ( "Connect Server Failed: " . mysql_error () );
 		}
@@ -141,15 +139,12 @@ class BaseModel {
 		$ret = mysql_query ( $sql, $link );
 		if (! $ret) {
 			$this->writeSqlError ( $sql, mysql_error ( $link ) );
-			echo "errot";
 			return array();
 		}
 		$result=array();
 		while ($row = mysql_fetch_assoc($ret)) {
 			$result[]=$row;
 		}
-	
-		print_R($result);
 		return $result;
 	}
 	protected function BaiduExecute($sql) {
@@ -305,8 +300,7 @@ class BaseModel {
 		return $Name->increment ($idname, 1 );
 	}
 	protected function getMongdb() {
-		return new MongoClient("mongodb://localhost:27017");
-		if(ISBAIDU&&false){
+		if(ISBAIDU){
 			$host=BAIDU_MONGO_HOST;
 			$port=BAIDU_MONGO_PORT;
 			$dbname=BAIDU_MONGO_DBNAME;
