@@ -68,7 +68,6 @@ class BaseModel {
 	
 	public function insertUser($content){
 		$monogdb = $this->getMongdb ();
-		$db = $monogdb->centurywar;
 		$collection = $db->users;
 		$ret = $collection->insert ( $content );
 		return $content['_id'];
@@ -79,7 +78,6 @@ class BaseModel {
 			return array ();
 		}
 		$monogdb = $this->getMongdb ();
-		$db = $monogdb->centurywar;
 		$collection = $db->users;
 		$ret = $collection->findOne ( array ('uid' => $uid ) );
 		return $ret;
