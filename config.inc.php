@@ -28,7 +28,9 @@ define('BAIDU_MONGO_PORT','8908');
 define('BAIDU_MONGO_DBNAME','KGqspGheASthPzbuQmcE');
 
 
-
+define('BAIDU_CACHE_HOST','cache.duapp.com');
+define('BAIDU_CACHE_PORT','20243');
+define('BAIDU_CACHE_DBNAME','IxQLDAmTlrkMPFzuTnJW');
 
 
 //JPUSH相关配置
@@ -48,6 +50,8 @@ $config ['redis_base_baidu'] = array ('host' => BAIDU_REDIS_HOST, 'port' => BAID
 $config ['redis_base'] = array ('host' => 'localhost', 'port' => 6379, 'password' => '' );	
 
 
+$config['memcache_base_baidu']=array('host' => BAIDU_CACHE_HOST, 'port' => BAIDU_CACHE_PORT,'user'=>BAIDU_AK, 'password' => BAIDU_SK,'cacheid'=>BAIDU_CACHE_DBNAME);
+$config['memcache_base']=array('host' => '127.0.0.1', 'port' => 12121, 'password' => '','cacheid'=>'');
 
 define("SHARE",'<div class="bdsharebuttonbox pull-right"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>')

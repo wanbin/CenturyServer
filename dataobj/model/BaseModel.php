@@ -17,6 +17,11 @@ class BaseModel {
 	 */
 	protected $redis = null;
 	
+	/**
+	 * @var Memcache
+	 */
+	protected $memcache=null;
+	
 	//数据分析参数
 	protected $selectCount = 0;
 	protected $insertCount = 0;
@@ -38,6 +43,19 @@ class BaseModel {
 		$this->redis  = new Redis();
 		$this->redis ->connect($redis_config['host'], $redis_config['port']);
 		$this->redis->auth($redis_config['password']);
+		
+		
+		if(ISBAIDU){
+			$cacheConfig=$config ['memcache_base_baidu'];
+			$this->memcache = new BaeMemcache($cacheConfig['cacheid'], $cacheConfig['host'].':'.$cacheConfig['port'], $cacheConfig['user'], $cacheConfig['password']);
+		}
+		else{
+			$cacheConfig=$config ['memcache_base'];
+			$this->memcache = new Memcache;
+			$this->memcache->pconnect($cacheConfig['host'], $cacheConfig['port']);
+		}
+		
+		
 		if (isset ( $uid )&&!empty($uid)) {
 			$this->uid = $uid;
 			$this->gameuid = $this->getGameuid($uid);
