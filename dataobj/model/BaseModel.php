@@ -72,7 +72,6 @@ class BaseModel {
 		$monogdb = $this->getMongdb ();
 		$collection =  $monogdb->selectCollection('users');
 		$ret = $collection->findOne ( array ('uid' => $uid ) );
-		print_r($ret);
 		return $ret;
 	}	
 	
