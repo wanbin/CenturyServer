@@ -16,13 +16,14 @@ class UnderCoverModel extends BaseModel {
 		}
 	}
 	
-	
 	public function Log($content) {
-		$gameuid=$this->gameuid;
-		$time=time();
-		$sql="insert into wx_log(gameuid,content,time) values ($gameuid,'$content',$time)";
-		$this->oneSql($sql);
+		$insert = array (
+				'gameuid' => $this->gameuid,
+				'content' => $content 
+		);
+		return $this->insertMongo ( $insert, 'wx_log' );
 	}
+	
 	public function getMessageCount($msg){
 		$sql = "select count(DISTINCT gameuid) count from wx_log where content='$msg'";
 		$ret = $this->oneSqlSignle ( $sql );
@@ -31,9 +32,9 @@ class UnderCoverModel extends BaseModel {
 	
 	
 	public function changeName($name){
-		$gameuid=$this->gameuid;
-		$sql="update wx_account set username='$name' where gameuid=".$this->gameuid;
-		$this->oneSql($sql);
+		$content=array('nickname'=>$name);
+		$where=array("_id"=>intval($this->gameuid) );
+		$this->updateMongo($content, $where, 'users');
 		return true;
 	}
 	/**
@@ -58,7 +59,7 @@ class UnderCoverModel extends BaseModel {
 		$temarr = explode ( ' ', trim ( $keyword ) );
 		if (in_array($temarr [0], array("名字","姓名","昵称"))) {
 			$this->changeName($temarr[1]);
-			return "修改名字成功";
+			return "修改名字成功，".$temarr[1];
 		}
 		
 		if(in_array(trim($keyword), array("身份","刷新","r"))){

@@ -36,8 +36,6 @@ class GameCache extends GameModel {
 		return $this->redis->HLEN ($dislikeKey);
 	}
 	public function getLikeInfo($id) {
-		$this->memcache->set("wanbin","大女要噶");
-		echo $this->memcache->get("wanbin");
 		$likeKey= $this->getGameLikeGameKey ( $id ) ;
 		$dislikeKey= $this->getGameDisLikeGameKey ( $id ) ;
 		return array (

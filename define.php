@@ -10,6 +10,7 @@ define ( 'PATH_MODEL', PATH_ROOT . 'dataobj/model/' );
 define ( 'PATH_SQL', PATH_ROOT . 'sql/' );
 define ( 'FRAMEWORK', PATH_ROOT . 'framework/' ); // 主框架目录
 define ( 'PATH_STATIC', PATH_ROOT . 'static/' ); // 静态文件夹
+define ( 'PATH_DEBUGGER', PATH_ROOT . 'debugger/' ); // 静态文件夹
 
 define ( 'PATH_VIEW_COMMAND', PATH_ROOT . 'www/command/' ); // control
 define ( 'PATH_CONTROL', PATH_ROOT . 'www/control/' ); // control

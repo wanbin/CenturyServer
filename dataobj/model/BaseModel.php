@@ -62,7 +62,50 @@ class BaseModel {
 			$this->gameuid = $this->getGameuid($uid);
 		}
 	}
-
+	
+	
+	//基本cache操作
+	protected function setToCache($key,$value){
+		return $this->memcache->set($key,$value);
+	}
+	protected function getFromCache($key){
+		return $this->memcache->get($key);
+	}
+	protected function delFromCache($key){
+		return $this->memcache->delete($key);
+	}
+	
+	
+	
+	//基本redis操作
+	protected function setRedisHash($key,$field,$value){
+		return $this->redis->HMSET ( $key,array($field=>$value));
+	}
+	
+	protected function getRedisHash($key,$field){
+		return $this->redis->HGET ( $key,$field);
+	}
+	
+	protected function getRedisHashAll($key){
+		return $this->redis->HGETALL($key);
+	}
+	
+	protected function pushList($key,$field){
+		return $this->redis->RPUSH ( $key,$field);
+	}
+	protected function getListAll($key){
+		return $this->redis->LRANGE($key,0,$this->redis->LLEN($key));
+	}
+	
+	protected function getListLen($key){
+		return $this->redis->LLEN($key);
+	}
+	
+	protected function delRedis($key){
+		return $this->redis->DEL($key);
+	}
+	
+	
 	public function getGameuid($uid){
 		$gameuid=$this->redis->HGET("REDIS_USER_GAMEUID",$uid);
 		if($gameuid>0){
@@ -77,12 +120,10 @@ class BaseModel {
 				$this->channel = 'WX';
 			}
 			$userinfo = array (
-					'_id' => $this->getIdNew ( "users" ),
 					'uid' => $uid,
-					'regtime' => time (),
 					'channel' => $this->channel 
 			);
-			return $this->insertUser ( $userinfo );
+			return $this->insertMongo($userinfo, 'users');
 		} else {
 			$this->redis->HMSET ( "REDIS_USER_GAMEUID", array (
 					$uid => $gameuid 
@@ -91,15 +132,36 @@ class BaseModel {
 		return $gameuid;
 	}
 	
-	public function insertUser($content){
+	
+	protected function insertMongo($content,$dbname){
+		if(!isset($content['_id'])){
+			$content['_id']=$this->getIdNew($dbname);
+		}
+		if(!isset($content['time'])){
+			$content['time']=time();
+		}
 		$monogdb = $this->getMongdb ();
-		$collection = $monogdb->selectCollection('users');
+		$collection = $monogdb->selectCollection($dbname);
 		$ret = $collection->insert ( $content );
 		return $content['_id'];
 	}
 	
+	/**更新mongo内容
+	 * @param unknown_type array('nickname'=>'wanbin')
+	 * @param unknown_type array('roomid'=>intval ( $id ))
+	 * @param unknown_type $dbname
+	 * @return boolean
+	 */
+	protected function updateMongo($content, $where, $dbname) {
+		$monogdb = $this->getMongdb ();
+		$collection = $monogdb->selectCollection ( $dbname );
+		$result = $collection->update ( $where, array (
+				'$set' => $content 
+		) );
+		return true;
+	}
+	
 	public function getUserInfo($uid){
-		//先从redis取
 		$monogdb = $this->getMongdb ();
 		$collection =  $monogdb->selectCollection('users');
 		$ret = $collection->findOne ( array ('uid' => $uid ) );
@@ -126,7 +188,6 @@ class BaseModel {
 	}
 	
 	public function oneSql($sql) {
-		
 		$this->baidudebug($sql);
 		$DBHandler = $this->getDBInstance ( $this->getTableName () );
 		$tem = explode ( ' ', $sql );
@@ -260,47 +321,6 @@ class BaseModel {
 	
 	//=========================================Cache=====================================//
 
-	/**
-	 * 返回需要操作的缓存实例
-	 *
-	 * @param $config_key string
-	 *       	 配置缓存的key
-	 * @return Cache
-	 */
-	protected function getCacheInstance($config_key = '') {
-		static $instances = array ();
-		if (isset ( $instances [$config_key] )) {
-			return $instances [$config_key];
-		}
-		$config = $GLOBALS ['config'] [$config_key];
-		if (! isset ( $config ['host'] )) {
-			$this->throwException ( 'cache config error', StatusCode::CONFIG_ERROR );
-		}
-		$cache = new Cache ( $config ['host'] );
-		$instances [$config_key] = $cache;
-		return $cache;
-	}
-	
-	/**
-	 * 返回需要操作的缓存实例
-	 *
-	 * @param $gameuid int
-	 * @return Cache
-	 */
-	protected function getCacheInstanceNoHash($gameuid) {
-		static $cacheinstances = array ();
-		if (empty ( $gameuid )) {
-			$gameuid = $this->gameuid;
-		}
-		$config = $this->getConfig ( 'cache_dispatch' );
-		$server_index = $this->getCacheServerIndex ( $gameuid );
-		if (isset ( $cacheinstances [$server_index] )) {
-			return $cacheinstances [$server_index];
-		}
-		$cache = new Cache ( $config ['dispatch_rule'] [$server_index] ['server'] );
-		$cacheinstances [$server_index] = $cache;
-		return $cache;
-	}
 	/**
 	 * 打印调试信息
 	 *
