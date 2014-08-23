@@ -13,8 +13,7 @@ class GameModel extends BaseModel {
 				'type'=>$type,
 				);
 		$monogdb = $this->getMongdb ();
-		$db = $monogdb->centurywar;
-		$collection = $db->game;
+		$collection = $monogdb->selectCollection('game');
 		$ret = $collection->insert ( $content );
 		return $content ['_id'];
 	}

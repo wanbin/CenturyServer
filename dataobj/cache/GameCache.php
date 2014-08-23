@@ -31,7 +31,7 @@ class GameCache extends GameModel {
 		$dislikeKey = $this->getGameDisLikeGameKey ( $id );
 		if (! $this->redis->HEXISTS ( $dislikeKey, $this->gameuid )) {
 			$this->redis->HMSET ( $dislikeKey,array($this->gameuid=>time()));
-			parent::addLikeDislike ( $id, 'dis' );
+			parent::addLikeDislike ( $id, 'dislike' );
 		}
 		return $this->redis->HLEN ($dislikeKey);
 	}

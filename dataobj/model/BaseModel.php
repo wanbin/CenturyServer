@@ -321,7 +321,9 @@ class BaseModel {
 			return $mongoDB;
 		}
 		else{
-			return new MongoClient("mongodb://localhost:27017");
+			$mongoClient= new MongoClient("mongodb://localhost:27017");
+			$mongoDB = $mongoClient->selectDB('centurywar');
+			return $mongoDB;
 		}
 	}
 }
