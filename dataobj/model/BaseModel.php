@@ -31,7 +31,7 @@ class BaseModel {
 	protected $itemMC = null;
 	protected $mysqlConnect=null;
 	
-	protected static $mongoDb=null;
+	protected static $mongoClient=null;
 	
 	public function __construct($uid) {
 		// 加载config
@@ -399,19 +399,22 @@ class BaseModel {
 			$dbname=BAIDU_MONGO_DBNAME;
 			$user = BAIDU_AK;
 			$pwd = BAIDU_SK;
-			if(self::$mongoDb==null){
-				$mongoClient = new MongoClient("mongodb://{$host}:{$port}");
-				self::$mongoDb = $mongoClient->selectDB($dbname);
-				self::$mongoDb->authenticate($user, $pwd);
+			try {
+				$mongoClient = new MongoClient ( "mongodb://{$user}:{$pwd}@{$host}:{$port}", array (
+						"db" => $dbname 
+				) );
+				$mongoDb = $mongoClient->selectDB ( $dbname );
+			} catch ( Exception $e ) {
+				$this->baidudebug ( $e->getMessage () );
 			}
-			return self::$mongoDb;
+			return $mongoDb;
 		}
 		else{
-			if(self::$mongoDb==null){
-				$mongoClient = new MongoClient("mongodb://localhost:27017");
-				self::$mongoDb = $mongoClient->selectDB('centurywar');
-			}
-			return self::$mongoDb;
+			$mongoClient = new MongoClient ( "mongodb://localhost:27017", array (
+					"db" => "centurywar" 
+			) );
+			$mongoDb = $mongoClient->selectDB ( 'centurywar' );
+			return $mongoDb;
 		}
 	}
 }
