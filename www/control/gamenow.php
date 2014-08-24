@@ -15,9 +15,9 @@ if(!empty($uid)){
 
 
 for($i = 0; $i < 100; $i ++) {
-	getMongo ( $i );
+// 	getMongo ( $i );
 }
-exit();
+// exit();
 
 function getMongo($times) {
 	$host = BAIDU_MONGO_HOST;
@@ -36,46 +36,6 @@ function getMongo($times) {
 		// 集合并不需要预先创建
 		$mongoCollection = $mongoDB->selectCollection ( 'test_mongo' );
 		
-		// 插入数据
-		$array = array (
-				'no' => new MongoInt32 ( '2007' ),
-				'name' => 'this is a test message' 
-		);
-		$mongoCollection->insert ( $array );
-		$array = array (
-				'no' => new MongoInt32 ( '2008' ),
-				'name' => 'this is another test message' 
-		);
-		$mongoCollection->insert ( $array );
-		$array = array (
-				'no' => new MongoInt32 ( '2009' ),
-				'name' => 'xxxxxxxx' 
-		);
-		$mongoCollection->insert ( $array );
-		
-		// 删除数据
-		$mongoCollection->remove ( array (
-				'no' => 2008 
-		) );
-		
-		// 更新数据
-		$mongoCollection->update ( array (
-				'no' => 2009 
-		), array (
-				'$set' => array (
-						'name' => 'yyyyyy' 
-				) 
-		) );
-		
-		// 检索数据
-		$mongoCursor = $mongoCollection->find ();
-		while ( $mongoCursor->hasNext () ) {
-			$ret = $mongoCursor->getNext ();
-			echo json_encode ( $ret ) . '<br />';
-		}
-		
-		// 删除集合
-		$mongoCollection->drop ();
 	} catch ( Exception $e ) {
 		die ( $e->getMessage () );
 	}

@@ -147,6 +147,29 @@ class BaseModel {
 		return $gameuid;
 	}
 	
+	private function getMongoConfig(){
+		if(ISBAIDU){
+			return array(
+					'host'=>BAIDU_MONGO_HOST,
+					'port'=>BAIDU_MONGO_PORT,
+					'dbname'=>BAIDU_MONGO_DBNAME,
+					'user'=>BAIDU_AK,
+					'pass'=>BAIDU_SK,
+					);
+		}
+		else{
+			return array(
+					'host'=>'localhost',
+					'port'=>'27017',
+					'dbname'=>'centurywar',
+					'user'=>'',
+					'pass'=>'',
+			);
+		}
+	}
+	
+	//这块mongodb 太逆天啦，我单独处理一下试试
+	
 	
 	protected function insertMongo($content,$dbname){
 		if(!isset($content['_id'])){
@@ -155,11 +178,22 @@ class BaseModel {
 		if(!isset($content['time'])){
 			$content['time']=time();
 		}
-		$monogdb = $this->getMongdb ();
-		$collection = $monogdb->selectCollection($dbname);
-		$ret = $collection->insert ( $content );
-		return $content['_id'];
+		
+		$mongoconfig=$this->getMongoConfig();
+		try {
+			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
+			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['prot']}" );
+			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
+			$mongoDB->authenticate ( $mongoconfig['user'], $mongoconfig['pass'] );
+			$mongoCollection = $mongoDB->selectCollection ($dbname );
+			$ret = $mongoCollection->insert ( $content );
+			return $content['_id'];
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+		
 	}
+
 	
 	/**更新mongo内容
 	 * @param unknown_type array('nickname'=>'wanbin')
@@ -168,15 +202,38 @@ class BaseModel {
 	 * @return boolean
 	 */
 	protected function updateMongo($content, $where, $dbname) {
-		$monogdb = $this->getMongdb ();
-		$collection = $monogdb->selectCollection ( $dbname );
-		$result = $collection->update ( $where, array (
-				'$set' => $content 
-		) );
-		return true;
+		$mongoconfig=$this->getMongoConfig();
+		try {
+			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
+			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['prot']}" );
+			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
+			$mongoDB->authenticate ( $mongoconfig['user'], $mongoconfig['pass'] );
+			$mongoCollection = $mongoDB->selectCollection ($dbname );
+			$result = $mongoCollection->update ( $where, array (
+					'$set' => $content
+			) );
+			return true;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
 	}
 	
 	protected function removeMongo( $where, $dbname) {
+		$mongoconfig=$this->getMongoConfig();
+		try {
+			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
+			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['prot']}" );
+			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
+			$mongoDB->authenticate ( $mongoconfig['user'], $mongoconfig['pass'] );
+			$mongoCollection = $mongoDB->selectCollection ($dbname );
+			$result = $mongoCollection->remove ( $where );
+			return true;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+		return ;
+		
+		
 		$monogdb = $this->getMongdb ();
 		$collection = $monogdb->selectCollection ( $dbname );
 		$result = $collection->remove ( $where );
@@ -184,6 +241,24 @@ class BaseModel {
 	}
 	
 	protected function getFromMongo($where, $dbname) {
+		$mongoconfig=$this->getMongoConfig();
+		try {
+			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
+			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['prot']}" );
+			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
+			$mongoDB->authenticate ( $mongoconfig ['user'], $mongoconfig ['pass'] );
+			$mongoCollection = $mongoDB->selectCollection ( $dbname );
+			$mongoCursor = $mongoCollection->find ( $where );
+			while ( $mongoCursor->hasNext () ) {
+				$ret [] = $mongoCursor->getNext ();
+			}
+			return $ret;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+		return ;
+		
+		
 		$monogdb = $this->getMongdb ();
 		$collection = $monogdb->selectCollection ( $dbname );
 		$mongoCursor = $collection->find ($where);
@@ -193,6 +268,23 @@ class BaseModel {
 		return $ret;
 	}
 	protected function getOneFromMongo($where, $dbname,$sort='-1') {
+		$mongoconfig=$this->getMongoConfig();
+		try {
+			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
+			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['prot']}" );
+			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
+			$mongoDB->authenticate ( $mongoconfig ['user'], $mongoconfig ['pass'] );
+			$mongoCollection = $mongoDB->selectCollection ( $dbname );
+			$mongoCursor = $mongoCollection->find ($where)->sort(array('_id'=>-1))->limit(1);
+			while ( $mongoCursor->hasNext () ) {
+				$ret [] = $mongoCursor->getNext ();
+			}
+		return $ret[0];
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+		return ;
+		
 		$monogdb = $this->getMongdb ();
 		$collection = $monogdb->selectCollection ( $dbname );
 		$mongoCursor = $collection->find ($where)->sort(array('_id'=>-1))->limit(1);
@@ -203,10 +295,7 @@ class BaseModel {
 	}
 	
 	public function getUserInfo($uid){
-		$monogdb = $this->getMongdb ();
-		$collection =  $monogdb->selectCollection('users');
-		$ret = $collection->findOne ( array ('uid' => $uid ) );
-		return $ret;
+		return $this->getOneFromMongo(array('uid'=>$uid), 'users');
 	}	
 	
 	
