@@ -256,7 +256,7 @@ class BaseModel {
 		$pwd = DB_PWD;
 		$port=DB_PORT;
 		$dbname=DB_NAME;
-		if (ISBAIDU == 1) {
+		if (ISBAIDU) {
 			$host = BAIDU_MYSQL_HOST;
 			$port = BAIDU_MYSQL_PORT;
 			$user = BAIDU_AK;
@@ -334,7 +334,7 @@ class BaseModel {
 	
 	
 	public function writeSqlError($sql, $e) {
-		if (ISBAIDU==1) {
+		if (ISBAIDU) {
 			require_once FRAMEWORK."/BaeLog.class.php";
 			$user = BAIDU_AK;
 			$pwd = BAIDU_SK;
@@ -351,13 +351,12 @@ class BaseModel {
 	}
 	
 	public function baidudebug($message){
-		if (ISBAIDU==1) {
+		if (ISBAIDU) {
 			require_once FRAMEWORK."/BaeLog.class.php";
 			$user = BAIDU_AK;
 			$pwd = BAIDU_SK;
 			$logger=BaeLog::getInstance(array('user'=>$user, 'passwd'=> $pwd));
 			$logger->setLogLevel(16);
-			$logger->setLogTag("sql_query");
 			$logger->Debug($message);
 		}
 	}
