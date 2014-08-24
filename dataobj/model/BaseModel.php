@@ -400,6 +400,7 @@ class BaseModel {
 			$user = BAIDU_AK;
 			$pwd = BAIDU_SK;
 			try {
+				$this->baidudebug("new mongoclient");
 				$mongoClient = new MongoClient ( "mongodb://{$user}:{$pwd}@{$host}:{$port}", array (
 						"db" => $dbname 
 				) );
