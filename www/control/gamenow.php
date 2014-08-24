@@ -15,7 +15,7 @@ if(!empty($uid)){
 
 
 for($i = 0; $i < 100; $i ++) {
-// 	getMongo ( $i );
+ 	getMongo ( $i );
 }
 // exit();
 
