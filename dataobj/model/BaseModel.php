@@ -31,7 +31,8 @@ class BaseModel {
 	protected $itemMC = null;
 	protected $mysqlConnect=null;
 	
-	protected $mongoClient=null;
+	protected static $mongoDb=null;
+	
 	public function __construct($uid) {
 		// 加载config
 		$config = $GLOBALS ['config'];
@@ -398,19 +399,19 @@ class BaseModel {
 			$dbname=BAIDU_MONGO_DBNAME;
 			$user = BAIDU_AK;
 			$pwd = BAIDU_SK;
-			if($this->mongoClient==null){
-				$this->mongoClient = new MongoClient("mongodb://{$host}:{$port}");
+			if(self::$mongoDb==null){
+				$mongoClient = new MongoClient("mongodb://{$host}:{$port}");
+				self::$mongoDb = $mongoClient->selectDB($dbname);
+				self::$mongoDb->authenticate($user, $pwd);
 			}
-			$mongoDB = $this->mongoClient->selectDB($dbname);
-			$mongoDB->authenticate($user, $pwd);
-			return $mongoDB;
+			return self::$mongoDb;
 		}
 		else{
-			if($this->mongoClient==null){
-				$this->mongoClient = new MongoClient("mongodb://localhost:27017");
+			if(self::$mongoDb==null){
+				$mongoClient = new MongoClient("mongodb://localhost:27017");
+				self::$mongoDb = $mongoClient->selectDB('centurywar');
 			}
-			$mongoDB = $this->mongoClient->selectDB('centurywar');
-			return $mongoDB;
+			return self::$mongoDb;
 		}
 	}
 }
