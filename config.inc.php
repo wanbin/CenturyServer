@@ -25,7 +25,7 @@ define('BAIDU_REDIS_DBNAME','esdImygxeYaDGMxKXqtU');
 
 define('BAIDU_MONGO_HOST','mongo.duapp.com');
 define('BAIDU_MONGO_PORT','8908');
-define('BAIDU_MONGO_DBNAME','KGqspGheASthPzbuQmcE');
+define('BAIDU_MONGO_DBNAME','PrOHxODNxhEOvUStNfAk');
 
 
 define('BAIDU_CACHE_HOST','cache.duapp.com');
