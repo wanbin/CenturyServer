@@ -23,6 +23,9 @@ class AccountCache extends AccountModel{
 				$this->setToCache($key, $ret);
 			}
 		}
+		if(!empty($ret)){
+		$ret['gameuid']=$ret['_id'];
+		}
 		return $ret;
 	}
 	public function getAccountByUid($uid) {

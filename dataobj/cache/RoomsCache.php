@@ -8,15 +8,22 @@
 require_once PATH_MODEL . 'RoomsModel.php';
 class RoomsCache extends RoomsModel{
 	protected function NewRoom() {
+		$this->exitAllGame();
+		$roomid = parent::NewRoom ();
+		$rediskey = $this->getRoomRedisUserKey ( $roomid );
+		$this->addToRoom ( $roomid );
+		return $roomid;
+	}
+	
+	protected function exitAllGame(){
 		$userRoomInfo=$this->getUserRoomInfo($this->gameuid);
 		if(!empty($userRoomInfo)){
 			$this->removeSomeOne($userRoomInfo['roomid'], $this->gameuid);
 		}
-		$roomid = parent::NewRoom ();
-		$this->addToRoom ( $roomid );
-		return $roomid;
 	}
+	
 	protected function addToRoom($roomid){
+		$this->exitAllGame();
 		$rediskey = $this->getRoomRedisUserKey ( $roomid );
 		$roomInfo = $this->getInfo ( $roomid );
 		if ($this->getListLen ( $rediskey ) >= $roomInfo ['maxcount']) {
@@ -62,7 +69,7 @@ class RoomsCache extends RoomsModel{
 	
 	
 	protected function setRoomType($roomid,$type,$content=''){
-		parent::setRoomType($type,$content);
+		parent::setRoomType($roomid,$type,$content);
 		$key=$this->getRoomInfoKey($roomid);
 		return $this->delFromCache($key);
 	}
@@ -93,7 +100,7 @@ class RoomsCache extends RoomsModel{
 		$key = $this->getRoomUserInfoKey ( $gameuid );
 		$ret = $this->getFromCache ( $key );
 		if (empty ( $ret )) {
-			$ret = parent::GetRoomInfoOne ( $gameuid );
+			$ret = parent::getRoomUserInfo ( $gameuid );
 			if (! empty ( $ret )) {
 				$this->setToCache ( $key, $ret );
 			}
@@ -102,6 +109,12 @@ class RoomsCache extends RoomsModel{
 	}
 	
 	
+	
+	protected function setUserContent($gameuid,$content){
+		parent::setUserContent($gameuid, $content);
+		$key = $this->getRoomUserInfoKey ( $gameuid );
+		return $this->delFromCache($key);
+	}
 	
 	private function getRoomInfoKey($roomid) {
 		return sprintf ( CACHE_KEY_ROOMINFO, $roomid );

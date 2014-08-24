@@ -36,8 +36,8 @@ class RoomsHandler extends RoomsCache{
 		include_once PATH_HANDLER . 'AccountHandler.php';
 		$account = new AccountHandler ( $this->uid );
 		
-		include_once PATH_HANDLER . 'PublishHandler.php';
-		$punish = new PublishHandler ( $this->uid );
+		include_once PATH_HANDLER . 'PunishHandler.php';
+		$punish = new PunishHandler ( $this->uid );
 		//先判断一下玩家是否都在房间里，如果不在房间里，则
 		$result=array();
 		foreach ($gameuidarr as $key=>$value){
@@ -71,13 +71,17 @@ class RoomsHandler extends RoomsCache{
 		return $result;
 	}
 	
-	public function delSomeOne($roomid,$gameuid){
-		$ret= parent::removeSomeOne($roomid,$gameuid);
-		if($ret){
+	public function delSomeOne($gameuid){
+		$roomInfo = $this->getRoomUserInfo ( $this->gameuid );
+		if (empty ( $roomInfo )) {
+			return false;
+		}
+		$ret = parent::removeSomeOne ( $roomInfo ['roomid'], $gameuid );
+		if ($ret) {
 			include_once PATH_HANDLER . 'AccountHandler.php';
 			$account = new AccountHandler ( $this->uid );
-			$content='您被管理员移出房间';
-			$account->sendPushByGameuid($gameuid, $content);
+			$content = '您被管理员移出房间';
+			$account->sendPushByGameuid ( $gameuid, $content );
 		}
 		return $ret;
 	}
@@ -86,7 +90,7 @@ class RoomsHandler extends RoomsCache{
 	 * @param unknown_type $type 1,谁是卧底 2，杀人游戏
 	 */
 	public function StartGame($type,$addPeople){
-		$roomInfo=$this->GetRoomInfo($this->gameuid,$addPeople);
+		$roomInfo=$this->GetRoomInfo($addPeople);
 		$userCount=count($roomInfo['room_user']);
 // 		$userCount=10;
 		$roomcontent='';
@@ -106,7 +110,7 @@ class RoomsHandler extends RoomsCache{
 			$roomContent=$ucroom->initKiller($userCount);
 			$roomcontent="警察：".$roomContent['police']."人 平民：".$roomContent['killer'].'人';
 		}
-		$this->setRoomType($type,$roomcontent);
+		$this->setRoomType($roomInfo['_id'],$type,$roomcontent);
 	
 		//准备发送推送
 		include_once PATH_HANDLER . 'AccountHandler.php';
@@ -128,9 +132,14 @@ class RoomsHandler extends RoomsCache{
 	}
 	
 	
-	public function GetRoomInfoOne($gameuid=''){
-		$gameuid=$this->gameuid;
-		return parent::GetRoomInfoOne($gameuid);
+	public function GetRoomInfoOne(){
+		$ret= parent::getRoomUserInfo($this->gameuid);
+		if($ret['roomid']>0){
+			$roomInfo=$this->getInfo($ret['roomid']);
+			$ret['roomid']+=10000;
+			$ret['roominfo']=$roomInfo;
+		}
+		return $ret;
 	}
 	
 	public function LevelRoom(){

@@ -16,7 +16,7 @@ class RoomsModel extends BaseModel {
 	
 	protected  function NewRoom(){
 		$content = array (
-				'gameuid' => $this->gameuid,
+				'gameuid' => intval($this->gameuid),
 				'maxcount' => 10 
 		);
 		$id = $this->insertMongo ( $content, 'room' );
@@ -26,7 +26,7 @@ class RoomsModel extends BaseModel {
 	//离开房间
 	protected function LevelFromRoom($roomid) {
 		$where = array (
-				'gameuid' => $this->gameuid,
+				'gameuid' => intval($this->gameuid),
 				'roomid'=>$roomid
 		);
 		return $this->removeMongo($where, 'user_room');
@@ -35,7 +35,7 @@ class RoomsModel extends BaseModel {
 		// 离开房间
 	protected function removeRoom($roomid) {
 		$where = array (
-				'roomid' => $roomid 
+				'roomid' => intval($roomid)
 		);
 		return $this->removeMongo ( $where, 'user_room' );
 	}
@@ -43,7 +43,7 @@ class RoomsModel extends BaseModel {
 	
 	protected function endAndUpdateRoomUser($roomid,$userList){
 		$where = array (
-				'_id' => $roomid
+				'_id' => intval($roomid)
 		);
 		
 		$content=array(
@@ -59,7 +59,7 @@ class RoomsModel extends BaseModel {
 		
 	protected function addToRoom($id){
 		$content=array(
-				'gameuid'=>$this->gameuid,
+				'gameuid'=>intval($this->gameuid),
 				'roomid'=>$id,
 				'content'=>'已经加入游戏，还未开始'
 				);
@@ -73,7 +73,7 @@ class RoomsModel extends BaseModel {
 	
 	protected function getUserRoomInfo($gameuid){
 		$where = array (
-				'gameuid' => $gameuid
+				'gameuid' => intval($gameuid)
 		);
 		return $this->getOneFromMongo($where, 'user_room');
 	}
@@ -84,7 +84,7 @@ class RoomsModel extends BaseModel {
 				'content'=>$content
 				);
 		$where = array (
-				'gameuid' => $gameuid
+				'gameuid' => intval($gameuid)
 		);
 		return $this->updateMongo($content, $where, 'user_room');
 	}
@@ -93,31 +93,32 @@ class RoomsModel extends BaseModel {
 	
 	protected  function removeUserRoomInfo($gameuid){
 		$where = array (
-				'gameuid' => $gameuid
+				'gameuid' => intval($gameuid)
 		);
 		return $this->removeMongo($where, 'user_room');
 	}
 	
 	protected function setRoomType($roomid,$type,$content=''){
 		$where = array (
-				'_id' => $roomid
+				'_id' => intval($roomid)
 		);
 		if ($type == 1) {
 			$name = "谁是卧底";
 		} else if ($type == 2) {
 			$name = "杀人游戏";
 		}
-		$content=array(
+		$update=array(
 				'name'=>$name,
 				'updatetime'=>time(),
 				'type'=>$type,
+				'content'=>$content
 				);
-		return $this->updateMongo($content, $where, 'room');
+		return $this->updateMongo($update, $where, 'room');
 	}
 	
-	protected function GetRoomInfoOne($gameuid) {
+	protected function getRoomUserInfo($gameuid) {
 		$where = array (
-				'gameuid' => $gameuid
+				'gameuid' => intval($gameuid)
 		);
 		return $this->getOneFromMongo($where, 'user_room');
 	}

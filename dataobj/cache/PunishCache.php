@@ -54,8 +54,11 @@ class PunishCache extends PunishModel{
 	protected function getRandomOne($type){
 		$listKey = "publish_list_1";
 		$listCount = $this->getListLen ( $listKey );
+		if($listCount==0){
+			return array();
+		}
 		$randindex = rand ( 0, $listCount - 1 );
-		$punishid=$this->getListValueByIndex($listKey);
+		$punishid=$this->getListValueByIndex($listKey,$randindex);
 		return $this->getPunish($punishid);
 	}
 	
