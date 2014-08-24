@@ -7,6 +7,7 @@ require_once PATH_MODEL.'BaseModel.php';
 class BehaveModel extends BaseModel {
 	
 	protected function add($behave) {
+		return;
 		$content=array(
 				'gameuid'=>$this->gameuid,
 				'behave'=>$behave
