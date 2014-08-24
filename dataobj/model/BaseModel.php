@@ -182,7 +182,7 @@ class BaseModel {
 		$mongoconfig=$this->getMongoConfig();
 		try {
 			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
-			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['prot']}" );
+			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['port']}" );
 			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
 			$mongoDB->authenticate ( $mongoconfig['user'], $mongoconfig['pass'] );
 			$mongoCollection = $mongoDB->selectCollection ($dbname );
@@ -205,7 +205,7 @@ class BaseModel {
 		$mongoconfig=$this->getMongoConfig();
 		try {
 			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
-			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['prot']}" );
+			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['port']}" );
 			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
 			$mongoDB->authenticate ( $mongoconfig['user'], $mongoconfig['pass'] );
 			$mongoCollection = $mongoDB->selectCollection ($dbname );
@@ -222,7 +222,7 @@ class BaseModel {
 		$mongoconfig=$this->getMongoConfig();
 		try {
 			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
-			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['prot']}" );
+			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['port']}" );
 			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
 			$mongoDB->authenticate ( $mongoconfig['user'], $mongoconfig['pass'] );
 			$mongoCollection = $mongoDB->selectCollection ($dbname );
@@ -244,7 +244,7 @@ class BaseModel {
 		$mongoconfig=$this->getMongoConfig();
 		try {
 			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
-			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['prot']}" );
+			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['port']}" );
 			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
 			$mongoDB->authenticate ( $mongoconfig ['user'], $mongoconfig ['pass'] );
 			$mongoCollection = $mongoDB->selectCollection ( $dbname );
@@ -271,7 +271,7 @@ class BaseModel {
 		$mongoconfig=$this->getMongoConfig();
 		try {
 			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
-			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['prot']}" );
+			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['port']}" );
 			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
 			$mongoDB->authenticate ( $mongoconfig ['user'], $mongoconfig ['pass'] );
 			$mongoCollection = $mongoDB->selectCollection ( $dbname );
