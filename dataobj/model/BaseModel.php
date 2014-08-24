@@ -31,7 +31,7 @@ class BaseModel {
 	protected $itemMC = null;
 	protected $mysqlConnect=null;
 	
-	static $mongoClient=null;
+	protected $mongoClient=null;
 	public function __construct($uid) {
 		// 加载config
 		$config = $GLOBALS ['config'];
@@ -66,8 +66,9 @@ class BaseModel {
 	
 	//基本cache操作
 	protected function setToCache($key,$value){
-		return $this->memcache->set($key,$value);
+		return $this->memcache->set($key,$value,0);
 	}
+	
 	protected function getFromCache($key){
 		return $this->memcache->get($key);
 	}
@@ -89,16 +90,33 @@ class BaseModel {
 	protected function getRedisHashAll($key){
 		return $this->redis->HGETALL($key);
 	}
+	protected function incrList($key,$field){
+		return $this->redis->HINCRBY($key,$field,1);
+	}
 	
 	protected function pushList($key,$field){
 		return $this->redis->RPUSH ( $key,$field);
+	}
+	protected function pushListLeft($key,$field){
+		return $this->redis->LPUSH ( $key,$field);
 	}
 	protected function getListAll($key){
 		return $this->redis->LRANGE($key,0,$this->redis->LLEN($key));
 	}
 	
+	protected function getListRange($key,$start,$end){
+		return $this->redis->LRANGE($key,$start,$end);
+	}
+	
 	protected function getListLen($key){
 		return $this->redis->LLEN($key);
+	}
+	protected function removeList($key, $value) {
+		return $this->redis->LREM ( $key,$value );
+	}
+	
+	protected function getListValueByIndex($key,$index){
+		return $this->redis->LINDEX($key);
 	}
 	
 	protected function delRedis($key){
@@ -157,12 +175,40 @@ class BaseModel {
 		return true;
 	}
 	
+	protected function removeMongo( $where, $dbname) {
+		$monogdb = $this->getMongdb ();
+		$collection = $monogdb->selectCollection ( $dbname );
+		$result = $collection->remove ( $where );
+		return true;
+	}
+	
+	protected function getFromMongo($where, $dbname) {
+		$monogdb = $this->getMongdb ();
+		$collection = $monogdb->selectCollection ( $dbname );
+		$mongoCursor = $collection->find ($where);
+		while ( $mongoCursor->hasNext () ) {
+			$ret [] = $mongoCursor->getNext ();
+		}
+		return $ret;
+	}
+	protected function getOneFromMongo($where, $dbname,$sort='-1') {
+		$monogdb = $this->getMongdb ();
+		$collection = $monogdb->selectCollection ( $dbname );
+		$mongoCursor = $collection->find ($where)->sort(array('_id'=>-1))->limit(1);
+		while ( $mongoCursor->hasNext () ) {
+			$ret [] = $mongoCursor->getNext ();
+		}
+		return $ret[0];
+	}
+	
 	public function getUserInfo($uid){
 		$monogdb = $this->getMongdb ();
 		$collection =  $monogdb->selectCollection('users');
 		$ret = $collection->findOne ( array ('uid' => $uid ) );
 		return $ret;
 	}	
+	
+	
 	
 		// =================================MYSQL============================================//
 		

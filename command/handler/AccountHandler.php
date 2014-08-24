@@ -25,10 +25,27 @@ class AccountHandler extends AccountCache {
 		$obj = new jpush ( masterSecret, appkeys );
 		$msg_content = json_encode ( array (
 				'n_builder_id' => 0,
-				'n_title' => "谁是卧底-爱上聚会",
+				'n_title' => "爱上聚会",
 				'n_content' => $content
 		) );
-		$res = $obj->send ( rand ( 100000000, 999999999 ), 3, str_replace("-", "", $userInfo['uid']), 1, $msg_content, strtolower($userInfo['channel']) );
+		
+		if (USER_NODEJS) {
+			$this->sendPushNodejs ( $userInfo ['uid'], $msg_content, strtolower ( $userInfo ['channel'] ) );
+		} else {
+			return ;
+			$res = $obj->send ( rand ( 100000000, 999999999 ), 3, str_replace ( "-", "", $userInfo ['uid'] ), 1, $msg_content, strtolower ( $userInfo ['channel'] ) );
+		}
+		
+	}
+
+	/**
+	 * 利用极光推送可以明显提高推送效率，防止前端卡顿现象
+	 * @param unknown_type $uid
+	 * @param unknown_type $content
+	 * @param unknown_type $channel
+	 */
+	public function sendPushNodejs($uid,$content,$channel){
+		
 	}
 	
 	public function sendPushByTag($tag,$content){
@@ -57,6 +74,12 @@ class AccountHandler extends AccountCache {
 		$res = $obj->send ( rand ( 100000000, 999999999 ), 3, str_replace("-", "", $useralise), 1, $msg_content, "android,ios" );
 	}
 	public function changeUserName($username) {
-		parent::updateUserName($username);
+		return parent::updateUserName($username);
 	}
+	
+	
+	
+
+	
+
 }

@@ -24,11 +24,7 @@ class UnderCoverModel extends BaseModel {
 		return $this->insertMongo ( $insert, 'wx_log' );
 	}
 	
-	public function getMessageCount($msg){
-		$sql = "select count(DISTINCT gameuid) count from wx_log where content='$msg'";
-		$ret = $this->oneSqlSignle ( $sql );
-		return $ret['count'];
-	}
+
 	
 	
 	public function changeName($name){
@@ -58,7 +54,9 @@ class UnderCoverModel extends BaseModel {
 		
 		$temarr = explode ( ' ', trim ( $keyword ) );
 		if (in_array($temarr [0], array("名字","姓名","昵称"))) {
-			$this->changeName($temarr[1]);
+			include_once PATH_HANDLER . "/AccountHandler.php";
+			$account = new AccountHandler ( $this->uid );
+			$str = $account->changeUserName ( $temarr[1] );
 			return "修改名字成功，".$temarr[1];
 		}
 		

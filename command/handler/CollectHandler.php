@@ -21,8 +21,8 @@ class CollectHandler extends CollectCache{
 			return false;
 		}
 		$this->add ( $id,$type );
-		include_once 'PublishHandler.php';
-		$publish = new PublishHandler ( $this->uid );
+		include_once 'PunishHandler.php';
+		$publish = new PunishHandler ( $this->uid );
 		$publish->addLikeWith ( $id, $type );
 		return true;
 	}

@@ -5,14 +5,17 @@
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
  */
-require_once PATH_CACHE . 'PublishCache.php';
-class PublishHandler extends PublishCache{
+require_once PATH_CACHE . 'PunishCache.php';
+class PunishHandler extends PunishCache{
 	
-	/**
-	 * 添加一个新闻公告
+	
+	
+	
+	/* 
+	 * @see PunishCache::newPublish()
 	 */
 	public function newPublish($message,$type){
-		return $this->add($message,$type);
+		return parent::newPublish($message, $type);
 	}
 	/**
 	 * 审核词汇
@@ -21,7 +24,7 @@ class PublishHandler extends PublishCache{
 	 * @param unknown_type $type
 	 */
 	public function changeShow($id, $type) {
-		$ret = $this->getOne ( $id );
+		$ret = $this->getPunish ( $id );
 		include_once PATH_HANDLER.'AccountHandler.php';
 		$account = new AccountHandler ( $this->uid );
 		$typestr="真心话";
@@ -86,10 +89,6 @@ class PublishHandler extends PublishCache{
 	}
 	public function addLikeWith($id, $type,$costOther=0) {
 			// 这个是标记为喜欢或不喜欢 1，喜欢 2，不喜欢
-		if ($type == 1) {
-			parent::addLike ( $id, 1, $costOther );
-		} else if ($type == 2) {
-			parent::addLike ( $id, $costOther, 1 );
-		}
+		return parent::addLike ( $id, $type);
 	}
 }

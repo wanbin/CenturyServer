@@ -7,10 +7,11 @@ require_once PATH_MODEL.'BaseModel.php';
 class BehaveModel extends BaseModel {
 	
 	protected function add($behave) {
-		$gameuid=$this->gameuid;
-		$time=time();
-		$sql="insert into user_behave(gameuid,behave,time) values($gameuid,'$behave',$time)";
-		return $this->oneSql($sql);
+		$content=array(
+				'gameuid'=>$this->gameuid,
+				'behave'=>$behave
+				);
+		return $this->insertMongo($content, 'user_behave');
 	}
 	
 }

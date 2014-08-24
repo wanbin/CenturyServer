@@ -29,7 +29,7 @@ class BehaveHandler extends BehaveCache{
 	 * 添加一个用户行为
 	 */
 	public function newBehave($beahve,$data,$sec){
-		$this->add($beahve);
+		return $this->add($beahve);
 	}
 	
 }

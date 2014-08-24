@@ -5,7 +5,25 @@
 require_once PATH_CACHE . 'RoomsCache.php';
 class RoomsHandler extends RoomsCache{
 	public function NewRoom(){
-		return parent::NewRoom();
+		//网络房间基数
+		return parent::NewRoom()+10000;
+	}
+	
+	
+	/* 
+	 * 玩家加入某个房间
+	 * @see RoomsModel::JoinRoom()
+	 */
+	public function JoinRoom($roomid){
+		if (parent::addToRoom ( $roomid )) {
+			include_once PATH_HANDLER . 'AccountHandler.php';
+			$account = new AccountHandler ( $this->uid );
+			$userInfo = $account->getAccountByUid($this->uid);
+			$content = $userInfo ['username'] . "已经加入到游戏中";
+			$account->sendPushByGameuid ( $roomid, $content );
+			return true;
+		}
+		return false;
 	}
 	
 	public function PunishSomeOne($gameuidarr){
@@ -53,8 +71,8 @@ class RoomsHandler extends RoomsCache{
 		return $result;
 	}
 	
-	public function delSomeOne($gameuid){
-		$ret= parent::delSomeOne($gameuid);
+	public function delSomeOne($roomid,$gameuid){
+		$ret= parent::removeSomeOne($roomid,$gameuid);
 		if($ret){
 			include_once PATH_HANDLER . 'AccountHandler.php';
 			$account = new AccountHandler ( $this->uid );
@@ -68,7 +86,6 @@ class RoomsHandler extends RoomsCache{
 	 * @param unknown_type $type 1,谁是卧底 2，杀人游戏
 	 */
 	public function StartGame($type,$addPeople){
-		
 		$roomInfo=$this->GetRoomInfo($this->gameuid,$addPeople);
 		$userCount=count($roomInfo['room_user']);
 // 		$userCount=10;
@@ -110,60 +127,65 @@ class RoomsHandler extends RoomsCache{
 		return $roomInfo;
 	}
 	
-	/**
-	 * 某个玩家出局
-	 * @param unknown_type $gameuid
-	 */
-	public function killSomeOne($gameuid){
-		
-	}
 	
-	public function GetRoomInfo($roomid,$addPeople=0){
-			return parent::GetRoomInfo($roomid,$addPeople);
-	}
-	public function GetRoomInfoOne(){
-		return parent::GetRoomInfoOne();
+	public function GetRoomInfoOne($gameuid=''){
+		$gameuid=$this->gameuid;
+		return parent::GetRoomInfoOne($gameuid);
 	}
 	
 	public function LevelRoom(){
-		include_once PATH_HANDLER . 'AccountHandler.php';
-		$account = new AccountHandler ( $this->uid );
-		$roomid = parent::LevelRoom ();
-		// 代表没有房间
-		if ($roomid == - 1) {
-			return false;
-		}		// 代表是自己创建的房间
-		else if ($roomid == - 2) {
-			$retuser=parent::distroyRoom ();
-			$userInfo = $account->getAccountByUid ( $this->uid );
-			$str = $userInfo ['username'] . "解散了房间" . $this->gameuid;
-			foreach ( $retuser as $key => $value ) {
-				$temgameuid = $value ['gameuid'];
-				$account->sendPushByGameuid ( $temgameuid, $str );
+		$userRoomInfo=$this->getRoomUserInfo($this->gameuid);
+		$roomid=$userRoomInfo['roomid'];
+		if($roomid>0){
+			$roomInfo=$this->getInfo($roomid);
+			if($roomInfo['gameuid']==$this->gameuid){
+				//代表是自己创建了这个
+				$retuser=parent::distroyRoom ($roomid);
+				include_once PATH_HANDLER . 'AccountHandler.php';
+				$account = new AccountHandler ( $this->uid );
+				$userInfo = $account->getAccountByUid ( $this->uid );
+				$str = $userInfo ['username'] . "解散了房间" . $this->gameuid;
+				foreach ( $retuser as $key => $value ) {
+					$temgameuid = $value;
+					$account->sendPushByGameuid ( $temgameuid, $str );
+				}
 			}
-			return true;
-		} else {
-			$userInfo = $account->getAccountByUid ( $this->uid );
-			$content = $userInfo ['username'] . "离开了房间";
-			$account->sendPushByGameuid( $roomid, $content );
-			return true;
+			else{
+				$userInfo = $account->getAccountByUid ( $this->uid );
+				$content = $userInfo ['username'] . "离开了房间";
+				$account->sendPushByGameuid( $roomid, $content );
+				return true;
+			}
+		}
+		else{
+			return -1;
 		}
 	} 
 	
 	
 	
-	public function JoinRoom($roomid){
-		if (parent::JoinRoom ( $roomid )) {
-			include_once PATH_HANDLER . 'AccountHandler.php';
-			$account = new AccountHandler ( $this->uid );
-			$userInfo = $account->getAccountByUid($this->uid);
-			$content = $userInfo ['username'] . "已经加入到游戏中";
- 			$account->sendPushByGameuid ( $roomid, $content );
-			return true;
+	/**
+	 *	这个是主持人取得信息的方式
+	 */
+	public function GetRoomInfo($addPeople=0) {
+		//先取下这个用户对应的roomid
+		$userRoomInfo=$this->getRoomUserInfo($this->gameuid);
+		$roomid=$userRoomInfo['roomid'];
+		$ret = $this->getInfo ( $roomid );
+		$roomUserList = $this->getRoomUserList ( $roomid );
+		$retpeople=array();
+		//添加两个多余的玩家
+		for($i=1;$i<=$addPeople;$i++){
+			$retpeople[]=array('username'=>"NO. $i",'gameuid'=>"-".$i);
 		}
-		return false;
-	}
-
+		include_once PATH_HANDLER . 'AccountHandler.php';
+		$account = new AccountHandler ( $this->uid );
+		foreach ($roomUserList as $key=>$value){
+			$retpeople[]=$account->getAccountByGameuid($value);
+		}
+		$ret['room_user']=$retpeople;
+		return $ret;
+	} 
 	
 	
 }

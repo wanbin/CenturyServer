@@ -13,20 +13,18 @@ require_once 'BaseModel.php';
  +----------------------------------------------------------
  */
 class AccountModel extends BaseModel {
-	public function getAccountByUid($uid = '') {
-		$sql="select * from wx_account  where uid='$uid'";
-		return $this->oneSqlSignle($sql);
-	}
-	
-	public function getAccountByGameuid($gameuid = '') {
-		$sql="select * from wx_account  where gameuid=$gameuid";
-		return $this->oneSqlSignle($sql);
+	public function getAccountByGameuid($gameuid) {
+		$where=array('_id' => intval ( $gameuid ) );
+		$ret = $this->getOneFromMongo ( $where, 'users' );
+		return $ret;
 	}
     
     
     protected function updateUserName($name){
-    	$sql="update wx_account set username='$name' where gameuid=".$this->gameuid;
-    	return $this->oneSql($sql);
+    	$content=array('username'=>$name);
+    	$where=array("_id"=>intval($this->gameuid) );
+    	$this->updateMongo($content, $where, 'users');
+    	return true;
     }
 
 

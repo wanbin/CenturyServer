@@ -7,4 +7,8 @@
  */
 require_once PATH_MODEL . 'UnderCoverModel.php';
 class UnderCoverCache extends UnderCoverModel{
+	public function getMessageCount($msg) {
+		$mesmd5 = md5 ( $msg );
+		return $this->incrList ( "message_send_count", $mesmd5 );
+	}
 }

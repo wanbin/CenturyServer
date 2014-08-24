@@ -10,9 +10,9 @@ class UserGetInfo extends BaseCommand {
 		if (empty ( $uid )) {
 			$uid=$this->uid;
 		}
-		
 		$account = new AccountHandler ( $this->uid );
 		$ret= $account->getAccountByUid($uid);
+		
 		$mail = new MailHandler ( $this->uid );
 		$retmail = $mail->getOneMail ();
 		
@@ -21,12 +21,6 @@ class UserGetInfo extends BaseCommand {
 					$retmail
 			);
 		}
-		
-		
-// 		$account->sendJPush($account->getUidFromGameuid(838), "测试gameuid");
-		
-		$behavea = new BehaveHandler ( $this->uid );
-		$behavea->newBehave ( "getUserInfo","","" );
 		
 		return $this->reutrnDate ( COMMAND_ENPTY ,$ret);
 	}
