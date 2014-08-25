@@ -150,6 +150,13 @@ class BaseModel {
 	private function getMongoConfig(){
 		if(ISBAIDU){
 			return array(
+					'host'=>'101.227.246.95',
+					'port'=>'27017',
+					'dbname'=>'centerwar',
+					'user'=>'starry',
+					'pass'=>'4aCaoch5=7DB',
+			);
+			return array(
 					'host'=>BAIDU_MONGO_HOST,
 					'port'=>BAIDU_MONGO_PORT,
 					'dbname'=>BAIDU_MONGO_DBNAME,
@@ -158,6 +165,13 @@ class BaseModel {
 					);
 		}
 		else{
+			return array(
+					'host'=>'101.227.246.95',
+					'port'=>'27017',
+					'dbname'=>'centerwar',
+					'user'=>'starry',
+					'pass'=>'4aCaoch5=7DB',
+			);
 			return array(
 					'host'=>'localhost',
 					'port'=>'27017',
