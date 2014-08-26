@@ -193,12 +193,8 @@ class BaseModel {
 			$content['time']=time();
 		}
 		
-		$mongoconfig=$this->getMongoConfig();
 		try {
-			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
-			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['port']}" );
-			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
-			$mongoDB->authenticate ( $mongoconfig['user'], $mongoconfig['pass'] );
+			$mongoDB=$this->getMongdb();
 			$mongoCollection = $mongoDB->selectCollection ($dbname );
 			$ret = $mongoCollection->insert ( $content );
 			return $content['_id'];
@@ -216,12 +212,8 @@ class BaseModel {
 	 * @return boolean
 	 */
 	protected function updateMongo($content, $where, $dbname) {
-		$mongoconfig=$this->getMongoConfig();
 		try {
-			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
-			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['port']}" );
-			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
-			$mongoDB->authenticate ( $mongoconfig['user'], $mongoconfig['pass'] );
+			$mongoDB=$this->getMongdb();
 			$mongoCollection = $mongoDB->selectCollection ($dbname );
 			$result = $mongoCollection->update ( $where, array (
 					'$set' => $content
@@ -233,12 +225,8 @@ class BaseModel {
 	}
 	
 	protected function removeMongo( $where, $dbname) {
-		$mongoconfig=$this->getMongoConfig();
 		try {
-			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
-			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['port']}" );
-			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
-			$mongoDB->authenticate ( $mongoconfig['user'], $mongoconfig['pass'] );
+			$mongoDB=$this->getMongdb();
 			$mongoCollection = $mongoDB->selectCollection ($dbname );
 			$result = $mongoCollection->remove ( $where );
 			return true;
@@ -246,21 +234,11 @@ class BaseModel {
 			die ( $e->getMessage () );
 		}
 		return ;
-		
-		
-		$monogdb = $this->getMongdb ();
-		$collection = $monogdb->selectCollection ( $dbname );
-		$result = $collection->remove ( $where );
-		return true;
 	}
 	
 	protected function getFromMongo($where, $dbname) {
-		$mongoconfig=$this->getMongoConfig();
 		try {
-			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
-			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['port']}" );
-			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
-			$mongoDB->authenticate ( $mongoconfig ['user'], $mongoconfig ['pass'] );
+			$mongoDB=$this->getMongdb();;
 			$mongoCollection = $mongoDB->selectCollection ( $dbname );
 			$mongoCursor = $mongoCollection->find ( $where );
 			while ( $mongoCursor->hasNext () ) {
@@ -271,23 +249,10 @@ class BaseModel {
 			die ( $e->getMessage () );
 		}
 		return ;
-		
-		
-		$monogdb = $this->getMongdb ();
-		$collection = $monogdb->selectCollection ( $dbname );
-		$mongoCursor = $collection->find ($where);
-		while ( $mongoCursor->hasNext () ) {
-			$ret [] = $mongoCursor->getNext ();
-		}
-		return $ret;
 	}
 	protected function getOneFromMongo($where, $dbname,$sort='-1') {
-		$mongoconfig=$this->getMongoConfig();
 		try {
-			/* 建立连接后，在进行集合操作前，需要先select使用的数据库，并进行auth */
-			$mongoClient = new MongoClient ( "mongodb://{$mongoconfig['host']}:{$mongoconfig['port']}" );
-			$mongoDB = $mongoClient->selectDB ( $mongoconfig['dbname'] );
-			$mongoDB->authenticate ( $mongoconfig ['user'], $mongoconfig ['pass'] );
+			$mongoDB=$this->getMongdb();
 			$mongoCollection = $mongoDB->selectCollection ( $dbname );
 			$mongoCursor = $mongoCollection->find ($where)->sort(array('_id'=>-1))->limit(1);
 			while ( $mongoCursor->hasNext () ) {
@@ -298,14 +263,6 @@ class BaseModel {
 			die ( $e->getMessage () );
 		}
 		return ;
-		
-		$monogdb = $this->getMongdb ();
-		$collection = $monogdb->selectCollection ( $dbname );
-		$mongoCursor = $collection->find ($where)->sort(array('_id'=>-1))->limit(1);
-		while ( $mongoCursor->hasNext () ) {
-			$ret [] = $mongoCursor->getNext ();
-		}
-		return $ret[0];
 	}
 	
 	public function getUserInfo($uid){
@@ -513,9 +470,7 @@ class BaseModel {
 			return $mongoDb;
 		}
 		else{
-			$mongoClient = new MongoClient ( "mongodb://localhost:27017", array (
-					"db" => "centurywar" 
-			) );
+			$mongoClient = new MongoClient ( "mongodb://localhost:27017");
 			$mongoDb = $mongoClient->selectDB ( 'centurywar' );
 			return $mongoDb;
 		}
