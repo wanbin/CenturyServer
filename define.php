@@ -1,5 +1,6 @@
 <?php
 // 游戏主程序调用入口
+define('ISBAIDU',false);
 
 define ( 'PATH_ROOT', dirname ( __FILE__ ) . '/' ); // 根目录
 define ( 'PATH_COMMAND', PATH_ROOT . 'command/' ); // 命令(逻辑)目录
