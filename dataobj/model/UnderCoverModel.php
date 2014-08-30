@@ -90,12 +90,14 @@ class UnderCoverModel extends BaseModel {
 			$gameuid = $UnderCache->gameuid;
 			include_once PATH_HANDLER . "/RoomsHandler.php";
 			$room = new RoomsHandler ( $this->uid );
-			$ret = $room->JoinRoom ( $type );
-			echo $type;
-			print_R($ret);
-			if ($ret) {
+			$roomid=$type-10000;
+			$ret = $room->JoinRoom ( $roomid );
+			if ($ret==1) {
 				return "加入房间成功";
-			} else {
+			} else if($ret==-2){
+				return "未查到房间信息";
+			}
+			else if($ret==1){
 				return "加入房间失败";
 			}
 			return $str.$helpStr;

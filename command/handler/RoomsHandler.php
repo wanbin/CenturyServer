@@ -15,15 +15,16 @@ class RoomsHandler extends RoomsCache{
 	 * @see RoomsModel::JoinRoom()
 	 */
 	public function JoinRoom($roomid){
-		if (parent::addToRoom ( $roomid )) {
+		$ret=parent::addToRoom ( $roomid );
+		if ($ret>0) {
 			include_once PATH_HANDLER . 'AccountHandler.php';
 			$account = new AccountHandler ( $this->uid );
 			$userInfo = $account->getAccountByUid($this->uid);
 			$content = $userInfo ['username'] . "已经加入到游戏中";
 			$account->sendPushByGameuid ( $roomid, $content );
-			return true;
+			return 1;
 		}
-		return false;
+		return $ret;
 	}
 	
 	public function PunishSomeOne($gameuidarr){

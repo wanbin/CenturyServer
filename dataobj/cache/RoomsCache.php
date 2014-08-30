@@ -26,6 +26,9 @@ class RoomsCache extends RoomsModel{
 		$this->exitAllGame();
 		$rediskey = $this->getRoomRedisUserKey ( $roomid );
 		$roomInfo = $this->getInfo ( $roomid );
+		if(empty($roomInfo)){
+			return -2;
+		}
 		if ($this->getListLen ( $rediskey ) >= $roomInfo ['maxcount']) {
 			// 人数已经多了，不能再加了
 			return -1;
