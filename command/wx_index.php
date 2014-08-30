@@ -29,7 +29,11 @@ class wechatCallbackapiTest {
 		// extract post data
 		if (! empty ( $postStr )) {
 			$postObj = simplexml_load_string ( $postStr, 'SimpleXMLElement', LIBXML_NOCDATA );
-			$this->fromUsername = $postObj->FromUserName;
+			if(is_array($postObj->FromUserName)){
+				$this->fromUsername=$postObj->FromUserName[0];
+			}else{
+				$this->fromUsername = $postObj->FromUserName;
+			}
 			$this->toUsername = $postObj->ToUserName;
 			$this->event = $postObj->Event;
 			$keyword = trim ( $postObj->Content );
