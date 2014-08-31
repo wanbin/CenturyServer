@@ -41,6 +41,7 @@ class PunishHandler extends PunishCache{
 			$satus = "被管理员删除";
 		}
 		
+		
 		$mailstr="您提交的$typestr [".$ret['content']."] $satus";
 		$account->sendPushByGameuid($ret ['gameuid'], $mailstr,true);
 		

@@ -1,21 +1,31 @@
 <script>
-function add(id){
-	$.post("command/command_base.php?mod=game&action=like", {
-		gameid : id,
-		username:$("#username").val()
+function add(){
+	if($("#punishcontent").val()==''){
+		alert("没有任何内容");
+		return;
+	}
+	$.post("command/command_base.php?mod=punish&action=add", {
+		content : $("#punishcontent").val(),
+		gametype:$("#gametype").val()
 	}, function(data) {
-		$("#likeval").html(data);
+		if(data>0){
+			alert("添加"+data+"条成功");
+		}
 	}, "html");
 }
 </script>
 
 <body youdao="bind" ryt12173="1">
 	<div class="container">
-		
-		<textarea class="form-control" rows="8" style="margin:20px 5px"></textarea>
-		<div class="pull-right">
-		<span style='color:999999'>以行分隔，每行为一条惩罚</span>
-		<button type="button" class="btn btn-primary">提交</button>
-		</div>
+		<div id='likeval'></div>
+		<select class="form-control" id='gametype'  style="margin:20px 5px" >
+  <option value='1'>真心话</option>
+  <option value='2'>大冒险</option>
+  <option value='3'>看演技</option>
+</select>
+		<textarea class="form-control" rows="8" style="margin:20px 5px" id='punishcontent'></textarea>
+		<button type="button" class="btn btn-primary btn-lg btn-block" onclick='add()'>提交</button>	
+		<div  class='text-right'  style='color:999999;padding:10px;'>	
+		<span>以行分隔，每行为一条惩罚</span></div>
 	</div>
 </body>

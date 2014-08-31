@@ -77,7 +77,7 @@ class PunishCache extends PunishModel{
 	public function newPublish($message, $type) {
 		$listNeedChange = "publish_list_0";
 		$id = parent::newPublish ( $message, $type );
-		$this->pushListLeft ( $id );
+		$this->pushListLeft ($listNeedChange, $id );
 		return $id;
 	}
 	
