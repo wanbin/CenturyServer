@@ -5,16 +5,6 @@
  */
 require_once PATH_MODEL.'BaseModel.php';
 class UnderCoverModel extends BaseModel {
-	public function __construct( $uid = null) {
-		parent::__construct($uid);
-		if (empty ( $this->gameuid )) {
-			$this->add ( array (
-					'uid' => $uid,
-					'regtime' => time ()
-			) );
-			parent::__construct($uid);
-		}
-	}
 	
 	public function Log($content) {
 		$insert = array (

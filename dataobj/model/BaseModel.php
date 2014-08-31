@@ -141,6 +141,9 @@ class BaseModel {
 				'channel' => $this->channel 
 		);
 		$gameuid = $this->insertMongo ( $userinfo, 'users' );
+		file_put_contents("user_gameuid.log", print_R(array (
+				$uid => $gameuid 
+		),true),FILE_APPEND);
 		$this->redis->HMSET ( "REDIS_USER_GAMEUID", array (
 				$uid => $gameuid 
 		) );
