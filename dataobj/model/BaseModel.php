@@ -34,6 +34,7 @@ class BaseModel {
 	protected static $mongoClient=null;
 	
 	public function __construct($uid) {
+		$this->debug('firstuid',$uid);
 		// 加载config
 		$config = $GLOBALS ['config'];
 		$this->useMemcache = $config ['memcache'];
@@ -126,6 +127,7 @@ class BaseModel {
 	
 	
 	public function getGameuid($uid){
+		$this->debug("initUid",$uid);
 		$gameuid=$this->redis->HGET("REDIS_USER_GAMEUID",$uid);
 		
 		if($gameuid>0){
@@ -141,9 +143,11 @@ class BaseModel {
 				'channel' => $this->channel 
 		);
 		$gameuid = $this->insertMongo ( $userinfo, 'users' );
-		file_put_contents("user_gameuid.log", print_R(array (
+		
+		$this->debug ( 'user_gameuid', array (
 				$uid => $gameuid 
-		),true),FILE_APPEND);
+		) );
+		
 		$this->redis->HMSET ( "REDIS_USER_GAMEUID", array (
 				$uid => $gameuid 
 		) );
@@ -436,11 +440,8 @@ class BaseModel {
 	 */
 	protected function debug($msg, $var = null) {
 		if (DEBUG) {
-			$file = $GLOBALS ['config'] ['log_path'] . 'debug_logs/model_debug_' . date ( 'Y-m-d' ) . '.log';
-			if (! file_exists ( $GLOBALS ['config'] ['log_path'] . 'debug_logs' )) {
-				mkdir ( $GLOBALS ['config'] ['log_path'] . 'debug_logs', 0777, true );
-			}
-			$m = '[' . date ( 'Y-m-d H:i:s' ) . '] ' . $msg;
+			$file = PATH_LOG.'/model_debug_' . date ( 'Y-m-d' ) . '.log';
+			$m = '[' . date ( 'Y-m-d H:i:s' ) . '] ' . $msg."\n";
 			if (isset ( $var )) {
 				$m .= print_r ( $var, true );
 			}
