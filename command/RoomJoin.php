@@ -8,11 +8,10 @@ class RoomJoin extends BaseCommand {
 		include_once PATH_HANDLER . 'RoomsHandler.php';
 		$room = new RoomsHandler ( $this->uid );
 		$ret = $room->JoinRoom ( $roomid-10000 );
-		if ($ret) {
+		if ($ret==1) {
 			return $this->reutrnDate ( COMMAND_SUCCESS,array('roomid'=>$roomid) );
 		} else {
 			return $this->reutrnDate ( ERROR_ROOM );
 		}
-		
 	}
 }

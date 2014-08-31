@@ -14,7 +14,7 @@ if (isset ( $_REQUEST ['username'] )) {
 
 $showPage=$_REQUEST['showpage'];
 
-$pageArr=array('help','home','gamenow');
+$pageArr=array('help','home','gamenow','punish','punishadd','punishshenhe');
 
 if(in_array($showPage, $pageArr)){
 	include_once PATH_CONTROL."/$showPage.php";

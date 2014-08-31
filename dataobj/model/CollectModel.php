@@ -20,16 +20,17 @@ class CollectModel extends BaseModel {
 		foreach ( $idarray as $id ) {
 			$str .= $id . ",";
 		}
-		$str=trim($str,",");
-		$sql = "select * from user_collect where publish_id in($str) and gameuid=" . $this->gameuid;
-		return $this->oneSql ( $sql );
+// 		$sql = "select * from user_collect where publish_id in($str) and gameuid=" . $this->gameuid;
+// 		$str=trim($str,",");
+// 		return $this->oneSql ( $sql );
+		return array();	
 	}
 	
 	protected function add($id,$type){
 		$gameuid=$this->gameuid;
 		$time=time();
-		$sql="insert into user_collect(gameuid,publish_id,type,time) values($gameuid,$id,$type,$time)";
-		$this->oneSql($sql);
+// 		$sql="insert into user_collect(gameuid,publish_id,type,time) values($gameuid,$id,$type,$time)";
+// 		$this->oneSql($sql);
 		return ture;
 	}
 }

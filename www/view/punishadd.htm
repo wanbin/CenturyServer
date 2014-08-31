@@ -1,0 +1,21 @@
+<script>
+function add(id){
+	$.post("command/command_base.php?mod=game&action=like", {
+		gameid : id,
+		username:$("#username").val()
+	}, function(data) {
+		$("#likeval").html(data);
+	}, "html");
+}
+</script>
+
+<body youdao="bind" ryt12173="1">
+	<div class="container">
+		
+		<textarea class="form-control" rows="8" style="margin:20px 5px"></textarea>
+		<div class="pull-right">
+		<span style='color:999999'>以行分隔，每行为一条惩罚</span>
+		<button type="button" class="btn btn-primary">提交</button>
+		</div>
+	</div>
+</body>
