@@ -3,16 +3,26 @@ function agree(id){
 	$.post("command/command_base.php?mod=punish&action=agree", {
 		id : id
 	}, function(data) {
-		showGlobalAlert("审核通过");
-		$("#content_"+id).hide();
+		if(data!=1){
+			alert(data);
+		}
+		else{
+			showGlobalAlert("审核通过");
+			$("#content_"+id).hide();
+		}
 	}, "html");
 }
 function del(id){
 	$.post("command/command_base.php?mod=punish&action=del", {
 		id : id
 	}, function(data) {
+		if(data!=1){
+			alert(data);
+		}
+		else{
 		showGlobalAlert("审核未通过");
 		$("#content_"+id).hide();
+		}
 	}, "html");
 }
 
