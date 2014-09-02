@@ -15,7 +15,8 @@ class PunishCache extends PunishModel{
 		$listNeedChange = "publish_list_1";
 		$count = $this->getListLen ( $listNeedChange );
 		$randStart = rand ( 0, $count - PAGECOUNT );
-		$list = $this->getListRange ( $listNeedChange, $randStart, PAGECOUNT );
+		$randStart=0;
+		$list = $this->getListRange ( $listNeedChange, $randStart, $randStart+PAGECOUNT );
 		$ret = array ();
 		foreach ( $list as $key => $value ) {
 			$ret [] = $this->getPunish ( $value );

@@ -16,14 +16,13 @@ class CollectHandler extends CollectCache{
 	 * 添加一个新闻公告
 	 */
 	public function newCollect($id, $type) {
-		$nowtype=$this->checkCollete ( $id) ;
-		if($nowtype==$type){
+		if ($type == 1) {
+			echo $this->like ( $id );
+		} else if ($type == 2) {
+			echo $this->dislike ( $id );
+		} else {
 			return false;
 		}
-		$this->add ( $id,$type );
-		include_once 'PunishHandler.php';
-		$publish = new PunishHandler ( $this->uid );
-		$publish->addLikeWith ( $id, $type );
 		return true;
 	}
 	

@@ -58,7 +58,7 @@ class PunishHandler extends PunishCache{
 		$idarr = array ();
 		// 这里取到所有的喜欢不喜欢，进行查询返回
 		foreach ( $ret as $key => $valuse ) {
-			$idarr [] = $valuse ['id'];
+			$idarr [] = $valuse ['_id'];
 		}
 		
 		include_once 'CollectHandler.php';
@@ -70,9 +70,11 @@ class PunishHandler extends PunishCache{
 			$temarray [$value ['publish_id']] [$value ['type']] = $value ['time'];
 		}
 		foreach ( $ret as $key => $value ) {
-			$ret [$key] ['liked'] = !empty ( $temarray [$value ['id']] [1] );
-			$ret [$key] ['disliked'] = !empty ( $temarray [$value ['id']] [2] );
-			$ret [$key] ['collected'] = !empty ( $temarray [$value ['id']] [3] );
+			$ret [$key] ['id'] =$value ['_id'];
+			$ret [$key] ['like'] = $result [$value ['_id']]['like'];
+			$ret [$key] ['dislike'] =  $result [$value ['_id']]['dislike'];
+			$ret [$key] ['liked'] = !empty ( $result [$value ['_id']] ['liked'] );
+			$ret [$key] ['disliked'] = !empty ( $result [$value ['_id']] ['disliked'] );
 			$ret [$key] ['username']=empty($value['username'])?"匿名":$value['username'];
 			$ret [$key] ['type']=$value['type'];
 		}
@@ -90,6 +92,9 @@ class PunishHandler extends PunishCache{
 	}
 	public function addLikeWith($id, $type,$costOther=0) {
 			// 这个是标记为喜欢或不喜欢 1，喜欢 2，不喜欢
+		include_once 'CollectHandler.php';
+		$collectHandler = new CollectHandler ( $this->uid );
+		$result = $collectHandler->newCollect ( $id,$type );
 		return parent::addLike ( $id, $type);
 	}
 }

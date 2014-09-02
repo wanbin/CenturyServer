@@ -56,6 +56,11 @@ define ( "CACHE_KEY_USER", "cache_key_user_%d" );
 define ( "CACHE_KEY_PUBLISH", "cache_key_publish_%d" );
 
 
+//惩罚缓存
+define ( "REDIS_KEY_LIKE", "redis_key_like_%d" );
+define ( "REDIS_KEY_DISLIKE", "redis_key_dislike_%d" );
+
+
 //房间信息
 define ( "CACHE_KEY_ROOMINFO", "cache_key_roominfo_%d" );
 

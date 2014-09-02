@@ -113,6 +113,10 @@ class BaseModel {
 	protected function getListLen($key){
 		return $this->redis->LLEN($key);
 	}
+	protected function getHashLen($key){
+		return $this->redis->HLEN($key);
+	}
+	
 	protected function removeList($key, $value) {
 		return $this->redis->LREM ( $key,$value );
 	}
@@ -123,6 +127,10 @@ class BaseModel {
 	
 	protected function delRedis($key){
 		return $this->redis->DEL($key);
+	}
+	
+	protected function isExit($key,$value){
+		return $this->redis->HEXISTS($key,$value);
 	}
 	
 	
