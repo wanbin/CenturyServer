@@ -122,7 +122,7 @@ class BaseModel {
 	}
 	
 	protected function getListValueByIndex($key,$index){
-		return $this->redis->LINDEX($key);
+		return $this->redis->LINDEX($key,$index);
 	}
 	
 	protected function delRedis($key){

@@ -5,9 +5,12 @@ $modle = $_REQUEST ['mod'];
 $action = $_REQUEST ['action'];
 
 if (isset ( $_SESSION ['username'] )) {
-	$uid=$_SESSION ['username'];
-}else{
-	$uid = isset ( $_REQUEST ['username'] ) ? $_REQUEST ['username']  : "";
+	$uid = $_SESSION ['username'];
+} else {
+	$uid = isset ( $_REQUEST ['username'] ) ? $_REQUEST ['username'] : "";
+	if (! empty ( $uid )) {
+		$_SESSION ['username'] = $uid;
+	}
 }
 
 

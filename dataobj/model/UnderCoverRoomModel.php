@@ -60,6 +60,7 @@ class UnderCoverRoomModel extends BaseModel {
 		}
 		$killer=floor( $peoplecount/4);
 		$police=$killer;
+		$policeold=$killerold=$killer;
 		$result=array();
 		for($i=0;$i<$peoplecount;$i++){
 			$result[$i]="平民";
@@ -81,14 +82,14 @@ class UnderCoverRoomModel extends BaseModel {
 			$policeindex=rand(0, $peoplecount-1);
 			if($result[$policeindex]=='平民')
 			{
-				$result[$policeindex]='杀手';
+				$result[$policeindex]='警察';
 				$police--;
 			}
 		}
 		return array (
 				'content' => $result,
-				'killer' => $killer,
-				'police' => $police
+				'killer' => $killerold,
+				'police' => $policeold
 		);
 	}
 	

@@ -17,9 +17,9 @@ class CollectHandler extends CollectCache{
 	 */
 	public function newCollect($id, $type) {
 		if ($type == 1) {
-			echo $this->like ( $id );
+			$this->like ( $id );
 		} else if ($type == 2) {
-			echo $this->dislike ( $id );
+			$this->dislike ( $id );
 		} else {
 			return false;
 		}

@@ -1,4 +1,4 @@
-/* 首页 添加标签操作   开始  */
+centershow/* 首页 添加标签操作   开始  */
 
 function ask_a_tab(){
 	$("#addmsgtab_k").show();
