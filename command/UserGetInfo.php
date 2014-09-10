@@ -21,7 +21,7 @@ class UserGetInfo extends BaseCommand {
 					$retmail
 			);
 		}
-		
+		$ret['newgame']=1;
 		return $this->reutrnDate ( COMMAND_ENPTY ,$ret);
 	}
 }
