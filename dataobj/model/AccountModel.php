@@ -20,8 +20,8 @@ class AccountModel extends BaseModel {
 	}
     
     
-    protected function updateUserName($name){
-    	$content=array('username'=>$name);
+    protected function updateUserName($name,$photo){
+    	$content=array('username'=>$name,'photo'=>$photo);
     	$where=array("_id"=>intval($this->gameuid) );
     	$this->updateMongo($content, $where, 'users');
     	return true;

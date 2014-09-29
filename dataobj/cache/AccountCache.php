@@ -34,8 +34,8 @@ class AccountCache extends AccountModel{
 		return $this->getAccountByGameuid($gameuid	);
 	}
 	
-	protected function updateUserName($name) {
-		parent::updateUserName ( $name );
+	protected function updateUserName($name,$photo) {
+		parent::updateUserName ( $name,$photo );
 		$key = $this->getUserCacheKey ( $this->gameuid );
 		$this->delFromCache ( $key );
 		return true;

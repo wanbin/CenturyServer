@@ -5,13 +5,14 @@ include_once 'handler/PunishHandler.php';
 class NameChange extends BaseCommand {
 	protected function executeEx($params) {
 		$username = $params ['username'];
+		$photo = $params ['photo'];
 		if (empty ( $username )) {
 			$this->throwException ( 'username is empty', 1101 );
 		}
 		if (! empty ( $username )) {
 			include_once PATH_HANDLER . 'AccountHandler.php';
 			$account = new AccountHandler ( $this->uid );
-			$account->changeUserName ( $username );
+			$account->changeUserName ( $username,$photo );
 		}
 		return $this->reutrnDate ( COMMAND_SUCCESS );
 	}
