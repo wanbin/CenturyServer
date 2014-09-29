@@ -42,7 +42,7 @@ class RoomsHandler extends RoomsCache{
 		//先判断一下玩家是否都在房间里，如果不在房间里，则
 		$result=array();
 		foreach ($gameuidarr as $key=>$value){
-			if(key_exists($value, $gameuid_name)||in_array($value, array(-1,-2))){
+			if(key_exists($value, $gameuid_name)||in_array($value, array(-1,-2,-3,-4,-5))){
 				$temPublish=$punish->getRandomOne(1);
 				$content="惩罚：".$temPublish[0]['content'];
 				$username = $gameuid_name [$value];
