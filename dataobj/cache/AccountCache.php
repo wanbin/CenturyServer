@@ -26,6 +26,7 @@ class AccountCache extends AccountModel{
 		if(!empty($ret)){
 			$ret['gameuid']=$ret['_id'];
 			$ret['username']=isset($ret['username'])?$ret['username']:"";
+			$ret['photo']=isset($ret['photo'])?$ret['photo']:"";
 		}
 		return $ret;
 	}
