@@ -68,6 +68,7 @@ class jpush {
 		$param .= '&msg_type='.$msg_type;
 		$param .= '&msg_content='.$msg_content;
 		$param .= '&platform='.$platform;
+// 		$param .= '&badge=+1';
 		$res = $this->request_post($url, $param);
 		if ($res === false) {
 			return false;

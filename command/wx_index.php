@@ -6,7 +6,7 @@ include_once '../define.php';
 // define your token
 define ( "TOKEN", "weixin" );
 $wechatObj = new wechatCallbackapiTest ();
-if (WEIXINVAILD) {
+if (false) {
 	$wechatObj->valid ();
 }
 $wechatObj->responseMsg ();

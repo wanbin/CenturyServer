@@ -32,7 +32,9 @@ class AccountHandler extends AccountCache {
 		if (USER_NODEJS) {
 			$this->sendPushNodejs ( $userInfo ['uid'], $msg_content, strtolower ( $userInfo ['channel'] ) );
 		} else {
-			$res = $obj->send ( rand ( 100000000, 999999999 ), 3, str_replace ( "-", "", $userInfo ['uid'] ), 1, $msg_content, strtolower ( $userInfo ['channel'] ) );
+			$pushCount=$userInfo['pushcount']+1;
+// 			$account->resetPushCount($gameuid,$pushCount);
+			$res = $obj->send ( rand ( 100000000, 999999999 ), 3, str_replace ( "-", "", $userInfo ['uid'] ),1, $msg_content, strtolower ( $userInfo ['channel'] ) );
 		}
 		
 	}

@@ -27,9 +27,21 @@ class AccountCache extends AccountModel{
 			$ret['gameuid']=$ret['_id'];
 			$ret['username']=isset($ret['username'])?$ret['username']:"";
 			$ret['photo']=isset($ret['photo'])?$ret['photo']:"";
+			$ret['pushcount']=$this->getPushCount($gameuid);
+			//加上推送的数量取得
 		}
 		return $ret;
 	}
+	
+	public function getPushCount($gameuid){
+		$likeKey = "PUSH_COUNT";
+		return $this->getRedisHash ( $likeKey,$gameuid);
+	}
+	public function resetPushCount($gameuid,$count=0){
+		$likeKey = "PUSH_COUNT";
+		return $this->setRedisHash ( $likeKey, $gameuid, $count );
+	}
+	
 	public function getAccountByUid($uid) {
 		$gameuid=$this->getGameuid($uid);
 		return $this->getAccountByGameuid($gameuid	);

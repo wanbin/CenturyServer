@@ -32,7 +32,8 @@ class RoomsHandler extends RoomsCache{
 		$ret=$this->GetRoomInfo($roomid);
 		$gameuid_name=array();
 		foreach ($ret['room_user'] as $key=>$value){
-			$gameuid_name[$value['gameuid']]=$value['username'];
+			$gameuid_name[$value['gameuid']]['username']=$value['username'];
+			$gameuid_name[$value['gameuid']]['photo']=$value['photo'];
 		}
 		include_once PATH_HANDLER . 'AccountHandler.php';
 		$account = new AccountHandler ( $this->uid );
@@ -45,12 +46,14 @@ class RoomsHandler extends RoomsCache{
 			if(key_exists($value, $gameuid_name)||in_array($value, array(-1,-2,-3,-4,-5))){
 				$temPublish=$punish->getRandomOne(1);
 				$content="惩罚：".$temPublish[0]['content'];
-				$username = $gameuid_name [$value];
+				$username = $gameuid_name [$value]['username'];
+				$photo=isset($gameuid_name [$value]['photo'])?$gameuid_name [$value]['photo']:"";
 				if ($value < 0) {
 					$username = "NO." . abs ( $value );
 				}
 				$result [] = array (
 						'username' => $username,
+						'photo' => $photo,
 						'content' => $content,
 						'gameuid' => $value 
 				);

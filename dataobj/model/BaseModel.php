@@ -58,7 +58,6 @@ class BaseModel {
 			$this->memcache->pconnect($cacheConfig['host'], $cacheConfig['port']);
 		}
 		
-		
 		if (isset ( $uid )&&!empty($uid)) {
 			$this->uid = $uid;
 			$this->gameuid = $this->getGameuid($uid);
