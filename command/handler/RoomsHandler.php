@@ -60,7 +60,9 @@ class RoomsHandler extends RoomsCache{
 				
 				if($value>0){
 					$this->setUserContent($value, $content);
-					$account->sendPushByGameuid($value, $content);
+					if($value!=$this->gameuid){
+						$account->sendPushByGameuid($value, $content);						
+					}
 				}
 			}
 		}
@@ -126,7 +128,9 @@ class RoomsHandler extends RoomsCache{
 				continue;
 			}
 			$this->setUserContent($value['gameuid'], $content);
-			$account->sendPushByGameuid($value['gameuid'], $content);
+			if($this->gameuid!=$value['gameuid']&&$value['gameuid']>0){				
+				$account->sendPushByGameuid($value['gameuid'], $content);
+			}
 		}
 		
 		

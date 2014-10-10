@@ -29,14 +29,13 @@ class AccountHandler extends AccountCache {
 				'n_content' => $content
 		) );
 		
-		if (USER_NODEJS) {
+		if (false) {
 			$this->sendPushNodejs ( $userInfo ['uid'], $msg_content, strtolower ( $userInfo ['channel'] ) );
 		} else {
-			$pushCount=$userInfo['pushcount']+1;
-// 			$account->resetPushCount($gameuid,$pushCount);
 			$res = $obj->send ( rand ( 100000000, 999999999 ), 3, str_replace ( "-", "", $userInfo ['uid'] ),1, $msg_content, strtolower ( $userInfo ['channel'] ) );
 		}
-		
+		file_put_contents(PATH_LOG."push.log","[".date("Y-m-d H:i:s")."]\n gameuid:".$gameuid."\ncontent:".$msg_content."\n" ,FILE_APPEND);
+		return true;
 	}
 
 	/**
