@@ -7,9 +7,8 @@
  */
 require_once PATH_CACHE . 'PunishCache.php';
 class PunishHandler extends PunishCache{
-	
-	
-	
+
+
 	
 	/* 
 	 * @see PunishCache::newPublish()
@@ -52,6 +51,9 @@ class PunishHandler extends PunishCache{
 		$ret= parent::getRandomOne($type);
 		return $ret;
 	}
+	public function getPunish($punishid){
+		return parent::getPunish($punishid);
+	}
 	
 	public function getPage($page) {
 		$ret = parent::getPage ( $page );
@@ -62,6 +64,7 @@ class PunishHandler extends PunishCache{
 		}
 		
 		include_once 'CollectHandler.php';
+// 		echo $this->uid;
 		$collectHandler = new CollectHandler ( $this->uid );
 		$result = $collectHandler->getAllByIds ( $idarr );
 		// 取得了所有的喜欢与非喜欢

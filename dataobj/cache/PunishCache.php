@@ -8,6 +8,9 @@
 require_once PATH_MODEL . 'PunishModel.php';
 class PunishCache extends PunishModel{
 	
+	
+
+	
 	/*
 	 * 返回第n页的内容 @see PublishModel::getPage()
 	 */
@@ -15,8 +18,8 @@ class PunishCache extends PunishModel{
 		$listNeedChange = "publish_list_1";
 		$count = $this->getListLen ( $listNeedChange );
 		$randStart = rand ( 0, $count - PAGECOUNT );
-		$randStart=0;
-		$list = $this->getListRange ( $listNeedChange, $randStart, $randStart+PAGECOUNT );
+		$randStart=$page*PAGECOUNT;
+		$list = $this->getListRange ( $listNeedChange, $randStart, $randStart*PAGECOUNT+PAGECOUNT );
 		$ret = array ();
 		foreach ( $list as $key => $value ) {
 			$ret [] = $this->getPunish ( $value );
@@ -63,6 +66,8 @@ class PunishCache extends PunishModel{
 		$punishid=$this->getListValueByIndex($listKey,$randindex);
 		return $this->getPunish($punishid);
 	}
+	
+
 	
 	public function getPunishFromText(){
 		global $chengfa;

@@ -1,9 +1,10 @@
 <?php 
-if(!empty($uid)){
+$punishid=$_REQUEST['punishid'];
+if(!empty($punishid)){
 	include_once PATH_HANDLER . 'PunishHandler.php';
 	$punish = new PunishHandler ($uid);
-	$ret=$punish->getPage(1);
-	var_dump($ret);
+	$ret=$punish->getPunish($punishid);
+//  	var_dump($ret);
 }
 
 ?>

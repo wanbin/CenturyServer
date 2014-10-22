@@ -33,4 +33,21 @@ class CollectModel extends BaseModel {
 // 		$this->oneSql($sql);
 		return ture;
 	}
+	
+	
+	/**
+	 * 添加喜欢
+	 * @param unknown_type $id
+	 * @param unknown_type $like
+	 * @param unknown_type $dislike
+	 * @param unknown_type $collete
+	 */
+	protected function addLike($id,$type){
+		$content=array(
+				'gameuid'=>$this->gameuid,
+				'punishid'=>$id,
+				'type'=>$type
+		);
+		return $this->insertMongo($content, 'punish_like');
+	}
 }

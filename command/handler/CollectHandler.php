@@ -13,6 +13,21 @@ require_once PATH_CACHE . 'CollectCache.php';
 class CollectHandler extends CollectCache{
 	
 	/**
+	 * 喜欢游戏
+	 * @param unknown_type $id
+	 */
+	public function like($id){
+		return parent::like($id);
+	}
+	/**
+	 * 不喜欢游戏
+	 * @param unknown_type $id
+	 */
+	public function dislike($id){
+		return parent::dislike($id);
+	}
+	
+	/**
 	 * 添加一个新闻公告
 	 */
 	public function newCollect($id, $type) {

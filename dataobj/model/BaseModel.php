@@ -120,6 +120,10 @@ class BaseModel {
 		return $this->redis->LREM ( $key,$value );
 	}
 	
+	protected function removeHash($key, $value) {
+		return $this->redis->HDEL ( $key,$value );
+	}
+	
 	protected function getListValueByIndex($key,$index){
 		return $this->redis->LINDEX($key,$index);
 	}

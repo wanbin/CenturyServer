@@ -23,16 +23,54 @@ class CollectCache extends CollectModel{
 		return $ret;
 	}
 	
-	public function like($id){
+	
+	
+	/**
+	 * 喜欢游戏
+	 *
+	 * @param unknown_type $id
+	 */
+	protected function like($id) {
 		$likeKey = $this->getLikeKey ( $id );
-		$this->setRedisHash ( $likeKey, $this->gameuid, time () );
-		return $this->getHashLen ( $likeKey );
+		if (!$this->isExit($likeKey, $this->gameuid)) {
+			$this->setRedisHash ( $likeKey,$this->gameuid,time());
+			parent::addLike ( $id, 'like' );
+		}
+		else{
+			$this->removeHash ( $likeKey,$this->gameuid,time());
+// 			parent::addLike ( $id, 'like' );
+		}
+		return $this->getHashLen ($likeKey);
 	}
-	public function dislike($id){
+	
+	/**
+	 * 不喜欢游戏
+	 *
+	 * @param unknown_type $id
+	 */
+	protected function dislike($id) {
 		$dislikeKey = $this->getDislikeKey ( $id );
-		$this->setRedisHash ( $dislikeKey, $this->gameuid, time () );
-		return $this->getHashLen ( $dislikeKey );
+		if (! $this->isExit( $dislikeKey, $this->gameuid )) {
+			$this->setRedisHash( $dislikeKey,$this->gameuid,time());
+			parent::addLike ( $id, 'dislike' );
+		}
+		else{
+			$this->removeHash( $dislikeKey,$this->gameuid,time());
+// 			parent::addLike ( $id, 'dislike' );
+		}
+		return $this->getHashLen ($dislikeKey);
 	}
+	
+// 	public function like($id){
+// 		$likeKey = $this->getLikeKey ( $id );
+// 		$this->setRedisHash ( $likeKey, $this->gameuid, time () );
+// 		return $this->getHashLen ( $likeKey );
+// 	}
+// 	public function dislike($id){
+// 		$dislikeKey = $this->getDislikeKey ( $id );
+// 		$this->setRedisHash ( $dislikeKey, $this->gameuid, time () );
+// 		return $this->getHashLen ( $dislikeKey );
+// 	}
 	
 
 	private function getLikeKey($id) {

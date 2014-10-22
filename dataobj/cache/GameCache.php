@@ -15,11 +15,11 @@ class GameCache extends GameModel {
 	 */
 	protected function like($id) {
 		$likeKey = $this->getGameLikeGameKey ( $id );
-		if (! $this->redis->HEXISTS ( $likeKey, 8)||true) {
-			$this->redis->HMSET ( $likeKey,array($this->gameuid=>time()));
+		if (!$this->isExit($likeKey, $this->gameuid)) {
+			$this->setRedisHash ( $likeKey,$this->gameuid,time());
 			parent::addLikeDislike ( $id, 'like' );
 		}
-		return $this->redis->HLEN ($likeKey);
+		return $this->getHashLen ($likeKey);
 	}
 	
 	/**
@@ -29,11 +29,11 @@ class GameCache extends GameModel {
 	 */
 	protected function dislike($id) {
 		$dislikeKey = $this->getGameDisLikeGameKey ( $id );
-		if (! $this->redis->HEXISTS ( $dislikeKey, $this->gameuid )) {
-			$this->redis->HMSET ( $dislikeKey,array($this->gameuid=>time()));
+		if (! $this->isExit( $dislikeKey, $this->gameuid )) {
+			$this->setRedisHash( $dislikeKey,$this->gameuid,time());
 			parent::addLikeDislike ( $id, 'dislike' );
 		}
-		return $this->redis->HLEN ($dislikeKey);
+		return $this->getHashLen ($dislikeKey);
 	}
 	public function getLikeInfo($id) {
 		$likeKey= $this->getGameLikeGameKey ( $id ) ;

@@ -9,23 +9,43 @@ function add(){
 		gametype:$("#gametype").val()
 	}, function(data) {
 		if(data>0){
-			alert("添加"+data+"条成功");
+			$(".bg-success").fadeIn();
+			$(".bg-success").html("添加"+data+"条成功");
+			$("#punishcontent").val("");
+		}else{
+			alert("添加失败，请重新尝试！");
 		}
 	}, "html");
 }
+$(document).ready(function () {
+    var type=$("#punishtype").val();
+    if(type>0){
+    /*  */
+    	$("#gametype").val(type);
+    }
+});
+function returnPage(){
+	history.go(-1);
+}
 </script>
+
 
 <body youdao="bind" ryt12173="1">
 	<div class="container">
+	<p class="bg-success" style='padding:10px;display:none'>成功</p>
 		<div id='likeval'></div>
 		<select class="form-control" id='gametype'  style="margin:20px 5px" >
   <option value='1'>真心话</option>
   <option value='2'>大冒险</option>
   <option value='3'>看演技</option>
 </select>
-		<textarea class="form-control" rows="8" style="margin:20px 5px" id='punishcontent'></textarea>
+
+<input type="hidden" id="punishtype" value={$ret['type']}>
+
+<textarea class="form-control" rows="8" style="margin:20px 5px" id='punishcontent'>{$ret['content']}</textarea>
 		<button type="button" class="btn btn-primary btn-lg btn-block" onclick='add()'>提交</button>	
-		<div  class='text-right'  style='color:999999;padding:10px;'>	
+		<button type="button" class="btn btn-default btn-lg btn-block" onclick='returnPage()'>返回</button>	
+		<div  class='text-center'  style='color:999999;padding:10px;'>	
 		<span>以行分隔，每行为一条惩罚</span></div>
 	</div>
 </body>
