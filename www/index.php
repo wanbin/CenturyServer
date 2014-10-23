@@ -30,7 +30,14 @@ if (isset ( $_SESSION ['username'] )) {
 
 $showPage=$_REQUEST['showpage'];
 
-$pageArr=array('help','home','gamenow','punish','punishadd','punishshenhe','helpimage');
+$pageArr=array('help','home','gamenow','punish','punishadd','adminpunish','helpimage','admin','adminindex');
+$adminArr=array('adminpunish','adminindex');
+
+if(in_array($showPage, $adminArr)){
+	if(empty($_SESSION['adminname'])){
+		$showPage='admin';
+	}
+}
 
 if(in_array($showPage, $pageArr)){
 	include_once PATH_CONTROL."/$showPage.php";
@@ -40,6 +47,7 @@ else{
 	include_once PATH_CONTROL.'/index.php';
 	include( Mootemplate( 'index' ) );
 }
+
 
 
 include( Mootemplate( 'footer' ) );

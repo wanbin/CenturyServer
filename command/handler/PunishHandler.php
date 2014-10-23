@@ -16,6 +16,9 @@ class PunishHandler extends PunishCache{
 	public function newPublish($message,$type){
 		return parent::newPublish($message, $type);
 	}
+	public function updatePunish($id,$content){
+		return parent::updatePunish($id,$content);
+	}
 	/**
 	 * 审核词汇
 	 *
@@ -39,8 +42,6 @@ class PunishHandler extends PunishCache{
 		} else if ($type == 3) {
 			$satus = "被管理员删除";
 		}
-		
-		
 		$mailstr="您提交的$typestr [".$ret['content']."] $satus";
 		$account->sendPushByGameuid($ret ['gameuid'], $mailstr,true);
 		

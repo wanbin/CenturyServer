@@ -21,6 +21,15 @@ class PunishModel extends BaseModel {
 		return $this->updateMongo ( $content, $where, 'punish' );
 	}
 	
+	protected function updatePunish($id,$content){
+		$where = array (
+				"_id" => intval ( $id )
+		);
+		$content = array (
+				'content' => $content
+		);
+		return $this->updateMongo ( $content, $where, 'punish' );
+	}
 	
 	protected function getPunish($id) {
 		$where = array (
