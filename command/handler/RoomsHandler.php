@@ -100,6 +100,7 @@ class RoomsHandler extends RoomsCache{
 		$userCount=count($roomInfo['room_user']);
 // 		$userCount=10;
 		$roomcontent='';
+		$gamename="";
 		if ($type == 1) {
 			if($userCount<4){
 // 						return false;
@@ -118,6 +119,7 @@ class RoomsHandler extends RoomsCache{
 		}
 		$this->setRoomType($roomInfo['_id'],$type,$roomcontent);
 	
+
 		//准备发送推送
 		include_once PATH_HANDLER . 'AccountHandler.php';
 		$account = new AccountHandler ( $this->uid );
@@ -132,8 +134,12 @@ class RoomsHandler extends RoomsCache{
 				$account->sendPushByGameuid($value['gameuid'], $content);
 			}
 		}
-		
-		
+		if ($type == 1) {
+			$gamename = "谁是卧底";
+		} else if ($type == 2) {
+			$gamename = "杀人游戏";
+		}
+		$roomInfo['content']=$gamename;
 		$roomInfo['room_contente']=$roomContent;
 		$roomInfo['roomtype']=$type;
 		return $roomInfo;
