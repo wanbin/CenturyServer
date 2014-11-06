@@ -151,6 +151,7 @@ class RoomsHandler extends RoomsCache{
 		if($ret['roomid']>0){
 			$roomInfo=$this->getInfo($ret['roomid']);
 			$ret['roomid']+=10000;
+			$ret['name']=isset($ret['name'])?$ret['name']:"";
 			$ret['roominfo']=$roomInfo;
 		}
 		return $ret;
