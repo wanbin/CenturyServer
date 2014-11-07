@@ -4,7 +4,7 @@ $week=date("w",time());
 //时间戳的第几周
 $weekcount=ceil((time()-86400*3)/86400/7);
 // echo $weekcount;
-$base=2336;
+$base=2339;
 $weekshowindex=$weekcount-$base;
 $ret=$partyGameArr[$weekshowindex];
 $ret2=$partyGameArr[$weekshowindex+1];
