@@ -24,7 +24,7 @@ class UserGetInfo extends BaseCommand {
 		
 		$ret['newgame']=1;
 		$ret['newgamename']="我爱你OR不要脸";
-		$ret['newgameimage']="http://www.centurywar.cn/www/image/recom_1.png";
+		$ret['newgameimage']="http://www.centurywar.cn/www/image/game_1.png";
 		
 		$account->resetPushCount($account->gameuid,0);
 		return $this->reutrnDate ( COMMAND_ENPTY ,$ret);
