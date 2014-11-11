@@ -18,9 +18,8 @@ class RankCache extends RoomsModel{
 			$this->pushList ( $key, $this->gameuid );
 			$keycount = $this->getChuangGuanPeople ();
 			$this->incrList ( $keycount, $level );
-			return true;
 		}
-		return false;
+		return $this->getRedisHash ( $keycount, $level );
 	}
 	
 	
