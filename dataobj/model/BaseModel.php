@@ -135,7 +135,23 @@ class BaseModel {
 	protected function isExit($key,$value){
 		return $this->redis->HEXISTS($key,$value);
 	}
+
 	
+	//有序集合
+	protected function sortAdd($key,$souce,$member){
+		return $this->redis->ZADD($key,$souce,$member);
+	}
+	
+	protected function incrSortOne($key,$souce,$member){
+		return $this->redis->ZINCRBY($key,$souce,$member);
+	}
+	
+	protected function getSortRankLowToHigh($key,$member){
+		return $this->redis->ZREVRANK($key,$member);
+	}
+	protected function getSortRank($key,$member){
+		return $this->redis->ZRANK($key,$member);
+	}
 	
 	public function getGameuid($uid){
 		$this->debug("initUid",$uid);

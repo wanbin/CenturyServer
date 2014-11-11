@@ -2,13 +2,15 @@
 // 新建一个房间
 include_once 'BaseCommand.php';
 include_once 'handler/PunishHandler.php';
-class ResponseGetRank extends BaseCommand {
+class ResponseSetRank extends BaseCommand {
 	protected function executeEx($params) {
 		$gametype=$params['game'];
 		$level=$params['level'];
+		$souce=$params['souce'];
 		include_once PATH_HANDLER . 'RankHandler.php';
 		$rank = new RankHandler ( $this->uid );
-		$ret=$rank->getRank ($gametype,$level);
-		return $this->reutrnDate ( COMMAND_SUCCESS,$ret);
+		$rank->setRank ($gametype,$level,$souce);
+		$ret=$rank->getRank($gametype, $level);
+		return $this->reutrnDate ( COMMAND_SUCCESS,array('rank'=>$ret));
 	}
 }

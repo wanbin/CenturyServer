@@ -8,7 +8,7 @@
 require_once PATH_MODEL . 'RoomsModel.php';
 class RankCache extends RoomsModel{
 	
-	protected function changguan($level) {
+	protected function changguan($level,$name) {
 		$key = $this->getChuangGuanKey ( $level );
 		if (! $this->isExit ( $key, $this->gameuid )) {
 			if ($this->getListLen ( $key ) == 0) {
@@ -28,6 +28,31 @@ class RankCache extends RoomsModel{
 		$keycount = $this->getChuangGuanPeople ();
 		return $this->getRedisHashAll($keycount);
 	}
+	
+	
+	protected function getRank($gametype,$level) {
+		$key=$this->getGameRankKey($gametype,$level);
+		//如果是时间的，按越少越胜利
+		if($gametype==102){
+			$rank=$this->getSortRankLowToHigh($key, $this->gameuid);
+		}else{
+			$rank=$this->getSortRank($key, $this->gameuid);
+		}
+		if($rank===false){
+			return 0;
+		}
+		return $rank+1;	
+	}
+	
+	public function setRank($gametype,$level,$souce){
+		$key=$this->getGameRankKey($gametype,$level);
+		return $this->sortAdd($key,$souce,$this->gameuid);
+	}
+	
+	private function getGameRankKey($gametype,$level) {
+		return sprintf ( REDIS_GAME_RANK,$gametype, $level );
+	}
+	
 	
 	private function getChuangGuanKey($level) {
 		return sprintf ( REDIS_CHUANG_GUAN, $level );

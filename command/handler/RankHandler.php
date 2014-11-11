@@ -9,14 +9,34 @@ class RankHandler extends RankCache{
 		$result=array();
 		foreach ($ret as $key=>$value){
 			$result['level'.$key]=array (
-						'peoplecount' => $value 
+						'value' => $value 
 				);
 		}
 		return $result;
 	}
 	
+	public function getRankList($gametype,$level){
+		$result=array();
+		for($i=0;$i<=$level;$i++){
+			$rank=$this->getRank($gametype, $i);	
+			$result['level'.$i]=array (
+					'value' => $rank
+			);
+		}
+		return $result;
+	}
+
+	public function getRank($gametype,$level){
+		return parent::getRank($gametype, $level);
+	}
+	
+	public function setRank($gametype,$level,$souce){
+		return parent::setRank($gametype, $level, $souce);
+	}
+	
+	
 	public function changguan($level,$name) {
-		return parent::changguan ( $level);
+		return parent::changguan ( $level,$name);
 	}
 	
 	
