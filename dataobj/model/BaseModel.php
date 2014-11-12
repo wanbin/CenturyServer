@@ -152,6 +152,9 @@ class BaseModel {
 	protected function getSortRank($key,$member){
 		return $this->redis->ZRANK($key,$member);
 	}
+	protected function getSortValue($key,$member){
+		return $this->redis->ZSCORE($key,$member);
+	}
 	
 	public function getGameuid($uid){
 		$this->debug("initUid",$uid);

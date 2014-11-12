@@ -26,6 +26,26 @@ class RankHandler extends RankCache{
 		return $result;
 	}
 
+	public function getCell(){
+		
+	}
+	
+	public function updateCell($gametype, $level, $data) {
+		$count = $this->cellCount ( $gametype, $level, $data );
+		return $this->upcateCellSort ( $count );
+	}
+	
+	
+	private function cellCount($gametype,$level,$data){
+		return $level*$data;	
+	}
+	
+	public function getCellValue(){
+		return parent::getCellValue();
+	}
+	
+	
+	
 	public function getRank($gametype,$level){
 		return parent::getRank($gametype, $level);
 	}
