@@ -11,11 +11,11 @@ class RankCache extends RoomsModel{
 	protected function changguan($level,$name) {
 		$key = $this->getChuangGuanKey ( $level );
 		if (! $this->isExit ( $key, $this->gameuid )) {
-			if ($this->getListLen ( $key ) == 0) {
+			if ($this->getHashLen ( $key ) == 0) {
 				// 这个是全新开启的一阶游戏，触发事件
 				file_put_contents ( "newlevel$level.log", $this->gameuid, FILE_APPEND );
 			}
-			$this->pushList ( $key, $this->gameuid );
+			$this->setRedisHash ( $key, $this->gameuid,time() );
 			$keycount = $this->getChuangGuanPeople ();
 			$this->incrList ( $keycount, $level );
 		}
