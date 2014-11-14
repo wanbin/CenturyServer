@@ -25,6 +25,29 @@ class RankHandler extends RankCache{
 		}
 		return $result;
 	}
+	
+	public function getRankUser($gametype,$level){
+		if ($gametype == 101) {
+			$ret = parent::getChuangguanUser ( $level );
+		} else {
+			$ret = parent::getRankUser ( $gametype, $level );
+		}
+		$result=array();
+		include_once PATH_HANDLER . 'AccountHandler.php';
+		$account = new AccountHandler ( $this->uid );
+		$rank=1;
+		foreach ( $ret as $key => $value ) {
+			$userInfo = $account->getAccountByGameuid ( $value['gameuid'] );
+			$result[] = array (
+					'username' => $userInfo ['username'],
+					'rank' => $rank,
+					'gameuid' => $key,
+					'score' => $value['value']
+			);
+			$rank ++;
+		}
+		return $result;
+	}
 
 	public function getCell(){
 		
@@ -48,6 +71,9 @@ class RankHandler extends RankCache{
 	
 	public function getRank($gametype,$level){
 		return parent::getRank($gametype, $level);
+	}
+	public function getRankValue($gametype,$level){
+		return parent::getRankValue($gametype, $level);
 	}
 	
 	public function setRank($gametype,$level,$souce){

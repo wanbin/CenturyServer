@@ -156,6 +156,13 @@ class BaseModel {
 		return $this->redis->ZSCORE($key,$member);
 	}
 	
+	protected function getRankString($key,$start,$end){
+		return $this->redis->ZRANGE($key,$start,$end,true);
+	}
+	protected function getRankStringRev($key,$start,$end){
+		return $this->redis->ZREVRANGE($key,$start,$end,true);
+	}
+	
 	public function getGameuid($uid){
 		$this->debug("initUid",$uid);
 		$gameuid=$this->redis->HGET("REDIS_USER_GAMEUID",$uid);

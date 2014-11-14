@@ -9,17 +9,27 @@ require_once PATH_MODEL . 'RoomsModel.php';
 class RankCache extends RoomsModel{
 	
 	protected function changguan($level,$name) {
-		$key = $this->getChuangGuanKey ( $level );
-		if (! $this->isExit ( $key, $this->gameuid )) {
-			if ($this->getHashLen ( $key ) == 0) {
-				// 这个是全新开启的一阶游戏，触发事件
-				file_put_contents ( "newlevel$level.log", $this->gameuid, FILE_APPEND );
-			}
-			$this->setRedisHash ( $key, $this->gameuid,time() );
-			$keycount = $this->getChuangGuanPeople ();
-			$this->incrList ( $keycount, $level );
+		$listkey=$this->getChuangGuanList($level);
+		//判断是否是第一个启动的用户
+		if($this->getListLen($listkey)==0){
+			file_put_contents ( "newlevel$level.log", $this->gameuid, FILE_APPEND );
 		}
+		$this->pushListLeft($listkey, $this->gameuid."_".time());
+		$keycount = $this->getChuangGuanPeople ();
+		$this->incrList ( $keycount, $level );
 		return $this->getRedisHash ( $keycount, $level );
+	}
+	
+	public function getChuangguanUser($level){
+		$listkey=$this->getChuangGuanList($level);
+// 		$this->pushListLeft($listkey, $this->gameuid."_".time());
+		$ret=$this->getListRange($listkey,0,50);
+		$result=array();
+		foreach ($ret as $key=>$value){
+			$tem=explode("_", $value);
+			$result[]=array('gameuid'=>$tem[0],'value'=> date('[m.d] H:i:s',$tem[1]) );
+		}
+		return $result;
 	}
 	
 	
@@ -47,7 +57,7 @@ class RankCache extends RoomsModel{
 	protected function getRank($gametype,$level) {
 		$key=$this->getGameRankKey($gametype,$level);
 		//如果是时间的，按越少越胜利
-		if($gametype==102){
+		if($gametype==103){
 			$rank=$this->getSortRankLowToHigh($key, $this->gameuid);
 		}else{
 			$rank=$this->getSortRank($key, $this->gameuid);
@@ -57,6 +67,31 @@ class RankCache extends RoomsModel{
 		}
 		return $rank+1;	
 	}
+	protected function getRankValue($gametype,$level) {
+		$key=$this->getGameRankKey($gametype,$level);
+		//如果是时间的，按越少越胜利
+		$rank=$this->getSortValue($key, $this->gameuid);
+		if($rank===false){
+			return 0;
+		}
+		return $rank;	
+	}
+	
+	
+	public function getRankUser($gametype,$level){
+		$key=$this->getGameRankKey($gametype,$level);
+		if($gametype==103){
+			$rank=$this->getRankString($key, 0,50);
+		}else{
+			$rank=$this->getRankStringRev($key, 0,50);
+		}
+		$result=array();
+		foreach ($rank as $key=>$value){
+			$result[]=array('gameuid'=>$key,'value'=>$value);
+		}
+		return $result;
+	}
+	
 	
 	public function setRank($gametype,$level,$souce){
 		$key=$this->getGameRankKey($gametype,$level);
@@ -70,6 +105,10 @@ class RankCache extends RoomsModel{
 	
 	private function getChuangGuanKey($level) {
 		return sprintf ( REDIS_CHUANG_GUAN, $level );
+	}
+	
+	private function getChuangGuanList($level) {
+		return sprintf ( REDIS_CHUANG_GUAN_LIST, $level );
 	}
 	
 	private function getChuangGuanPeople() {

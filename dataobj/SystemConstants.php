@@ -74,6 +74,7 @@ define ( "REDIS_KEY_ROOMUSER", "redis_key_roomuser_%d" );
 //超级大脑
 //闯关用户的LIST
 define ( "REDIS_CHUANG_GUAN", "redis_chuangguan_%d" );
+define ( "REDIS_CHUANG_GUAN_LIST", "redis_chuangguan_list_%d" );
 define ( "REDIS_GAME_RANK", "redis_rank_%d_%d" );
 define ( "REDIS_CHUANG_GUAN_COUNT", "redis_chuangguan_count" );
 define ( "REDIS_CELL_KEY", "redis_cell_key" );
