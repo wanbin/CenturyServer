@@ -58,9 +58,9 @@ class RankCache extends RoomsModel{
 		$key=$this->getGameRankKey($gametype,$level);
 		//如果是时间的，按越少越胜利
 		if($gametype==103){
-			$rank=$this->getSortRankLowToHigh($key, $this->gameuid);
-		}else{
 			$rank=$this->getSortRank($key, $this->gameuid);
+		}else{
+			$rank=$this->getSortRankLowToHigh($key, $this->gameuid);
 		}
 		if($rank===false){
 			return 0;
