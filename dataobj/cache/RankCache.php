@@ -42,9 +42,16 @@ class RankCache extends RoomsModel{
 		return $this->incrSortOne($key,$count,$this->gameuid);
 	}
 	
+	
+	
 	protected function getCellValue() {
 		$key=$this->getCellKey();
 		return $this->getSortValue($key, $this->gameuid);
+	}
+	
+	protected function getCellRank() {
+		$key=$this->getCellKey();
+		return $this->getSortRank($key, $this->gameuid)+1;
 	}
 	
 	
@@ -80,7 +87,12 @@ class RankCache extends RoomsModel{
 	
 	public function getRankUser($gametype,$level){
 		$key=$this->getGameRankKey($gametype,$level);
-		if($gametype==103){
+		//这个是江湖排名
+		if($gametype==100){
+			$key=$this->getCellKey();
+			$rank=$this->getRankString($key,0,50);
+		}
+		else if($gametype==103){
 			$rank=$this->getRankString($key, 0,50);
 		}else{
 			$rank=$this->getRankStringRev($key, 0,50);

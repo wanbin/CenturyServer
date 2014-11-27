@@ -86,4 +86,11 @@ class RankHandler extends RankCache{
 	}
 	
 	
+
+	
+	public function getCellRank() {
+		return parent::getCellRank();
+	}
+	
+	
 }
