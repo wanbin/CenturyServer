@@ -10,9 +10,13 @@ class MailModel extends BaseModel {
 	protected function getOneMail(){
 		$where = array (
 				'gameuid' => $this->gameuid,
-				'read'=>0
+// 				'read'=>0
 		);
 		$ret=$this->getOneFromMongo( $where, 'mail',-1 );
+		//如果第一条都被读了，那就返回吧
+		if($ret['read']==1){
+			return array();
+		}
 		$this->readMail($ret['_id']);
 		return $ret;
 	}
@@ -45,6 +49,15 @@ class MailModel extends BaseModel {
 			$content=array('read'=>1);
 			$where=array('_id'=>intval($id));
 			$this->updateMongo($content, $where, 'mail');
+			return true;
+		}
+		return false;
+	}
+	
+	protected function mailDel($id) {
+		if ($id > 0) {
+			$where=array('_id'=>intval($id));
+			$this->removeMongo($where, 'mail');
 			return true;
 		}
 		return false;
