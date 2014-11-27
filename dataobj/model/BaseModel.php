@@ -236,7 +236,6 @@ class BaseModel {
 		if(!isset($content['time'])){
 			$content['time']=time();
 		}
-		
 		try {
 			$mongoDB=$this->getMongdb();
 			$mongoCollection = $mongoDB->selectCollection ($dbname );
@@ -280,13 +279,17 @@ class BaseModel {
 		return ;
 	}
 	
-	protected function getFromMongo($where, $dbname) {
+	protected function getFromMongo($where, $dbname,$sort=-1,$skip=0,$limit=100) {
+		if($sort!=1){
+			$sort=-1;
+		}
+		$ret=array();
 		try {
 			$mongoDB=$this->getMongdb();;
 			$mongoCollection = $mongoDB->selectCollection ( $dbname );
-			$mongoCursor = $mongoCollection->find ( $where );
+			$mongoCursor = $mongoCollection->find ( $where )->sort(array('_id'=>$sort))->skip($skip)->limit($limit);
 			while ( $mongoCursor->hasNext () ) {
-				$ret [] = $mongoCursor->getNext ();
+				$ret[]= $mongoCursor->getNext ();
 			}
 			return $ret;
 		} catch ( Exception $e ) {
@@ -294,7 +297,9 @@ class BaseModel {
 		}
 		return ;
 	}
-	protected function getOneFromMongo($where, $dbname,$sort='-1') {
+	
+	protected function getOneFromMongo($where, $dbname,$sort=-1) {
+		$ret=array();
 		try {
 			$mongoDB=$this->getMongdb();
 			$mongoCollection = $mongoDB->selectCollection ( $dbname );
@@ -302,7 +307,7 @@ class BaseModel {
 			while ( $mongoCursor->hasNext () ) {
 				$ret [] = $mongoCursor->getNext ();
 			}
-		return $ret[0];
+			return $ret[0];
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
@@ -515,5 +520,19 @@ class BaseModel {
 			$mongoDb = $mongoClient->selectDB ( 'centurywar' );
 			return $mongoDb;
 		}
+	}
+	
+	public function  getTimeStr($time){
+		if(time()-$time<60){
+			return "刚刚";
+		}
+		if(time()-$time<600){
+			return "几分钟前";
+		}
+		if(time()-$time<3600){
+			return "一小时前";
+		}
+		return date("Y-m-d",$time);
+		
 	}
 }

@@ -9,20 +9,34 @@ class MailModel extends BaseModel {
 
 	protected function getOneMail(){
 		$where = array (
-				'gameuid' => $this->gameuid
+				'gameuid' => $this->gameuid,
+				'read'=>0
 		);
-		$ret=$this->getOneFromMongo( $where, 'mail',1 );
+		$ret=$this->getOneFromMongo( $where, 'mail',-1 );
 		$this->readMail($ret['_id']);
 		return $ret;
 	}
+	protected function getMailList($page){
+		$where = array (
+				'gameuid' => $this->gameuid,
+		);
+		$pageNum = 30;
+		$skip = $pageNum * ($page-1);
+		$ret= $this->getFromMongo ( $where, 'mail', -1,$skip,$pageNum );
+		return $ret;
+	}
+	
 	
 	protected function SendMail($from, $sendto, $content) {
 		$content = array (
 				'gameuid' => $sendto,
 				'fromgameuid' => $from,
-				'content' => $content 
+				'content' => $content,
+				'read'=>0
 		);
+// 		print_R($content);
 		$id = $this->insertMongo ( $content, 'mail' );
+// 		echo $id;
 		return $id;
 	}
 	

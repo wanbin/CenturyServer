@@ -15,6 +15,13 @@ require_once PATH_MODEL . 'AccountModel.php';
  */
 class AccountCache extends AccountModel{
 	public function getAccountByGameuid($gameuid) {
+		if($gameuid=='-1')
+		{
+			return array('gameuid'=>-1,
+					'username'=>'系统',
+					'photo'=>'http://cnd.centurywar.cn/wordpress/2014/11/icon_100.png'
+					);
+		}
 		$key = $this->getUserCacheKey ( $gameuid );
 		$ret = $this->getFromCache ( $key );
 		if (empty ( $ret )) {
