@@ -32,7 +32,7 @@ class AccountCache extends AccountModel{
 		}
 		if(!empty($ret)){
 			$ret['gameuid']=$ret['_id'];
-			$ret['username']=isset($ret['username'])?$ret['username']:"";
+			$ret['username']=isset($ret['username'])?$ret['username']:"第"+$ret['gameuid']+"位英雄";
 			$ret['photo']=isset($ret['photo'])?$ret['photo']:"";
 			$ret['pushcount']=$this->getPushCount($gameuid);
 			//加上推送的数量取得
