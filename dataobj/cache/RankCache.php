@@ -90,7 +90,7 @@ class RankCache extends RoomsModel{
 		//这个是江湖排名
 		if($gametype==100){
 			$key=$this->getCellKey();
-			$rank=$this->getRankString($key,0,50);
+			$rank=$this->getRankStringRev($key,0,50);
 		}
 		else if($gametype==103){
 			$rank=$this->getRankString($key, 0,50);
