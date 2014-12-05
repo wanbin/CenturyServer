@@ -1,0 +1,13 @@
+User-Agent: Baiduspider
+Disallow: /comments/feed
+Disallow: /?s=*
+Disallow: /*/?s=*
+Disallow: /?r=*
+Disallow: /*/feed
+Disallow: /feed
+Disallow: /wp-content/plugins
+Disallow: /wp-content/themes
+Disallow: /wp-includes
+Disallow: /*/trackback
+Disallow: /wp-admin
+

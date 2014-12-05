@@ -81,7 +81,7 @@ class PunishCache extends PunishModel{
 		$listKey = "publish_list_1";
 		$listCount = $this->getListLen ( $listKey );
 		if($listCount<=50){
-			return array($this->getPunishFromText());
+			return $this->getPunishFromText();
 // 			return array();
 		}
 		$randindex = rand ( 0, $listCount - 1 );

@@ -45,7 +45,8 @@ class RoomsHandler extends RoomsCache{
 		foreach ($gameuidarr as $key=>$value){
 			if(key_exists($value, $gameuid_name)||in_array($value, array(-1,-2,-3,-4,-5))){
 				$temPublish=$punish->getRandomOne(1);
-				$content="惩罚：".$temPublish[0]['content'];
+// 				file_put_contents(PATH_LOG."punish".date("Y-m-d").".log", print_r($temPublish),FILE_APPEND);
+				$content="惩罚：".$temPublish['content'];
 				$username = $gameuid_name [$value]['username'];
 				$photo=isset($gameuid_name [$value]['photo'])?$gameuid_name [$value]['photo']:"";
 				if ($value < 0) {
