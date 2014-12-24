@@ -7,7 +7,7 @@ include_once PATH_ADMIN_CONTROL.'/header.php';
 include( Mootemplate( 'header' ,true) );
 
 $showPage=$_REQUEST['showpage'];
-$pageAdminArr=array('admin','punish_edit','punish_shenhe','index','push_new','push_edit');
+$pageAdminArr=array('admin','punish_edit','punish_shenhe','index','push_new','push_edit','login');
 
 
 
@@ -19,7 +19,7 @@ if(in_array($showPage, $pageAdminArr)&&isset($_SESSION['adminname'])){
 }
 else{
 	include_once PATH_ADMIN_CONTROL.'/index.php';
-	include( Mootemplate( 'index',true ) );
+	include( Mootemplate( 'login',true ) );
 }
 
 
