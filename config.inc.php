@@ -41,8 +41,11 @@ define('DB_PWD', '');
 define('DB_NAME', 'wx');
 define('DB_TAB', 'zxzbcar_push');
 define('DB_CODE','utf8');
-define('appkeys','d0085b49b0682dbbb3a36ff5');
-define('masterSecret', 'fd838eceb6aaf5276b75f542');
+
+
+//JPUSH
+define('appkeys','1fca24a4ae00341567e84792');
+define('masterSecret', '2a8228f3e58823fc5f4ace55');
 define('platform', 'android');
 
 
