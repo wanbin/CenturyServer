@@ -1,8 +1,14 @@
+
 <script>
+$(document).ready(function() { 
+	$("#d241").datepicker(); 
+	}); 
 function send(){
 	var content=$("#push_content").val();
+	var time=$("#d241").val();
 	$.post("command/command_base.php?mod=push&action=send", {
-		content:content
+		content:content,
+		sendtime:time
 	}, function(data) {
 		alert(data);
 	}, "html");
@@ -12,6 +18,9 @@ function send(){
 
 <h3>发推送</h3>
 <textarea class="form-control" style="width:100%" id='push_content'></textarea>
-<button type="button" class="btn btn-default btn-sm" onclick='send()'>立即发送</button>
-
+<div>
+<input type="text" id="d241" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate" style="width:200px" value="{$def_date}"/>
+ <button type="button" class="btn btn-default btn-sm" onclick='send()'>按时发送</button>
+ </div>
+  <a href="index.php?showpage=push_edit">已发</a>
 </div>

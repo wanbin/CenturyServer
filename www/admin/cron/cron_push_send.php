@@ -27,3 +27,5 @@ while($list->count()>0){
 
 $push->hasSend($ret['_id'],$temcount);
 print_R($ret);
+
+echo date("Y-m-d H:i:s",time());

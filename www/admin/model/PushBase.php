@@ -3,12 +3,12 @@
 include_once 'AdminBase.php';
 class PushBase  extends AdminBase {
 	private $onesCount=20000;
-	public function newpush($content){
+	public function newpush($content,$sendtime){
 		//插入一条记录数据，再把用户查出来，放入到缓存里面
 		$content = array (
 				'content' => $content,
 				'issend' => false,
-				'addtime'=>time()
+				'sendtime'=>$sendtime
 		);
 		$id = $this->insertMongo ( $content, 'push','century_admin' );
 		$index=0;
@@ -44,7 +44,7 @@ class PushBase  extends AdminBase {
 		return $this->getFromMongo(array(), 'push',array('id'=>-1),0,100,'century_admin');	
 	}
 	public function getNeedSend(){
-		return $this->getOneFromMongo(array('issend'=>false), 'push','century_admin');
+		return $this->getOneFromMongo(array('issend'=>false,'sendtime'=>array('$lte'=>time())), 'push','century_admin');
 	}
 	public function hasSend($id,$count=0){
 		 $this->updateMongo(array('issend'=>true), array('_id'=>$id), 'push','century_admin',array('sendcount'=>$count));
