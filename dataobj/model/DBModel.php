@@ -143,7 +143,7 @@ class DBModel {
 	//这块mongodb 太逆天啦，我单独处理一下试试
 	
 	
-	protected function insertMongo($content,$collectionName,$dbname='century'){
+	protected function insertMongo($content,$collectionName,$dbname='centurywar'){
 		if(!isset($content['_id'])){
 			$content['_id']=$this->getIdNew($collectionName);
 		}
@@ -168,7 +168,7 @@ class DBModel {
 	 * @param unknown_type $dbname
 	 * @return boolean
 	 */
-	protected function updateMongo($content, $where, $collectionName,$dbname='century',$inc=array()) {
+	protected function updateMongo($content, $where, $collectionName,$dbname='centurywar',$inc=array()) {
 		try {
 			$mongoDB=$this->getMongdb($dbname);
 			$mongoCollection = $mongoDB->selectCollection ($collectionName );
@@ -189,7 +189,7 @@ class DBModel {
 		}
 	}
 	
-	protected function removeMongo( $where, $collectionName,$dbname='century') {
+	protected function removeMongo( $where, $collectionName,$dbname='centurywar') {
 		try {
 			$mongoDB=$this->getMongdb($dbname);
 			$mongoCollection = $mongoDB->selectCollection ($collectionName );
@@ -220,7 +220,7 @@ class DBModel {
 		return array();
 	}
 	
-	protected function getOneFromMongo($where, $collectionName,$dbname='century') {
+	protected function getOneFromMongo($where, $collectionName,$dbname='centurywar') {
 		$ret=array();
 		try {
 			$mongoDB=$this->getMongdb($dbname);

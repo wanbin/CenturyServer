@@ -10,14 +10,7 @@ $showPage=$_REQUEST['showpage'];
 $pageArr=array('help','home','gamenow','punish','punishadd','adminpunish','helpimage');
 
 
-if(in_array($showPage, $pageArr)){
-	include_once PATH_CONTROL."/$showPage.php";
-	include( Mootemplate( $showPage) );
-}
-else{
-	include_once PATH_CONTROL.'/index.php';
-	include( Mootemplate( 'index' ) );
-}
+
 
 
 if (isset ( $_REQUEST ['username'] )) {
@@ -40,7 +33,14 @@ if (isset ( $_SESSION ['username'] )) {
 
 
 
-
+if(in_array($showPage, $pageArr)){
+	include_once PATH_CONTROL."/$showPage.php";
+	include( Mootemplate( $showPage) );
+}
+else{
+	include_once PATH_CONTROL.'/index.php';
+	include( Mootemplate( 'index' ) );
+}
 
 
 

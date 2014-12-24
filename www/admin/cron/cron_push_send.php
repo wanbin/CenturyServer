@@ -6,7 +6,7 @@ $ret=$push->getNeedSend();
 
 $rediska = new Rediska();
 $list = new Rediska_Key_List('Redis_push_'.$ret['_id']);
-set_time_limit(3600);
+set_time_limit(600);
 $temcount=0;
 while($list->count()>0){
 	$tem=$list->pop();
@@ -18,7 +18,7 @@ while($list->count()>0){
 			'n_content' => $ret['content']
 	) );
 	$res = $obj->send ( rand ( 100000, 999999 ), 3,$tem,1, $msg_content, strtolower ( 'android') );
-	if($res['errcode']>0){
+	if($res['errcode']!=0){
 		//没有满足条件的用户
 		$push->signUidError($tem,$res['errcode']);
 	}
