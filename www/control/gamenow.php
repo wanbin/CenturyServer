@@ -11,7 +11,7 @@ $ret2=$partyGameArr[$weekshowindex+1];
 // print_R($ret);
 if(!empty($uid)){
 	include_once PATH_HANDLER . 'GameHandler.php';
-	$game = new GameHandler ($uid);
+	$game = new GameHandler ($uid,'WEB');
 	$likeInfo=$game->getLikeInfo($weekshowindex);
 }
 

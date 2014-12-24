@@ -14,10 +14,11 @@ class BaseModel  extends DBModel {
 	protected $itemMC = null;
 
 	
-	public function __construct($uid) {
+	public function __construct($uid,$channel='ANDROID') {
 		parent::__construct();
 		$this->debug('firstuid',$uid);
 		// 加载config
+		$this->channel=$channel;
 		if (isset ( $uid )&&!empty($uid)) {
 			$this->uid = $uid;
 			$this->gameuid = $this->getGameuid($uid);
@@ -36,7 +37,10 @@ class BaseModel  extends DBModel {
 			$this->channel = 'IOS';
 		} elseif (substr ( $uid, 1, 5 ) == substr ( "ouHjQjpu175ug-jVh0Wdw5i--Xgw", 1, 5 )) {
 			$this->channel = 'WX';
+		}elseif(substr ( $uid, 1, 5 )=='201'){
+			$this->channel = 'WEB';
 		}
+		
 		$userinfo = array (
 				'uid' => $uid,
 				'channel' => $this->channel 
