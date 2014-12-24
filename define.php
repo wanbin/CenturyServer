@@ -17,10 +17,20 @@ define ( 'PATH_LOG', PATH_ROOT . 'log/' ); // 静态文件夹
 
 define ( 'PATH_VIEW_COMMAND', PATH_ROOT . 'www/command/' ); // control
 define ( 'PATH_CONTROL', PATH_ROOT . 'www/control/' ); // control
+
+define ( 'PATH_ADMIN_CONTROL', PATH_ROOT . 'www/admin/control' ); // control
+define ( 'PATH_ADMIN_VIEW', PATH_ROOT . 'www/admin/view' ); // control
+define ( 'PATH_ADMIN_COMMAND', PATH_ROOT . 'www/admin/command/' ); // control
+
 define ( 'PATH_VIEW', PATH_ROOT . 'www/view/' ); // control
 
 define("MOOPHP_DATA_DIR", PATH_VIEW.'/cache/');
 define("MOOPHP_TEMPLATE_DIR", PATH_VIEW);
+
+
+define("MOOPHP_ADMIN_DATA_DIR", PATH_ADMIN_VIEW.'/cache/');
+define("MOOPHP_ADMIN_TEMPLATE_DIR", PATH_ADMIN_VIEW);
+
 
 date_default_timezone_set ( "Asia/Chongqing" );
 include_once PATH_ROOT . 'config.inc.php'; // 全局配置文件

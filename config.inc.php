@@ -18,7 +18,7 @@ define('BAIDU_MYSQL_DBNAME','vGqVSTLBAJuMcqzGlevs');
 define('BAIDU_MYSQL_HOST','sqld.duapp.com');
 define('BAIDU_MYSQL_PORT','4050');
 
-define('BAIDU_REDIS_HOST','redis.duapp.com');
+define('BAIDU_REDIS_HOST','redis.duapp.com'); 
 define('BAIDU_REDIS_PORT','80');
 define('BAIDU_REDIS_DBNAME','esdImygxeYaDGMxKXqtU');
 

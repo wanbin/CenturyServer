@@ -1,3 +1,4 @@
+<? if(!defined('IN_MOOPHP')) exit('Access Denied');?>
 <script>
 function agree(id){
 	$.post("command/command_base.php?mod=punish&action=agree", {
@@ -27,33 +28,37 @@ function del(id){
 }
 
 </script>
-<div>
+<div class="container">
 <h3>惩罚审核</h3>
 <p class="bg-success" style='padding:10px;display:none'>成功</p>
 	<table class="table table-striped">
 		<tbody>
-			<!--{loop $ret $key $value}-->
-			<tr id="content_{$value['_id']}">
+			<?php foreach((array)$ret as $key=>$value) {?>
+			<tr id="content_<?php echo $value['_id'];?>">
+				<td>
+				<?php if($value['type']=='1') { ?>
+				<span class="label label-success" style='margin-right:5px'>真心话</span>
+				<?php } elseif ($value['type']=='2') { ?>
+				<span class="label label-danger" style='margin-right:5px'>大冒险</span>
+				<?php } else { ?>
+				<span class="label label-info" style='margin-right:5px'>看演技</span>
+				<?php } ?>
+				</td>
 				<td>
 				<div style="padding:10px 0px;">
-				<!--{if $value['type']=='1'}-->
-				<span class="label label-success" style='margin-right:5px'>真心话</span>
-				<!--{elseif $value['type']=='2'}-->
-				<span class="label label-danger" style='margin-right:5px'>大冒险</span>
-				<!--{else}-->
-				<span class="label label-info" style='margin-right:5px'>看演技</span>
-				<!--{/if}-->
-				$value['content']
+				<?php echo $value['content'];?>
 	</div>
+				</td>
+				<td>
 				<div class="btn-group  btn-group-xs  pull-right ">
-				<button type="button" class="btn btn-default btn-sm" onclick='agree({$value["_id"]})'>通过</button>	
-				<button type="button" class="btn btn-default btn-sm" onclick='del({$value["_id"]})'>删除</button>
+				<button type="button" class="btn btn-default btn-sm" onclick='agree(<?php echo $value["_id"];?>)'>通过</button>	
+				<button type="button" class="btn btn-default btn-sm" onclick='del(<?php echo $value["_id"];?>)'>删除</button>
 				</div>
 				
 				</td>
 
 			</tr>
-			<!--{/loop}-->
+			<?php }?>
 		</tbody>
 	</table>
 </div>

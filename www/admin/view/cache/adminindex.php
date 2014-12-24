@@ -1,3 +1,4 @@
+<? if(!defined('IN_MOOPHP')) exit('Access Denied');?>
 <script>
 var lasttype=1;
 function showContent(type,page){

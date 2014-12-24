@@ -133,7 +133,7 @@ class jpush {
 		$created =date("Y-m-d H:i:s",$created);
 // 		$sql = "INSERT INTO  ".DB_NAME.".`".DB_TAB."` (`id` ,`sendno` ,`n_title` ,`n_content` ,`errcode` ,`errmsg` ,`total_user` ,`send_cnt` ,`created`)VALUES ( NULL ,'".$sendno."','".$msg_content['n_title']."','".$msg_content['n_content']."', '".$res_arr['errcode']."', '".$res_arr['errmsg']."', '',  '','".$created."')";
 // 		$query = mysql_query($sql);
-				
+		return $res_arr;
 	}
 	
 }

@@ -453,10 +453,14 @@ function MooMessage($message, $urlForward = '', $time = 3) {
 * @param string $file - ģ���ļ���
 * @return string ���ر����ģ���ϵͳ���·��
 */
-function MooTemplate($file) {
-
+function MooTemplate($file,$isadmin=false) {
+if($isadmin){
+	$tplfile = MOOPHP_ADMIN_TEMPLATE_DIR.'/'.$file.'.htm';
+	$objfile = MOOPHP_ADMIN_DATA_DIR.'/'.$file.'.php';
+}else{
 	$tplfile = MOOPHP_TEMPLATE_DIR.'/'.$file.'.htm';
 	$objfile = MOOPHP_DATA_DIR.'/'.$file.'.php';
+}
 // 	echo MOOPHP_TEMPLATE_DIR;
 	if(@filemtime($tplfile) > @filemtime($objfile)) {
 		//note ����ģ�����ļ�

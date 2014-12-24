@@ -29,8 +29,7 @@ function del(id){
 }
 
 </script>
-<div >
-
+<div class="container">
 <h3>惩罚管理</h3>
 <p class="bg-success" style='padding:10px;display:none'>成功</p>
 	<table class="table table-striped">
@@ -38,7 +37,6 @@ function del(id){
 			<!--{loop $ret $key $value}-->
 			<tr id="content_{$value['_id']}">
 				<td>
-				<div style="padding:10px 0px;">
 				<!--{if $value['type']=='1'}-->
 				<span class="label label-success" style='margin-right:5px'>真心话</span>
 				<!--{elseif $value['type']=='2'}-->
@@ -46,15 +44,15 @@ function del(id){
 				<!--{else}-->
 				<span class="label label-info" style='margin-right:5px'>看演技</span>
 				<!--{/if}-->
-				<textarea class="form-control" style="margin:20px 5px" id='punish_{$value["_id"]}'>{$value['content']}</textarea>
-				</div>
+				</td>
+				<td>
+				<textarea class="form-control" style="width:100%" id='punish_{$value["_id"]}'>{$value['content']}</textarea>
+				<td>
 				<div class="btn-group  btn-group-xs  pull-right ">
 				<button type="button" class="btn btn-default btn-sm" onclick='del({$value["_id"]})'>删除</button>
 				<button type="button" class="btn btn-default btn-sm" onclick='update({$value["_id"]})'>保存</button>	
 				</div>
-				
 				</td>
-
 			</tr>
 			<!--{/loop}-->
 		</tbody>
