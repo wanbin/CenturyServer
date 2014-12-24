@@ -18,6 +18,10 @@ while($list->count()>0){
 			'n_content' => $ret['content']
 	) );
 	$res = $obj->send ( rand ( 100000, 999999 ), 3,$tem,1, $msg_content, strtolower ( 'android') );
+	if($res['errcode']>0){
+		//没有满足条件的用户
+		$push->signUidError($tem,$res['errcode']);
+	}
 	$temcount++;
 }
 

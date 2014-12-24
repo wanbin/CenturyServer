@@ -27,6 +27,10 @@ class AccountModel extends BaseModel {
     	return true;
     }
 
-
+    protected function accountLogin(){
+    	//把用户的不可推送标记去除，更新用户这次登录时间
+    	$this->updateMongo(array('$unset'=>array('push_error'=>''),'logintime'=>time()), array('uid'=>$uid), 'users','centurywar');
+    	
+    }
 
 }

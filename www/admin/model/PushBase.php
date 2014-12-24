@@ -51,12 +51,19 @@ class PushBase  extends AdminBase {
 	}
 	
 	public function insertAllUidInRedis($id,$index){
-		$ret=$this->getFromMongo(array('channel'=>'ANDROID'), 'users',array('time'-1),$index*$this->onesCount,$this->onesCount,'centurywar');
+		$ret=$this->getFromMongo(array('channel'=>'ANDROID','push_error'=>array('$exists'=>false)), 'users',array('time'-1),$index*$this->onesCount,$this->onesCount,'centurywar');
 		$rediska = new Rediska();
 		$list = new Rediska_Key_List('Redis_push_'.$id);
 		foreach ($ret as $key=>$value){
 			$list[]=$value['uid'];
 		}
 		return count($ret);
+	}
+	/**
+	 * 标记UID有问题，下次不再添加
+	 * @param unknown_type $id
+	 */
+	public function signUidError($uid,$error_code){
+		$this->updateMongo(array('push_error'=>$error_code), array('uid'=>$uid), 'users','centurywar');
 	}
 }

@@ -55,6 +55,11 @@ class AccountCache extends AccountModel{
 		return $this->getAccountByGameuid($gameuid	);
 	}
 	
+	public function accountLogin(){
+		return parent::accountLogin();
+	}
+	
+	
 	protected function updateUserName($name,$photo) {
 		parent::updateUserName ( $name,$photo );
 		$key = $this->getUserCacheKey ( $this->gameuid );

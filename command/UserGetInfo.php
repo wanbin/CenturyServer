@@ -12,6 +12,7 @@ class UserGetInfo extends BaseCommand {
 		}
 		$account = new AccountHandler ( $this->uid );
 		$ret= $account->getAccountByUid($uid);
+		$account->accountLogin();
 		
 		$mail = new MailHandler ( $this->uid );
 // 		echo $this->uid;
