@@ -31,6 +31,7 @@ define("MOOPHP_TEMPLATE_DIR", PATH_VIEW);
 define("MOOPHP_ADMIN_DATA_DIR", PATH_ADMIN_VIEW.'/cache/');
 define("MOOPHP_ADMIN_TEMPLATE_DIR", PATH_ADMIN_VIEW);
 
+include_once PATH_ROOT."act.conf.php";
 
 date_default_timezone_set ( "Asia/Chongqing" );
 include_once PATH_ROOT . 'config.inc.php'; // 全局配置文件
