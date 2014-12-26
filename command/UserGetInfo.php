@@ -32,7 +32,7 @@ class UserGetInfo extends BaseCommand {
 		$ret['newgame']=1;
 		$ret['newgamename']="爱上聚会吧";
 		$ret['newgameimage']="http://cnd.centurywar.cn/gameimg/tieba.png";
-		$ret['newgameurl']="http://tieba.baidu.com/f?ie=utf-8&kw=%E7%88%B1%E4%B8%8A%E8%81%9A%E4%BC%9A";
+		$ret['newgameurl']="http://tieba.baidu.com/f?ie=utf-8&kw=%E7%88%B1%E4%B8%8A%E8%81%9A%E4%BC%9A&fr=search";
 		
 		$account->resetPushCount($account->gameuid,0);
 		return $this->reutrnDate ( COMMAND_ENPTY ,$ret);
