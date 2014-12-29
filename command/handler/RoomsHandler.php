@@ -135,6 +135,8 @@ class RoomsHandler extends RoomsCache{
 				$account->sendPushByGameuid($value['gameuid'], $content);
 			}
 		}
+// 		$account->sendPushByGameuid($this->gameuid, "我爱你，我超爱你");
+
 		if ($type == 1) {
 			$gamename = "谁是卧底";
 		} else if ($type == 2) {

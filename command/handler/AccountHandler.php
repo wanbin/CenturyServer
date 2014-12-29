@@ -29,8 +29,8 @@ class AccountHandler extends AccountCache {
 				'n_content' => $content
 		) );
 		
-		if (false) {
-			$this->sendPushNodejs ( $userInfo ['uid'], $msg_content, strtolower ( $userInfo ['channel'] ) );
+		if (PUSH_NODEJS) {
+			$this->sendPushNodejs ( $userInfo ['uid'], $content, strtolower ( $userInfo ['channel'] ) );
 		} else {
 			$res = $obj->send ( rand ( 100000000, 999999999 ), 3, str_replace ( "-", "", $userInfo ['uid'] ),1, $msg_content, strtolower ( $userInfo ['channel'] ) );
 		}
@@ -45,7 +45,10 @@ class AccountHandler extends AccountCache {
 	 * @param unknown_type $channel
 	 */
 	public function sendPushNodejs($uid,$content,$channel){
-		
+		$rediska = new Rediska();
+		$list = new Rediska_Key_List('Push_Map_0');
+		$date= json_encode(array('message'=>$content,'channel'=>$channel,'alias'=>$uid));
+		$list[]=$date;
 	}
 	
 	public function sendPushByTag($tag,$content){
