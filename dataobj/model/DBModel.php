@@ -182,7 +182,6 @@ class DBModel {
 						'$set' => $content 
 				) );
 			}
-	
 			return true;
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );

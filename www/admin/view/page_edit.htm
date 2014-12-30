@@ -1,0 +1,39 @@
+<script>
+function delgame(id){
+	$.post("command/command_base.php?mod=page&action=del", {
+		_id:id
+	}, function(data) {
+		alert(data);
+		$("#tr_"+id).fadeOut();
+	}, "html");
+}
+</script>
+<div class="container">
+
+	<h3>界面管理</h3>
+	<table class="table table-striped">
+		<tbody>
+			<tr>
+				<td>序号</td>
+				<td>标题</td>
+				<td>发布时间</td>
+				<td>状态</td>
+				<td>操作</td>
+			</tr>
+			<!--{loop $ret $key $value}-->
+			<tr id="tr_{$value['_id']}">
+				<td>$value['_id']</td>
+				<td>$value['title']
+				<td>$value['time']</td>
+				<td>$value['status']</td>
+				<td>
+					<button type="button" class="btn btn-default btn-sm"
+						onclick='delgame({$value["_id"]})'>删除</button> <a
+					href="index.php?showpage=page_new&id={$value['_id']}">编辑</a>
+				</td>
+			</tr>
+			<!--{/loop}-->
+		</tbody>
+	</table>
+	<a href="index.php?showpage=page_new">新建界面</a>
+</div>

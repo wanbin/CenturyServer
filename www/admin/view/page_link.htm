@@ -1,0 +1,72 @@
+<script>
+function add(){
+	var des=$("#link_des").val();
+	var key=$("#link_key").val();
+	$.post("command/command_base.php?mod=page&action=linkadd", {
+		des:des,
+		key:key
+	}, function(data) {
+		alert(data);
+	}, "html");
+}
+function del(id){
+	$.post("command/command_base.php?mod=page&action=linkdel", {
+		linkid:id
+	}, function(data) {
+		alert(data);
+		$("#tr_"+id).fadeOut();
+	}, "html");
+}
+function update(id){
+	var link=$("#select_"+id).val();
+	var key=$("#key_"+id).val();
+	var name=$("#name_"+id).val();
+	$.post("command/command_base.php?mod=page&action=linkupdate", {
+		_id:id,
+		key:key,
+		name:name,
+		link:link
+	}, function(data) {
+		alert(data);
+	}, "html");
+}
+</script>
+<div class="container">
+
+	<h3>页面链接管理</h3>
+	<table class="table table-striped">
+		<tbody>
+			<tr>
+				<td style="width:20%">键</td>
+				<td style="width:20%">描述</td>
+				<td style="width:20%">页面</td>
+				<td style="width:20%">页面ID</td>
+				<td style="width:20%">操作</td>
+			</tr>
+			<!--{loop $ret $key $value}-->
+			<tr id="tr_{$value['_id']}">
+				<td><input class="form-control" id="key_{$value['_id']}" placeholder="" value="{$value['key']}"></td>
+				<td><input class="form-control" id="name_{$value['_id']}" placeholder="" value="{$value['name']}"></td>
+				<td>$value['html']</td>
+				<td>$value['link']</td>
+				<td>
+					<button type="button" class="btn btn-danger btn-sm"
+						onclick='del({$value["_id"]})'>删除</button>
+					
+					<button type="button" class="btn btn-primary btn-sm"
+						onclick='update({$value["_id"]})'>更新</button>
+				</td>
+			</tr>
+			<!--{/loop}-->
+
+			<tr>
+				<td><input type="input" class="form-control" id="link_key" placeholder="" value="LINK_"> </td>
+				<td><input type="input" class="form-control" id="link_des" placeholder="" value=""></td>
+				<td>页面</td>
+				<td>页面ID</td>
+				<td><button type="button" class="btn btn-default btn-sm"
+						onclick='add()'>新建</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

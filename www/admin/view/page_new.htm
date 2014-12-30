@@ -1,0 +1,82 @@
+<link rel="stylesheet" type="text/css" href="../html/simditor/styles/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="../html/simditor/styles/simditor.css" />
+
+
+
+<script type="text/javascript" src="../html/simditor/scripts/module.min.js"></script>
+<script type="text/javascript" src="../html/simditor/scripts/hotkeys.min.js"></script> <!--
+<script type="text/javascript" src="../html/simditor/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="../html/simditor/scripts/uploader.min.js"></script> -->
+<script type="text/javascript" src="../html/simditor/scripts/simditor.min.js"></script>
+
+
+<script>
+/* 
+$(document).ready(function() { 
+	//$("#d241").datepicker(); 
+});  */
+
+
+	
+</script>
+<div class="container">
+
+<h3>新界面</h3>
+<div class="form-group">
+    <label for="exampleInputEmail1">标题</label>
+    <input type="input" class="form-control" id="title" placeholder="" value="{$ret['title']}">
+  </div>
+<div class="form-group">
+    <label for="exampleInputEmail1">内容</label>
+<textarea id="editor_sim" placeholder="这里输入内容" autofocus ></textarea>
+</div>
+
+<div>
+
+<!--{if $update}-->
+<button type="button" class="btn btn-default pull-right" onclick='update()'>更新</button>
+					<!--{else}-->
+<button type="button" class="btn btn-default pull-right" onclick='send()'>发布</button>
+				<!--{/if}-->
+ 
+ </div>
+  <a href="index.php?showpage=page_edit">界面列表</a>
+</div>
+<input id='temcontent' value="{$ret['content']}" type="hidden"/>
+<input id='_id' value="{$ret['_id']}" type="hidden"/>
+<script>
+var editor = new Simditor({
+	  textarea: $('#editor_sim')
+});
+
+if( $("#temcontent").val()!=''){
+	editor.setValue( $("#temcontent").val());
+}
+
+function send(){
+	editor.sync();
+	var content=$("#editor_sim").val();
+	var title=$("#title").val();
+	var time=$("#d241").val();
+	$.post("command/command_base.php?mod=page&action=new", {
+		title:title,
+		content:content
+	}, function(data) {
+		alert(data);
+	}, "html");
+}
+
+function update(){
+	editor.sync();
+	var content=$("#editor_sim").val();
+	var title=$("#title").val();
+	var id=$("#_id").val();
+	$.post("command/command_base.php?mod=page&action=update", {
+		title:title,
+		content:content,
+		_id:id
+	}, function(data) {
+		alert(data);
+	}, "html");
+}
+</script>
