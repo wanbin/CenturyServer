@@ -1,9 +1,9 @@
 <?php
-include_once 'model/PushBase.php';
-$push=new PushBase();
-$ret=$push->getResect(100);
+include_once PATH_HANDLER.'GameHandler.php';
+$game=new GameHandler($uid);
+$ret=$game->getGameList(1);
 foreach ($ret as $key=>$value){
-	$ret[$key]['sendtime']=date("Y-m-d H:i:s",$value['sendtime']);
-	$ret[$key]['remain']=$push->getRemain($value['_id']);
+	$ret[$key]['showtime']=date("Y-m-d H:i:s",$value['showtime']);
+	$ret[$key]['status']=$value['showtime']>time()?"未展示":"已经展示";
 }
 

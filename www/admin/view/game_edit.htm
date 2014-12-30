@@ -1,11 +1,10 @@
 <script>
-function del(pushid){
-	var content=$("#push_content").val();
-	$.post("command/command_base.php?mod=push&action=del", {
-		pushid:pushid
+function delgame(id){
+	$.post("command/command_base.php?mod=game&action=del", {
+		_id:id
 	}, function(data) {
 		alert(data);
-		$("#tr_"+pushid).fadeOut();
+		$("#tr_"+id).fadeOut();
 	}, "html");
 }
 </script>
@@ -19,15 +18,9 @@ function del(pushid){
 				序号
 				</td>
 				<td>
-				内容
+				标题
 				<td>
 				发送时间
-				</td>
-				<td>
-				总共
-				</td>
-					<td>
-				剩余
 				</td>
 					<td>
 				状态
@@ -42,29 +35,20 @@ function del(pushid){
 				$value['_id']
 				</td>
 				<td>
-				$value['content']
+				$value['title']
 				<td>
-				$value['sendtime']
-				</td>
-				<td>
-				$value['total']
+				$value['showtime']
 				</td>
 					<td>
-				$value['remain']
-				</td>
-					<td>
-					<!--{if $value['issend']=='1'}-->
-					已发送
-					<!--{else}-->
-					<span style='color:green'>未发送</span>
-				<!--{/if}-->
+				$value['status']
 				</td>
 				<td>
-					<button type="button" class="btn btn-default btn-sm" onclick='del({$value["_id"]})'>删除</button>
+					<button type="button" class="btn btn-default btn-sm" onclick='delgame({$value["_id"]})'>删除</button>
+					<a href="index.php?showpage=game_new&id={$value['_id']}">编辑</a>
 				</td>
 			</tr>
 			<!--{/loop}-->
 		</tbody>
 	</table>
-    <a href="index.php?showpage=push_new">新建</a>
+    <a href="index.php?showpage=game_new">新建</a>
 </div>

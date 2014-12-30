@@ -41,8 +41,8 @@ class DBModel {
 	
 	
 	//基本cache操作
-	protected function setToCache($key,$value){
-		return $this->memcache->set($key,$value,0);
+	protected function setToCache($key,$value,$expird=0){
+		return $this->memcache->set($key,$value,false,$expird);
 	}
 	
 	protected function getFromCache($key){
@@ -202,14 +202,11 @@ class DBModel {
 	}
 	
 	protected function getFromMongo($where, $collectionName,$sort=array('_id'=>-1),$skip=0,$limit=100,$dbname='centurywar') {
-		if($sort!=1){
-			$sort=-1;
-		}
 		$ret=array();
 		try {
 			$mongoDB=$this->getMongdb($dbname);
 			$mongoCollection = $mongoDB->selectCollection ( $collectionName );
-			$mongoCursor = $mongoCollection->find ( $where )->sort(array('_id'=>$sort))->skip($skip)->limit($limit);
+			$mongoCursor = $mongoCollection->find ( $where )->sort($sort)->skip($skip)->limit($limit);
 			while ( $mongoCursor->hasNext () ) {
 				$ret[]= $mongoCursor->getNext ();
 			}

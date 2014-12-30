@@ -41,7 +41,7 @@ class PushBase  extends AdminBase {
 		return $list->count();
 	}
 	public function getResect($count=100){
-		return $this->getFromMongo(array(), 'push',array('id'=>-1),0,100,'century_admin');	
+		return $this->getFromMongo(array(), 'push',array('_id'=>-1),0,100,'century_admin');	
 	}
 	public function getNeedSend(){
 		return $this->getOneFromMongo(array('issend'=>false,'sendtime'=>array('$lte'=>time())), 'push','century_admin');

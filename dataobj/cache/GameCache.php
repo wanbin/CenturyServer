@@ -51,4 +51,27 @@ class GameCache extends GameModel {
 	private function getGameDisLikeGameKey($gameid) {
 		return sprintf ( REDIS_KEY_GAMEDISLIKE_GAME, $gameid );
 	}
+	
+	
+	
+	protected function getGameList($page){
+		$key="Game_list_".$page;
+		$ret=$this->getFromCache($key);
+		if(empty($ret)){
+			$ret=parent::getGameList($page);
+			$this->setToCache($key, $ret,10);
+		}
+		return $ret;
+	}
+	protected function getOne($id){
+		$key="Game_id_".$id;
+		$ret=$this->getFromCache($key);
+		if(empty($ret)){
+			$ret=parent::getOne($id);
+			$this->setToCache($key, $ret,10);
+		}
+		return $ret;
+// 		return parent::getOne($id);
+	}
+	
 }

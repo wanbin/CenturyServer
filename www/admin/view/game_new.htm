@@ -15,16 +15,6 @@
 $(document).ready(function() { 
 	//$("#d241").datepicker(); 
 });  */
-function send(){
-	var content=$("#push_content").val();
-	var time=$("#d241").val();
-	$.post("command/command_base.php?mod=push&action=send", {
-		content:content,
-		sendtime:time
-	}, function(data) {
-		alert(data);
-	}, "html");
-}
 
 
 	
@@ -32,15 +22,69 @@ function send(){
 <div class="container">
 
 <h3>新游戏</h3>
-<textarea id="editor_sim" placeholder="这里输入内容" autofocus></textarea>
-<div>
+<div class="form-group">
+    <label for="exampleInputEmail1">标题</label>
+    <input type="input" class="form-control" id="title" placeholder="[NO.*]游戏名称" value="{$ret['title']}">
+  </div>
+<div class="form-group">
+    <label for="exampleInputEmail1">内容</label>
+<textarea id="editor_sim" placeholder="这里输入内容" autofocus ></textarea>
+</div>
+
+<div class="form-group">
+    <label for="exampleInputEmail1">发布时间</label>
 <input type="text" id="d241" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate" style="width:200px" value="{$def_date}"/>
- <button type="button" class="btn btn-default btn-sm" onclick='send()'>按时发送</button>
+</div>
+
+<div>
+
+<!--{if $update}-->
+<button type="button" class="btn btn-default pull-right" onclick='update()'>更新</button>
+					<!--{else}-->
+<button type="button" class="btn btn-default pull-right" onclick='send()'>按时发送</button>
+				<!--{/if}-->
+ 
  </div>
   <a href="index.php?showpage=game_edit">游戏列表</a>
 </div>
+<input id='temcontent' value="{$ret['content']}" type="hidden"/>
+<input id='_id' value="{$ret['_id']}" type="hidden"/>
 <script>
 var editor = new Simditor({
 	  textarea: $('#editor_sim')
-	});
+});
+
+if( $("#temcontent").val()!=''){
+	editor.setValue( $("#temcontent").val());
+}
+
+function send(){
+	editor.sync();
+	var content=$("#editor_sim").val();
+	var title=$("#title").val();
+	var time=$("#d241").val();
+	$.post("command/command_base.php?mod=game&action=send", {
+		title:title,
+		content:content,
+		sendtime:time
+	}, function(data) {
+		alert(data);
+	}, "html");
+}
+
+function update(){
+	editor.sync();
+	var content=$("#editor_sim").val();
+	var title=$("#title").val();
+	var time=$("#d241").val();
+	var id=$("#_id").val();
+	$.post("command/command_base.php?mod=game&action=update", {
+		title:title,
+		content:content,
+		sendtime:time,
+		_id:id
+	}, function(data) {
+		alert(data);
+	}, "html");
+}
 </script>
