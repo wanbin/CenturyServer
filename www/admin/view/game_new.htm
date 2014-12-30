@@ -1,0 +1,41 @@
+<link rel="stylesheet" type="text/css" href="../html/simditor/styles/font-awesome.css" />
+<link rel="stylesheet" type="text/css" href="../html/simditor/styles/simditor.css" />
+
+<script type="text/javascript" src="../html/simditor/scripts/module.js"></script>
+<script type="text/javascript" src="../html/simditor/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="../html/simditor/scripts/uploader.js"></script>
+<script type="text/javascript" src="../html/simditor/scripts/simditor.min.js"></script>
+<script>
+$(document).ready(function() { 
+	//$("#d241").datepicker(); 
+}); 
+function send(){
+	var content=$("#push_content").val();
+	var time=$("#d241").val();
+	$.post("command/command_base.php?mod=push&action=send", {
+		content:content,
+		sendtime:time
+	}, function(data) {
+		alert(data);
+	}, "html");
+}
+
+
+	
+</script>
+<div class="container">
+
+<h3>新游戏</h3>
+<textarea id="editor_sim" placeholder="这里输入内容" autofocus></textarea>
+<div>
+<input type="text" id="d241" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="Wdate" style="width:200px" value="{$def_date}"/>
+ <button type="button" class="btn btn-default btn-sm" onclick='send()'>按时发送</button>
+ </div>
+  <a href="index.php?showpage=game_edit">游戏列表</a>
+</div>
+<script>
+var editor = new Simditor({
+	  textarea: $('#editor_sim')
+	});
+editor.setValue('ssss');
+</script>
