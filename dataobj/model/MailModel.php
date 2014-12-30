@@ -26,7 +26,7 @@ class MailModel extends BaseModel {
 		);
 		$pageNum = 30;
 		$skip = $pageNum * ($page-1);
-		$ret= $this->getFromMongo ( $where, 'mail', -1,$skip,$pageNum );
+		$ret= $this->getFromMongo ( $where, 'mail', array("_id"=>-1),$skip,$pageNum );
 		return $ret;
 	}
 	
