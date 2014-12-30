@@ -2,7 +2,7 @@
 // 这是线上游戏的列表
 include_once 'BaseCommand.php';
 include_once 'handler/GameHandler.php';
-class GameList extends BaseCommand {
+class GameOne extends BaseCommand {
 	protected function executeEx($params) {
 		$id = $params['gameid'];
 		//是否是需要审核的词汇
