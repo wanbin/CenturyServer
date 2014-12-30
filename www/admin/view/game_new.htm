@@ -1,14 +1,20 @@
 <link rel="stylesheet" type="text/css" href="../html/simditor/styles/font-awesome.css" />
 <link rel="stylesheet" type="text/css" href="../html/simditor/styles/simditor.css" />
 
-<script type="text/javascript" src="../html/simditor/scripts/module.js"></script>
-<script type="text/javascript" src="../html/simditor/scripts/hotkeys.js"></script>
-<script type="text/javascript" src="../html/simditor/scripts/uploader.js"></script>
+
+
+<script type="text/javascript" src="../html/simditor/scripts/module.min.js"></script>
+<script type="text/javascript" src="../html/simditor/scripts/hotkeys.min.js"></script> <!--
+<script type="text/javascript" src="../html/simditor/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="../html/simditor/scripts/uploader.min.js"></script> -->
 <script type="text/javascript" src="../html/simditor/scripts/simditor.min.js"></script>
+
+
 <script>
+/* 
 $(document).ready(function() { 
 	//$("#d241").datepicker(); 
-}); 
+});  */
 function send(){
 	var content=$("#push_content").val();
 	var time=$("#d241").val();
@@ -37,5 +43,4 @@ function send(){
 var editor = new Simditor({
 	  textarea: $('#editor_sim')
 	});
-editor.setValue('ssss');
 </script>
