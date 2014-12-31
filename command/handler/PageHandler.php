@@ -28,15 +28,20 @@ class PageHandler extends PageCache{
 		return parent::getPageOne($id);
 	}
 	
-	
-	
 	/**
 	 * 返回相应KEY的界面
-	 * @param unknown_type $id
+	 * 
+	 * @param unknown_type $id        	
 	 */
-	public function getPageFromKey($key){
-		$pageid= parent::getPageId($key);
-		return $this->getPageOne($pageid);
+	public function getPageFromKey($key) {
+		$pageid = parent::getPageId ( $key );
+		$ret = $this->getPageOne ( $pageid );
+		if (substr ( $key, 0, 2 ) == "WX") {
+			if (! empty ( $ret ['content'] )) {
+				$ret ['content'] = strip_tags ( $ret ['content'] );
+			}
+		}
+		return $ret;
 	}
 	
 	
