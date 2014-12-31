@@ -19,6 +19,11 @@ if(empty($title)){
 	echo "错误的标题";
 	return;
 }
-echo $timeint;
-$id=$game->newGame($title, "", $content, $timeint);
+
+
+preg_match_all("/http(.*)png/",$content,$matchs);
+//取第一张图片
+$homeurl=$matchs[0][0];
+
+$id=$game->newGame($title, $homeurl, $content, $timeint);
 echo $content."发送成功,ID:".$id;

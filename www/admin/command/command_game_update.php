@@ -20,5 +20,9 @@ if(empty($title)){
 	echo "错误的标题";
 	return;
 }
-$id=$game->updateGame($id,$title, "", $content, $timeint);
-echo $content."更新成功,ID:".$id;
+preg_match_all("/http(.*)png/",$content,$matchs);
+//取第一张图片
+$homeurl=$matchs[0][0];
+
+$id=$game->updateGame($id,$title, $homeurl, $content, $timeint);
+echo "更新成功,ID:".$id;
