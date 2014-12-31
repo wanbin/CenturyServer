@@ -5,8 +5,8 @@
 
 <script type="text/javascript" src="../html/simditor/scripts/module.min.js"></script>
 <script type="text/javascript" src="../html/simditor/scripts/hotkeys.min.js"></script> <!--
-<script type="text/javascript" src="../html/simditor/scripts/jquery.min.js"></script>
-<script type="text/javascript" src="../html/simditor/scripts/uploader.min.js"></script> -->
+<script type="text/javascript" src="../html/simditor/scripts/jquery.min.js"></script>-->
+<script type="text/javascript" src="../html/simditor/scripts/uploader.js"></script> 
 <script type="text/javascript" src="../html/simditor/scripts/simditor.min.js"></script>
 
 
@@ -28,7 +28,7 @@ $(document).ready(function() {
   </div>
 <div class="form-group">
     <label for="exampleInputEmail1">内容</label>
-<textarea id="editor_sim" placeholder="这里输入内容" autofocus ></textarea>
+<textarea id="editor_sim" placeholder="这里输入内容" autofocus >{$ret['content']}</textarea>
 </div>
 
 <div>
@@ -42,15 +42,20 @@ $(document).ready(function() {
  </div>
   <a href="index.php?showpage=page_edit">界面列表</a>
 </div>
-<input id='temcontent' value="{$ret['content']}" type="hidden"/>
 <input id='_id' value="{$ret['_id']}" type="hidden"/>
 <script>
 var editor = new Simditor({
-	  textarea: $('#editor_sim')
+	  textarea: $('#editor_sim'),
+	  pasteImage: true,
+	  upload:{url: '../upload.php',
+		    params: null,
+		    fileKey: 'upload_file',
+		    connectionCount: 3,
+		    leaveConfirm: '正在上传文件，如果离开上传会自动取消'}
 });
 
 if( $("#temcontent").val()!=''){
-	editor.setValue( $("#temcontent").val());
+	//editor.setValue($("#temcontent").val()  );
 }
 
 function send(){

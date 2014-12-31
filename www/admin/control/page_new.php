@@ -8,4 +8,6 @@ if($id>0){
 	$ret=$game->getPageOne($id);
 	$def_date=date("Y-m-d H:i:s",$ret['showtime']);
 	$update=true;
+	$jsonstr=json_encode($ret);
+// 	echo $jsonstr;
 }
