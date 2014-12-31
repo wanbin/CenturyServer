@@ -4,7 +4,7 @@
  * 微信用户表
  */
 require_once PATH_MODEL.'BaseModel.php';
-class UnderCoverModel extends BaseModel {
+class WXModel extends BaseModel {
 	
 	public function Log($content) {
 		$insert = array (
@@ -35,12 +35,11 @@ class UnderCoverModel extends BaseModel {
 		$helpStr = $this->getSampleHelpStr ();
 		$type = $keyword ;
 		if ($type == "帮助" || $type == "【帮助】" || $type == "help" || $type == "?"|| $type == "？") {
-			return $this->getHelpStr () . $helpStr;
+			return $this->getHelpStr () ;
 		}
 		if ($type == "规则" || $type == "【规则】" || $type == "rule" || $type == "*") {
-			return $this->getRuleStr () . $helpStr;
+			return $this->getRuleStr () ;
 		}
-		
 		
 		$temarr = explode ( ' ', trim ( $keyword ) );
 		if (in_array($temarr [0], array("名字","姓名","昵称"))) {
@@ -99,8 +98,16 @@ class UnderCoverModel extends BaseModel {
 			$str = $UnderRoomCache->getInfo ( $type );
 			return $str.$helpStr;
 		} else {
-			include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
-			$UnderCoverCache = new UnderCoverCache ( $this->uid );
+			include_once PATH_HANDLER.'PageHandler.php';
+			$page=new PageHandler($uid);
+			$ret=$page->getPageFromKey('WX_'.$keyword);
+			
+			if (! empty ( $ret ['content'] )) {
+				return $ret ['content'];
+			}
+			
+			include_once PATH_HANDLER . "WXHandler.php";
+			$UnderCoverCache = new WXHandler ( $this->uid );
 			$msgCount = $UnderCoverCache->getMessageCount($keyword);
 			if ($msgCount > 1) {
 				$strtem = "[得意]你是本游戏中第【 $msgCount 】位用户发送这条信息了！这或许就是缘分吧，虽然小编一时半会回答不了你的问题，但相信您一定会在游戏中找到乐趣的~\n===============\n先发个游戏帮助，您先看着，看有需要的内容吗\n================\n";
@@ -127,7 +134,10 @@ class UnderCoverModel extends BaseModel {
 		}
 	}
 	protected function getHelpStr() {
-		return "一起来玩吧，体验不一样的谁是卧底游戏！回复以下内容快速开始：\n 1.创建谁是卧底游戏\n 2.真心话大冒险（网络版）\n 3.真心话大冒险（本地版）\n 4-15.创建谁是卧底房间\n姓名 **  修改自己的昵称 \n 1000至100000 加入线上房间 \n刷新 \n ?.帮助\n *.谁是卧底规则\n 快快来试试吧~";
+		include_once PATH_HANDLER.'PageHandler.php';
+		$page=new PageHandler($uid);
+		$ret=$page->getPageFromKey('WX_HELP');
+		return $ret['content'];
 	}
 	//返回制作团队
 	protected function getEmail() {
@@ -137,14 +147,10 @@ class UnderCoverModel extends BaseModel {
 		return "\n\n【帮助】帮助内容 \n【规则】游戏规则";
 	}
 	protected function getRuleStr() {
-		return "【谁是卧底】游戏规则 \n"
-				."【人数】：法官1人，玩家4至15人\n"
-				."【开局】：法官回复参与人数，返回平民及卧底身份及编号，以及房间号\n"
-				."【参与】：把房间号通过群告诉所有玩家，参与者向我发送房间号，我会给他们发送身份及说明编号\n"
-				."【进行】：法官组织每位玩家依次发言，每位玩家说自己编号及简短的描述自己的身份以\n"
-				."【投票】：描述一轮结束后，玩家投票选择卧底，票数较多的玩家身亡。分出结果后，法官公布结果（冤死或卧底）\n"
-				."【胜利】：卧底全被揪出，则平民胜利，卧底数大于等于平民数，卧底胜利\n"
-				."【惩罚】：回复2或3返回真心话大冒险，输的玩家掷骰子选择惩罚\n";
+		include_once PATH_HANDLER.'PageHandler.php';
+		$page=new PageHandler($uid);
+		$ret=$page->getPageFromKey('WX_UNDERCOVER_RULE');
+		return $ret['content'];
 	}
 	
 

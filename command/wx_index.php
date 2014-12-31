@@ -36,8 +36,8 @@ class wechatCallbackapiTest {
 			$messageType = $postObj['MsgType'];
 			
 			if ($this->event == 'subscribe') {
-				include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
-				$UnderCache = new UnderCoverCache ( $this->fromUsername );
+				include_once PATH_HANDLER . "/WXHandler.php";
+				$UnderCache = new WXHandler ( $this->fromUsername );
 				$contentStr = $UnderCache->returncontent ( 'help' );
 				$this->returnMsg ( $contentStr );
 			}
@@ -50,8 +50,8 @@ class wechatCallbackapiTest {
 			} else if (! empty ( $this->event )) {
 				
 			} else if (! empty ( $keyword )) {
-				include_once PATH_DATAOBJ . "/cache/UnderCoverCache.php";
-				$UnderCache = new UnderCoverCache ( $this->fromUsername );
+				include_once PATH_HANDLER . "/WXHandler.php";
+				$UnderCache = new WXHandler ( $this->fromUsername );
 				$contentStr = $UnderCache->returncontent ( $keyword );
 				$this->returnMsg ( $contentStr );
 			} else {

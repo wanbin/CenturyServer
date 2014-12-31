@@ -1,0 +1,50 @@
+<script>
+function delwx(id){
+	$.post("command/command_base.php?mod=wx&action=del", {
+		key:id
+	}, function(data) {
+		alert(data);
+		$("#tr_"+id).fadeOut();
+	}, "html");
+}
+</script>
+<div class="container">
+
+<h3>微信管理</h3>
+	<table class="table table-striped">
+		<tbody>
+			<tr>
+				<td>
+				排名
+				</td>
+				<td>
+				关键词
+				</td>
+				<td>
+				人数
+				</td>
+					<td>
+				操作
+				</td>
+			</tr>
+			<!--{loop $ret $key $value}-->
+			<tr id="tr_{$value['value']}">
+			<td>
+				$value['rank']
+				</td>
+				<td>
+				$value['value']
+				</td>
+				<td>
+				$value['score']
+				</td>
+				<td>
+					<button type="button" class="btn btn-default btn-sm" onclick="delwx('{$value['value']}')"">标记完成</button>
+					<a href="index.php?showpage=page_new&id={$value['_id']}">创作回复</a>
+				</td>
+			</tr>
+			<!--{/loop}-->
+		</tbody>
+	</table>
+    <a href="index.php?showpage=game_new">新建</a>
+</div>
