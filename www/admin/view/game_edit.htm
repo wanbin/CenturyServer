@@ -15,7 +15,7 @@ function delgame(id){
 		<tbody>
 			<tr>
 				<td>
-				序号
+				缩略图
 				</td>
 				<td>
 				标题
@@ -32,7 +32,7 @@ function delgame(id){
 			<!--{loop $ret $key $value}-->
 			<tr id="tr_{$value['_id']}">
 			<td>
-				$value['_id']
+				<img src="$value['homeimg']"/>
 				</td>
 				<td>
 				$value['title']
