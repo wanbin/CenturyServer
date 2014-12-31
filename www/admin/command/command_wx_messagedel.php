@@ -4,6 +4,6 @@ $key=$_REQUEST["key"];
 
 include_once PATH_HANDLER.'WXHandler.php';
 $game=new WXHandler($uid);
-$ret=$game->delKey($key);
+$ret=$game->delCacheKey($key);
 
 echo "删除关键词 $key 成功";

@@ -94,8 +94,8 @@ class WXHandler extends WXCache{
 	public function getMessageList(){
 		return parent::getMessageList();
 	}
-	public function delKey($key){
-		return parent::delKey($key);
+	public function delCacheKey($key){
+		return parent::delCacheKey($key);
 	}
 	
 }

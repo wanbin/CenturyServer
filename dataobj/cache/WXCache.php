@@ -8,15 +8,18 @@
 require_once PATH_MODEL . 'WXModel.php';
 class WXCache extends WXModel{
 	public function getMessageCount($msg) {
+		if (empty ( $msg )) {
+			return 0;
+		}
 		$rediska = new Rediska ();
-		$list = new Rediska_Key_SortedSet ( "wx_message_send_count" );
+		$list = new Rediska_Key_SortedSet ( "wx_message_count" );
 		$list->incrementScore ( $msg, 1 );
 		return $list->getScore ( $msg );
 	}
 	
 	protected function getMessageList() {
 		$rediska = new Rediska ();
-		$list = new Rediska_Key_SortedSet ( "wx_message_send_count" );
+		$list = new Rediska_Key_SortedSet ( "wx_message_count" );
 		$ret= $list->getByRank(true,0,100,true,false);
 		$result=array();
 		$rank=1;
@@ -26,9 +29,9 @@ class WXCache extends WXModel{
 		}
 		return $result;
 	}
-	protected function delKey($key){
+	protected function delCacheKey($key){
 		$rediska = new Rediska ();
-		$list = new Rediska_Key_SortedSet ( "wx_message_send_count" );
+		$list = new Rediska_Key_SortedSet ( "wx_message_count" );
 		$list->remove($key);
 	}
 	
@@ -36,7 +39,7 @@ class WXCache extends WXModel{
 	protected function getReturn($keyword) {
 		$key="WX_KEY_".$keyword;
 		$ret=$this->getFromCache($key);
-		if (empty ( $ret )) {
+		if (empty ( $ret )||true) {
 			$ret = parent::getReturnFromMongo ( $keyword );
 			$this->setToCache ( $key, $ret, 60 );
 		}

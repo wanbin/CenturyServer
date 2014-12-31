@@ -9,6 +9,18 @@ function update(){
 		alert(data);
 	}, "html");
 }
+function add(){
+	var key=$("#returnKey").val();
+	var content=$("#returnContent").val();
+	$.post("command/command_base.php?mod=wx&action=new", {
+		key:key,
+		content:content
+	}, function(data) {
+		alert(data);
+		$("#returnKey").val("");
+		$("#returnContent").val("");
+	}, "html");
+}
 </script>
 <div class="container">
 
@@ -21,6 +33,11 @@ function update(){
 		<label for="exampleInputPassword1">内容</label> 
 		<textarea class="form-control" rows="5"  id="returnContent" >$content</textarea>
 	</div>
+	
+						<!--{if $content==''}--> 
+	 <button type="submit" class="btn btn-default" onclick="add()">新建</button>
+						<!--{else}--> 
 	 <button type="submit" class="btn btn-default" onclick="update()">更新</button>
+						<!--{/if}-->
 </div>
 </div>

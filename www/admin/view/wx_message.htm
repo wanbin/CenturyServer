@@ -27,11 +27,10 @@ function delwx(id){
 				<td>
 					<button type="button" class="btn btn-default btn-sm"
 						onclick="delwx('{$value['value']}')"">标记完成</button> <a
-					href="index.php?showpage=page_new&id={$value['_id']}">创作回复</a>
+					href="index.php?showpage=wx_new&key={$value['value']}">创作回复</a>
 				</td>
 			</tr>
 			<!--{/loop}-->
 		</tbody>
 	</table>
-	<a href="index.php?showpage=game_new">新建</a>
 </div>
