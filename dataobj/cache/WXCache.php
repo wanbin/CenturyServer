@@ -49,9 +49,9 @@ class WXCache extends WXModel{
 			if ($msgCount > 1) {
 				$ret = "[得意]你是本游戏中第【 $msgCount 】位用户发送这条信息了！虽然小编一时半会回答不了你的问题，但相信您一定会在游戏中找到乐趣的~\n";
 			} else {
-				$ret = "[可怜]小编找遍了所有用户发来的信息，没有发和和你这条重复的，不知如何是好,又要挨骂了~~\n";
+				$ret = "[可怜]小编找遍了所有用户发来的信息，没有发和和你这条重复的，不知如何是好,又要挨骂了~~\n发送帮助";
 			}
-			$ret=$ret.$this->getReturn($keyword,false);
+			$ret=$ret.$this->getReturn("帮助",false);
 		}
 		return $ret;
 	}
