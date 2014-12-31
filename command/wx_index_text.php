@@ -14,8 +14,8 @@ set_time_limit(6);
 // $fromUsername="uHjQjsqWDtru-GeaV13nAtd0dh824";
 // $fromUsername="uHjQjsqWDtru-GeaV13nAtd0dh825";
 
-include_once PATH_DATAOBJ . "/cache/WXCache.php";
-$UnderCache = new WXCache ( $fromUsername );
+include_once PATH_HANDLER . "/WXHandler.php";
+$UnderCache = new WXHandler ( $fromUsername );
 echo '<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> ';
 echo str_replace("\n", "<br/>",  $UnderCache->returncontent ( $_REQUEST['commad'] ));
 

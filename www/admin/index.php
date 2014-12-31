@@ -7,7 +7,23 @@ include_once PATH_ADMIN_CONTROL.'/header.php';
 include( Mootemplate( 'header' ,true) );
 
 $showPage=$_REQUEST['showpage'];
-$pageAdminArr=array('admin','punish_edit','punish_shenhe','index','push_new','push_edit','login','game_new','game_edit','page_new','page_edit','page_link','wx_edit');
+$pageAdminArr = array (
+		'admin',
+		'punish_edit',
+		'punish_shenhe',
+		'index',
+		'push_new',
+		'push_edit',
+		'login',
+		'game_new',
+		'game_edit',
+		'page_new',
+		'page_edit',
+		'page_link',
+		'wx_edit',
+		'wx_new',
+		'wx_message' 
+);
 
 
 

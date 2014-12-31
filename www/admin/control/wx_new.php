@@ -1,4 +1,5 @@
 <?php
+$key=$_REQUEST['key'];
 include_once PATH_HANDLER . 'WXHandler.php';
 $game = new WXHandler ( $uid );
-$ret = $game->getReturnList ();
+$content = $game->getReturnFromMongo ($key);

@@ -11,60 +11,36 @@ function del(pushid){
 </script>
 <div class="container">
 
-<h3>推送管理</h3>
+	<h3>推送管理</h3>
 	<table class="table table-striped">
 		<tbody>
 			<tr>
-				<td>
-				序号
-				</td>
-				<td>
-				内容
-				<td>
-				发送时间
-				</td>
-				<td>
-				总共
-				</td>
-					<td>
-				剩余
-				</td>
-					<td>
-				状态
-				</td>
-					<td>
-				操作
-				</td>
+				<td>序号</td>
+				<td>内容
+				<td>发送时间</td>
+				<td>总共</td>
+				<td>剩余</td>
+				<td>状态</td>
+				<td>操作</td>
 			</tr>
 			<!--{loop $ret $key $value}-->
 			<tr id="tr_{$value['_id']}">
-			<td>
-				$value['_id']
+				<td>$value['_id']</td>
+				<td>$value['content']
+				<td>$value['sendtime']</td>
+				<td>$value['total']</td>
+				<td>$value['remain']</td>
+				<td>
+					<!--{if $value['issend']=='1'}--> 已发送 <!--{else}--> <span
+					style='color: green'>未发送</span> <!--{/if}-->
 				</td>
 				<td>
-				$value['content']
-				<td>
-				$value['sendtime']
-				</td>
-				<td>
-				$value['total']
-				</td>
-					<td>
-				$value['remain']
-				</td>
-					<td>
-					<!--{if $value['issend']=='1'}-->
-					已发送
-					<!--{else}-->
-					<span style='color:green'>未发送</span>
-				<!--{/if}-->
-				</td>
-				<td>
-					<button type="button" class="btn btn-default btn-sm" onclick='del({$value["_id"]})'>删除</button>
+					<button type="button" class="btn btn-default btn-sm"
+						onclick='del({$value["_id"]})'>删除</button>
 				</td>
 			</tr>
 			<!--{/loop}-->
 		</tbody>
 	</table>
-    <a href="index.php?showpage=push_new">新建</a>
+	<a href="index.php?showpage=push_new">新建</a>
 </div>
