@@ -26,6 +26,7 @@ function dislikeGame(id){
 <table class="table table-striped">
 		<tbody>
 			<tr>
+			<td>图片</td>
 				<td>
 				游戏名称
 				<td>
@@ -37,6 +38,9 @@ function dislikeGame(id){
 			</tr>
 			<!--{loop $ret $key $value}-->
 			<tr id="tr_{$value['_id']}">
+			<td>
+			<img src="$value['homeimg']"/>
+			</td>
 				<td>
 				<a href="index.php?showpage=gamenow&gameid={$value['_id']}">
 				$value['title']</a>
