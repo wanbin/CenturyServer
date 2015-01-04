@@ -63,6 +63,18 @@ class GameCache extends GameModel {
 		}
 		return $ret;
 	}
+	
+	public function getGameLast(){
+		$key="Game_last";
+		$ret=$this->getFromCache($key);
+		if (empty ( $ret )) {
+			$tem = $this->getGameList ( 1 );
+			$ret = $tem [0];
+			$this->setToCache ( $key, $ret, 60 );
+		}
+		return $ret;
+	}
+	
 	protected function getOne($id){
 		$key="Game_id_".$id;
 		$ret=$this->getFromCache($key);

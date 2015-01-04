@@ -42,7 +42,13 @@ class GameHandler extends GameCache{
 	public function getGameList($page){
 		return parent::getGameList($page);
 	}
+	
+	public function getGameLast(){
+		return parent::getGameLast();
+	}
+	
 	public function getOne($id){
 		return parent::getOne($id);
 	}
+	
 }

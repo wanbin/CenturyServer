@@ -3,6 +3,7 @@
 include_once 'BaseCommand.php';
 include_once 'handler/AccountHandler.php';
 include_once 'handler/BehaveHandler.php';
+include_once 'handler/GameHandler.php';
 include_once 'handler/MailHandler.php';
 class UserGetInfo extends BaseCommand {
 	protected function executeEx($params) {
@@ -29,10 +30,14 @@ class UserGetInfo extends BaseCommand {
 			);
 		}
 		
+		$game = new GameHandler ( $this->uid );
+		$temgame=$game->getGameLast();
+// 		print_R($temgame);
+		
 		$ret['newgame']=1;
-		$ret['newgamename']="爱上聚会吧";
-		$ret['newgameimage']="http://cnd.centurywar.cn/gameimg/tieba.png";
 		$ret['newgameurl']="http://tieba.baidu.com/f?ie=utf-8&kw=%E7%88%B1%E4%B8%8A%E8%81%9A%E4%BC%9A&fr=search";
+		$ret['newgamecontent']=$temgame;
+		
 		
 		$account->resetPushCount($account->gameuid,0);
 		return $this->reutrnDate ( COMMAND_ENPTY ,$ret);

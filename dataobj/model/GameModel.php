@@ -44,7 +44,6 @@ class GameModel extends BaseModel {
 				'showtime' => array (
 						'$lte' => time () 
 				) 
-// 		), 'game_content', -1, ($pagecount - 1) * $page, $pagecount, 'century_admin' );
 		), 'game_content', array("showtime"=>-1), ($page - 1) * $pagecount, $pagecount, 'century_admin' );
 		$result = array ();
 		foreach ( $ret as $key => $value ) {
