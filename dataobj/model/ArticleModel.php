@@ -4,7 +4,7 @@
  * 谁是卧底词汇
  */
 require_once PATH_MODEL.'BaseModel.php';
-class GameModel extends BaseModel {
+class ArticleModel extends BaseModel {
 	protected function addLikeDislike($gameid, $type='like') {
 		$content=array(
 				'gameuid'=>$this->gameuid,
@@ -15,39 +15,54 @@ class GameModel extends BaseModel {
 		return $id;
 	}
 
-	protected function newGame($title,$image,$content,$time){
+	protected function newGame($title,$image,$content,$time,$type){
 		$content=array(
 				'title'=>$title,
 				'homeimg'=>$image,
 				'content'=>$content,
+				'type'=>intval($type),
 				'showtime'=>$time
 		);
 		$id=$this->insertMongo($content, 'game_content','century_admin');
 		return $id;
 	}
 	
-	protected function updateGame($id,$title,$image,$content,$time){
+	protected function updateGame($id,$title,$image,$content,$time,$type){
 		$where=array('_id'=>intval($id));
 		$content=array(
 				'title'=>$title,
 				'homeimg'=>$image,
 				'content'=>$content,
+				'type'=>intval($type),
 				'showtime'=>$time
 		);
 		$id=$this->updateMongo($content,$where, 'game_content','century_admin');
 		return $id;
 	}
 	
-	protected function getGameList($page){
+	protected function getGameList($page,$type){
 		$pagecount = 30;
-		$ret = $this->getFromMongo ( array (
+		$where = array (
+				'type' => intval($type) ,
 				'showtime' => array (
 						'$lte' => time () 
 				) 
-		), 'game_content', array("showtime"=>-1), ($page - 1) * $pagecount, $pagecount, 'century_admin' );
+		);
+		if ($type == 0) {
+			$where = array ();
+		}
+		$ret = $this->getFromMongo ( $where, 'game_content', array (
+				"showtime" => - 1 
+		), ($page - 1) * $pagecount, $pagecount, 'century_admin' );
 		$result = array ();
 		foreach ( $ret as $key => $value ) {
-			$result [] = array('_id'=>$value ['_id'],'title'=>$value ['title'],'homeimg'=>$value['homeimg'],'showtime'=>$value['showtime']);
+			$result [] = array (
+					'_id' => $value ['_id'],
+					'title' => $value ['title'],
+					'homeimg' => $value ['homeimg'],
+					'type' => $value ['type'],
+					'showtime' => $value ['showtime'] 
+			);
 		}
 		return $result;
 	}

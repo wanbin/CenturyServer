@@ -5,8 +5,8 @@
  * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
  * 都写为受保护的方法，实际使用时要手动修改
  */
-require_once PATH_MODEL . 'GameModel.php';
-class GameCache extends GameModel {
+require_once PATH_MODEL . 'ArticleModel.php';
+class ArticleCache extends ArticleModel {
 	
 	/**
 	 * 喜欢游戏
@@ -54,11 +54,11 @@ class GameCache extends GameModel {
 	
 	
 	
-	protected function getGameList($page){
-		$key="Game_list_".$page;
+	protected function getGameList($page,$type){
+		$key="Game_list_".$type."_".$page;
 		$ret=$this->getFromCache($key);
 		if(empty($ret)){
-			$ret=parent::getGameList($page);
+			$ret=parent::getGameList($page,$type);
 			$this->setToCache($key, $ret,10);
 		}
 		return $ret;

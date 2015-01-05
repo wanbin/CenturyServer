@@ -3,9 +3,10 @@
 $content=stripslashes($_REQUEST['content']);
 $sendtime=$_REQUEST['sendtime'];
 $title=$_REQUEST['title'];
+$type=$_REQUEST['type'];
 
-include_once PATH_HANDLER.'GameHandler.php';
-$game=new GameHandler($uid);
+include_once PATH_HANDLER.'ArticleHandler.php';
+$game=new ArticleHandler($uid);
 $timeint=strtotime($sendtime);
 if($timeint==0){
 	echo "错误的日期";
@@ -25,5 +26,5 @@ preg_match_all("/http(.*)png/",$content,$matchs);
 //取第一张图片
 $homeurl=$matchs[0][0];
 
-$id=$game->newGame($title, $homeurl, $content, $timeint);
+$id=$game->newGame($title, $homeurl, $content, $timeint,$type);
 echo $content."发送成功,ID:".$id;

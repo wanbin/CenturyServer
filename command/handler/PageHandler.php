@@ -33,14 +33,9 @@ class PageHandler extends PageCache{
 	 * 
 	 * @param unknown_type $id        	
 	 */
-	public function getPageFromKey($key) {
+	public function getPageFromKey($key='INDEX') {
 		$pageid = parent::getPageId ( $key );
 		$ret = $this->getPageOne ( $pageid );
-		if (substr ( $key, 0, 2 ) == "WX") {
-			if (! empty ( $ret ['content'] )) {
-				$ret ['content'] = strip_tags ( $ret ['content'] );
-			}
-		}
 		return $ret;
 	}
 	

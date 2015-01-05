@@ -3,6 +3,6 @@
 $id=$_REQUEST["_id"];
 
 include_once PATH_HANDLER.'GameHandler.php';
-$game=new GameHandler($uid);
+$game=new ArticleHandler($uid);
 $game->delGame($id);
 echo "删除成功,ID:".$id;

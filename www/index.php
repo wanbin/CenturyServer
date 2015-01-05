@@ -7,7 +7,7 @@ include_once PATH_CONTROL.'/header.php';
 include( Mootemplate( 'header' ) );
 
 $showPage=$_REQUEST['showpage'];
-$pageArr=array('help','home','gamenow','punish','punishadd','adminpunish','helpimage','game_list');
+$pageArr=array('page','gamenow','game_punish','game_punishadd','article','game_list','game_help','game_online');
 
 
 

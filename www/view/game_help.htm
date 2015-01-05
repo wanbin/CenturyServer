@@ -19,36 +19,16 @@ function dislikeGame(id){
 
 <body youdao="bind" ryt12173="1">
 	<div class="container">
-	
 		<h1>{$gamecontent['title']}</h1>
-
-
 <table class="table table-striped">
 		<tbody>
-			<tr>
-			<td>图片</td>
-				<td>
-				游戏名称
-				<td>
-				发布时间
-				</td>
-				<td>
-				关键词
-				</td>
-			</tr>
 			<!--{loop $ret $key $value}-->
 			<tr id="tr_{$value['_id']}">
-			<td>
-			<img src="$value['homeimg']"/>
-			</td>
 				<td>
 				<a href="index.php?showpage=article&articleid={$value['_id']}">
 				$value['title']</a>
-				<td>
+				<td style="width:20%" >
 				$value['showtime']
-				</td>
-				<td>
-				$value['type']
 				</td>
 			</tr>
 			<!--{/loop}-->

@@ -22,7 +22,7 @@ class PageCache extends PageModel {
 		$ret=$this->getFromCache($key);
 		if(empty($ret)){
 			$ret=parent::getPageOne($id);
-			$this->setToCache($key, $ret,10);
+			$this->setToCache($key, $ret,20);
 		}
 		return $ret;
 	}
@@ -45,7 +45,7 @@ class PageCache extends PageModel {
 		$ret=$this->getFromCache($linkkey);
 		if(empty($ret)){
 			$ret=parent::getPageId($key);
-			$this->setToCache($linkkey, $ret,3600);
+			$this->setToCache($linkkey, $ret,20);
 		}
 		return $ret;
 	}

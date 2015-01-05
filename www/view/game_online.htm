@@ -1,0 +1,24 @@
+<script>
+function likeGame(id){
+	$.post("command/command_base.php?mod=game&action=like", {
+		gameid : id,
+		username:$("#username").val()
+	}, function(data) {
+		$("#likeval").html(data);
+	}, "html");
+}
+function dislikeGame(id){
+	$.post("command/command_base.php?mod=game&action=dislike", {
+		gameid : id,
+		username:$("#username").val()
+	}, function(data) {
+		$("#dislikeval").html(data);
+	}, "html");
+}
+</script>
+
+<body youdao="bind" ryt12173="1">
+	<div class="container">
+		<a href="index.php?showpage=game_punish">真心话大冒险</a>
+	</div>
+</body>

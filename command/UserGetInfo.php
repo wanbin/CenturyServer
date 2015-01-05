@@ -3,7 +3,7 @@
 include_once 'BaseCommand.php';
 include_once 'handler/AccountHandler.php';
 include_once 'handler/BehaveHandler.php';
-include_once 'handler/GameHandler.php';
+include_once 'handler/ArticleHandler.php';
 include_once 'handler/MailHandler.php';
 class UserGetInfo extends BaseCommand {
 	protected function executeEx($params) {
@@ -30,7 +30,7 @@ class UserGetInfo extends BaseCommand {
 			);
 		}
 		
-		$game = new GameHandler ( $this->uid );
+		$game = new ArticleHandler ( $this->uid );
 		$temgame=$game->getGameLast();
 // 		print_R($temgame);
 		

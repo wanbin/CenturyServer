@@ -154,11 +154,10 @@ class DBModel {
 			$mongoDB=$this->getMongdb($dbname);
 			$mongoCollection = $mongoDB->selectCollection ($collectionName );
 			$ret = $mongoCollection->insert ( $content );
-			return $content['_id'];
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
 		}
-		
+		return $content['_id'];
 	}
 
 	

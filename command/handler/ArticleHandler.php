@@ -1,6 +1,7 @@
 <?php
-require_once PATH_CACHE . 'GameCache.php';
-class GameHandler extends GameCache{
+require_once PATH_CACHE . 'ArticleCache.php';
+//type 1 游戏 2，帮助
+class ArticleHandler extends ArticleCache{
 	
 	/**
 	 * 喜欢游戏
@@ -28,19 +29,19 @@ class GameHandler extends GameCache{
 	 * @param unknown_type $time
 	 */
 	
-	public function newGame($title,$image,$content,$time){
-		return parent::newGame($title,$image,$content,$time);
+	public function newGame($title,$image,$content,$time,$type=1){
+		return parent::newGame($title,$image,$content,$time,$type);
 	}
 	
-	public function updateGame($id,$title,$image,$content,$time){
-		return parent::updateGame($id,$title,$image,$content,$time);
+	public function updateGame($id,$title,$image,$content,$time,$type=1){
+		return parent::updateGame($id,$title,$image,$content,$time,$type);
 	}
 	public function delGame($id){
 		return parent::delGame($id);
 	}
 	
-	public function getGameList($page){
-		return parent::getGameList($page);
+	public function getGameList($page,$type=0){
+		return parent::getGameList($page,$type);
 	}
 	
 	public function getGameLast(){

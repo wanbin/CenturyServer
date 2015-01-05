@@ -30,6 +30,10 @@ $(document).ready(function() {
     <label for="exampleInputEmail1">内容</label>
 <textarea id="editor_sim" placeholder="这里输入内容" autofocus >{$ret['content']}</textarea>
 </div>
+<div class="form-group">
+    <label for="exampleInputEmail1">分类</label>
+{$typeselect}
+</div>
 
 <div class="form-group">
     <label for="exampleInputEmail1">发布时间</label>
@@ -45,7 +49,7 @@ $(document).ready(function() {
 				<!--{/if}-->
  
  </div>
-  <a href="index.php?showpage=game_edit">游戏列表</a>
+  <a href="index.php?showpage=article_edit">文章列表</a>
 </div>
 <input id='_id' value="{$ret['_id']}" type="hidden"/>
 <script>
@@ -81,9 +85,11 @@ function send(){
 	var content=$("#editor_sim").val();
 	var title=$("#title").val();
 	var time=$("#d241").val();
-	$.post("command/command_base.php?mod=game&action=send", {
+	var type=$("#typeselect").val();
+	$.post("command/command_base.php?mod=article&action=send", {
 		title:title,
 		content:content,
+		type:type,
 		sendtime:time
 	}, function(data) {
 		alert(data);
@@ -96,10 +102,12 @@ function update(){
 	var title=$("#title").val();
 	var time=$("#d241").val();
 	var id=$("#_id").val();
-	$.post("command/command_base.php?mod=game&action=update", {
+	var type=$("#typeselect").val();
+	$.post("command/command_base.php?mod=article&action=update", {
 		title:title,
 		content:content,
 		sendtime:time,
+		type:type,
 		_id:id
 	}, function(data) {
 		alert(data);

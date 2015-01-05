@@ -1,6 +1,9 @@
 <?php 
-
+$showContent=$_REQUEST['page'];
 include_once PATH_HANDLER.'PageHandler.php';
 $page=new PageHandler($uid);
-$ret=$page->getPageFromKey('LINK_INDEX');
+if(empty($showContent)){
+	$showContent='INDEX';
+}
+$ret=$page->getPageFromKey($showContent);
 ?>
