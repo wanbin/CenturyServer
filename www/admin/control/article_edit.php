@@ -1,7 +1,8 @@
 <?php
+$page=isset($_REQUEST['page'])?$_REQUEST['page']:1;
 include_once PATH_HANDLER.'ArticleHandler.php';
 $game=new ArticleHandler($uid);
-$ret=$game->getGameList(1,0);
+$ret=$game->getGameList($page,0);
 foreach ($ret as $key=>$value){
 	$ret[$key]['showtime']=date("Y-m-d H:i:s",$value['showtime']);
 	$ret[$key]['status']=$value['showtime']>time()?"未展示":"已经展示";
@@ -15,6 +16,5 @@ foreach ($ret as $key=>$value){
 	}else if($value['type']==2){
 		$ret[$key]['typename']='帮助';
 	}
-	
 }
 
