@@ -68,7 +68,7 @@ class ArticleCache extends ArticleModel {
 		$key="Game_last";
 		$ret=$this->getFromCache($key);
 		if (empty ( $ret )) {
-			$tem = $this->getGameList ( 1 );
+			$tem = $this->getGameList ( 1,1 );
 			$ret = $tem [0];
 			$this->setToCache ( $key, $ret, 60 );
 		}

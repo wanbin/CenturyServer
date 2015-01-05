@@ -7,7 +7,7 @@ class GameList extends BaseCommand {
 		$page = isset($params ['page'])?$params ['page']:1;
 		//是否是需要审核的词汇
 		$game = new ArticleHandler ( $this->uid );
-		$ret = $game->getGameList ( $page );
+		$ret = $game->getGameList ( $page,1 );
 		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
 	}
 
