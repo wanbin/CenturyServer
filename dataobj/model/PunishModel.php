@@ -12,17 +12,14 @@ class PunishModel extends BaseModel {
 	 * @param unknown_type $type        	
 	 */
 	public function changeTypeToInt() {
-		$ret = $this->getFromMongo ( array (
-				'type' => '1' 
-		), 'punish', array (
-				"_id" => - 1 
-		), 0, 1000 );
+		$ret = $this->getFromMongo ( array (), 'punish', array (), 0, 10000 );
 		foreach ( $ret as $key => $value ) {
 			$where = array (
 					"_id" => intval ( $value ['_id'] ) 
 			);
 			$content = array (
-					'type' => intval ( $value ['type'] ) 
+					'type' => intval ( $value ['type'] ), 
+					'contenttype' => 1
 			);
 		 $this->updateMongo ( $content, $where, 'punish' );
 		}
