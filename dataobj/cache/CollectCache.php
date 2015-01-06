@@ -23,24 +23,20 @@ class CollectCache extends CollectModel{
 		return $ret;
 	}
 	
-	
-	
 	/**
 	 * 喜欢游戏
 	 *
-	 * @param unknown_type $id
+	 * @param unknown_type $id        	
 	 */
 	protected function like($id) {
 		$likeKey = $this->getLikeKey ( $id );
-		if (!$this->isExit($likeKey, $this->gameuid)) {
-			$this->setRedisHash ( $likeKey,$this->gameuid,time());
+		if (! $this->isExit ( $likeKey, $this->gameuid )) {
+			$this->setRedisHash ( $likeKey, $this->gameuid, time () );
 			parent::addLike ( $id, 'like' );
+		} else {
+			$this->removeHash ( $likeKey, $this->gameuid, time () );
 		}
-		else{
-			$this->removeHash ( $likeKey,$this->gameuid,time());
-// 			parent::addLike ( $id, 'like' );
-		}
-		return $this->getHashLen ($likeKey);
+		return $this->getHashLen($likeKey);
 	}
 	
 	/**

@@ -42,10 +42,6 @@ class CollectHandler extends CollectCache{
 	}
 	
 	
-	public function getPage($page){
-		return parent::getPage($page);
-	}
-	
 	/**
 	 *通过id数组返回相应的状态
 	 */

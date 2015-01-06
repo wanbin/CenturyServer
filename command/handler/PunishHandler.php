@@ -23,6 +23,13 @@ class PunishHandler extends PunishCache{
 	public function delPunish($id){
 		return parent::delPunish($id);
 	}
+	
+	public function like($id,$count){
+		return parent::like($id, $count);
+	}
+	public function dislike($id,$count){
+		return parent::dislike($id, $count);
+	}
 	/**
 	 * 审核词汇
 	 *

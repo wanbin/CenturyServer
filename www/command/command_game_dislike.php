@@ -3,4 +3,10 @@
 include_once PATH_HANDLER . 'CollectHandler.php';
 $id=$_REQUEST['id'];
 $game = new CollectHandler ($uid);
-echo $game->dislike($id);
+
+$count= $game->dislike($id);
+
+include_once PATH_HANDLER.'PunishHandler.php';
+$publish = new PunishHandler ( $uid );
+$publish->like($id, $count);
+echo $count;

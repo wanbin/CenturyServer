@@ -128,6 +128,29 @@ class PunishModel extends BaseModel {
 		return $this->updateMongo ( $content, $where, 'punish' );
 	}
 	
+	protected  function like($id,$count){
+		$where = array (
+				"_id" => intval ( $id )
+		);
+		$content = array (
+				'like' => intval($count),
+				'updatetime'=>time()
+		);
+		return $this->updateMongo ( $content, $where, 'punish' );
+	}
+	protected function dislike($id,$count){
+		$where = array (
+				"_id" => intval ( $id )
+		);
+		$content = array (
+				'dislike' => intval($count),
+				'updatetime'=>time()
+		);
+		return $this->updateMongo ( $content, $where, 'punish' );
+	}
+	
+	
+	
 	protected function getPunish($id) {
 		$where = array (
 				'_id' => intval ( $id ) 
