@@ -3,7 +3,6 @@ function likeGame(id){
 	$.post("command/command_base.php?mod=game&action=like", {
 		id : id
 	}, function(data) {
-		//alert(data);
 		$("#like"+id).html(data);/*  */
 	}, "html");
 }
@@ -15,13 +14,13 @@ function dislikeGame(id){
 		/* $("#dislikeval").html(data); */
 	}, "html");
 }
-var page=0;
+var page=1;
 function newpunish(id){
 	window.location.href="index.php?showpage=game_punishadd&punishid="+id;
 }
 $(document).ready(function () {
     page=$("#page").val();
-    if(page==0){
+    if(page==1){
     	$("#btnBefore").hide();
     }
     else{
@@ -30,72 +29,89 @@ $(document).ready(function () {
     
 });
 function pageBefore(){
-	if(page>0){
+	if(page>1){
 		page--;
 	}
-	window.location.href="index.php?showpage=punish&page="+page;
+	window.location.href="index.php?showpage=game_punish&page="+page;
 	
 }
 function pageNext(){
 	page++;
-	window.location.href="index.php?showpage=punish&page="+page;
+	window.location.href="index.php?showpage=game_punish&page="+page;
 }
 function addone(){
-	window.location.href="index.php?showpage=punishadd";
+	window.location.href="index.php?showpage=game_punishadd";
 }
 </script>
 <input type="hidden" id="page" value={$page}>
 <body youdao="bind" ryt12173="1">
-	<div class="container" style='padding:0px'>
+	<div class="container" style='padding: 0px'>
 		<!-- <a href="index.php?showpage=punishadd">提一个</a>
 		 <a href="index.php?showpage=punishshenhe">审核</a>-->
 		<h3>真心话大冒险</h3>
-		<button type="button" class="btn btn-link pull-right" onclick="addone()">我也来提一个</button>
-		<table class="table table-striped" style='padding:0px'>
-		<tbody>
-			<!--{loop $ret $key $value}-->
-			<tr>
-				<td>
-				<div style="padding:10px 0px;">
-				<!--{if $value['type']=='1'}-->
-				<span class="label label-success" style='margin-right:5px'>真心话</span>
-				<!--{elseif $value['type']=='2'}-->
-				<span class="label label-danger" style='margin-right:5px'>大冒险</span>
-				<!--{else}-->
-				<span class="label label-info" style='margin-right:5px'>看演技</span>
-				<!--{/if}-->
-				$value['content']</div>
-				
-				<div class="btn-toolbar  pull-right " role="toolbar">
-				<div class="btn-group  btn-group-xs">
-				<!--{if $value['liked']=='1'}-->
-				  <button type="button" class="btn btn-default" onclick='likeGame({$value["_id"]})' style='color:#999999'>喜欢<span id='like{$value["_id"]}'>{$value['like']}</span></button>
-				  <!--{else}-->
-				<button type="button" class="btn btn-default" onclick='likeGame({$value["_id"]})'>喜欢<span id='like{$value["_id"]}'>{$value['like']}</span></button>
-				<!--{/if}-->
-				
-			<!--{if $value['disliked']=='1'}-->
-			  <button type="button" class="btn btn-default" onclick='dislikeGame({$value["_id"]})'  style='color:#999999'>不喜欢<span id='dislike{$value["_id"]}'>{$value['dislike']}</span></button>
-			   <!--{else}-->
-			   <button type="button" class="btn btn-default" onclick='dislikeGame({$value["_id"]})'>不喜欢<span id='dislike{$value["_id"]}'>{$value['dislike']}</span></button>
-			<!--{/if}-->
-			  <!-- <button type="button" class="btn btn-default">Right</button> -->
-</div>
-	<div class="btn-group  btn-group-xs">
-	  <button type="button" class="btn btn-default" style='color:#ff0000' onclick='newpunish({$value["_id"]})'>修改</button>
-	  </div>
+		<button type="button" class="btn btn-link pull-right"
+			onclick="addone()">我也来提一个</button>
+		<table class="table table-striped" style='padding: 0px'>
+			<tbody>
+				<!--{loop $ret $key $value}-->
+				<tr>
+					<td>
+							<!--{if $value['contenttype']=='1'}-->
+							<span class="label label-success" style='margin-right: 5px'>真心话</span>
+							<!--{elseif $value['contenttype']=='2'}-->
+							<span class="label label-danger" style='margin-right: 5px'>大冒险</span>
+							<!--{elseif $value['contenttype']=='3'}-->
+							<span class="label label-info" style='margin-right: 5px'>看演技</span>
+							<!--{else}-->
+							<span class="label label-default" style='margin-right: 5px'>默认</span>
+							<!--{/if}-->
+							$value['content']
+</td>
+<td style='width:160px'>
+						<div class="btn-toolbar  pull-right" role="toolbar">
+							<div class="btn-group  btn-group-xs">
+								<!--{if $value['liked']=='1'}-->
+								<button type="button" class="btn btn-default"
+									onclick='likeGame({$value["_id"]})' style='color: #999999'>
+									喜欢<span id='like{$value["_id"]}'>{$value['like']}</span>
+								</button>
+								<!--{else}-->
+								<button type="button" class="btn btn-default"
+									onclick='likeGame({$value["_id"]})'>
+									喜欢<span id='like{$value["_id"]}'>{$value['like']}</span>
+								</button>
+								<!--{/if}-->
 
-				</div>
-				</td>
-				
-			</tr>
-			<!--{/loop}-->
-		</tbody>
-	</table>
-	<ul class="pager">
-  <li><a href="javascript:void(0);" onclick="pageBefore()" id="btnBefore">上一页</a></li>
-  <li><a href="javascript:void(0);" onclick="pageNext()">下一页</a></li>
-</ul>
-</div>
-		
+								<!--{if $value['disliked']=='1'}-->
+								<button type="button" class="btn btn-default"
+									onclick='dislikeGame({$value["_id"]})' style='color: #999999'>
+									不喜欢<span id='dislike{$value["_id"]}'>{$value['dislike']}</span>
+								</button>
+								<!--{else}-->
+								<button type="button" class="btn btn-default"
+									onclick='dislikeGame({$value["_id"]})'>
+									不喜欢<span id='dislike{$value["_id"]}'>{$value['dislike']}</span>
+								</button>
+								<!--{/if}-->
+								<!-- <button type="button" class="btn btn-default">Right</button> -->
+							</div>
+							<div class="btn-group  btn-group-xs">
+								<button type="button" class="btn btn-default"
+									style='color: #ff0000' onclick='newpunish({$value["_id"]})'>修改</button>
+							</div>
+
+						</div>
+					</td>
+
+				</tr>
+				<!--{/loop}-->
+			</tbody>
+		</table>
+		<ul class="pager">
+			<li><a href="javascript:void(0);" onclick="pageBefore()"
+				id="btnBefore">上一页</a></li>
+			<li><a href="javascript:void(0);" onclick="pageNext()">下一页</a></li>
+		</ul>
+	</div>
+
 </body>

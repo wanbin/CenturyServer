@@ -30,6 +30,7 @@ $pageAdminArr = array (
 
 // exit();
 if(in_array($showPage, $pageAdminArr)&&isset($_SESSION['adminname'])){
+	include_once PATH_ADMIN_CONTROL."/base.php";
 	include_once PATH_ADMIN_CONTROL."/$showPage.php";
 	include( Mootemplate( $showPage,true) );
 }
@@ -37,9 +38,6 @@ else{
 	include_once PATH_ADMIN_CONTROL.'/index.php';
 	include( Mootemplate( 'login',true ) );
 }
-
-
-
 
 
 if (isset ( $_REQUEST ['username'] )) {

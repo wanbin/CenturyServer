@@ -16,8 +16,12 @@ class PunishHandler extends PunishCache{
 	public function newPublish($message,$type){
 		return parent::newPublish($message, $type);
 	}
-	public function updatePunish($id,$content){
-		return parent::updatePunish($id,$content);
+	
+	public function updatePunish($id,$content,$contenttype=1){
+		return parent::updatePunish($id,$content,$contenttype);
+	}
+	public function delPunish($id){
+		return parent::delPunish($id);
 	}
 	/**
 	 * 审核词汇
@@ -56,8 +60,8 @@ class PunishHandler extends PunishCache{
 		return parent::getPunish($punishid);
 	}
 	
-	public function getPage($page) {
-		$ret = parent::getPage ( $page );
+	public function getPageList($page,$contenttype) {
+		$ret = parent::getPage ( $page,1,$contenttype );
 		$idarr = array ();
 		// 这里取到所有的喜欢不喜欢，进行查询返回
 		foreach ( $ret as $key => $valuse ) {
@@ -85,8 +89,8 @@ class PunishHandler extends PunishCache{
 		return $ret;
 	}
 	
-	public function getPageShenHe($page) {
-		$ret= parent::getPageShenHe ( $page );
+	public function getPageShenHe($page,$type) {
+		$ret= parent::getPage ( $page, 0, $type );
 		foreach ($ret as $key=>$value){
 			$ret [$key] ['liked'] = false;
 			$ret [$key] ['disliked'] = false;
@@ -94,6 +98,7 @@ class PunishHandler extends PunishCache{
 		}
 		return $ret;
 	}
+	
 	public function addLikeWith($id, $type,$costOther=0) {
 			// 这个是标记为喜欢或不喜欢 1，喜欢 2，不喜欢
 		include_once 'CollectHandler.php';

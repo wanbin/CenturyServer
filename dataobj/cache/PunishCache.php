@@ -8,33 +8,31 @@
 require_once PATH_MODEL . 'PunishModel.php';
 class PunishCache extends PunishModel{
 	
-	
-
+	// contenttype 0,全部 1，真心话 2，大冒险，3看演技
 	
 	/*
 	 * 返回第n页的内容 @see PublishModel::getPage()
 	 */
-	protected function getPage($page) {
-		$listNeedChange = "publish_list_1";
-		$count = $this->getListLen ( $listNeedChange );
-		$randStart = rand ( 0, $count - PAGECOUNT );
-		if ($page > 1) {
-		//	$randStart = $page * PAGECOUNT;
+	protected function getPage($page, $showtype, $contenttype) {
+		if ($showtype != 1) {
+			return parent::getPagePunish ( $page, $contenttype, $showtype );
 		}
-		$list = $this->getListRange ( $listNeedChange, $randStart, $randStart+PAGECOUNT );
-		$ret = array ();
-		foreach ( $list as $key => $value ) {
-			$tem = $this->getPunish ( $value );
-			if(empty($tem)){
-				$this->removeList($listNeedChange, $value);
-			}
-			$ret []=$tem;
+		$key = "Punish_List_" . $page . "_" . $contenttype;
+		$ret = $this->getFromCache ( $key );
+		if (empty ( $ret )) {
+			$ret = parent::getPagePunish ( $page, $contenttype, $showtype );
+			$this->setToCache ( $key, $ret, 2 );
 		}
 		return $ret;
 	}
 	
-	protected function updatePunish($id,$content){
-		parent::updatePunish($id,$content);
+	protected function updatePunish($id,$content,$contenttype){
+		parent::updatePunish($id,$content,$contenttype);
+		$key = $this->getPunishKey ( $id );
+		return $this->delFromCache ( $key );
+	}
+	protected function delPunish($id){
+		parent::delPunish($id);
 		$key = $this->getPunishKey ( $id );
 		return $this->delFromCache ( $key );
 	}
@@ -46,47 +44,28 @@ class PunishCache extends PunishModel{
 	 */
 	public function changeShow($id,$type){
 			// 把待审核的词汇放到正常列表中
-		$listNeedChange = "publish_list_0";
-		$listNeedChange1 = "publish_list_1";
-		$listNeedChange2 = "publish_list_2";
-		$listNeedChange3 = "publish_list_3";
-		$listTo = "publish_list_" . $type;
-		$this->removeList($listNeedChange, $id);
-		$this->removeList($listNeedChange1, $id);
-		$this->removeList($listNeedChange2, $id);
-		$this->removeList($listNeedChange3, $id);
-		$this->pushListLeft($listTo, $id);
+// 		$listNeedChange = "publish_list_0";
+// 		$listNeedChange1 = "publish_list_1";
+// 		$listNeedChange2 = "publish_list_2";
+// 		$listNeedChange3 = "publish_list_3";
+// 		$listTo = "publish_list_" . $type;
+// 		$this->removeList($listNeedChange, $id);
+// 		$this->removeList($listNeedChange1, $id);
+// 		$this->removeList($listNeedChange2, $id);
+// 		$this->removeList($listNeedChange3, $id);
+// 		$this->pushListLeft($listTo, $id);
 		return parent::changeShow ( $id,$type );
 	}
 		
-		/*
-	 * 返回第n页的内容 @see PublishModel::getPage()
-	 */
-	protected function getPageShenHe($page) {
-		$listNeedChange = "publish_list_0";
-		$list = $this->getListRange ( $listNeedChange, 0, 30 );
-		$ret = array ();
-		foreach ( $list as $key => $value ) {
-			$tem = $this->getPunish ( $value );
-			if(empty($tem)){
-				$this->removeList($listNeedChange, $value);
-			}
-			$ret[]=$tem;
+	protected function getRandomOne($type) {
+		$randIndex = rand ( 0, 1000 );
+		$key = "Punish_random_" . $type . "_" . $randIndex;
+		$ret = $this->getFromCache ( $key );
+		if (empty ( $ret )) {
+			$ret=parent::getRandomOne ( $type );
+			$this->setToCache($key, $ret,60);
 		}
 		return $ret;
-	}
-	
-	
-	protected function getRandomOne($type){
-		$listKey = "publish_list_1";
-		$listCount = $this->getListLen ( $listKey );
-		if($listCount<=50){
-			return $this->getPunishFromText();
-// 			return array();
-		}
-		$randindex = rand ( 0, $listCount - 1 );
-		$punishid=$this->getListValueByIndex($listKey,$randindex);
-		return $this->getPunish($punishid);
 	}
 	
 
@@ -102,16 +81,16 @@ class PunishCache extends PunishModel{
 		if (empty ( $ret )) {
 			$ret = parent::getPunish ( $id );
 			if (! empty ( $ret )) {
-				$this->setToCache ( $key, $ret );
+				$this->setToCache ( $key, $ret, 3600 );
 			}
 		}
 		return $ret;
 	}
 	
 	public function newPublish($message, $type) {
-		$listNeedChange = "publish_list_0";
+// 		$listNeedChange = "publish_list_0";
 		$id = parent::newPublish ( $message, $type );
-		$this->pushListLeft ($listNeedChange, $id );
+// 		$this->pushListLeft ($listNeedChange, $id );
 		return $id;
 	}
 	

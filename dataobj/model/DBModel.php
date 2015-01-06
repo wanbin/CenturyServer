@@ -215,6 +215,18 @@ class DBModel {
 		return array();
 	}
 	
+	protected function getMongoCount($where, $collectionName, $dbname = 'centurywar') {
+		try {
+			$mongoDB = $this->getMongdb ( $dbname );
+			$mongoCollection = $mongoDB->selectCollection ( $collectionName );
+			$count = $mongoCollection->find ($where)->count ();
+			return $count;
+		} catch ( Exception $e ) {
+			die ( $e->getMessage () );
+		}
+		return 0;
+	}
+	
 	protected function getOneFromMongo($where, $collectionName,$dbname='centurywar') {
 		$ret=array();
 		try {
