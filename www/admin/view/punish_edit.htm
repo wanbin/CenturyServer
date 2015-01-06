@@ -41,7 +41,8 @@ function update(id){
 		content:content,
 		type:type
 	}, function(data) {
-			alert(data);
+		$("#content_"+id).hide();
+		alert(data);
 	}, "html");
 }
 var page={$page};
@@ -62,7 +63,7 @@ function pageNext(){
 }
 
 function selectchange(id){
-	var type=$("#select_"+id).val();
+	update(id);
 }
 </script>
 <div class="container">
