@@ -69,9 +69,7 @@ class PunishModel extends BaseModel {
 				'contenttype' => intval ( $contenttype ) 
 		);
 		if ($contenttype == 0) {
-			$where = array (
-					'type' => intval($showtype)
-			);
+			unset($where['contenttype']);
 		}
 		$ret = $this->getFromMongo ( $where, 'punish', array (
 				"updatetime" => - 1 

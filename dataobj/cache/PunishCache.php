@@ -21,7 +21,7 @@ class PunishCache extends PunishModel{
 		$ret = $this->getFromCache ( $key );
 		if (empty ( $ret )) {
 			$ret = parent::getPagePunish ( $page, $contenttype, $showtype );
-			$this->setToCache ( $key, $ret, 2 );
+			$this->setToCache ( $key, $ret, 1 );
 		}
 		return $ret;
 	}
