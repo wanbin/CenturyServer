@@ -61,9 +61,9 @@ class PunishCache extends PunishModel{
 		$randIndex = rand ( 0, 1000 );
 		$key = "Punish_random_" . $type . "_" . $randIndex;
 		$ret = $this->getFromCache ( $key );
-		if (empty ( $ret )) {
+		if (empty ( $ret )||true) {
 			$ret=parent::getRandomOne ( $type );
-			$this->setToCache($key, $ret,60);
+			$this->setToCache($key, $ret,20);
 		}
 		return $ret;
 	}

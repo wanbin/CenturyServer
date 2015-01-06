@@ -55,7 +55,7 @@ class PunishModel extends BaseModel {
 					'contenttype' => $value ['contenttype']
 			);
 		}
-		return $result;
+		return $result[0];
 	}
 	
 	
@@ -83,6 +83,7 @@ class PunishModel extends BaseModel {
 					'content' => $value ['content'],
 					'gameuid' => $value ['gameuid'],
 					'time' => $value ['time'],
+					'type' => $value['type'],
 					'contenttype' => $value ['contenttype'] 
 			);
 			//如果没有定义类别，就先定义为默认的
