@@ -29,10 +29,7 @@ class PunishModel extends BaseModel {
 		return count($ret);
 	}
 	
-	/**
-	 * 返回一个随机词汇
-	 */
-	protected function getRandomOne($type) {
+	protected function getTypeCount($type) {
 		// 先取到count
 		$where = array (
 				'type' => 1,
@@ -42,7 +39,23 @@ class PunishModel extends BaseModel {
 			unset ( $where ['contenttype'] );
 		}
 		$count = $this->getMongoCount ( $where, 'punish' );
+		return $count;
+	}
+	
+	/**
+	 * 返回一个随机词汇
+	 */
+	protected function getRandomOne($type) {
+		$count = $this->getTypeCount($type);
 		
+		// 先取到count
+		$where = array (
+				'type' => 1,
+				'contenttype' => intval ( $type )
+		);
+		if ($type == 0) {
+			unset ( $where ['contenttype'] );
+		}
 		
 		$ret = $this->getFromMongo ( $where, 'punish', array(), rand(1,$count)-1, 1 );
 		$result = array ();
@@ -68,7 +81,7 @@ class PunishModel extends BaseModel {
 				'type' => intval($showtype),
 				'contenttype' => intval ( $contenttype ) 
 		);
-		if ($contenttype == 0) {
+		if ($contenttype == -1) {
 			unset($where['contenttype']);
 		}
 		$ret = $this->getFromMongo ( $where, 'punish', array (
@@ -84,10 +97,6 @@ class PunishModel extends BaseModel {
 					'type' => $value['type'],
 					'contenttype' => $value ['contenttype'] 
 			);
-			//如果没有定义类别，就先定义为默认的
-			if(empty($value['contenttype'])){
-				$this->updatePunish($value['_id'], $value['content'],0);
-			}
 		}
 		return $result;
 	}

@@ -12,7 +12,9 @@ class PublishAll extends BaseCommand {
 		if ($shenhe == 1) {
 			$ret = $publish->getPageShenHe ( $page );
 		} else {
-			$ret = $publish->getPageList ( $page, 0 );
+			$count = $publish->getTypeCount ( - 1 );
+			$rand = rand ( 1, $count % PAGECOUNT );
+			$ret = $publish->getPageList ( $rand, - 1 );
 		}
 		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
 	}

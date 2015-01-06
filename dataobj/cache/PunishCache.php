@@ -26,6 +26,16 @@ class PunishCache extends PunishModel{
 		return $ret;
 	}
 	
+	public function getTypeCount($type){
+		$key="Punish_type_count_".$type;
+		$count=$this->getFromCache($key);
+		if(empty($count)){
+			$count=parent::getTypeCount($type);
+			$this->setToCache($key, $count,10);
+		}
+		return $count;
+	}
+	
 	protected function updatePunish($id,$content,$contenttype){
 		parent::updatePunish($id,$content,$contenttype);
 		$key = $this->getPunishKey ( $id );
