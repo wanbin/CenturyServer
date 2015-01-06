@@ -135,7 +135,8 @@ class PunishModel extends BaseModel {
 		$content=array(
 				'gameuid'=>$this->gameuid,
 				'content'=>$content,
-				'type'=>intval($type),
+				'contenttype'=>intval($type),
+				'type'=>0,
 				'updatetime'=>time()
 				);
 		return $this->insertMongo($content, 'punish');

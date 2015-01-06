@@ -5,7 +5,7 @@ include_once 'handler/PunishHandler.php';
 class PublishNew extends BaseCommand {
 	protected function executeEx($params) {
 		$content = $params ['content'];
-		$type = $params ['type'];
+		$type = isset($params ['type'])?$params ['type']:1;
 		$username=$params['username'];
 		if (empty ( $content )) {
 			$this->throwException ( 'content is empty', 1101 );
