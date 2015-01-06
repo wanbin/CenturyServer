@@ -35,7 +35,7 @@ class PunishModel extends BaseModel {
 				'type' => 1,
 				'contenttype' => intval ( $type ) 
 		);
-		if ($type == 0) {
+		if ($type == -1) {
 			unset ( $where ['contenttype'] );
 		}
 		$count = $this->getMongoCount ( $where, 'punish' );
@@ -53,7 +53,7 @@ class PunishModel extends BaseModel {
 				'type' => 1,
 				'contenttype' => intval ( $type )
 		);
-		if ($type == 0) {
+		if ($type == -1) {
 			unset ( $where ['contenttype'] );
 		}
 		
