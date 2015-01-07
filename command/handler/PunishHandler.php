@@ -110,6 +110,10 @@ class PunishHandler extends PunishCache{
 		return $ret;
 	}
 	
+	public function getRepeat(){
+		return parent::getRepeat ();
+	}
+	
 	public function addLikeWith($id, $type,$costOther=0) {
 			// 这个是标记为喜欢或不喜欢 1，喜欢 2，不喜欢
 		include_once 'CollectHandler.php';

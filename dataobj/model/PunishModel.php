@@ -168,4 +168,42 @@ class PunishModel extends BaseModel {
 		return $this->insertMongo($content, 'punish');
 	}
 	
+	/**
+	 * 返回有重复的项，实在受不了了
+	 */
+	protected function getRepeat(){
+		$mongoDB = $this->getMongdb ( "centurywar" );
+		$mongoCollection = $mongoDB->selectCollection ( "punish" );
+		$group = array(
+				array (
+						'$match' => array (
+								'type' => 1,
+						) 
+				),
+				array (
+						'$group' => array (
+								"_id" => '$content',
+								"count" => array (
+										'$sum' => 1 
+								) 
+						) 
+				),
+				array (
+						'$match' => array (
+								'count' => array (
+										'$gt' => 1 
+								) 
+						) 
+				) 
+		);
+		$ret = $mongoCollection->aggregate ( $group ); 
+		$ret=$ret['result'];
+		$result=array();
+		foreach ($ret as $key=>$value) {
+			$where=array('type'=>1,'content'=>$value['_id']);
+			$tem=$this->getFromMongo($where, 'punish');
+			$result=array_merge($result,$tem);
+		}
+		return $result;
+	}
 }

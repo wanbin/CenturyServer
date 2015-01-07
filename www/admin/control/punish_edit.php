@@ -5,7 +5,11 @@ include_once PATH_HANDLER . 'PunishHandler.php';
 $punish = new PunishHandler ( $uid );
 if ($type == 0 || $type == 2) {
 	$ret = $punish->getPageShenHe ( $page, $type );
-} else {
+}
+else if ($type == - 2) {
+	$ret = $punish->getRepeat (  );
+} 
+ else {
 	$ret = $punish->getPageList ( $page, $type % 10 );
 }
 $contenttype = array (
