@@ -18,8 +18,7 @@ class PunishModel extends BaseModel {
 					"_id" => intval ( $value ['_id'] ) 
 			);
 			$content = array (
-					'type' => intval ( $value ['type'] ), 
-					'contenttype' => 1
+					'type' => intval ( $value ['type'] )
 			);
 		 $this->updateMongo ( $content, $where, 'punish' );
 		}

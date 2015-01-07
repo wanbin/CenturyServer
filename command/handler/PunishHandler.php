@@ -99,8 +99,9 @@ class PunishHandler extends PunishCache{
 		return $ret;
 	}
 	
-	public function getPageShenHe($page,$type) {
-		$ret= parent::getPage ( $page, 0, $type );
+	public function getPageShenHe($page,$showtype) {
+		//这一点写的恶心程度令人发指
+		$ret= parent::getPage ( $page, $showtype, -1 );
 		foreach ($ret as $key=>$value){
 			$ret [$key] ['liked'] = false;
 			$ret [$key] ['disliked'] = false;

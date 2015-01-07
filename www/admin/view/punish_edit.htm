@@ -41,8 +41,7 @@ function update(id){
 		content:content,
 		type:type
 	}, function(data) {
-		$("#content_"+id).hide();
-		alert(data);
+		$("#message_"+id).html(data);
 	}, "html");
 }
 var page={$page};
@@ -87,7 +86,7 @@ function selectchange(id){
 					{$value['typehtml']}
 					</td>
 					<td>
-					 <input  class="form-control" id="punish_{$value['_id']}" value="{$value['content']}">
+					 <input  class="form-control" id="punish_{$value['_id']}" value="{$value['content']}"><span id="message_{$value['_id']}"></span>
 				</td>
 				<td>
 				<div class="btn-group  btn-group-xs  pull-right " style='width:170px'>
@@ -106,7 +105,7 @@ function selectchange(id){
 			id="btnBefore">上一页</a></li>
 		<li><a href="javascript:void(0);" onclick="pageNext()">下一页</a></li>
 	</ul>
-	<button type="button" class="btn btn-default btn-sm" onclick='changetoint()'>格式化字段类型</button>
+	<!-- <button type="button" class="btn btn-default btn-sm" onclick='changetoint()'>格式化字段类型</button> -->
 </div>
 <script>
 $("#se_"+{$type}).addClass("active");
