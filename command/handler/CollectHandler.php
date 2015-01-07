@@ -27,20 +27,6 @@ class CollectHandler extends CollectCache{
 		return parent::dislike($id);
 	}
 	
-	/**
-	 * 添加一个新闻公告
-	 */
-	public function newCollect($id, $type) {
-		if ($type == 1) {
-			$this->like ( $id );
-		} else if ($type == 2) {
-			$this->dislike ( $id );
-		} else {
-			return false;
-		}
-		return true;
-	}
-	
 	
 	/**
 	 *通过id数组返回相应的状态
