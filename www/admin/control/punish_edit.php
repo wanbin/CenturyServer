@@ -27,7 +27,7 @@ foreach ( $ret as $key => $value ) {
 	$temid=$value ['_id'];
 	$temhtml = getSelectHtml ( "select_" . $value ['_id'], $contenttype, $value ['contenttype'],"selectchange($temid)" );
 	$ret[$key]['typehtml']=$temhtml;
-	$ret[$key]['content']=stripslashes($value['content']);
+	$ret[$key]['content']=str_replace('"', "'", stripslashes($value['content'])) ;
 }
 
 
