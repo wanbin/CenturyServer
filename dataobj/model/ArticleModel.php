@@ -87,8 +87,7 @@ class ArticleModel extends BaseModel {
 				"keyname" => $name 
 		);
 		$ret = $this->getOneFromMongo ( $where, 'game_content', 'century_admin' );
-		print_R ( $ret );
-		return $ret;
+		return $ret['_id'];
 	}
 	
 }
