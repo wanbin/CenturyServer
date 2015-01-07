@@ -5,11 +5,10 @@ include_once 'handler/ArticleHandler.php';
 class GameOne extends BaseCommand {
 	protected function executeEx($params) {
 		$id = $params['gameid'];
-		$helpName=isset($params['gamename'])?$params['gamename']:"";
-		//是否是需要审核的词汇
+		// 是否是需要审核的词汇
 		$game = new ArticleHandler ( $this->uid );
-		if (! empty ( $helpName )) {
-			$id = $game->getIdFromName ( $helpName );
+		if (intval ( $id ) == 0) {
+			$id = $game->getIdFromName ( $id );
 		}
 		$ret = $game->getOne($id);
 		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
