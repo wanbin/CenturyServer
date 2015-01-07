@@ -86,7 +86,7 @@ function selectchange(id){
 					{$value['typehtml']}
 					</td>
 					<td>
-					 <input  class="form-control" id="punish_{$value['_id']}" value="{$value['content']}"><span id="message_{$value['_id']}"></span>
+					 <input  class="form-control" id="punish_{$value['_id']}" value="{$value['content']}" onchange="update({$value["_id"]})"><span id="message_{$value['_id']}"></span>
 				</td>
 				<td>
 				<div class="btn-group  btn-group-xs  pull-right " style='width:170px'>
