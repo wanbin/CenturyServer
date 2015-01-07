@@ -24,8 +24,14 @@ $(document).ready(function() {
 <h3>新游戏</h3>
 <div class="form-group">
     <label for="exampleInputEmail1">标题</label>
-    <input type="input" class="form-control" id="title" placeholder="[NO.*]游戏名称" value="{$ret['title']}">
+    <input type="input" class="form-control" id="title" value="{$ret['title']}">
   </div>
+  
+<div class="form-group">
+    <label for="exampleInputEmail1">关键词名称</label>
+    <input type="input" class="form-control" id="keyname" value="{$ret['keyname']}">
+</div>
+
 <div class="form-group">
     <label for="exampleInputEmail1">内容</label>
 <textarea id="editor_sim" placeholder="这里输入内容" autofocus >{$ret['content']}</textarea>
@@ -86,10 +92,12 @@ function send(){
 	var title=$("#title").val();
 	var time=$("#d241").val();
 	var type=$("#typeselect").val();
+	var keyname=$("#keyname").val();
 	$.post("command/command_base.php?mod=article&action=send", {
 		title:title,
 		content:content,
 		type:type,
+		keyname:keyname,
 		sendtime:time
 	}, function(data) {
 		alert(data);
@@ -103,11 +111,13 @@ function update(){
 	var time=$("#d241").val();
 	var id=$("#_id").val();
 	var type=$("#typeselect").val();
+	var keyname=$("#keyname").val();
 	$.post("command/command_base.php?mod=article&action=update", {
 		title:title,
 		content:content,
 		sendtime:time,
 		type:type,
+		keyname:keyname,
 		_id:id
 	}, function(data) {
 		alert(data);

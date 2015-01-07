@@ -74,16 +74,25 @@ class ArticleCache extends ArticleModel {
 		}
 		return $ret;
 	}
-	
-	protected function getOne($id){
-		$key="Game_id_".$id;
-		$ret=$this->getFromCache($key);
-		if(empty($ret)){
-			$ret=parent::getOne($id);
-			$this->setToCache($key, $ret,10);
+	protected function getOne($id) {
+		$key = "Game_id_" . $id;
+		$ret = $this->getFromCache ( $key );
+		if (empty ( $ret )) {
+			$ret = parent::getOne ( $id );
+			$this->setToCache ( $key, $ret, 10 );
 		}
 		return $ret;
-// 		return parent::getOne($id);
+	}
+	
+	
+	protected function getIdFromName($name){
+		$key="articel_keyname_".$name;
+		$ret=$this->getFromCache($key);
+		if(empty($ret)){
+			$ret=parent::getIdFromName($name);
+			$this->setToCache($key, $ret,60);
+		}
+		return $ret;
 	}
 	
 }

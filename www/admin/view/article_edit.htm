@@ -10,60 +10,43 @@ function delgame(id){
 </script>
 <div class="container">
 
-<h3>游戏管理</h3>
+	<h3>游戏管理</h3>
 	<table class="table table-striped">
 		<tbody>
 			<tr>
-				<td>
-				缩略图
-				</td>
-				<td>
-				标题
-				<td>
-				发送时间
-				</td>
-				<td>
-				类别
-				</td>
-					<td>
-				状态
-				</td>
-					<td>
-				操作
-				</td>
+				<td>缩略图</td>
+				<td>关键字</td>
+				<td>标题</td>
+				<td>发送时间</td>
+				<td>类别</td>
+				<td>状态</td>
+				<td>操作</td>
 			</tr>
 			<!--{loop $ret $key $value}-->
 			<tr id="tr_{$value['_id']}">
-			<td>
-				<img src="$value['homeimg']"/>
-				</td>
+				<td><img src="$value['homeimg']" /></td>
+				<td>$value['keyname']</td>
+				<td>$value['title']</td>
+				<td>$value['showtime']</td>
+				<td>$value['typename']</td>
+				<td>$value['status']</td>
 				<td>
-				$value['title']
-				<td>
-				$value['showtime']
-				</td>
-				<td>
-				$value['typename']
-				</td>
-					<td>
-				$value['status']
-				</td>
-				<td>
-					<button type="button" class="btn btn-default btn-sm" onclick='delgame({$value["_id"]})'>删除</button>
-					<a href="index.php?showpage=article_new&id={$value['_id']}">编辑</a>
+					<button type="button" class="btn btn-default btn-sm"
+						onclick='delgame({$value["_id"]})'>删除</button> <a
+					href="index.php?showpage=article_new&id={$value['_id']}">编辑</a>
 				</td>
 			</tr>
 			<!--{/loop}-->
 		</tbody>
 	</table>
 	<nav>
-  <ul class="pagination">
-    <li><a href="index.php?showpage=article_edit&page=1">1</a></li>
-    <li><a href="index.php?showpage=article_edit&page=2">2</a></li>
-    <li><a href="index.php?showpage=article_edit&page=3">3</a></li>
-    <li><a href="index.php?showpage=article_edit&page=4">4</a></li>
-    <li><a href="index.php?showpage=article_edit&page=5">5</a></li>
-  </ul>
-</nav>
-    <a href="index.php?showpage=game_new">新建</a>
+		<ul class="pagination">
+			<li><a href="index.php?showpage=article_edit&page=1">1</a></li>
+			<li><a href="index.php?showpage=article_edit&page=2">2</a></li>
+			<li><a href="index.php?showpage=article_edit&page=3">3</a></li>
+			<li><a href="index.php?showpage=article_edit&page=4">4</a></li>
+			<li><a href="index.php?showpage=article_edit&page=5">5</a></li>
+		</ul>
+	</nav>
+	<a href="index.php?showpage=game_new">新建</a>
 </div>

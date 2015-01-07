@@ -4,6 +4,7 @@ $content=stripslashes($_REQUEST['content']);
 $sendtime=$_REQUEST['sendtime'];
 $title=$_REQUEST['title'];
 $type=$_REQUEST['type'];
+$keyname=$_REQUEST['keyname'];
 
 include_once PATH_HANDLER.'ArticleHandler.php';
 $game=new ArticleHandler($uid);
@@ -26,5 +27,6 @@ preg_match_all("/http(.*)png/",$content,$matchs);
 //取第一张图片
 $homeurl=$matchs[0][0];
 
-$id=$game->newGame($title, $homeurl, $content, $timeint,$type);
+$id=$game->newGame($title, $homeurl, $content, $timeint,$type,$keyname);
+
 echo $content."发送成功,ID:".$id;

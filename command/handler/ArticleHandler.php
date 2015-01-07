@@ -22,6 +22,10 @@ class ArticleHandler extends ArticleCache{
 		return parent::getLikeInfo($id);
 	}
 	
+	public function getIdFromName($name){
+		return parent::getIdFromName($name);
+	}
+	
 	/**
 	 * 添加一个新游戏
 	 * @param unknown_type $title
@@ -29,12 +33,12 @@ class ArticleHandler extends ArticleCache{
 	 * @param unknown_type $time
 	 */
 	
-	public function newGame($title,$image,$content,$time,$type=1){
-		return parent::newGame($title,$image,$content,$time,$type);
+	public function newGame($title,$image,$content,$time,$type,$keyname){
+		return parent::newGame($title,$image,$content,$time,$type,$keyname);
 	}
 	
-	public function updateGame($id,$title,$image,$content,$time,$type=1){
-		return parent::updateGame($id,$title,$image,$content,$time,$type);
+	public function updateGame($id,$title,$image,$content,$time,$type,$keyname){
+		return parent::updateGame($id,$title,$image,$content,$time,$type,$keyname);
 	}
 	public function delGame($id){
 		return parent::delGame($id);

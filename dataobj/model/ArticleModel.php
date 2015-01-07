@@ -15,11 +15,12 @@ class ArticleModel extends BaseModel {
 		return $id;
 	}
 
-	protected function newGame($title,$image,$content,$time,$type){
+	protected function newGame($title,$image,$content,$time,$type,$keyname){
 		$content=array(
 				'title'=>$title,
 				'homeimg'=>$image,
 				'content'=>$content,
+				'keyname'=>$keyname,
 				'type'=>intval($type),
 				'showtime'=>$time
 		);
@@ -27,13 +28,14 @@ class ArticleModel extends BaseModel {
 		return $id;
 	}
 	
-	protected function updateGame($id,$title,$image,$content,$time,$type){
+	protected function updateGame($id,$title,$image,$content,$time,$type,$keyname){
 		$where=array('_id'=>intval($id));
 		$content=array(
 				'title'=>$title,
 				'homeimg'=>$image,
 				'content'=>$content,
 				'type'=>intval($type),
+				'keyname'=>$keyname,
 				'showtime'=>$time
 		);
 		$id=$this->updateMongo($content,$where, 'game_content','century_admin');
@@ -61,6 +63,7 @@ class ArticleModel extends BaseModel {
 					'title' => $value ['title'],
 					'homeimg' => $value ['homeimg'],
 					'type' => $value ['type'],
+					'keyname' => $value ['keyname'],
 					'showtime' => $value ['showtime'] 
 			);
 		}
@@ -76,6 +79,15 @@ class ArticleModel extends BaseModel {
 	public function delGame($id){
 		$where=array("_id"=>intval($id));
 		$ret=$this->removeMongo($where,  'game_content','century_admin');
+		return $ret;
+	}
+	
+	protected function getIdFromName($name) {
+		$where = array (
+				"keyname" => $name 
+		);
+		$ret = $this->getOneFromMongo ( $where, 'game_content', 'century_admin' );
+		print_R ( $ret );
 		return $ret;
 	}
 	
