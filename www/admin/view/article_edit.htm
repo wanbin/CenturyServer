@@ -1,6 +1,6 @@
 <script>
 function delgame(id){
-	$.post("command/command_base.php?mod=game&action=del", {
+	$.post("command/command_base.php?mod=article&action=del", {
 		_id:id
 	}, function(data) {
 		alert(data);
@@ -48,5 +48,5 @@ function delgame(id){
 			<li><a href="index.php?showpage=article_edit&page=5">5</a></li>
 		</ul>
 	</nav>
-	<a href="index.php?showpage=game_new">新建</a>
+	<a href="index.php?showpage=article_new">新建</a>
 </div>
