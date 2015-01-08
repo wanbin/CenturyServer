@@ -16,10 +16,10 @@ getMessage();
 function getMessage() {
 	redis.BRPOP(redisKey, 0, function(err, data) {
 	var json= eval("("+data[1]+")");
-		if (json.channel != "") {
+		if (json.channel == "android") {
 			client.push().setPlatform(json.channel).setAudience(
 					JPush.alias(json.alias)).setNotification(
-					JPush.android(json.content, null, 1))
+					JPush.android(json.message, null, 1))
 			// .setMessage('msg content')
 			.setOptions(null, 60).send(function(err, res) {
 				if (err) {
