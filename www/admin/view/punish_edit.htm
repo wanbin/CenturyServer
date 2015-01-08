@@ -89,6 +89,7 @@ function selectchange(id){
 					<td>
 					 <input  class="form-control" id="punish_{$value['_id']}" value="{$value['content']}" onchange="update({$value["_id"]})"><span id="message_{$value['_id']}"></span>
 				</td>
+					<td style="width:100px"><a href="index.php?showpage=mail_new&gameuid={$value['gameuid']}">发邮件</a> </td>
 				<td>
 				<div class="btn-group  btn-group-xs  pull-right " style='width:170px'>
 				<button type="button" class="btn btn-success btn-sm" onclick='update({$value["_id"]})'>更新</button>

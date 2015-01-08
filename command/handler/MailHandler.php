@@ -6,11 +6,12 @@ require_once PATH_CACHE . 'MailCache.php';
  *
  */
 class MailHandler extends MailCache{
-	public function getOneMail() {
-		return parent::getOneMail ();
+	public function getUnreadCount() {
+		return parent::getUnreadCount ();
 	}
-	public function getMailList($page=1) {
-		$ret=parent::getMailList ($page);
+	
+	public function getMailList($page=1,$isgm=false) {
+		$ret=parent::getMailList ($page,$isgm);
 		include_once PATH_HANDLER . 'AccountHandler.php';
 		$account = new AccountHandler ( $this->uid );
 		foreach ($ret as $key=>$value){

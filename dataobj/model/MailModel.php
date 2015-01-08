@@ -7,24 +7,24 @@ require_once PATH_MODEL.'BaseModel.php';
 class MailModel extends BaseModel {
 	
 
-	protected function getOneMail(){
+	protected function getUnreadCount(){
 		$where = array (
 				'gameuid' => $this->gameuid,
-// 				'read'=>0
+				'read'=>0
 		);
-		$ret=$this->getOneFromMongo( $where, 'mail',-1 );
+		$ret=$this->getMongoCount( $where, 'mail');
 		//如果第一条都被读了，那就返回吧
-		if($ret['read']==1){
-			return array();
-		}
-		$this->readMail($ret['_id']);
 		return $ret;
 	}
-	protected function getMailList($page){
+	
+	protected function getMailList($page,$isgm){
 		$where = array (
 				'gameuid' => $this->gameuid,
 		);
-		$pageNum = 30;
+		if($isgm){
+			$where['gameuid']=-1;
+		}
+		$pageNum = PAGECOUNT;
 		$skip = $pageNum * ($page-1);
 		$ret= $this->getFromMongo ( $where, 'mail', array("_id"=>-1),$skip,$pageNum );
 		return $ret;
@@ -38,9 +38,7 @@ class MailModel extends BaseModel {
 				'content' => $content,
 				'read'=>0
 		);
-// 		print_R($content);
 		$id = $this->insertMongo ( $content, 'mail' );
-// 		echo $id;
 		return $id;
 	}
 	

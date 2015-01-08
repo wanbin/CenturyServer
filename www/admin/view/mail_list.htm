@@ -1,0 +1,55 @@
+<script>
+function del(id){
+	$.post("command/command_base.php?mod=wx&action=del", {
+		key:id
+	}, function(data) {
+		alert(data);
+		$("#tr_"+id).fadeOut();
+	}, "html");
+}
+function add(){
+	var key=$("#returnKey").val();
+	var content=$("#returnContent").val();
+	$.post("command/command_base.php?mod=wx&action=new", {
+		key:key,
+		content:content
+	}, function(data) {
+		alert(data);
+		$("#returnKey").val("");
+		$("#returnContent").val("");
+	}, "html");
+}
+</script>
+<div class="container">
+	<h3>邮件管理</h3>
+	<table class="table table-striped">
+		<tbody>
+			<tr>
+				<td style="width:20%">关键词</td>
+				<td style="width:50%">内容</td>
+				<td>操作</td>
+			</tr>
+			<!--{loop $ret $key $value}-->
+			<tr id="tr_{$value['keyword']}">
+				<td>$value['keyword']</td>
+				<td>$value['content']</td>
+				<td>
+						<button type="button" class="btn btn-default" onclick="del('{$value['keyword']}')">删除</button>
+						<a href="index.php?showpage=wx_new&key={$value['keyword']}">编辑</a>
+				</td>
+			</tr>
+			<!--{/loop}-->
+		</tbody>
+	</table>
+<div style='width:300px'>
+	<div class="form-group">
+		<label for="exampleInputEmail1">关键字</label> <input
+			 class="form-control" id="returnKey">
+	</div>
+	<div class="form-group">
+		<label for="exampleInputPassword1">内容</label> 
+		<textarea class="form-control" rows="5"  id="returnContent"></textarea>
+	</div>
+	 <button type="submit" class="btn btn-default" onclick="add()">添加</button>
+</div>
+</div>

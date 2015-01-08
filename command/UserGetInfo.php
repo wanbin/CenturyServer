@@ -18,17 +18,8 @@ class UserGetInfo extends BaseCommand {
 		$account->accountLogin();
 		
 		$mail = new MailHandler ( $this->uid );
-// 		echo $this->uid;
-// 		echo $mail->gameuid;
 // 		$mail->mailSend(-1, $mail->gameuid, "欢迎来到这里");
-		
-		$retmail = $mail->getOneMail ();
-		
-		if (! empty ( $retmail )) {
-			$ret ['mail'] = array (
-					$retmail
-			);
-		}
+		$ret ['mailcount']=$mail->getUnreadCount();
 		
 		$game = new ArticleHandler ( $this->uid );
 		$temgame=$game->getGameLast();

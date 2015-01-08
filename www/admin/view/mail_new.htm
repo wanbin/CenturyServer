@@ -1,0 +1,29 @@
+<script>
+function send(){
+	var content=$("#content").val();
+	var gameuid=$("#gameuid").val();
+	$.post("command/command_base.php?mod=mail&action=send", {
+		gameuid:gameuid,
+		content:content
+	}, function(data) {
+		$("#content").val("");
+		$("#message").html(data);
+	}, "html");
+}
+</script>
+<div class="container">
+
+<div style='width:300px'>
+	<div class="form-group">
+		<label for="exampleInputEmail1">用户</label> <input
+			 class="form-control" id="gameuid" value="{$_REQUEST['gameuid']}">
+	</div>
+	<div class="form-group">
+		<label for="exampleInputPassword1">内容</label> 
+		<textarea class="form-control" rows="5"  id="content" >$content</textarea>
+		<span id='message'></span>
+	</div>
+	
+	 <button type="submit" class="btn btn-default" onclick="send()">发送</button>
+</div>
+</div>

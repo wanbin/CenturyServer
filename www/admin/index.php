@@ -22,6 +22,8 @@ $pageAdminArr = array (
 		'page_link',
 		'wx_edit',
 		'wx_new',
+		'mail_new',
+		'mail_list',
 		'version_edit',
 		'wx_message' 
 );
