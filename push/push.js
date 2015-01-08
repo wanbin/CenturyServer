@@ -16,19 +16,20 @@ getMessage();
 function getMessage() {
 	redis.BRPOP(redisKey, 0, function(err, data) {
 	var json= eval("("+data[1]+")");
-	client.push().setPlatform(json.channel)
-    .setAudience(JPush.alias(json.alias))
-    .setNotification(JPush.android(json.content, null, 1))
-    //.setMessage('msg content')
-    .setOptions(null, 60)
-    .send(function(err, res) {
-        if (err) {
-            console.log(err.message);
-        } else {
-            console.log('Sendno: ' + res.sendno);
-            console.log('Msg_id: ' + res.msg_id);
-        }
-    });
+		if (json.channel != "") {
+			client.push().setPlatform(json.channel).setAudience(
+					JPush.alias(json.alias)).setNotification(
+					JPush.android(json.content, null, 1))
+			// .setMessage('msg content')
+			.setOptions(null, 60).send(function(err, res) {
+				if (err) {
+					console.log(err.message);
+				} else {
+					console.log('Sendno: ' + res.sendno);
+					console.log('Msg_id: ' + res.msg_id);
+				}
+			});
+		}
 		getMessage();
 	});
 }
