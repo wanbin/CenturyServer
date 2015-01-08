@@ -1,0 +1,32 @@
+<script>
+
+</script>
+<div class="container">
+	<table class="table table-striped">
+		<tbody>
+			<tr>
+				<td>名称</td>
+				<td>类型</td>
+				<td>大小</td>
+				<td>时间</td>
+			</tr>
+			<!--{loop $ret $key $value}-->
+			<tr id="tr_{$value['_id']}">
+				<td>$value['name']</td>
+				<td>$value['type']
+				<td>$value['size']</td>
+				<td>$value['time']</td>
+			</tr>
+			<!--{/loop}-->
+		</tbody>
+	</table>
+
+
+	<h1>文件上传</h1>
+	<form action="uploadapk.php" method="post"
+		enctype="multipart/form-data" class="wj">
+		<input type="file" name="upload_file" /><br /> 
+		<input type="submit"
+			value="上传" />
+	</form>
+</div>
