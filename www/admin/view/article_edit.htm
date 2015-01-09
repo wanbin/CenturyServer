@@ -11,6 +11,12 @@ function delgame(id){
 <div class="container">
 
 	<h3>游戏管理</h3>
+	<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" id="se_0"><a href="index.php?showpage=article_edit&type=0">全部</a></li>
+  <li role="presentation" id="se_1"><a href="index.php?showpage=article_edit&type=1">游戏</a></li>
+  <li role="presentation" id="se_2"><a href="index.php?showpage=article_edit&type=2">帮助</a></li>
+</ul>
+
 	<table class="table table-striped">
 		<tbody>
 			<tr>
@@ -52,3 +58,6 @@ function delgame(id){
 	</nav>
 	<a href="index.php?showpage=article_new">新建</a>
 </div>
+<script>
+$("#se_"+{$type}).addClass("active");
+</script>
