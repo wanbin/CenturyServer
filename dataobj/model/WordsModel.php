@@ -6,9 +6,6 @@
 require_once PATH_MODEL.'BaseModel.php';
 class WordsModel extends BaseModel {
 	protected function newWords($words,  $type) {
-		if(empty(trim ( $words))||empty($type)){
-			return;
-		}
 		$content = array (
 				'content' => trim ( $words),
 				'type' => intval($type),
