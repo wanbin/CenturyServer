@@ -104,7 +104,7 @@ class ArticleCache extends ArticleModel {
 		$readlist = new Rediska_Key_Hash ( "Article_read_count" );
 		$readcount = $readlist [$id];
 		$peoplelist = new Rediska_Key_Hash ( "Article_read_people_" . $id );
-		$readpeople = count ( $peoplelist [$id] );
+		$readpeople = $peoplelist->count();
 		return array (
 				'count' => $readcount,
 				'people' => $readpeople 
