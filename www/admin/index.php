@@ -25,6 +25,9 @@ $pageAdminArr = array (
 		'mail_new',
 		'mail_list',
 		'version_edit',
+		'words_edit',
+		'action_edit',
+		'guess_edit',
 		'wx_message' 
 );
 

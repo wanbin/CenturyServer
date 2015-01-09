@@ -7,4 +7,14 @@
  */
 require_once PATH_MODEL . 'WordsModel.php';
 class WordsCache extends WordsModel{
+	protected function getRandomOne($type = 0) {
+		$ret = parent::getRandomOne ();
+		return $ret;
+	}
+	
+	protected function getPage($page,$type) {
+		$ret = parent::getPage ( $page,$type );
+		return $ret;
+	}
+	
 }
