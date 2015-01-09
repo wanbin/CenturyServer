@@ -81,7 +81,34 @@ class ArticleCache extends ArticleModel {
 			$ret = parent::getOne ( $id );
 			$this->setToCache ( $key, $ret, 10 );
 		}
+		$this->read($id);
 		return $ret;
+	}
+	
+	protected function read($id){
+		$rediska = new Rediska ();
+		// 记录阅读次数及阅读人数
+		$readcount = new Rediska_Key_Hash ( "Article_read_count" );
+		$readcount->increment ( $id );
+		// 记录阅读的人数
+		$readcount = new Rediska_Key_Hash ( "Article_read_people_" . $id );
+		$readcount->increment ( $this->gameuid );
+		// 记录某个玩家阅读的内容
+		if ($this->channel != 'WEB') {
+			$readcount = new Rediska_Key_Hash ( "Article_people_" . $this->gameuid );
+			$readcount->increment ( $id );
+		}
+	}
+	protected function getReadInfo($id) {
+		$rediska = new Rediska();
+		$readlist = new Rediska_Key_Hash ( "Article_read_count" );
+		$readcount = $readlist [$id];
+		$peoplelist = new Rediska_Key_Hash ( "Article_read_people_" . $id );
+		$readpeople = count ( $peoplelist [$id] );
+		return array (
+				'count' => $readcount,
+				'people' => $readpeople 
+		);
 	}
 	
 	

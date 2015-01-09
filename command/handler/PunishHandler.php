@@ -53,7 +53,13 @@ class PunishHandler extends PunishCache{
 		} else if ($type == 3) {
 			$satus = "被管理员删除";
 		}
-		$mailstr="您提交的$typestr [".$ret['content']."] $satus";
+		$punishcount=$ret['content'];
+		
+		if (strlen ( $punishcount ) > 10) {
+			$punishcount = substr ( $punishcount, 0, 10 ) . "……";
+		}
+		
+		$mailstr="您提交的$typestr [$punishcount] $satus";
 		$account->sendPushByGameuid($ret ['gameuid'], $mailstr,true);
 		
 		return parent::changeShow ( $id, $type );

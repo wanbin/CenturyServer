@@ -55,5 +55,8 @@ class ArticleHandler extends ArticleCache{
 	public function getOne($id){
 		return parent::getOne($id);
 	}
+	public function getReadInfo($id){
+		return parent::getReadInfo($id);
+	}
 	
 }
