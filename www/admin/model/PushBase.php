@@ -8,24 +8,45 @@ class PushBase  extends AdminBase {
 		$content = array (
 				'content' => $content,
 				'issend' => false,
+				'reday'=>-1,
 				'sendtime'=>$sendtime
 		);
 		$id = $this->insertMongo ( $content, 'push','century_admin' );
-		$index=0;
-		$total=0;
+		return $id;		
+	}
+	
+	public function insertPushInRedis() {
+		// 取到该加入到redis里面
+		$ret = $this->getOneFromMongo ( array (
+				'issend' => false,
+				'reday' => - 1,
+				'sendtime' => array (
+						'$lte' => time () 
+				) 
+		), 'push', 'century_admin' );
+		$id = $ret ['_id'];
+		if ($id == 0) {
+			echo "empty";
+			exit ();
+		}
+		// 更新一下，正在加入
+		$index = 0;
+		$total = 0;
 		while ( true ) {
-			$count = $this->insertAllUidInRedis ( $id ,$index);
-			$total+=$count;
+			$count = $this->insertAllUidInRedis ( $id, $index );
+			$total += $count;
 			if ($count < $this->onesCount) {
 				break;
 			}
-			$index++;
+			$index ++;
 		}
-		$this->updateMongo(array('total'=>$total), array('_id'=>$id), 'push','century_admin');
-		
-		$rediska = new Rediska();
-		$list = new Rediska_Key_List('Redis_push_'.$id);
-		return $id;		
+		$this->updateMongo ( array (
+				'total' => $total,
+				'reday' => 1 
+		), array (
+				'_id' => $id 
+		), 'push', 'century_admin' );
+		return $count;
 	}
 	
 	public function del($id){
@@ -44,7 +65,7 @@ class PushBase  extends AdminBase {
 		return $this->getFromMongo(array(), 'push',array('_id'=>-1),0,100,'century_admin');	
 	}
 	public function getNeedSend(){
-		return $this->getOneFromMongo(array('issend'=>false,'sendtime'=>array('$lte'=>time())), 'push','century_admin');
+		return $this->getOneFromMongo(array('issend'=>false,'reday'=>1,'sendtime'=>array('$lte'=>time())), 'push','century_admin');
 	}
 	public function hasSend($id,$count=0){
 		 $this->updateMongo(array('issend'=>true), array('_id'=>$id), 'push','century_admin',array('sendcount'=>$count));
