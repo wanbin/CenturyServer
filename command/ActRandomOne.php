@@ -4,11 +4,14 @@ include_once 'BaseCommand.php';
 class ActRandomOne extends BaseCommand {
 	protected function executeEx($params) {
 		// 是否是需要审核的词汇
-		global $des, $action;
+		include_once PATH_HANDLER . 'ActionHandler.php';
+		$words = new ActionHandler ( $uid );
+		$des=$words->getRandomOne(1);
+		$act=$words->getRandomOne(2);
 		$ret = array (
 				'content' => array (
-						'des' => $des [array_rand ( $des )],
-						'action' => $action [array_rand ( $action )] 
+						'des' => $des['content'],
+						'action' => $act['content']
 				) 
 		);
 		return $this->reutrnDate ( COMMAND_ENPTY, $ret );

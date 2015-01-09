@@ -5,6 +5,8 @@
  */
 require_once PATH_MODEL.'BaseModel.php';
 class WordsModel extends BaseModel {
+	protected  $tableName;
+	
 	protected function newWords($words,  $type) {
 		$content = array (
 				'content' => trim ( $words),
@@ -12,7 +14,7 @@ class WordsModel extends BaseModel {
 				'status' => 0,
 				'time' => time ()
 		);
-		$id=$this->insertMongo($content, "words");
+		$id=$this->insertMongo($content, $this->tableName);
 		return $id;
 	}
 	public function updateWords($id, $words, $type) {
@@ -24,14 +26,14 @@ class WordsModel extends BaseModel {
 				'type' => intval ( $type ),
 				'updatetime' => time () 
 		);
-		return $this->updateMongo ( $content, $where, 'words' );
+		return $this->updateMongo ( $content, $where,  $this->tableName );
 	}
 	
 	protected function delWords($id){
 		$where = array (
 				"_id" => intval ( $id )
 		);
-		return $this->removeMongo( $where, 'words' );
+		return $this->removeMongo( $where,  $this->tableName);
 	}
 	
 	protected function getRandomOne($type = 0) {
@@ -43,8 +45,8 @@ class WordsModel extends BaseModel {
 			$where = array ();
 		}
 		
-		$count = $this->getMongoCount ( $where, 'words' );
-		$ret = $this->getFromMongo ( $where, 'words', array (), rand ( 1, $count ) - 1, 1 );
+		$count = $this->getMongoCount ( $where,  $this->tableName );
+		$ret = $this->getFromMongo ( $where,$this->tableName , array (), rand ( 1, $count ) - 1, 1 );
 		$result = array ();
 		foreach ( $ret as $key => $value ) {
 			$result [] = array (
@@ -63,7 +65,7 @@ class WordsModel extends BaseModel {
 		if ($type == 0) {
 			$where = array ();
 		}
-		$ret = $this->getFromMongo ( $where, 'words', array ('_id'=>-1), ($page - 1) * PAGECOUNT, PAGECOUNT );
+		$ret = $this->getFromMongo ( $where,  $this->tableName, array ('_id'=>-1), ($page - 1) * PAGECOUNT, PAGECOUNT );
 		$result = array ();
 		foreach ( $ret as $key => $value ) {
 			$result [] = array (

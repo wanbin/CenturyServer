@@ -1,0 +1,100 @@
+<script>
+
+
+function del(id){
+	$.post("command/command_base.php?mod=guess&action=del", {
+		id : id
+	}, function(data) {
+		$("#content_"+id).hide();
+	}, "html");
+}
+function update(id){
+	var content=$("#punish_"+id).val();
+	var type=$("#select_"+id).val();
+	$.post("command/command_base.php?mod=guess&action=update", {
+		id : id,
+		content:content,
+		type:type
+	}, function(data) {
+		$("#message_"+id).html(data);
+	}, "html");
+}
+var page={$page};
+
+function pageBefore(){
+	if(page>1){
+		page--;
+	}
+	gopage(page);
+}
+function gopage(showpage){
+	window.location.href="index.php?showpage=guess_edit&type="+{$type}+"&page="+showpage;
+}
+
+function pageNext(){
+	page++;
+	gopage(page);
+}
+
+function selectchange(id){
+	update(id);
+}
+
+function add(){
+	var content=$("#newContent").val();
+	var type={$type};
+	$.post("command/command_base.php?mod=guess&action=new", {
+		content:content,
+		type:type
+	}, function(data) {
+		alert(data);
+	}, "html");
+}
+</script>
+<div class="container">
+<h3>疯狂猜词管理</h3>
+
+
+<ul class="nav nav-tabs" role="tablist">
+  <li role="presentation" id="se_-1"><a href="index.php?showpage=guess_edit&type=-1">未分类</a></li>
+  <li role="presentation" id="se_0"><a href="index.php?showpage=guess_edit&type=0">全部</a></li>
+  <!--{loop $list $key $value}-->
+  <li role="presentation" id="se_{$value['value']}"><a href="index.php?showpage=guess_edit&type={$value['value']}">{$value['content']}</a></li>
+  <!--{/loop}-->
+</ul>
+
+	<table class="table table-striped">
+		<tbody>
+			<!--{loop $ret $key $value}-->
+			<tr id="content_{$value['_id']}">
+				<td style='width:100px'>
+					{$value['typehtml']}
+					</td>
+					<td>
+					 <input  class="form-control" id="punish_{$value['_id']}" value="{$value['content']}" onchange="update({$value["_id"]})"><span id="message_{$value['_id']}"></span>
+				</td>
+					<td style="width:100px"><a href="index.php?showpage=mail_new&gameuid={$value['gameuid']}">发邮件</a> </td>
+				<td>
+				<div class="btn-group  btn-group-xs  pull-right " style='width:170px'>
+				<button type="button" class="btn btn-danger btn-sm" onclick='del({$value["_id"]})'>删除</button>
+				</div>
+				</td>
+			</tr>
+			<!--{/loop}-->
+		</tbody>
+	</table>
+	<ul class="pager">
+		<li><a href="javascript:void(0);" onclick="pageBefore()"
+			id="btnBefore">上一页</a></li>
+		<li><a href="javascript:void(0);" onclick="pageNext()">下一页</a></li>
+	</ul>
+	<hr/>
+	<div style="width:300px">
+	<h5>创建格式：词汇（可以创建多行）</h5>
+	<textarea class="form-control" rows="10"  id="newContent" >$content</textarea>
+	<button type="button" class="btn btn-success pull-right" onclick='add()'>创建</button>
+	</div>
+</div>
+<script>
+$("#se_"+{$type}).addClass("active");
+</script>

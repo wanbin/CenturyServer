@@ -6,11 +6,12 @@
  * 都写为受保护的方法，实际使用时要手动修改
  */
 require_once PATH_CACHE . 'WordsCache.php';
-class WordsHandler extends WordsCache {
+class GuessHandler extends WordsCache {
 	public function __construct($uid,$channel='ANDROID') {
+		$this->tableName='guess';
 		parent::__construct($uid,$channel);
-		$this->tableName='words';
 	}
+	
 	/**
 	 * 添加一个新闻公告
 	 */
@@ -25,7 +26,7 @@ class WordsHandler extends WordsCache {
 	}
 	
 	public function getRandomOne($type = 0) {
-		$ret = parent::getRandomOne ();
+		$ret = parent::getRandomOne ($type);
 		return $ret;
 	}
 	public function getPage($page, $type) {
@@ -35,13 +36,12 @@ class WordsHandler extends WordsCache {
 	
 	public function getTypeList(){
 		return array(
-				array('value'=>1,'content'=>'人物'),
-				array('value'=>2,'content'=>'日常'),
-				array('value'=>3,'content'=>'吃货'),
-				array('value'=>4,'content'=>'重口味'),
-				array('value'=>5,'content'=>'小清新'),
-				array('value'=>6,'content'=>'高难度'),
-				array('value'=>-1,'content'=>'未分类'),
+				array('value'=>1,'content'=>'大明星'),
+				array('value'=>2,'content'=>'网络达人'),
+				array('value'=>3,'content'=>'表演'),
+				array('value'=>4,'content'=>'动物'),
+				array('value'=>5,'content'=>'日常用品'),
+				array('value'=>6,'content'=>'8090'),
 				);
 	}
 }
