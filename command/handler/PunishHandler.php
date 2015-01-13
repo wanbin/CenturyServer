@@ -56,7 +56,7 @@ class PunishHandler extends PunishCache{
 		$punishcount=$ret['content'];
 		
 		if (strlen ( $punishcount ) > 10) {
-			$punishcount = substr ( $punishcount, 0, 10 ) . "……";
+// 			$punishcount = substr ( $punishcount, 0, 10 ) . "……";
 		}
 		
 		$mailstr="您提交的$typestr [$punishcount] $satus";

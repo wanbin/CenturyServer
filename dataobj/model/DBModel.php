@@ -28,7 +28,7 @@ class DBModel {
 		$this->useMemcache = $config ['memcache'];
 		$this->model = get_class ( $this );
 		
-		$redis_config = ISBAIDU ? $config ['redis_base_baidu'] : $config ['redis_base'];
+		$redis_config =  $config ['redis_base'];
 		$this->redis = new Redis ();
 		$this->redis->connect ( $redis_config ['host'], $redis_config ['port'] );
 		$this->redis->auth ( $redis_config ['password'] );
