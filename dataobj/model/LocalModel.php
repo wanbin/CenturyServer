@@ -11,6 +11,8 @@ class LocalModel extends BaseModel {
 				'name' => trim ( $name ),
 				'gameid' => intval ( $gameid ),
 				'img' =>$img,
+				'des' =>'',
+				'type' =>0,
 				'time' => time () 
 		);
 		$id = $this->insertMongo ( $content, $this->tableName );
