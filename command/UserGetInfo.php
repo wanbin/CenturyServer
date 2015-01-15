@@ -5,6 +5,7 @@ include_once 'handler/AccountHandler.php';
 include_once 'handler/BehaveHandler.php';
 include_once 'handler/ArticleHandler.php';
 include_once 'handler/MailHandler.php';
+include_once 'handler/LocalHandler.php';
 class UserGetInfo extends BaseCommand {
 	protected function executeEx($params) {
 		$uid = $params ['uid'];
@@ -28,6 +29,11 @@ class UserGetInfo extends BaseCommand {
 		$ret['newgame']=1;
 		$ret['newgameurl']="http://tieba.baidu.com/f?ie=utf-8&kw=%E7%88%B1%E4%B8%8A%E8%81%9A%E4%BC%9A&fr=search";
 		$ret['newgamecontent']=$temgame;
+		
+		
+		//返回本地游戏列表
+		$local = new LocalHandler ( $this->uid );
+		$ret['local']=$local->getPage(0);
 		
 		
 		$account->resetPushCount($account->gameuid,0);

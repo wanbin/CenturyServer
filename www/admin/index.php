@@ -28,6 +28,7 @@ $pageAdminArr = array (
 		'words_edit',
 		'action_edit',
 		'guess_edit',
+		'local_edit',//本地显示游戏管理
 		'wx_message' 
 );
 

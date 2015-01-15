@@ -10,5 +10,5 @@ $uploadName="/upload/$newfileName.png";
 $rsp = $upyun->writeFile($uploadName, $fh, True);   // 上传图片，自动创建目录
 fclose($fh);
 
-$ret=array("success"=>true,"msg"=>"失败", "file_path"=>"http://cnd.centurywar.cn/$uploadName");
+$ret=array("success"=>true,"msg"=>"失败", "file_path"=>"http://cdn.centurywar.cn/$uploadName");
 echo json_encode($ret);

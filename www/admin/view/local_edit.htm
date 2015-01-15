@@ -1,0 +1,144 @@
+<script>
+function del(id){
+	$.post("command/command_base.php?mod=guess&action=del", {
+		id : id
+	}, function(data) {
+		$("#content_"+id).hide();
+	}, "html");
+}
+function update(id){
+	var name=$("#name_"+id).val();
+	var type=$("#select_"+id).val();
+	var gameid=$("#gameid_"+id).val();
+	var img=$("#img_"+id).val();
+	var sort=$("#sort_"+id).val();
+	var des=$("#des_"+id).val();
+	$.post("command/command_base.php?mod=local&action=update", {
+		id : id,
+		name:name,
+		gameid:gameid,
+		img:img,
+		sort:sort,
+		des:des,
+		type:type
+	}, function(data) {
+		$("#message_"+id).html(data);
+	}, "html");
+}
+var page={$page};
+
+function pageBefore(){
+	if(page>1){
+		page--;
+	}
+	gopage(page);
+}
+function gopage(showpage){
+	window.location.href="index.php?showpage=guess_edit&type="+{$type}+"&page="+showpage;
+}
+
+function pageNext(){
+	page++;
+	gopage(page);
+}
+
+function selectchange(id){
+	update(id);
+}
+
+function add(){
+	var name=$("#name_new").val();
+	var img=$("#img_new").val();
+	var gameid=$("#gameid_new").val();
+	var type={$type};
+	$.post("command/command_base.php?mod=local&action=new", {
+		name:name,
+		img:img,
+		gameid:gameid
+	}, function(data) {
+		alert(data);
+	}, "html");
+}
+</script>
+<div class="container">
+	<h3>本地游戏管理</h3>
+
+
+	<ul class="nav nav-tabs" role="tablist">
+		<li role="presentation" id="se_0"><a
+			href="index.php?showpage=local_edit&type=0">全部</a></li>
+		<!--{loop $list $key $value}-->
+		<li role="presentation" id="se_{$value['value']}"><a
+			href="index.php?showpage=local_edit&type={$value['value']}">{$value['content']}</a></li>
+		<!--{/loop}-->
+	</ul>
+
+	<table class="table table-striped">
+		<tbody>
+		<tr>
+		<td style="width:10%">类别</td>
+		<td style="width:10%">名称</td>
+		<td style="width:10%">编号</td>
+		<td style="width:10%">图片</td>
+		<td style="width:10%">描述</td>
+		<td style="width:10%">排序</td>
+		<td style="width:10%">操作</td>
+		</tr>
+			<!--{loop $ret $key $value}-->
+			<tr id="content_{$value['_id']}">
+				<td>{$value['typehtml']}</td>
+				<td><input class="form-control" id="name_{$value['_id']}"
+					value="{$value['name']}">
+				</td>
+				<td><input class="form-control" id="gameid_{$value['_id']}"
+					value="{$value['gameid']}">
+				</td>
+				<td><input class="form-control" id="img_{$value['_id']}"
+					value="{$value['img']}">
+				</td>
+				<td><input class="form-control" id="des_{$value['_id']}"
+					value="{$value['des']}">
+				</td>
+				<td><input class="form-control" id="sort_{$value['_id']}"
+					value="{$value['sort']}">
+				</td>
+				<td>
+						<button type="button" class="btn btn-success btn-sm"
+							onclick='update({$value["_id"]})'>更新</button>
+						<button type="button" class="btn btn-danger btn-sm"
+							onclick='del({$value["_id"]})'>删除</button>
+							<span id="message_{$value['_id']}"></span>
+				</td>
+			</tr>
+			<!--{/loop}-->
+		</tbody>
+	</table>
+	<ul class="pager">
+		<li><a href="javascript:void(0);" onclick="pageBefore()"
+			id="btnBefore">上一页</a></li>
+		<li><a href="javascript:void(0);" onclick="pageNext()">下一页</a></li>
+	</ul>
+	<hr />
+	<div style="width: 300px">
+		<h3>创建新游戏</h3>
+		<div class="form-group">
+			<label for="exampleInputEmail1">游戏名称</label> <input type="text"
+				class="form-control" id="name_new" placeholder="">
+		</div>
+
+		<div class="form-group">
+			<label for="exampleInputPassword1">游戏编号</label> <input type="text"
+				class="form-control" id="gameid_new">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputPassword1">游戏图标</label> <input type="text"
+				class="form-control" id="img_new">
+		</div>
+
+		<button type="button" class="btn btn-success pull-right"
+			onclick='add()'>创建</button>
+	</div>
+</div>
+<script>
+$("#se_"+{$type}).addClass("active");
+</script>
