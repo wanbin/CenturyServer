@@ -29,4 +29,19 @@ $homeurl=$matchs[0][0];
 
 $id=$game->newGame($title, $homeurl, $content, $timeint,$type,$keyname);
 
+
+if ($type == 1) {
+	$pushcontent = "最新游戏 $title 已经上线，快来围观吧！爱上聚会";
+	// 读某个人的信息，把这个人的未读标记去掉
+	include_once '../model/PushBase.php';
+	$push = new PushBase ();
+	$id = $push->newpush ( $pushcontent, $timeint );
+}
+
 echo $content."发送成功,ID:".$id;
+
+
+
+
+
+
