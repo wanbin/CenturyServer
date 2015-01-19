@@ -44,6 +44,9 @@ define("REDIS_KEY_GAMELIKE_USER","redis_key_gamelike_user_%d");
 define("REDIS_KEY_GAMELIKE_GAME","redis_gamelike_game_%d");
 define("REDIS_KEY_GAMEDISLIKE_GAME","redis_gamedislike_game_%d");
 
+define("REDIS_KEY_GAMELIKE_USRE","redis_gamelike_user_%d");
+define("REDIS_KEY_GAMEDISLIKE_USER","redis_gamedislike_user_%d");
+
 //redis自增建
 define ( "REDIS_KEY_ADD_ID", "redis_key_add_id_%s" );
 
@@ -59,6 +62,8 @@ define ( "CACHE_KEY_PUBLISH", "cache_key_publish_%d" );
 //惩罚缓存
 define ( "REDIS_KEY_LIKE", "redis_key_like_%d" );
 define ( "REDIS_KEY_DISLIKE", "redis_key_dislike_%d" );
+define ( "REDIS_USERKEY_LIKE", "redis_userkey_like_%d" );
+define ( "REDIS_USERKEY_DISLIKE", "redis_userkey_dislike_%d" );
 
 
 //房间信息

@@ -30,13 +30,15 @@ class CollectCache extends CollectModel{
 	 */
 	protected function like($id) {
 		$likeKey = $this->getLikeKey ( $id );
-		if (! $this->isExit ( $likeKey, $this->gameuid )) {
-			$this->setRedisHash ( $likeKey, $this->gameuid, time () );
-			parent::addLike ( $id, 'like' );
-		} else {
-			$this->removeHash ( $likeKey, $this->gameuid, time () );
-		}
-		return $this->getHashLen($likeKey);
+		$likeUser = $this->getUserLikeKey ( $this->gameuid );
+		$this->setRedisHash ( $likeKey, $this->gameuid, time () );
+
+		$rediska = new Rediska();
+		$list = new Rediska_Key_Hash($likeUser);
+		$list[$id]=time();
+		//这一块把之前用户喜欢的内容从mongo取出来
+//		parent::addLike ( $id, 'like' );
+		return $this->getHashLen ( $likeKey );
 	}
 	
 	/**
@@ -46,27 +48,23 @@ class CollectCache extends CollectModel{
 	 */
 	protected function dislike($id) {
 		$dislikeKey = $this->getDislikeKey ( $id );
-		if (! $this->isExit( $dislikeKey, $this->gameuid )) {
-			$this->setRedisHash( $dislikeKey,$this->gameuid,time());
-			parent::addLike ( $id, 'dislike' );
-		}
-		else{
-			$this->removeHash( $dislikeKey,$this->gameuid,time());
-// 			parent::addLike ( $id, 'dislike' );
-		}
+		$this->setRedisHash ( $dislikeKey, $this->gameuid, time () );
+		$dislikeUser = $this->getUserDislikeKey ( $this->gameuid );
+		
+		$rediska = new Rediska();
+		$list = new Rediska_Key_Hash($dislikeUser);
+		$list[$id]=time();
+		
+//		parent::addLike ( $id, 'dislike' );
 		return $this->getHashLen ($dislikeKey);
 	}
+	protected function getUserListList(){
+		$likeUser = $this->getUserLikeKey ( $this->gameuid );
+		$rediska = new Rediska();
+		$list = new Rediska_Key_Hash($likeUser);
+		return $list->getFieldsAndValues();
+	}
 	
-// 	public function like($id){
-// 		$likeKey = $this->getLikeKey ( $id );
-// 		$this->setRedisHash ( $likeKey, $this->gameuid, time () );
-// 		return $this->getHashLen ( $likeKey );
-// 	}
-// 	public function dislike($id){
-// 		$dislikeKey = $this->getDislikeKey ( $id );
-// 		$this->setRedisHash ( $dislikeKey, $this->gameuid, time () );
-// 		return $this->getHashLen ( $dislikeKey );
-// 	}
 	
 
 	private function getLikeKey($id) {
@@ -74,6 +72,12 @@ class CollectCache extends CollectModel{
 	}
 	private function getDislikeKey($id) {
 		return sprintf ( REDIS_KEY_DISLIKE, $id );
+	}
+	private function getUserLikeKey($id) {
+		return sprintf ( REDIS_USERKEY_LIKE, $id );
+	}
+	private function getUserDislikeKey($id) {
+		return sprintf ( REDIS_USERKEY_DISLIKE, $id );
 	}
 	
 }

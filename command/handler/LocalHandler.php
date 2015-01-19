@@ -29,7 +29,7 @@ class LocalHandler extends LocalCache {
 			$typeArr [$typevalue ['value']] = $typevalue ['content'];
 		}
 		foreach ( $ret as $key => $value ) {
-			$ret [$key] ['typename'] = "(".$typeArr [$value ['type']]."游戏）";
+			$ret [$key] ['typename'] = "(".$typeArr [$value ['type']]."游戏)";
 		}
 		return $ret;
 	}

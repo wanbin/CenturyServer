@@ -24,8 +24,8 @@ class WordsHandler extends WordsCache {
 		return parent::delWords($id);
 	}
 	
-	public function getRandomOne($type = 0) {
-		$ret = parent::getRandomOne ();
+	public function getRandomOne($type) {
+		$ret = parent::getRandomOne ($type);
 		return $ret;
 	}
 	public function getPage($page, $type) {

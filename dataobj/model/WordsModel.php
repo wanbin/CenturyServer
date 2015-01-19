@@ -36,7 +36,7 @@ class WordsModel extends BaseModel {
 		return $this->removeMongo( $where,  $this->tableName);
 	}
 	
-	protected function getRandomOne($type = 0) {
+	protected function getRandomOne($type) {
 		// 先取到count
 		$where = array (
 				'type' => intval ( $type ) 

@@ -34,4 +34,7 @@ class CollectHandler extends CollectCache{
 	public function getAllByIds($idarray){
 		return parent::getAllByIds($idarray);
 	}
+	public function getUserListList(){
+		return parent::getUserListList();
+	}
 }

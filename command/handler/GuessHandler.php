@@ -25,7 +25,7 @@ class GuessHandler extends WordsCache {
 		return parent::delWords($id);
 	}
 	
-	public function getRandomOne($type = 0) {
+	public function getRandomOne($type) {
 		$ret = parent::getRandomOne ($type);
 		return $ret;
 	}

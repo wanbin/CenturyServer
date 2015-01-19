@@ -3,6 +3,7 @@
 include_once 'BaseCommand.php';
 class GuessRandomOne extends BaseCommand {
 	protected function executeEx($params) {
+		$type=$params['type'];
 		// 是否是需要审核的词汇
 		$ret=array();
 		$return=30;
@@ -14,7 +15,7 @@ class GuessRandomOne extends BaseCommand {
 			$typearr [$valuelist [value]] = $valuelist ['content'];
 		}
 		for($return = 30; $return > 0; $return --) {
-			$tem = $words->getRandomOne ();
+			$tem = $words->getRandomOne ($type);
 			$ret [] = array (
 					'key' => $typearr [$tem ['type']],
 					'content' => $tem ['content'] 
@@ -22,28 +23,4 @@ class GuessRandomOne extends BaseCommand {
 		}
 		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
 	}
-	private function getRandomOne(){
-		global $guess;
-		/*
-		$total = 0;
-		foreach ( $guess as $key => $value ) {
-			$total += count ( $value );
-		}
-		$random = rand ( 1, $total );
-		foreach ( $guess as $key => $value ) {
-			if (count ( $value ) < $random) {
-				return array (
-						'key' => $key,
-						'content' => $value [$random] 
-				);
-			}
-			$random -= count ( $value );
-		}*/
-		$temarray = array_rand ( $guess );
-		$content = $guess [$temarray] [array_rand ( $guess [$temarray] )];
-		return array (
-				'key' => $temarray,
-				'content' => $content 
-		);
-	}	
 }

@@ -127,4 +127,17 @@ class PunishHandler extends PunishCache{
 		$result = $collectHandler->newCollect ( $id,$type );
 		return parent::addLike ( $id, $type);
 	}
+	
+	
+	public function getUserLikeList(){
+		include_once 'CollectHandler.php';
+		$collectHandler = new CollectHandler ( $this->uid );
+		$list=$collectHandler->getUserListList();
+		$result=array();
+		foreach ($list as $key=>$value){
+			$result[]=$this->getPunish($key);
+		}
+		return $result;
+		
+	}
 }

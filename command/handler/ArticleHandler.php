@@ -10,6 +10,17 @@ class ArticleHandler extends ArticleCache{
 	public function like($id){
 		return parent::like($id);
 	}
+	
+	public function getLikeList() {
+		$ret = parent::getLikeList ();
+		$result = array ();
+		foreach ( $ret as $key => $value ) {
+			$tem= $this->getOne ( $key );
+			unset($tem['content']);
+			$result []=$tem;
+		}
+		return $result;
+	}
 	/**
 	 * 不喜欢游戏
 	 * @param unknown_type $id
@@ -45,7 +56,16 @@ class ArticleHandler extends ArticleCache{
 	}
 	
 	public function getGameList($page,$type=0){
-		return parent::getGameList($page,$type);
+		$ret= parent::getGameList($page,$type);
+		$likeList=parent::getLikeList();
+		foreach ($ret as $key=>$value){
+			if(key_exists($value['_id'],$likeList)){
+				$ret[$key]['hasCollect']=true;
+			}else{
+				$ret[$key]['hasCollect']=false;
+			}
+		}
+		return $ret;
 	}
 	
 	public function getGameLast(){

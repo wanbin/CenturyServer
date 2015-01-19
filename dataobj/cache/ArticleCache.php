@@ -15,11 +15,13 @@ class ArticleCache extends ArticleModel {
 	 */
 	protected function like($id) {
 		$likeKey = $this->getGameLikeGameKey ( $id );
-		if (!$this->isExit($likeKey, $this->gameuid)) {
-			$this->setRedisHash ( $likeKey,$this->gameuid,time());
-			parent::addLikeDislike ( $id, 'like' );
-		}
-		return $this->getHashLen ($likeKey);
+		$userKey=$this->getGameLikeUserKey($this->gameuid);
+		$rediska = new Rediska();
+		$list = new Rediska_Key_Hash($likeKey);
+		$list->set($this->gameuid,time());
+		$useLike = new Rediska_Key_Hash($userKey);
+		$useLike->set($id,time());
+		return $list->count();		
 	}
 	
 	/**
@@ -28,13 +30,23 @@ class ArticleCache extends ArticleModel {
 	 * @param unknown_type $id        	
 	 */
 	protected function dislike($id) {
-		$dislikeKey = $this->getGameDisLikeGameKey ( $id );
-		if (! $this->isExit( $dislikeKey, $this->gameuid )) {
-			$this->setRedisHash( $dislikeKey,$this->gameuid,time());
-			parent::addLikeDislike ( $id, 'dislike' );
-		}
-		return $this->getHashLen ($dislikeKey);
+		$likeKey = $this->getGameDisLikeGameKey ( $id );
+		$userKey=$this->getGameDisLikeUserKey($this->gameuid);
+		$rediska = new Rediska();
+		$list = new Rediska_Key_Hash($likeKey);
+		$list->set($this->gameuid,time());
+		$useLike = new Rediska_Key_Hash($likeKey);
+		$useLike->set($id,time());
+		return $list->count();	
 	}
+	
+	protected function getLikeList(){
+		$userKey=$this->getGameLikeUserKey($this->gameuid);
+		$rediska = new Rediska();
+		$list = new Rediska_Key_Hash($userKey);
+		return $list->getFieldsAndValues();
+	}
+	
 	public function getLikeInfo($id) {
 		$likeKey= $this->getGameLikeGameKey ( $id ) ;
 		$dislikeKey= $this->getGameDisLikeGameKey ( $id ) ;
@@ -50,6 +62,13 @@ class ArticleCache extends ArticleModel {
 	}
 	private function getGameDisLikeGameKey($gameid) {
 		return sprintf ( REDIS_KEY_GAMEDISLIKE_GAME, $gameid );
+	}
+	
+	private function getGameLikeUserKey($gameid) {
+		return sprintf ( REDIS_KEY_GAMELIKE_USER, $gameid );
+	}
+	private function getGameDisLikeUserKey($gameid) {
+		return sprintf ( REDIS_KEY_GAMEDISLIKE_USER, $gameid );
 	}
 	
 	
