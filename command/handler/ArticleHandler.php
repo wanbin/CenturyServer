@@ -16,7 +16,7 @@ class ArticleHandler extends ArticleCache{
 		rsort($ret);
 		$result = array ();
 		foreach ( $ret as $key => $value ) {
-			$tem= $this->getOne ( $key );
+			$tem= $this->getOne ( $value );
 			unset($tem['content']);
 			$result []=$tem;
 		}
