@@ -16,11 +16,16 @@ class ArticleCache extends ArticleModel {
 	protected function like($id) {
 		$likeKey = $this->getGameLikeGameKey ( $id );
 		$userKey=$this->getGameLikeUserKey($this->gameuid);
-		$rediska = new Rediska();
-		$list = new Rediska_Key_Hash($likeKey);
-		$list->set($this->gameuid,time());
-		$useLike = new Rediska_Key_Hash($userKey);
-		$useLike->set($id,time());
+		$rediska = new Rediska ();
+		$list = new Rediska_Key_Hash ( $likeKey );
+		$useLike = new Rediska_Key_Hash ( $userKey );
+		if ($list->exists ( $this->gameuid )) {
+			$list->remove ( $this->gameuid );
+			$useLike->remove ( $id);
+		} else {
+			$list->set ( $this->gameuid, time () );
+			$useLike->set ( $id, time () );
+		}
 		return $list->count();		
 	}
 	
