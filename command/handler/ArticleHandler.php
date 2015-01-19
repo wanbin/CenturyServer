@@ -13,10 +13,10 @@ class ArticleHandler extends ArticleCache{
 	
 	public function getLikeList() {
 		$ret = parent::getLikeList ();
-		rsort($ret);
+		krsort($ret);
 		$result = array ();
 		foreach ( $ret as $key => $value ) {
-			$tem= $this->getOne ( $value );
+			$tem= $this->getOne ( $key );
 			unset($tem['content']);
 			$result []=$tem;
 		}
