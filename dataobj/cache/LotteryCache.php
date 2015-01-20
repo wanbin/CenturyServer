@@ -1,0 +1,44 @@
+<?php
+/**
+ * @author WanBin @date 2013-08-03
+ * 谁是卧底房间信息
+ * 单记录与多记录同时存在在本类中，需要根据实际情况进行修改
+ * 都写为受保护的方法，实际使用时要手动修改
+ */
+require_once PATH_MODEL . 'LotteryModel.php';
+class LotteryCache extends LotteryModel{
+	protected function isShake($roomid) {
+		$shackKey = "Lottery_Shake_" . $roomid;
+		$ret = $this->getFromCache ( $shackKey );
+		if (empty ( $ret )) {
+			$info = parent::getSetting ($roomid);
+			$ret = isset ( $info ['isshake'] ) ? $info ['isshake'] : false;
+			$this->setToCache ( $shackKey, $ret );
+		}
+		return $ret;
+	}
+	protected function shake($roomid) {
+		$keyList = "Lottery_Redis_Shake_List_" . $roomid;
+		$keyCount = "Lottery_Redis_Shake_Count_" . $roomid;
+		$rediska = new Rediska ();
+		if ($this->isShake ( $roomid )) {
+			$hash = new Rediska_Key_Hash ( $keyCount );
+			$clickcount = $hash->increment ( $this->gameuid );
+			$list = new Rediska_Key_List ( $keyList );
+			$list->append ( $this->gameuid );
+			$clicknum = $list->count ();
+		}
+		return array (
+				'clicknum' => $clicknum,
+				'clickcount' => $clickcount 
+		);
+	}
+	
+	
+	
+	protected function updateShake($isshake) {
+		$shackKey = "Lottery_Shake_" . $this->gameuid;
+		$this->delFromCache ( $shackKey );
+		return parent::updateShake ( $isshake );
+	}
+}

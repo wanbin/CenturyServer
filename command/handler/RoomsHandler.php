@@ -157,6 +157,11 @@ class RoomsHandler extends RoomsCache{
 			$roomInfo['name']=isset($roomInfo['name'])?$roomInfo['name']:"";
 			$ret['roominfo']=$roomInfo;
 		}
+		
+		include_once PATH_HANDLER . '/LotteryHandler.php';
+		$lottery = new LotteryHandler ( $this->uid );
+		$shackret=$lottery->shake ( $ret ['roomid'] - 10000 );
+		$ret ['shackinfo'] = $shackret;
 		return $ret;
 	}
 	
@@ -211,6 +216,11 @@ class RoomsHandler extends RoomsCache{
 			$retpeople[]=$account->getAccountByGameuid($value);
 		}
 		$ret['room_user']=$retpeople;
+		
+		include_once PATH_HANDLER . '/LotteryHandler.php';
+		$lottery = new LotteryHandler ( $this->uid );
+		$shackret = $lottery->shake ( $roomid );
+		
 		return $ret;
 	} 
 	

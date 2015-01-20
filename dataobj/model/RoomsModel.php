@@ -5,12 +5,14 @@
  */
 require_once PATH_MODEL.'BaseModel.php';
 class RoomsModel extends BaseModel {
-	
 	protected function getInfo($roomid) {
 		$where = array (
 				'_id' => intval ( $roomid ) 
 		);
 		$ret = $this->getOneFromMongo ( $where, 'room' );
+// 		if (empty ( $roomid )) {
+// 			$this->NewRoom ();
+// 		}
 		return $ret;
 	}
 	
@@ -21,8 +23,8 @@ class RoomsModel extends BaseModel {
 		);
 		$id = $this->insertMongo ( $content, 'room' );
 		return $id;
-		
 	}
+	
 	//离开房间
 	protected function LevelFromRoom($roomid) {
 		$where = array (

@@ -26,5 +26,4 @@ $command = $_REQUEST ['cmd'];
 $data = json_decode ( str_replace ( "\\", "", $_REQUEST ['data'] ), true );
 $sign = json_decode ( str_replace ( "\\", "", $_REQUEST ['sign'] ), true );
 Entry::callCommand ( $command, $data, $sign );
-
 ?>
