@@ -102,17 +102,16 @@ class LotteryHandler extends LotteryCache {
 		}
 		
 		// 3.抽取，标记，推送，组织，返回
-		$lotteryarr [$lotterycontentIndex] [haslottery] += count ( $temLotteryResult );
+		$lotteryarr [$lotterycontentIndex] ['haslottery'] += count ( $temLotteryResult );
 		$this->updateSetting ( $lotteryarr );
 		
 		
 		include_once PATH_HANDLER . 'AccountHandler.php';
 		$account = new AccountHandler ( $this->uid );
 		
-		
 		foreach ( $temLotteryResult as $value => $gameuid ) {
 			//这里进行发推送
-			$content = "恭喜抽中【" + $lotteryarr [$lotterycontentIndex] ['name'] + "】" + $lotteryarr [$lotterycontentIndex] ['gift'];
+			$content = "恭喜抽中【".$lotteryarr [$lotterycontentIndex] ['name'] ."】".$lotteryarr [$lotterycontentIndex] ['gift'];
 			
 			$roomhl->setUserContent($gameuid,$content);
 			$account->sendPushByGameuid($gameuid, $content);
