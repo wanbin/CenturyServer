@@ -20,29 +20,27 @@ class RoomsCache extends RoomsModel{
 	}
 	
 	
-	protected function exitAllGame(){
-		$userRoomInfo=$this->getUserRoomInfo($this->gameuid);
-		if(!empty($userRoomInfo)){
-			$this->removeSomeOne($userRoomInfo['roomid'], $this->gameuid);
-		}
-	}
-	
 	protected function addToRoom($roomid){
 		$rediskey = $this->getRoomRedisUserKey ( $roomid );
 		$roomInfo = $this->getInfo ( $roomid );
 		if(empty($roomInfo)){
-			echo "emtty";
 			return -2;
 		}
 		
 		$rediska = new Rediska ();
 		$hash = new Rediska_Key_Hash ( $rediskey );
+		$userRoomidList=new Rediska_Key_Hash ( "Rooms_UserJoinRoomList" );
 		if ($hash->count() >= $roomInfo ['maxcount']) {
 			// 人数已经多了，不能再加了
 			return -1;
 		} else {
+			$roomidold=$userRoomidList->get($this->gameuid);
+			if ($roomidold > 0) {
+				$this->removeSomeOne ( $roomidold, $this->gameuid );
+			}
 			$hash->set($this->gameuid,time());
 			parent::addToRoom ( $roomid );
+			$userRoomidList->set($this->gameuid,$roomid);
 		}
 		return $hash->count();
 	}
@@ -70,8 +68,15 @@ class RoomsCache extends RoomsModel{
 	protected function removeSomeOne($roomid, $gameuid) {
 		$key = $this->getRoomRedisUserKey ( $roomid );
 		$rediska = new Rediska ();
+		
+		//把房间列表里面的用户信息去除
 		$hash = new Rediska_Key_Hash ( $key );
 		$hash->remove($gameuid);
+		
+		//把用户与房间号对应表去掉
+		$userRoomidList=new Rediska_Key_Hash ( "Rooms_UserJoinRoomList" );
+		$userRoomidList->remove($gameuid);
+		
 		return $this->removeUserRoomInfo($gameuid);
 	}
 	

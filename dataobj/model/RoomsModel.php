@@ -66,7 +66,6 @@ class RoomsModel extends BaseModel {
 				'gameuid' => intval($this->gameuid)
 		);
 		$this->removeMongo($where, 'user_room');
-		
 		$content=array(
 				'roomid'=>intval($roomid),
 				'gameuid'=>intval($this->gameuid),
