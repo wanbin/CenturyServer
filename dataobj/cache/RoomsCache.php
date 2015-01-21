@@ -34,14 +34,17 @@ class RoomsCache extends RoomsModel{
 			echo "emtty";
 			return -2;
 		}
-		if ($this->getListLen ( $rediskey ) >= $roomInfo ['maxcount']) {
+		
+		$rediska = new Rediska ();
+		$hash = new Rediska_Key_Hash ( $rediskey );
+		if ($hash->count() >= $roomInfo ['maxcount']) {
 			// 人数已经多了，不能再加了
 			return -1;
 		} else {
-			$this->pushList ( $rediskey, $this->gameuid );
+			$hash->set($this->gameuid,time());
 			parent::addToRoom ( $roomid );
 		}
-		return $this->getListLen($rediskey);
+		return $hash->count();
 	}
 	
 	
@@ -59,12 +62,16 @@ class RoomsCache extends RoomsModel{
 	
 	protected function getRoomUserList($roomid){
 		$key = $this->getRoomRedisUserKey ( $roomid );
-		return $this->getListAll($key);
+		$rediska = new Rediska ();
+		$hash = new Rediska_Key_Hash ( $key );
+		return $hash->getFields();
 	}
 	
 	protected function removeSomeOne($roomid, $gameuid) {
 		$key = $this->getRoomRedisUserKey ( $roomid );
-		$this->removeList ( $key,$gameuid );
+		$rediska = new Rediska ();
+		$hash = new Rediska_Key_Hash ( $key );
+		$hash->remove($gameuid);
 		return $this->removeUserRoomInfo($gameuid);
 	}
 	
@@ -115,8 +122,6 @@ class RoomsCache extends RoomsModel{
 		}
 		return $ret;
 	}
-	
-	
 	
 	protected function setUserContent($gameuid,$content){
 		parent::setUserContent($gameuid, $content);
