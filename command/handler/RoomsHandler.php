@@ -151,19 +151,16 @@ class RoomsHandler extends RoomsCache{
 	
 	public function GetRoomInfoOne(){
 		$ret= parent::getRoomUserInfo($this->gameuid);
-		if ($ret ['roomid'] <= 0) {
-			return array ();
+		if ($ret ['roomid'] > 0) {
+			$roomInfo = $this->getInfo ( $ret ['roomid'] );
+			$roomInfo ['name'] = isset ( $roomInfo ['name'] ) ? $roomInfo ['name'] : "";
+			include_once PATH_HANDLER . '/LotteryHandler.php';
+			$lottery = new LotteryHandler ( $this->uid );
+			$shackret = $lottery->shake ( $ret ['roomid'] );
+			$ret ['shackinfo'] = $shackret;
+			$roomInfo['content'].="[+".$shackret['clickcount']."]";
+			$ret ['roominfo'] = $roomInfo;
 		}
-		$roomInfo = $this->getInfo ( $ret ['roomid'] );
-		$roomInfo ['name'] = isset ( $roomInfo ['name'] ) ? $roomInfo ['name'] : "";
-		
-		include_once PATH_HANDLER . '/LotteryHandler.php';
-		$lottery = new LotteryHandler ( $this->uid );
-		$shackret=$lottery->shake ( $ret ['roomid'] );
-		$ret ['shackinfo'] = $shackret;
-// 		$roomInfo['content'].="[+".$shackret['clickcount']."]";
-
-		$ret ['roominfo'] = $roomInfo;
 		return $ret;
 	}
 	
