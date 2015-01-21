@@ -73,7 +73,7 @@ define ( "CACHE_KEY_ROOMINFO", "cache_key_roominfo_%d" );
 define ( "CACHE_KEY_ROOMUSERINFO", "cache_key_roomuserinfo_%d" );
 
 //房间中人员信息
-define ( "REDIS_KEY_ROOMUSER", "redis_key_roomuser_%d" );
+define ( "REDIS_KEY_ROOMUSER", "redis_key_roomuser_new_%d" );
 
 
 //超级大脑
