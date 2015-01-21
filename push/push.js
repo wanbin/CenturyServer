@@ -9,7 +9,9 @@ var redis = require('redis').createClient(redis_port,redis_ip);
 
 //var JPush = require("/Users/wanbin/node_modules/jpush-sdk/lib/JPush/JPush.js");
 var JPush = require("jpush-sdk");
+
 var client = JPush.buildClient('1fca24a4ae00341567e84792', '2a8228f3e58823fc5f4ace55');
+var clientIOS = JPush.buildClient('d0085b49b0682dbbb3a36ff5', 'fd838eceb6aaf5276b75f542');
 
 getMessage();
 
@@ -30,6 +32,21 @@ function getMessage() {
 				}
 			});
 		}
+		if (json.channel == "ios") {
+			clientIOS.push().setPlatform(json.channel).setAudience(
+					JPush.alias(json.alias)).setNotification(
+					JPush.android(json.message, null, 1))
+			// .setMessage('msg content')
+			.setOptions(null, 60).send(function(err, res) {
+				if (err) {
+					console.log(err.message);
+				} else {
+					console.log('Sendno: ' + res.sendno);
+					console.log('Msg_id: ' + res.msg_id);
+				}
+			});
+		}
+		
 		getMessage();
 	});
 }

@@ -32,6 +32,11 @@ class AccountHandler extends AccountCache {
 		if (PUSH_NODEJS) {
 			$this->sendPushNodejs ( $userInfo ['uid'], $content, strtolower ( $userInfo ['channel'] ) );
 		} else {
+			if (strtolower ( $userInfo ['channel'] ) == 'ios') {
+				$obj = new jpush ( masterSecretIOS, appkeysIOS );
+			} else {
+				$obj = new jpush ( masterSecret, appkeys );
+			}
 			$res = $obj->send ( rand ( 100000000, 999999999 ), 3, str_replace ( "-", "", $userInfo ['uid'] ),1, $msg_content, strtolower ( $userInfo ['channel'] ) );
 		}
 		file_put_contents(PATH_LOG."push.log","[".date("Y-m-d H:i:s")."]\n gameuid:".$gameuid."\ncontent:".$msg_content."\n" ,FILE_APPEND);

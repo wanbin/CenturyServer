@@ -46,6 +46,10 @@ define('DB_CODE','utf8');
 //JPUSH
 define('appkeys','1fca24a4ae00341567e84792');
 define('masterSecret', '2a8228f3e58823fc5f4ace55');
+
+define('appkeysIOS','d0085b49b0682dbbb3a36ff5');
+define('masterSecretIOS', 'fd838eceb6aaf5276b75f542');
+
 define('platform', 'android');
 
 
