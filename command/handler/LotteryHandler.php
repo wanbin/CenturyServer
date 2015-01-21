@@ -28,8 +28,10 @@ class LotteryHandler extends LotteryCache {
 			}
 			$content = "抽奖开启了互动模式，疯狂的点击吧！";
 			foreach ( $gameuidList as $gameuid => $value ) {
-				$roomhl->setUserContent($gameuid,$content);
-				$account->sendPushByGameuid($gameuid, $content);
+				if($gameuid!=$this->gameuid){
+					$roomhl->setUserContent($gameuid,$content);
+					$account->sendPushByGameuid($gameuid, $content);
+				}
 			}
 		}
 		return $ret;
