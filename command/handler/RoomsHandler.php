@@ -158,8 +158,8 @@ class RoomsHandler extends RoomsCache{
 			$lottery = new LotteryHandler ( $this->uid );
 			$shackret = $lottery->shake ( $ret ['roomid'] );
 			$ret ['shackinfo'] = $shackret;
-			if($lottery->isRoomShake()){
-				$ret['content'].="[+".$shackret['clickcount']."]";
+			if($shackret['clickcount']>0){
+				$ret['content']=$ret['content']."[+".$shackret['clickcount']."]";
 			}
 			$ret ['roominfo'] = $roomInfo;
 		}
