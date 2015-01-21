@@ -161,6 +161,8 @@ class RoomsHandler extends RoomsCache{
 			if($shackret['clickcount']>0){
 				$ret['content']=$ret['content']."[+".$shackret['clickcount']."]";
 			}
+			//IOS到这里出现了为数字的BUG
+			$ret['content'].=" ";
 			$ret ['roominfo'] = $roomInfo;
 		}
 		return $ret;
