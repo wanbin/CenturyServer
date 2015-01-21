@@ -12,7 +12,27 @@ class LotteryHandler extends LotteryCache {
 		return $ret;
 	}
 	public function updateShake($isshake) {
-		return parent::updateShake ( $isshake );
+		$ret=parent::updateShake ( $isshake );
+		if ($isshake) {
+			include_once PATH_HANDLER . '/RoomsHandler.php';
+			$roomhl = new RoomsHandler ( $this->uid );
+			
+			include_once PATH_HANDLER . 'AccountHandler.php';
+			$account = new AccountHandler ( $this->uid );
+			
+			$gameuidList = $roomhl->getRoomUserList ( $this->gameuid );
+			$gameuidList = array_flip ( $gameuidList );
+			// 把已经抽过奖的用户排除
+			foreach ( $this->getHasLottery () as $key => $value ) {
+				unset ( $gameuidList [$key] );
+			}
+			$content = "抽奖开启了互动模式，疯狂的点击吧！";
+			foreach ( $gameuidList as $gameuid => $value ) {
+				$roomhl->setUserContent($gameuid,$content);
+				$account->sendPushByGameuid($gameuid, $content);
+			}
+		}
+		return $ret;
 	}
 	public function isRoomShake() {
 		return parent::isShake ( $this->gameuid );
@@ -83,7 +103,18 @@ class LotteryHandler extends LotteryCache {
 		$lotteryarr [$lotterycontentIndex] [haslottery] += count ( $temLotteryResult );
 		$this->updateSetting ( $lotteryarr );
 		
+		
+		include_once PATH_HANDLER . 'AccountHandler.php';
+		$account = new AccountHandler ( $this->uid );
+		
+		
 		foreach ( $temLotteryResult as $value => $gameuid ) {
+			//这里进行发推送
+			$content = "恭喜抽中【" + $lotteryarr [$lotterycontentIndex] ['name'] + "】" + $lotteryarr [$lotterycontentIndex] ['gift'];
+			
+			$roomhl->setUserContent($gameuid,$content);
+			$account->sendPushByGameuid($gameuid, $content);
+			
 			$this->setHasLottery ( $gameuid, $lotteryarr [$lotterycontentIndex] ['id'] );
 		}
 		

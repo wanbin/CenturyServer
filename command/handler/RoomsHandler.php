@@ -245,5 +245,8 @@ class RoomsHandler extends RoomsCache{
 		return $ret;
 	} 
 	
+	public function setUserContent($gameuid,$content){
+		return parent::setUserContent($gameuid, $content);
+	}
 	
 }
