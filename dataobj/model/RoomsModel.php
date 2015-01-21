@@ -7,21 +7,24 @@ require_once PATH_MODEL.'BaseModel.php';
 class RoomsModel extends BaseModel {
 	protected function getInfo($roomid) {
 		$where = array (
-				'_id' => intval ( $roomid ) 
+				'gameuid' => intval ( $roomid ) 
 		);
 		$ret = $this->getOneFromMongo ( $where, 'room' );
-// 		if (empty ( $roomid )) {
-// 			$this->NewRoom ();
-// 		}
 		return $ret;
 	}
 	
 	protected  function NewRoom(){
-		$content = array (
-				'gameuid' => intval($this->gameuid),
-				'maxcount' => 10 
+		$where = array(
+				'gameuid' => intval ( $this->gameuid ) 
 		);
-		$id = $this->insertMongo ( $content, 'room' );
+		$ret = $this->getOneFromMongo ( $where, 'room' );
+		if (empty ( $ret )) {
+			$content = array (
+					'gameuid' => intval ( $this->gameuid ),
+					'maxcount' => 10 
+			);
+			$id = $this->insertMongo ( $content, 'room' );
+		}
 		return $id;
 	}
 	
@@ -34,7 +37,7 @@ class RoomsModel extends BaseModel {
 		return $this->removeMongo($where, 'user_room');
 	}
 		
-		// 离开房间
+	// 清空房间
 	protected function removeRoom($roomid) {
 		$where = array (
 				'roomid' => intval($roomid)
@@ -47,7 +50,6 @@ class RoomsModel extends BaseModel {
 		$where = array (
 				'_id' => intval($roomid)
 		);
-		
 		$content=array(
 				'endtime'=>time(),
 				'users'=>$userList
@@ -59,17 +61,16 @@ class RoomsModel extends BaseModel {
 	
 	
 		
-	protected function addToRoom($id){
-		$content=array(
-				'gameuid'=>intval($this->gameuid),
-				'roomid'=>$id,
-				'content'=>'已经加入游戏，还未开始'
-				);
-		
+	protected function addToRoom($roomid){
 		$where = array (
-				'gameuid' => $this->gameuid 
+				'gameuid' => intval($this->gameuid)
 		);
 		$this->removeMongo($where, 'user_room');
+		$content=array(
+				'gameuid'=>intval($this->gameuid),
+				'roomid'=>$roomid,
+				'content'=>'已经加入游戏，还未开始'
+				);
 		return $this->insertMongo($content, 'user_room');
 	}
 	

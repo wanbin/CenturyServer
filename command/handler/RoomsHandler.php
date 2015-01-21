@@ -6,7 +6,7 @@ require_once PATH_CACHE . 'RoomsCache.php';
 class RoomsHandler extends RoomsCache{
 	public function NewRoom(){
 		//网络房间基数
-		return parent::NewRoom()+10000;
+		return parent::NewRoom();
 	}
 	
 	
@@ -153,14 +153,13 @@ class RoomsHandler extends RoomsCache{
 		$ret= parent::getRoomUserInfo($this->gameuid);
 		if($ret['roomid']>0){
 			$roomInfo=$this->getInfo($ret['roomid']);
-			$ret['roomid']+=10000;
 			$roomInfo['name']=isset($roomInfo['name'])?$roomInfo['name']:"";
 			$ret['roominfo']=$roomInfo;
 		}
 		
 		include_once PATH_HANDLER . '/LotteryHandler.php';
 		$lottery = new LotteryHandler ( $this->uid );
-		$shackret=$lottery->shake ( $ret ['roomid'] - 10000 );
+		$shackret=$lottery->shake ( $ret ['roomid'] );
 		$ret ['shackinfo'] = $shackret;
 		return $ret;
 	}
@@ -194,33 +193,55 @@ class RoomsHandler extends RoomsCache{
 		}
 	} 
 	
-	
+	public function getRoomUserList($roomid){
+		return parent::getRoomUserList($roomid);
+	}
 	
 	/**
 	 *	这个是主持人取得信息的方式
 	 */
-	public function GetRoomInfo($addPeople=0) {
+	public function GetRoomInfo($addPeople=0,$isLottery=false) {
 		//先取下这个用户对应的roomid
-		$userRoomInfo=$this->getRoomUserInfo($this->gameuid);
-		$roomid=$userRoomInfo['roomid'];
+// 		$userRoomInfo=$this->getRoomUserInfo($this->gameuid);
+		$roomid=$this->gameuid;
 		$ret = $this->getInfo ( $roomid );
 		$roomUserList = $this->getRoomUserList ( $roomid );
+		
 		$retpeople=array();
 		//添加两个多余的玩家
 		for($i=1;$i<=$addPeople;$i++){
-			$retpeople[]=array('username'=>"NO. $i",'gameuid'=>"-".$i);
+			$retpeople[]=array('username'=>"NO. $i",'gameuid'=>"-".$i,'photo'=>"");
 		}
-		include_once PATH_HANDLER . 'AccountHandler.php';
-		$account = new AccountHandler ( $this->uid );
-		foreach ($roomUserList as $key=>$value){
-			$retpeople[]=$account->getAccountByGameuid($value);
-		}
-		$ret['room_user']=$retpeople;
 		
 		include_once PATH_HANDLER . '/LotteryHandler.php';
 		$lottery = new LotteryHandler ( $this->uid );
 		$shackret = $lottery->shake ( $roomid );
 		
+		$ret['isshake']=$lottery->isRoomShake();
+
+		$shackCountInfo=$lottery->getUserShackCount($roomUserList);
+		if($isLottery){
+			$lotteryInfo=$lottery->getSetting($this->gameuid);
+			$lotteryarr=$lotteryInfo['content'];
+			$lotteryRet=array();
+			foreach ($lotteryarr as $key=>$value){
+				$lotteryRet[$value['id']]=$value;
+			}
+			$hasLottery=$lottery->getHasLottery();
+		}
+		
+		
+		include_once PATH_HANDLER . 'AccountHandler.php';
+		$account = new AccountHandler ( $this->uid );
+		foreach ($roomUserList as $key=>$value){
+			$tem=$account->getAccountByGameuid($value);
+			if($isLottery){
+				$tem['shakecount']=isset($shackCountInfo[$value])?$shackCountInfo[$value]:0;
+				$tem['lotterycontent']=isset($hasLottery[$value])?$lotteryRet[$hasLottery[$value]]:array('empty'=>true);
+			}
+			$retpeople[]=$tem;
+		}
+		$ret['room_user']=$retpeople;
 		return $ret;
 	} 
 	

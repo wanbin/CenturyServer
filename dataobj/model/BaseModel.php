@@ -29,7 +29,6 @@ class BaseModel  extends DBModel {
 	public function getGameuid($uid){
 		$this->debug("initUid",$uid);
 		$gameuid=$this->redis->HGET("REDIS_USER_GAMEUID",$uid);
-		
 		if($gameuid>0){
 			return $gameuid;
 		}

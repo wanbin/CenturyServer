@@ -11,6 +11,8 @@ include_once 'handler/GuessHandler.php';
 class UserGetInfo extends BaseCommand {
 	protected function executeEx($params) {
 		$uid = $params ['uid'];
+		$version=$params['version'];
+		
 		$channel = $params ['channel'];
 		if (empty ( $uid )) {
 			$uid=$this->uid;
@@ -18,10 +20,20 @@ class UserGetInfo extends BaseCommand {
 		
 		$account = new AccountHandler ( $this->uid,$channel );
 		$ret= $account->getAccountByUid($uid);
-		$account->accountLogin();
+		$account->accountLogin($version);
+		
+		
 		
 		$mail = new MailHandler ( $this->uid );
+		
+		$issendmail=version_compare($version, '3.11');
+		// 当用户版本小于3.10的时候，提示房间问题
+		if ($issendmail < 0&&$ret['channel']=='ANDROID') {
+			$mail->systemSendNotDobule($this->gameuid, "亲爱的用户，3.09及以下版本网络游戏可能无法正常使用，请更新最新版本，感谢您的支持！");
+		}
+		
 		$ret ['mailcount']=$mail->getUnreadCount();
+		
 		
 		$game = new ArticleHandler ( $this->uid );
 		$temgame=$game->getGameLast();

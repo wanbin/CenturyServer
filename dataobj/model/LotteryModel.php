@@ -12,40 +12,56 @@ class LotteryModel extends BaseModel {
 				'updatetime' => time () 
 		);
 		$where = array (
-				'gameuid' => $this->gameuid 
+				'gameuid' => intval($this->gameuid)
 		);
 		$this->updateMongo ( $content, $where, $this->tablename );
 	}
 	protected function create(){
 		$content = array (
-				'gameuid' => $this->gameuid,
-				'content' => array()
+				'gameuid' => intval($this->gameuid),
+				'content' => array (
+						array (
+								'id' =>0,
+								'name' => "三等奖",
+								'gift' => "三等奖奖品",
+								'people' => "3" 
+								
+						),
+						array (
+								'id' =>1,
+								'name' => "二等奖",
+								'gift' => "二等奖奖品",
+								'people' => "2" 
+						),
+						array (
+								'id' =>2,
+								'name' => "一等奖",
+								'gift' => "一等奖奖品",
+								'people' => "1" 
+						) 
+				)
 		);
 		$this->insertMongo ( $content, $this->tablename );
 		return $content;
 	}
-	protected  function getSetting($roomid = 0) {
+	protected function getSetting($roomid) {
 		$where = array (
-				'gameuid' => $roomid > 0 ? $roomid : $this->gameuid 
+				'gameuid' => intval($roomid > 0 ? $roomid : $this->gameuid) 
 		);
-		
 		$ret = $this->getOneFromMongo ( $where, $this->tablename );
 		if (empty ( $ret )) {
 			$ret = $this->create ();
-		}
-		if($ret['content']==null){
-			$ret['content']=array();
 		}
 		return $ret;
 	}
 	
 	protected function updateShake($isshake){
 		$content = array (
-				'isshake' => (bool)$isshake,
+				'isshake' => intval($isshake),
 				'updatetime' => time ()
 		);
 		$where = array (
-				'gameuid' => $this->gameuid
+				'gameuid' => intval($this->gameuid)
 		);
 		$this->updateMongo ( $content, $where, $this->tablename );
 		return true;

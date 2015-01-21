@@ -12,15 +12,23 @@ class LotteryCache extends LotteryModel{
 		$ret = $this->getFromCache ( $shackKey );
 		if (empty ( $ret )) {
 			$info = parent::getSetting ($roomid);
-			$ret = isset ( $info ['isshake'] ) ? $info ['isshake'] : false;
+			$ret = isset ( $info ['isshake'] ) ? $info ['isshake'] : 0;
 			$this->setToCache ( $shackKey, $ret );
 		}
 		return $ret;
 	}
+// 	protected function updateShake($isshake) {
+// 		$shackKey = "Lottery_Shake_" . $this->gameuid;
+// 		$this->setToCache ( $shackKey, $isshake );
+// 		return parent::updateShake ( $isshake );
+// 	}
+	
 	protected function shake($roomid) {
 		$keyList = "Lottery_Redis_Shake_List_" . $roomid;
 		$keyCount = "Lottery_Redis_Shake_Count_" . $roomid;
 		$rediska = new Rediska ();
+		$clicknum=0;
+		$clickcount=0;
 		if ($this->isShake ( $roomid )) {
 			$hash = new Rediska_Key_Hash ( $keyCount );
 			$clickcount = $hash->increment ( $this->gameuid );
@@ -34,6 +42,17 @@ class LotteryCache extends LotteryModel{
 		);
 	}
 	
+	
+	protected function getUserShackCount($userarr){
+		$keyCount = "Lottery_Redis_Shake_Count_" . $this->gameuid;
+		$rediska = new Rediska ();
+		$hash = new Rediska_Key_Hash ( $keyCount );
+		$result=array();
+		foreach ($userarr as $gameuid){
+			$result[$gameuid]=$hash->get($gameuid);
+		}
+		return $result;
+	}
 	
 	
 	protected function updateShake($isshake) {

@@ -8,12 +8,17 @@
 require_once PATH_MODEL . 'RoomsModel.php';
 class RoomsCache extends RoomsModel{
 	protected function NewRoom() {
-		$this->exitAllGame();
-		$roomid = parent::NewRoom ();
+		parent::NewRoom();
+		$roomid=$this->gameuid;
 		$rediskey = $this->getRoomRedisUserKey ( $roomid );
-		$this->addToRoom ( $roomid );
+		$rediska = new Rediska ();
+		$list=new Rediska_Key_List($rediskey);
+		$list->delete();
+		$list->append($this->gameuid);
+		parent::addToRoom ( $roomid );
 		return $roomid;
 	}
+	
 	
 	protected function exitAllGame(){
 		$userRoomInfo=$this->getUserRoomInfo($this->gameuid);
@@ -23,10 +28,10 @@ class RoomsCache extends RoomsModel{
 	}
 	
 	protected function addToRoom($roomid){
-		$this->exitAllGame();
 		$rediskey = $this->getRoomRedisUserKey ( $roomid );
 		$roomInfo = $this->getInfo ( $roomid );
 		if(empty($roomInfo)){
+			echo "emtty";
 			return -2;
 		}
 		if ($this->getListLen ( $rediskey ) >= $roomInfo ['maxcount']) {
