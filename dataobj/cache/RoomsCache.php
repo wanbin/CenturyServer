@@ -12,7 +12,7 @@ class RoomsCache extends RoomsModel{
 		$roomid=$this->gameuid;
 		$rediskey = $this->getRoomRedisUserKey ( $roomid );
 		$rediska = new Rediska ();
-		$list = new Rediska_Key_hash ( $rediskey );
+		$list = new Rediska_Key_Hash ( $rediskey );
 		$list->delete ();
 		$list->set ( $this->gameuid, time () );
 		parent::addToRoom ( $roomid );
