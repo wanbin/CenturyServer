@@ -33,10 +33,10 @@ function getMessage() {
 			});
 		}
 		if (json.channel == "ios") {
-			clientIOS.push().setPlatform(json.channel).setAudience(
-					JPush.alias(json.alias)).setNotification(
-					JPush.android(json.message, null, 1))
-			// .setMessage('msg content')
+			clientIOS.push()
+			.setPlatform(json.channel)
+			.setAudience(JPush.alias(json.alias))
+			.setNotification(json.message,JPush.ios(json.message, null, 1))
 			.setOptions(null, 60).send(function(err, res) {
 				if (err) {
 					console.log(err.message);
