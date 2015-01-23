@@ -17,6 +17,7 @@ class ArticleHandler extends ArticleCache{
 		$result = array ();
 		foreach ( $ret as $key => $value ) {
 			$tem= $this->getOne ( $key );
+			$tem['hasCollect']=true;
 			unset($tem['content']);
 			$result []=$tem;
 		}

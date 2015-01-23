@@ -35,13 +35,13 @@ class WordsHandler extends WordsCache {
 	
 	public function getTypeList(){
 		return array(
+				array('value'=>0,'content'=>'全部'),
 				array('value'=>1,'content'=>'人物'),
 				array('value'=>2,'content'=>'日常'),
 				array('value'=>3,'content'=>'吃货'),
 				array('value'=>4,'content'=>'重口味'),
 				array('value'=>5,'content'=>'小清新'),
 				array('value'=>6,'content'=>'高难度'),
-				array('value'=>-1,'content'=>'未分类'),
 				);
 	}
 }
