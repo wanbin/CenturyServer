@@ -6,7 +6,8 @@ define("COMMAND_FAILE", 1001);
 define("PAGECOUNT", 30);
 
 
-
+//不能加入到自己的房间中
+define("ERROR_ROOM_SELF", 1100);
 
 //加入房间时的错误 
 define("ERROR_ROOM", 1101);
@@ -30,6 +31,7 @@ define("PUNISH_ERROR", 1109);
 define("ROOM_TIME_OUT", 1110);
 //用户游戏间隔过小
 define("FEQ_TO_MUCH", 1111);
+define("REMOVE_SELF", 1112);
 
 $GamePeople=array(
 		'game_1'=>array('name'=>'网络谁是卧底','min'=>4,'max'=>12),
@@ -44,4 +46,5 @@ $gameNeedPay=array(
 		array('max'=>50,'pay'=>18),
 		array('max'=>100,'pay'=>30),
 		);
+define("GAME_LIMIT_USER", false);
 ?>

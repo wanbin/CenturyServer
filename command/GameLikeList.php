@@ -8,8 +8,9 @@ class GameLikeList extends BaseCommand {
 		$showtype = isset ( $params ['type'] ) ? $params ['type'] : 1;
 		// 是否是需要审核的词汇
 		$game = new ArticleHandler ( $this->uid );
-		$ret = $game->getLikeList ();
-		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
+		$ret = $game->getCollectList ();
+		
+		return $this->returnDate ( COMMAND_ENPTY, $ret );
 	}
 
 }

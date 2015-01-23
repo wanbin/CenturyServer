@@ -8,6 +8,6 @@ class MailSend extends BaseCommand {
 		$sendto=$params['sendto'];
 		$content=$params['content'];
 		$ret = $mail->mailSend($sendto,$mail->gameuid, $content);
-		return $this->reutrnDate ( COMMAND_ENPTY ,$ret);
+		return $this->returnDate ( COMMAND_ENPTY ,$ret);
 	}
 }

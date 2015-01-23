@@ -31,6 +31,6 @@ class ResponseGetInfo extends BaseCommand {
 		$ret['helpurl']="http://www.centurywar.cn/?p=30";
 		
 		$account->resetPushCount($account->gameuid,0);
-		return $this->reutrnDate ( COMMAND_ENPTY ,$ret);
+		return $this->returnDate ( COMMAND_ENPTY ,$ret);
 	}
 }

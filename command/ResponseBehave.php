@@ -12,6 +12,6 @@ class ResponseBehave extends BaseCommand {
 		$cellold=$rank->getCellValue();
 		$cellnew=$rank->updateCell($gametype, $level, $data);
 		$ret=array('cell'=>$cellnew,'cellold'=>$cellold);
-		return $this->reutrnDate ( COMMAND_SUCCESS,$ret);
+		return $this->returnDate ( COMMAND_SUCCESS,$ret);
 	}
 }

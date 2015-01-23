@@ -424,7 +424,7 @@ class BaseCommand
 	/**
 	 * 行为返回值统一入口
 	 */
-	protected function reutrnDate($code, $data = array()) {
+	protected function returnDate($code, $data = array()) {
 		$ret = array (
 				'code' => $code,
 				'data' => json_encode ( $data ),

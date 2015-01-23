@@ -6,6 +6,6 @@ class RoomGetContent extends BaseCommand {
 		include_once PATH_HANDLER . 'RoomsHandler.php';
 		$room = new RoomsHandler ( $this->uid );
 		$ret=$room->GetRoomInfoOne ();
-		return $this->reutrnDate ( COMMAND_ENPTY,$ret );
+		return $this->returnDate ( COMMAND_ENPTY,$ret );
 	}
 }

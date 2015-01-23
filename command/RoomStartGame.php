@@ -9,6 +9,6 @@ class RoomStartGame extends BaseCommand {
 		$type=$params['type'];
 		$addPeople=$params['addPeople'];
 		$ret= $room->StartGame($type,$addPeople);
-		return $this->reutrnDate ( COMMAND_SUCCESS,$ret );
+		return $this->returnDate ( COMMAND_SUCCESS,$ret );
 	}
 }

@@ -8,7 +8,7 @@ class LotteryDo extends BaseCommand {
 		// 是否是需要审核的词汇
 		$lottery = new LotteryHandler ( $this->uid );
 		$ret=$lottery->LotteryDo($ismore);
-		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
+		return $this->returnDate ( COMMAND_ENPTY, $ret );
 	}
 
 }

@@ -10,6 +10,6 @@ class WordUndercover extends BaseCommand {
 		$result=$word->getRandomOne($type);
 		$ret ['word'] = $result['content'];
 		$ret ['wordtype']=$result['type'];
-		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
+		return $this->returnDate ( COMMAND_ENPTY, $ret );
 	}
 }

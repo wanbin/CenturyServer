@@ -6,8 +6,11 @@ class RoomRemoveSomeone extends BaseCommand {
 	protected function executeEx($params) {
 		include_once PATH_HANDLER . 'RoomsHandler.php';
 		$room = new RoomsHandler ( $this->uid );
-		$delgameuid=$params['gameuid'];
-		$ret= $room->delSomeOne($delgameuid);
-		return $this->reutrnDate ( COMMAND_SUCCESS,$ret );
+		$delgameuid = $params ['gameuid'];
+		if ($delgameuid == $this->gameuid) {
+			return $this->returnDate ( REMOVE_SELF );
+		}
+		$ret = $room->delSomeOne ( $delgameuid );
+		return $this->returnDate ( COMMAND_SUCCESS, $ret );
 	}
 }

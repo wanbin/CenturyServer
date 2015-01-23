@@ -18,6 +18,6 @@ class WordsNew extends BaseCommand {
 		foreach ( $content as $key => $value ) {
 			$words->newWords ( $value ['words1'], $value ['words2'], $value ['type'] );
 		}
-		return $this->reutrnDate ( COMMAND_SUCCESS );
+		return $this->returnDate ( COMMAND_SUCCESS );
 	}
 }

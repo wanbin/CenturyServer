@@ -18,6 +18,6 @@ class PublishNew extends BaseCommand {
 		}
 		$publish = new PunishHandler ( $this->uid );
 		$publish->newPublish ( $content, $type );
-		return $this->reutrnDate ( COMMAND_SUCCESS );
+		return $this->returnDate ( COMMAND_SUCCESS );
 	}
 }

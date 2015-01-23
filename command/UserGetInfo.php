@@ -54,6 +54,6 @@ class UserGetInfo extends BaseCommand {
 		
 		
 		$account->resetPushCount($account->gameuid,0);
-		return $this->reutrnDate ( COMMAND_ENPTY ,$ret);
+		return $this->returnDate ( COMMAND_ENPTY ,$ret);
 	}
 }

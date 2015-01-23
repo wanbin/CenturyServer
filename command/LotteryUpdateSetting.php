@@ -8,7 +8,7 @@ class LotteryUpdateSetting extends BaseCommand {
 		// 是否是需要审核的词汇
 		$lottery = new LotteryHandler ( $this->uid );
 		$lottery->updateSetting ( $content );
-		return $this->reutrnDate ( COMMAND_ENPTY, array () );
+		return $this->returnDate ( COMMAND_ENPTY, array () );
 	}
 
 }

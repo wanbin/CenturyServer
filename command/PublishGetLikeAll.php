@@ -10,6 +10,6 @@ class PublishRandomOne extends BaseCommand {
 		$shenhe = $params ['shenhe'];
 		$publish = new PunishHandler ( $this->uid );
 		$ret =array('content'=>$publish->getRandomOne ( 1 )) ;
-		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
+		return $this->returnDate ( COMMAND_ENPTY, $ret );
 	}
 }

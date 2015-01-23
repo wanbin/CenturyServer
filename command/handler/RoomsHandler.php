@@ -22,7 +22,6 @@ class RoomsHandler extends RoomsCache{
 			$userInfo = $account->getAccountByUid($this->uid);
 			$content = $userInfo ['username'] . "已经加入到游戏中";
 			$account->sendPushByGameuid ( $roomid, $content );
-			return 1;
 		}
 		return $ret;
 	}

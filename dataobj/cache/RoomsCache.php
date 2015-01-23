@@ -23,6 +23,7 @@ class RoomsCache extends RoomsModel{
 	protected function addToRoom($roomid){
 		$rediskey = $this->getRoomRedisUserKey ( $roomid );
 		$roomInfo = $this->getInfo ( $roomid );
+		
 		if(empty($roomInfo)){
 			return -2;
 		}
@@ -30,7 +31,9 @@ class RoomsCache extends RoomsModel{
 		$rediska = new Rediska ();
 		$hash = new Rediska_Key_Hash ( $rediskey );
 		$userRoomidList=new Rediska_Key_Hash ( "Rooms_UserJoinRoomList" );
-		if ($hash->count() >= $roomInfo ['maxcount']) {
+		
+		//目前对游戏人数不设限
+		if ($hash->count() >= $roomInfo ['maxcount']&&GAME_LIMIT_USER) {
 			// 人数已经多了，不能再加了
 			return -1;
 		} else {

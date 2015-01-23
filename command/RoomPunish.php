@@ -8,6 +8,6 @@ class RoomPunish extends BaseCommand {
 		$room = new RoomsHandler ( $this->uid );
 		$gameuidarr= explode("_", trim($params['gameuidstr'],'_'));
 		$ret= $room->PunishSomeOne($gameuidarr);
-		return $this->reutrnDate ( COMMAND_SUCCESS,array('punish'=>$ret));
+		return $this->returnDate ( COMMAND_SUCCESS,array('punish'=>$ret));
 	}
 }

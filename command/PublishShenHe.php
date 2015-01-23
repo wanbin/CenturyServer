@@ -8,7 +8,7 @@ class PublishShenHe extends BaseCommand {
 		$type = $params ['type'];
 		$publish = new PunishHandler ( $this->uid );
 		$ret = $publish->changeShow ( $id, $type );
-		return $this->reutrnDate ( COMMAND_SUCCESS, $ret );
+		return $this->returnDate ( COMMAND_SUCCESS, $ret );
 	}
 
 }

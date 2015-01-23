@@ -5,12 +5,12 @@ class ArticleHandler extends ArticleCache{
 	
 	/**
 	 * 喜欢游戏
-	 * @param unknown_type $id
+	 *
+	 * @param unknown_type $id        	
 	 */
-	public function like($id){
-		return parent::like($id);
+	public function gameCollect($gameuid, $type) {
+		return parent::gameCollect ( $gameuid, $type );
 	}
-	
 	public function getLikeList() {
 		$ret = parent::getLikeList ();
 		krsort($ret);
@@ -23,13 +23,20 @@ class ArticleHandler extends ArticleCache{
 		}
 		return $result;
 	}
-	/**
-	 * 不喜欢游戏
-	 * @param unknown_type $id
-	 */
-	public function dislike($id){
-		return parent::dislike($id);
+	
+	public function getCollectList() {
+		$ret = parent::getCollectList ();
+		krsort($ret);
+		$result = array ();
+		foreach ( $ret as $key => $value ) {
+			$tem= $this->getOne ( $key );
+			$tem['hasCollect']=true;
+			unset($tem['content']);
+			$result []=$tem;
+		}
+		return $result;
 	}
+	
 	
 	public function getLikeInfo($id){
 		return parent::getLikeInfo($id);
@@ -59,7 +66,7 @@ class ArticleHandler extends ArticleCache{
 	
 	public function getGameList($page,$type=0){
 		$ret= parent::getGameList($page,$type);
-		$likeList=parent::getLikeList();
+		$likeList=parent::getCollectList();
 		foreach ($ret as $key=>$value){
 			if(key_exists($value['_id'],$likeList)){
 				$ret[$key]['hasCollect']=true;

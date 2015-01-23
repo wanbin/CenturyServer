@@ -9,7 +9,7 @@ class BehaveAdd extends BaseCommand {
 		$sec = $params ['sec'];
 		$behavea = new BehaveHandler ( $this->uid );
 		$ret = $behavea->newBehave ( $behave,$data,$sec );
-		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
+		return $this->returnDate ( COMMAND_ENPTY, $ret );
 	}
 
 }

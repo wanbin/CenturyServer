@@ -9,9 +9,9 @@ class RoomLevel extends BaseCommand {
 		$room = new RoomsHandler ( $this->uid );
 		$ret = $room->LevelRoom();
 		if ($ret) {
-			return $this->reutrnDate ( COMMAND_SUCCESS );
+			return $this->returnDate ( COMMAND_SUCCESS );
 		} else {
-			return $this->reutrnDate ( ERROR_ROOM );
+			return $this->returnDate ( ERROR_ROOM );
 		}
 		
 	}

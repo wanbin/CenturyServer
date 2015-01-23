@@ -8,6 +8,6 @@ class PublishRandomOne extends BaseCommand {
 		$publish = new PunishHandler ( $this->uid );
 		$getrandom=$publish->getRandomOne ( -1 );
 		$ret =array('content'=>array($getrandom)) ;
-		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
+		return $this->returnDate ( COMMAND_ENPTY, $ret );
 	}
 }

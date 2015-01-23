@@ -8,6 +8,6 @@ class MailList extends BaseCommand {
 		$page=isset($params['page'])?$params['page']:1;
 // 		$mail->mailSend(-1, $mail->gameuid, "欢迎欢迎");
 		$ret = $mail->getMailList($page);
-		return $this->reutrnDate ( COMMAND_ENPTY ,$ret);
+		return $this->returnDate ( COMMAND_ENPTY ,$ret);
 	}
 }

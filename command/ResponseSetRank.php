@@ -12,6 +12,6 @@ class ResponseSetRank extends BaseCommand {
 		$rankold=$rank->getRank($gametype, $level);
 		$rank->setRank ($gametype,$level,$souce);
 		$ret=$rank->getRank($gametype, $level);
-		return $this->reutrnDate ( COMMAND_SUCCESS,array('rank'=>$ret,'rankold'=>$rankold));
+		return $this->returnDate ( COMMAND_SUCCESS,array('rank'=>$ret,'rankold'=>$rankold));
 	}
 }

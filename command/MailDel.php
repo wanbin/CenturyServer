@@ -7,6 +7,6 @@ class MailDel extends BaseCommand {
 		$mail = new MailHandler ( $this->gameuid );
 		$mailid=$params['mailid'];
 		$ret = $mail->mailDel($mailid);
-		return $this->reutrnDate ( COMMAND_ENPTY ,array('mailid'=>$mailid,'status'=>$ret));
+		return $this->returnDate ( COMMAND_ENPTY ,array('mailid'=>$mailid,'status'=>$ret));
 	}
 }

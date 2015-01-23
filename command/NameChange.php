@@ -14,6 +14,6 @@ class NameChange extends BaseCommand {
 			$account = new AccountHandler ( $this->uid );
 			$account->changeUserName ( $username,$photo );
 		}
-		return $this->reutrnDate ( COMMAND_SUCCESS );
+		return $this->returnDate ( COMMAND_SUCCESS );
 	}
 }

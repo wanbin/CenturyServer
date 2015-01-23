@@ -9,6 +9,6 @@ class ResponseGetRank extends BaseCommand {
 		include_once PATH_HANDLER . 'RankHandler.php';
 		$rank = new RankHandler ( $this->uid );
 		$ret=$rank->getRank ($gametype,$level);
-		return $this->reutrnDate ( COMMAND_SUCCESS,$ret);
+		return $this->returnDate ( COMMAND_SUCCESS,$ret);
 	}
 }

@@ -8,6 +8,6 @@ class LotteryChangeShake extends BaseCommand {
 		// 是否是需要审核的词汇
 		$lottery = new LotteryHandler ( $this->uid );
 		$ret=$lottery->updateShake($isshake);
-		return $this->reutrnDate ( COMMAND_ENPTY, array('isshake'=>$isshake));
+		return $this->returnDate ( COMMAND_ENPTY, array('isshake'=>$isshake));
 	}
 }

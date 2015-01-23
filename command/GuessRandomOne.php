@@ -21,6 +21,6 @@ class GuessRandomOne extends BaseCommand {
 					'content' => $tem ['content'] 
 			);
 		}
-		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
+		return $this->returnDate ( COMMAND_ENPTY, $ret );
 	}
 }

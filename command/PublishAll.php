@@ -9,7 +9,7 @@ class PublishAll extends BaseCommand {
 		// 是否是需要审核的词汇
 		$publish = new PunishHandler ( $this->uid );
 		$ret = $publish->getPageList ( $page, - 1 );
-		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
+		return $this->returnDate ( COMMAND_ENPTY, $ret );
 	}
 
 }

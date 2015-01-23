@@ -14,6 +14,6 @@ class ActRandomOne extends BaseCommand {
 						'action' => $act['content']
 				) 
 		);
-		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
+		return $this->returnDate ( COMMAND_ENPTY, $ret );
 	}
 }

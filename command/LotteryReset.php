@@ -8,7 +8,7 @@ class LotteryReset extends BaseCommand {
 		$lottery = new LotteryHandler ( $this->uid );
 		$lottery->LotteryReset();
 		$ret=$lottery->getSetting();
-		return $this->reutrnDate ( COMMAND_ENPTY,$ret['content']);
+		return $this->returnDate ( COMMAND_ENPTY,$ret['content']);
 	}
 
 }

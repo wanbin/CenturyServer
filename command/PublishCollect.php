@@ -19,6 +19,6 @@ class PublishCollect extends BaseCommand {
 			$count = $cillect->dislike ( $id );
 			$publish->dislike ( $id, $count );
 		}
-		$this->reutrnDate ( COMMAND_ENPTY );
+		$this->returnDate ( COMMAND_ENPTY );
 	}
 }

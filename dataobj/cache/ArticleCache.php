@@ -8,6 +8,32 @@
 require_once PATH_MODEL . 'ArticleModel.php';
 class ArticleCache extends ArticleModel {
 	
+	
+	protected function gameCollect($gameid,$type){
+		$keygame="Article_Collect_Gameid_".$gameid;
+		$keyuser="Article_Collect_User_".$this->gameuid;
+		$rediska = new Rediska ();
+		
+		$listGame=new Rediska_Key_Hash ( $keygame );
+		$listUser=new Rediska_Key_Hash ( $keyuser );
+		if($type==1){
+		$listGame->set($this->gameuid,time());
+		$listUser->set($gameid,time());
+		}else{
+			$listGame->remove($this->gameuid);
+			$listUser->remove($gameid);
+		}
+		return;
+	}
+	
+	
+	protected function getCollectList(){
+		$keyuser="Article_Collect_User_".$this->gameuid;
+		$rediska = new Rediska();
+		$list = new Rediska_Key_Hash($keyuser);
+		return $list->getFieldsAndValues();
+	}
+	
 	/**
 	 * 喜欢游戏
 	 *
@@ -19,13 +45,8 @@ class ArticleCache extends ArticleModel {
 		$rediska = new Rediska ();
 		$list = new Rediska_Key_Hash ( $likeKey );
 		$useLike = new Rediska_Key_Hash ( $userKey );
-		if ($list->exists ( $this->gameuid )) {
-			$list->remove ( $this->gameuid );
-			$useLike->remove ( $id);
-		} else {
-			$list->set ( $this->gameuid, time () );
-			$useLike->set ( $id, time () );
-		}
+		$list->set ( $this->gameuid, time () );
+		$useLike->set ( $id, time () );
 		return $list->count();		
 	}
 	

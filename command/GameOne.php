@@ -11,7 +11,7 @@ class GameOne extends BaseCommand {
 			$id = $game->getIdFromName ( $id );
 		}
 		$ret = $game->getOne($id);
-		return $this->reutrnDate ( COMMAND_ENPTY, $ret );
+		return $this->returnDate ( COMMAND_ENPTY, $ret );
 	}
 
 }
