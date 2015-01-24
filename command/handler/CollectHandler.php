@@ -26,7 +26,6 @@ class CollectHandler extends CollectCache{
 			$punishone=$punish->getPunish($id);
 			if(!empty($punishone)){
 				$temgameuid=$punishone['gameuid'];
-				$temgameuid=100;
 				$temcontent=$punishone['content'];
 				$temtype=$punish->getTypeName($punishone['contenttype']);
 				require_once PATH_HANDLER.'AccountHandler.php';
