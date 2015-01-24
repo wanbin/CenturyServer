@@ -4,6 +4,7 @@ define("COMMAND_SUCCESS", 1000);
 define("COMMAND_ENPTY", 0);
 define("COMMAND_FAILE", 1001);
 define("PAGECOUNT", 30);
+define("PAGECOUNTADMIN", 300);
 
 
 //不能加入到自己的房间中

@@ -65,7 +65,7 @@ class WordsModel extends BaseModel {
 		if ($type == 0) {
 			$where = array ();
 		}
-		$ret = $this->getFromMongo ( $where,  $this->tableName, array ('_id'=>-1), ($page - 1) * PAGECOUNT, PAGECOUNT );
+		$ret = $this->getFromMongo ( $where,  $this->tableName, array ('_id'=>-1), ($page - 1) * PAGECOUNTADMIN, PAGECOUNTADMIN );
 		$result = array ();
 		foreach ( $ret as $key => $value ) {
 			$result [] = array (
