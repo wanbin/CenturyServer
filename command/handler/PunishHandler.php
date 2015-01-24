@@ -25,7 +25,8 @@ class PunishHandler extends PunishCache{
 	}
 	
 	public function like($id,$count){
-		return parent::like($id, $count);
+		$ret= parent::like($id, $count);
+		return $ret;
 	}
 	public function dislike($id,$count){
 		return parent::dislike($id, $count);
@@ -139,5 +140,22 @@ class PunishHandler extends PunishCache{
 		}
 		return $result;
 		
+	}
+	
+	public function getTypeList(){
+		return array(
+				array('value'=>1,'content'=>'真心话'),
+				array('value'=>2,'content'=>'大冒险'),
+				array('value'=>3,'content'=>'看演技'),
+				);
+	}
+	public function getTypeName($id){
+		$ret=$this->getTypeList();
+		foreach ($ret as $key=>$value){
+			if($value['value']==$id){
+				return $value['content'];
+			}
+		}
+		return "";
 	}
 }

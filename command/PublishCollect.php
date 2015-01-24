@@ -7,9 +7,6 @@ class PublishCollect extends BaseCommand {
 	protected function executeEx($params) {
 		$id = $params ['id'];
 		$type = $params ['type'];
-		if (empty ( $id ) || empty ( $type )) {
-			$this->throwException ( 'id or type is empty', 1101 );
-		}
 		$cillect = new CollectHandler ( $this->uid );
 		$publish = new PunishHandler ( $this->uid );
 		if ($type == 1) {
@@ -19,6 +16,6 @@ class PublishCollect extends BaseCommand {
 			$count = $cillect->dislike ( $id );
 			$publish->dislike ( $id, $count );
 		}
-		$this->returnDate ( COMMAND_ENPTY );
+		return $this->returnDate ( COMMAND_ENPTY );
 	}
 }

@@ -17,7 +17,25 @@ class CollectHandler extends CollectCache{
 	 * @param unknown_type $id
 	 */
 	public function like($id){
-		return parent::like($id);
+		$ret=parent::like($id);
+		$count=$ret['count'];
+		$hasDo=$ret['hasdo'];
+		if (in_array($count, array(1,2,3,5,10,20,50,100))&&!$hasDo){
+			require_once PATH_HANDLER.'PunishHandler.php';
+			$punish=new PunishHandler($this->uid);
+			$punishone=$punish->getPunish($id);
+			if(!empty($punishone)){
+				$temgameuid=$punishone['gameuid'];
+				$temgameuid=100;
+				$temcontent=$punishone['content'];
+				$temtype=$punish->getTypeName($punishone['contenttype']);
+				require_once PATH_HANDLER.'AccountHandler.php';
+				$account=new AccountHandler($this->uid);
+				$content="您提交的".$temtype."【".$temcontent."】获得了".$count."个称赞！";
+				$account->sendPushByGameuid($temgameuid, $content,true);
+			}
+		}
+		return $count;
 	}
 	/**
 	 * 不喜欢游戏

@@ -31,15 +31,21 @@ class CollectCache extends CollectModel{
 	protected function like($id) {
 		$likeKey = $this->getLikeKey ( $id );
 		$likeUser = $this->getUserLikeKey ( $this->gameuid );
-		$this->setRedisHash ( $likeKey, $this->gameuid, time () );
-
-		$rediska = new Rediska();
-		$list = new Rediska_Key_Hash($likeUser);
-		$list[$id]=time();
-		//这一块把之前用户喜欢的内容从mongo取出来
-//		parent::addLike ( $id, 'like' );
-		return $this->getHashLen ( $likeKey );
+		$rediska = new Rediska ();
+		$list = new Rediska_Key_Hash ( $likeKey );
+		$hasDo = $list->exists ( $this->gameuid );
+		$list [$this->gameuid] = time ();
+		
+		$rediska = new Rediska ();
+		$list = new Rediska_Key_Hash ( $likeUser );
+		$list [$id] = time ();
+		// 这一块把之前用户喜欢的内容从mongo取出来
+		return array (
+				'count' => $this->getHashLen ( $likeKey ),
+				'hasdo' => $hasDo 
+		);
 	}
+	
 	
 	/**
 	 * 不喜欢游戏

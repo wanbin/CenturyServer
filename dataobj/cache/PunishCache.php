@@ -26,6 +26,7 @@ class PunishCache extends PunishModel{
 		return $ret;
 	}
 	
+	
 	public function getTypeCount($type){
 		$key="Punish_type_count_".$type;
 		$count=$this->getFromCache($key);
