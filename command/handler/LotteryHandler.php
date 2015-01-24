@@ -24,6 +24,9 @@ class LotteryHandler extends LotteryCache {
 		return $ret;
 	}
 	public function updateShake($isshake) {
+		if($isshake==$this->isRoomShake()){
+			return true;
+		}
 		$ret=parent::updateShake ( $isshake );
 		if ($isshake) {
 			include_once PATH_HANDLER . '/RoomsHandler.php';
