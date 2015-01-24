@@ -7,6 +7,10 @@
  */
 require_once PATH_MODEL . 'LotteryModel.php';
 class LotteryCache extends LotteryModel{
+	protected function updateSetting($content) {
+		return parent::updateSetting($content);
+	}
+	
 	protected function isShake($roomid) {
 		$shackKey = "Lottery_Shake_" . $roomid;
 		$ret = $this->getFromCache ( $shackKey );

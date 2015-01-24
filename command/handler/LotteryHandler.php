@@ -2,6 +2,17 @@
 require_once PATH_CACHE . 'LotteryCache.php';
 class LotteryHandler extends LotteryCache {
 	public function updateSetting($content) {
+		$lotteryinfo = $this->getSetting ( $this->gameuid );
+		$lotteryarr = $lotteryinfo ['content'];
+		$hasLotteryIdArr=array();
+		foreach ( $lotteryarr as $key => $value ) {
+			$hasLotteryIdArr[$value['id']]=$value['haslottery'];
+		}
+		//这个其实是客户端的一个BUG，更新信息的时候，已经抽奖不能变
+		foreach ($content as $key=>$value){
+			$content[$key]['haslottery']=$hasLotteryIdArr[$value['id']];
+		}
+		
 		parent::updateSetting ( $content );
 	}
 	public function getSetting($roomid = 0) {

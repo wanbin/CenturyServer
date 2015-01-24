@@ -14,7 +14,7 @@ class LotteryModel extends BaseModel {
 		$where = array (
 				'gameuid' => intval($this->gameuid)
 		);
-		$this->updateMongo ( $content, $where, $this->tablename );
+		return $this->updateMongo ( $content, $where, $this->tablename );
 	}
 	protected function create(){
 		$content = array (
