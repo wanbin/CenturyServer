@@ -7,7 +7,11 @@ class WordUndercover extends BaseCommand {
 		$type=isset($params['type'])?$params['type']:0;
 		global $word;
 		$word=new WordsHandler($this->uid);
-		$result=$word->getUniqueOne($type);
+		//避免删除某个词汇到，用户没有返回正常的词汇
+		$result = array ();
+		while ( empty ( $result ) ) {
+			$result = $word->getUniqueOne ( $type );
+		}
 		$ret ['word'] = $result['content'];
 		$ret ['wordtype']=$result['type'];
 		return $this->returnDate ( COMMAND_ENPTY, $ret );
