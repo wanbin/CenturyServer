@@ -7,7 +7,7 @@ class WordUndercover extends BaseCommand {
 		$type=isset($params['type'])?$params['type']:0;
 		global $word;
 		$word=new WordsHandler($this->uid);
-		$result=$word->getRandomOne($type);
+		$result=$word->getUniqueOne($type);
 		$ret ['word'] = $result['content'];
 		$ret ['wordtype']=$result['type'];
 		return $this->returnDate ( COMMAND_ENPTY, $ret );

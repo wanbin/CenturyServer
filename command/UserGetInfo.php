@@ -47,7 +47,7 @@ class UserGetInfo extends BaseCommand {
 		$ret['local']=$local->getPage(0);
 		
 		$words = new WordsHandler ( $this->uid );
-		$ret['wordskind']=$words->getTypeList();
+		$ret['wordskind']=$words->getUniqueList();
 		
 		$guess = new GuessHandler ( $this->uid );
 		$ret['guesskind']=$guess->getTypeList();

@@ -36,6 +36,16 @@ class WordsModel extends BaseModel {
 		return $this->removeMongo( $where,  $this->tableName);
 	}
 	
+	
+	protected function getOne($id){
+		$where = array (
+				"_id" => intval ( $id )
+		);
+		return $this->getOneFromMongo( $where,  $this->tableName);
+	}
+	
+	
+	
 	protected function getRandomOne($type) {
 		// 先取到count
 		$where = array (
@@ -72,6 +82,28 @@ class WordsModel extends BaseModel {
 					'_id' => $value ['_id'],
 					'type' => $value ['type'],
 					'content' => $value ['content'],
+			);
+		}
+		return $result;
+	}
+	
+	/**
+	 * 返回ID大于的数
+	 * @param unknown_type $id
+	 * @return multitype:multitype:unknown  
+	 */
+	protected function getListById($id) {
+		$where = array (
+				'_id' => array (
+						'$gt' => intval ( $id ) 
+				) 
+		);
+		$ret = $this->getFromMongo ( $where,  $this->tableName, array ('_id'=>1));
+		$result = array ();
+		foreach ( $ret as $key => $value ) {
+			$result [] = array (
+					'_id' => $value ['_id'],
+					'type' => $value ['type'],
 			);
 		}
 		return $result;

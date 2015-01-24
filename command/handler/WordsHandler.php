@@ -24,14 +24,31 @@ class WordsHandler extends WordsCache {
 		return parent::delWords($id);
 	}
 	
-	public function getRandomOne($type) {
-		$ret = parent::getRandomOne ($type);
+	public function getUniqueOne($type,$remove=true) {
+		$ret = parent::getUniqueOne ($type,$remove);
 		return $ret;
 	}
 	public function getPage($page, $type) {
 		$ret = parent::getPage ( $page, $type );
 		return $ret;
 	}
+	
+	
+	public function getUniqueList(){
+		$ret=parent::getUniqueList();
+		$tem=$this->getTypeList();
+		foreach ($tem as $key=>$value){
+			if(!in_array($value['value'], $ret)&&$value['value']!=0){
+				unset($tem[$key]);
+			}
+		}
+		return array_values($tem);
+	}
+	
+// 	public function reBuildUniqueList(){
+// 		return parent::reBuildUniqueList();
+// 	}
+	
 	
 	public function getTypeList(){
 		return array(
