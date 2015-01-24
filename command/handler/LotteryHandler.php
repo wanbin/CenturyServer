@@ -10,10 +10,10 @@ class LotteryHandler extends LotteryCache {
 		}
 		//这个其实是客户端的一个BUG，更新信息的时候，已经抽奖不能变
 		foreach ($content as $key=>$value){
-			$content[$key]['haslottery']=$hasLotteryIdArr[$value['id']];
+			$content[$key]['haslottery']=isset($hasLotteryIdArr[$value['id']])?$hasLotteryIdArr[$value['id']]:0;
 		}
 		
-		parent::updateSetting ( $content );
+		return parent::updateSetting ( $content );
 	}
 	public function getSetting($roomid = 0) {
 		return parent::getSetting ( $roomid );
