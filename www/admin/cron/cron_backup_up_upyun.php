@@ -12,7 +12,7 @@ if(isset($_REQUEST['date'])){
 	$datestr=$_REQUEST['date'];
 }
 $filesmongo = glob($mongopath . "mongo".$datestr."*.gz");
-$filesredis = glob($mongopath . "redis".$datestr."*.gz");
+$filesredis = glob($redispath . "redis".$datestr."*.gz");
 $mongobk=$filesmongo[0];
 $redisbk=$filesredis[0];
 
