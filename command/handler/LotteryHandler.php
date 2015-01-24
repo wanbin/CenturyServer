@@ -196,7 +196,7 @@ class LotteryHandler extends LotteryCache {
 			$lotteryarr [$key] ['haslottery'] = 0;
 		}
 		
-		$this->updateSetting ( $lotteryarr );
+		parent::updateSetting ( $lotteryarr );
 		return true;
 	}
 }
