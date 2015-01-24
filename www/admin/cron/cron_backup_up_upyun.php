@@ -11,8 +11,6 @@ $datestr=date("Ymd");
 if(isset($_REQUEST['date'])){
 	$datestr=$_REQUEST['date'];
 }
-echo $datestr;
-return;
 $filesmongo = glob($mongopath . "mongo".$datestr."*.gz");
 $filesredis = glob($mongopath . "redis".$datestr."*.gz");
 $mongobk=$filesmongo[0];
