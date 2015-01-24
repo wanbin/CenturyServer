@@ -8,6 +8,7 @@ class LotteryHandler extends LotteryCache {
 		foreach ( $lotteryarr as $key => $value ) {
 			$hasLotteryIdArr[$value['id']]=$value['haslottery'];
 		}
+		
 		//这个其实是客户端的一个BUG，更新信息的时候，已经抽奖不能变
 		foreach ($content as $key=>$value){
 			$content[$key]['haslottery']=isset($hasLotteryIdArr[$value['id']])?$hasLotteryIdArr[$value['id']]:0;
@@ -114,7 +115,7 @@ class LotteryHandler extends LotteryCache {
 		
 		// 3.抽取，标记，推送，组织，返回
 		$lotteryarr [$lotterycontentIndex] ['haslottery'] += count ( $temLotteryResult );
-		$this->updateSetting ( $lotteryarr );
+		parent::updateSetting ( $lotteryarr );
 		
 		
 		include_once PATH_HANDLER . 'AccountHandler.php';
