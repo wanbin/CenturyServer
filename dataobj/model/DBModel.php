@@ -138,6 +138,8 @@ class DBModel {
 		return $this->redis->ZREVRANGE($key,$start,$end,true);
 	}
 	
+	///////////////////////////MONGODB/////////////////////
+	
 	
 	
 	//这块mongodb 太逆天啦，我单独处理一下试试

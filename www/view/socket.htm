@@ -1,0 +1,18 @@
+<script type="text/javascript" src="../html/js/socket.io.js"></script>
+<script type="text/javascript" src="../html/js/jquery-1.7.1.min.js"></script>
+<script type="text/javascript" src="../html/js/jquery-qrcode/jquery.qrcode.min.js"></script>
+<script type="text/javascript" src="../html/js/jquery-qrcode/qrcode.js"></script>
+<script>
+	var url ="http://192.168.1.120:3000";
+	var socket = io.connect(url);
+	socket.on('server_send', function(data) {
+		console.log(data);
+	});
+	socket.on('conn', function(data) {
+		jQuery('#qrcodeCanvas').qrcode({
+			text	: data.socketid
+		});
+	});
+</script>
+<p>Render in canvas</p>
+<div id="qrcodeCanvas"></div>

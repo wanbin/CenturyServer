@@ -17,7 +17,7 @@ $mongobk=$filesmongo[0];
 $redisbk=$filesredis[0];
 
 $fh = fopen($mongobk, 'rb');
-$fh2 = fopen($mongobk, 'rb');
+$fh2 = fopen($redisbk, 'rb');
 $uploadName="/mongobackup/".basename($mongobk);
 $uploadName2="/redisbackup/".basename($redisbk);
 try {
