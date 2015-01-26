@@ -3,7 +3,7 @@
 <script type="text/javascript" src="../html/js/jquery-qrcode/jquery.qrcode.min.js"></script>
 <script type="text/javascript" src="../html/js/jquery-qrcode/qrcode.js"></script>
 <script>
-	var url ="http://127.0.0.1:3000";
+	var url ="http://www.centurywar.cn:3000";
 	var socket = io.connect(url);
 	socket.on('server_send', function(data) {
 		console.log(data);
