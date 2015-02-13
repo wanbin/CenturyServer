@@ -173,7 +173,8 @@ class PunishModel extends BaseModel {
 	 */
 	protected function getRepeat(){
 		$mongoDB = $this->getMongdb ( "centurywar" );
-		$mongoCollection = $mongoDB->selectCollection ( "punish" );
+		$mongoCollection = $mongoDB->selectCollection ( );
+		$mongoCollection = $this->getMongoConnection("punish" );
 		$group = array(
 				array (
 						'$match' => array (

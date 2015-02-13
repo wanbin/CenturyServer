@@ -26,19 +26,24 @@ class DBModel {
 	 */
 	protected static $mongoClient=null;
 	
+	protected static $mongoConnectionPool=array();
+	
 	public function __construct() {
 		$config = $GLOBALS ['config'];
 		$this->useMemcache = $config ['memcache'];
 		$this->model = get_class ( $this );
+		if ($this->redis == null) {
+			$redis_config = $config ['redis_base'];
+			$this->redis = new Redis ();
+			$this->redis->connect ( $redis_config ['host'], $redis_config ['port'] );
+			$this->redis->auth ( $redis_config ['password'] );
+		}
 		
-		$redis_config =  $config ['redis_base'];
-		$this->redis = new Redis ();
-		$this->redis->connect ( $redis_config ['host'], $redis_config ['port'] );
-		$this->redis->auth ( $redis_config ['password'] );
-		
-		$cacheConfig = $config ['memcache_base'];
-		$this->memcache = new Memcache ();
-		$this->memcache->pconnect ( $cacheConfig ['host'], $cacheConfig ['port'] );
+		if ($this->memcache == null) {
+			$cacheConfig = $config ['memcache_base'];
+			$this->memcache = new Memcache ();
+			$this->memcache->pconnect ( $cacheConfig ['host'], $cacheConfig ['port'] );
+		}
 	}
 	
 	
@@ -156,8 +161,7 @@ class DBModel {
 			$content['time']=time();
 		}
 		try {
-			$mongoDB=$this->getMongdb($dbname);
-			$mongoCollection = $mongoDB->selectCollection ($collectionName );
+			$mongoCollection = $this->getMongoConnection($collectionName);
 			$ret = $mongoCollection->insert ( $content );
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -174,8 +178,7 @@ class DBModel {
 	 */
 	protected function updateMongo($content, $where, $collectionName,$dbname='centurywar',$inc=array()) {
 		try {
-			$mongoDB=$this->getMongdb($dbname);
-			$mongoCollection = $mongoDB->selectCollection ($collectionName );
+			$mongoCollection = $this->getMongoConnection($collectionName);
 			if (! empty ( $inc )) {
 				$result = $mongoCollection->update ( $where, array (
 						'$set' => $content,
@@ -194,8 +197,7 @@ class DBModel {
 	
 	protected function removeMongo( $where, $collectionName,$dbname='centurywar') {
 		try {
-			$mongoDB=$this->getMongdb($dbname);
-			$mongoCollection = $mongoDB->selectCollection ($collectionName );
+			$mongoCollection = $this->getMongoConnection($collectionName);
 			$result = $mongoCollection->remove ( $where );
 			return true;
 		} catch ( Exception $e ) {
@@ -207,8 +209,7 @@ class DBModel {
 	protected function getFromMongo($where, $collectionName,$sort=array('_id'=>-1),$skip=0,$limit=100,$dbname='centurywar') {
 		$ret=array();
 		try {
-			$mongoDB=$this->getMongdb($dbname);
-			$mongoCollection = $mongoDB->selectCollection ( $collectionName );
+			$mongoCollection = $this->getMongoConnection($collectionName);
 			$mongoCursor = $mongoCollection->find ( $where )->sort($sort)->skip($skip)->limit($limit);
 			while ( $mongoCursor->hasNext () ) {
 				$ret[]= $mongoCursor->getNext ();
@@ -222,8 +223,7 @@ class DBModel {
 	
 	protected function getMongoCount($where, $collectionName, $dbname = 'centurywar') {
 		try {
-			$mongoDB = $this->getMongdb ( $dbname );
-			$mongoCollection = $mongoDB->selectCollection ( $collectionName );
+			$mongoCollection = $this->getMongoConnection($collectionName);
 			$count = $mongoCollection->find ($where)->count ();
 			return $count;
 		} catch ( Exception $e ) {
@@ -235,8 +235,7 @@ class DBModel {
 	protected function getOneFromMongo($where, $collectionName,$dbname='centurywar') {
 		$ret=array();
 		try {
-			$mongoDB=$this->getMongdb($dbname);
-			$mongoCollection = $mongoDB->selectCollection ( $collectionName );
+			$mongoCollection = $this->getMongoConnection($collectionName);
 			$mongoCursor = $mongoCollection->find ($where)->limit(1);
 			while ( $mongoCursor->hasNext () ) {
 				$ret [] = $mongoCursor->getNext ();
@@ -357,12 +356,20 @@ class DBModel {
 		return $this->redis->HINCRBY( "REDIS_KEY_ADD_ID",$idname,1);
 	}
 	
-	protected function getMongdb($dbname = 'centurywar') {
+	protected function getMongdb($dbname) {
 		if($this->mongoClient ==null){
 			$this->mongoClient = new MongoClient ( "mongodb://localhost:27017" );
 		}
 		$mongoDb = $this->mongoClient->selectDB ( $dbname );
 		return $mongoDb;
+	}
+	
+	protected function getMongoConnection($table) {
+		if (! isset ( $this->mongoConnectionPool [$table] )) {
+			$mongoDB = $this->getMongdb ( MONGO_DB_NAME );
+			$this->mongoConnectionPool [$table] = $mongoDB->selectCollection ( $table );
+		}
+		return $this->mongoConnectionPool [$table];
 	}
 	
 	public function  getTimeStr($time){

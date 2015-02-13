@@ -42,6 +42,8 @@ define('DB_NAME', 'wx');
 define('DB_TAB', 'zxzbcar_push');
 define('DB_CODE','utf8');
 
+define('MONGO_DB_NAME','centurywar');
+
 
 //JPUSH
 define('appkeys','1fca24a4ae00341567e84792');
