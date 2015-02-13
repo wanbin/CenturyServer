@@ -21,6 +21,9 @@ class DBModel {
 	protected $deleteCount = 0;
 	
 	protected $mysqlConnect=null;
+	/**
+	 * @var MongoClient
+	 */
 	protected static $mongoClient=null;
 	
 	public function __construct() {
@@ -354,10 +357,12 @@ class DBModel {
 		return $this->redis->HINCRBY( "REDIS_KEY_ADD_ID",$idname,1);
 	}
 	
-	protected function getMongdb($dbname='centurywar') {
-			$mongoClient = new MongoClient ( "mongodb://localhost:27017");
-			$mongoDb = $mongoClient->selectDB ($dbname);
-			return $mongoDb;
+	protected function getMongdb($dbname = 'centurywar') {
+		if($this->mongoClient ==null){
+			$this->mongoClient = new MongoClient ( "mongodb://localhost:27017" );
+		}
+		$mongoDb = $this->mongoClient->selectDB ( $dbname );
+		return $mongoDb;
 	}
 	
 	public function  getTimeStr($time){
