@@ -21,10 +21,8 @@ class DBModel {
 	protected $deleteCount = 0;
 	
 	protected $mysqlConnect=null;
-	/**
-	 * @var MongoClient
-	 */
-	protected static $mongoClient=null;
+
+	protected static $mongoClient=array();
 	
 	protected static $mongoConnectionPool=array();
 	
@@ -161,7 +159,7 @@ class DBModel {
 			$content['time']=time();
 		}
 		try {
-			$mongoCollection = $this->getMongoConnection($collectionName);
+			$mongoCollection = $this->getMongoConnection($dbname,$collectionName);
 			$ret = $mongoCollection->insert ( $content );
 		} catch ( Exception $e ) {
 			die ( $e->getMessage () );
@@ -178,7 +176,7 @@ class DBModel {
 	 */
 	protected function updateMongo($content, $where, $collectionName,$dbname='centurywar',$inc=array()) {
 		try {
-			$mongoCollection = $this->getMongoConnection($collectionName);
+			$mongoCollection = $this->getMongoConnection($dbname,$collectionName);
 			if (! empty ( $inc )) {
 				$result = $mongoCollection->update ( $where, array (
 						'$set' => $content,
@@ -197,7 +195,7 @@ class DBModel {
 	
 	protected function removeMongo( $where, $collectionName,$dbname='centurywar') {
 		try {
-			$mongoCollection = $this->getMongoConnection($collectionName);
+			$mongoCollection = $this->getMongoConnection($dbname,$collectionName);
 			$result = $mongoCollection->remove ( $where );
 			return true;
 		} catch ( Exception $e ) {
@@ -209,7 +207,7 @@ class DBModel {
 	protected function getFromMongo($where, $collectionName,$sort=array('_id'=>-1),$skip=0,$limit=100,$dbname='centurywar') {
 		$ret=array();
 		try {
-			$mongoCollection = $this->getMongoConnection($collectionName);
+			$mongoCollection = $this->getMongoConnection($dbname,$collectionName);
 			$mongoCursor = $mongoCollection->find ( $where )->sort($sort)->skip($skip)->limit($limit);
 			while ( $mongoCursor->hasNext () ) {
 				$ret[]= $mongoCursor->getNext ();
@@ -223,7 +221,7 @@ class DBModel {
 	
 	protected function getMongoCount($where, $collectionName, $dbname = 'centurywar') {
 		try {
-			$mongoCollection = $this->getMongoConnection($collectionName);
+			$mongoCollection = $this->getMongoConnection($dbname,$collectionName);
 			$count = $mongoCollection->find ($where)->count ();
 			return $count;
 		} catch ( Exception $e ) {
@@ -235,7 +233,7 @@ class DBModel {
 	protected function getOneFromMongo($where, $collectionName,$dbname='centurywar') {
 		$ret=array();
 		try {
-			$mongoCollection = $this->getMongoConnection($collectionName);
+			$mongoCollection = $this->getMongoConnection($dbname,$collectionName);
 			$mongoCursor = $mongoCollection->find ($where)->limit(1);
 			while ( $mongoCursor->hasNext () ) {
 				$ret [] = $mongoCursor->getNext ();
@@ -357,19 +355,18 @@ class DBModel {
 	}
 	
 	protected function getMongdb($dbname) {
-		if($this->mongoClient ==null){
-			$this->mongoClient = new MongoClient ( "mongodb://localhost:27017" );
+		if($this->mongoClient[$dbname] ==null){
+			$this->mongoClient[$dbname] = new MongoClient ( "mongodb://localhost:27017" );
 		}
-		$mongoDb = $this->mongoClient->selectDB ( $dbname );
+		$mongoDb = $this->mongoClient[$dbname]->selectDB ( $dbname );
 		return $mongoDb;
 	}
-	
-	protected function getMongoConnection($table) {
-		if (! isset ( $this->mongoConnectionPool [$table] )) {
-			$mongoDB = $this->getMongdb ( MONGO_DB_NAME );
-			$this->mongoConnectionPool [$table] = $mongoDB->selectCollection ( $table );
+	protected function getMongoConnection($dbname, $table) {
+		if (! isset ( $this->mongoConnectionPool [$dbname] [$table] )) {
+			$mongoDB = $this->getMongdb ( $dbname );
+			$this->mongoConnectionPool [$dbname] [$table] = $mongoDB->selectCollection ( $table );
 		}
-		return $this->mongoConnectionPool [$table];
+		return $this->mongoConnectionPool [$dbname] [$table];
 	}
 	
 	public function  getTimeStr($time){

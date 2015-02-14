@@ -56,6 +56,7 @@ class ArticleModel extends BaseModel {
 		$ret = $this->getFromMongo ( $where, 'game_content', array (
 				"showtime" => - 1 
 		), ($page - 1) * $pagecount, $pagecount, 'century_admin' );
+		
 		$result = array ();
 		foreach ( $ret as $key => $value ) {
 			$result [] = array (
