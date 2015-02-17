@@ -6,7 +6,6 @@ class RoomScan extends BaseCommand {
 	protected function executeEx($params) {
 		$content = $params ['content'];
 		//加入自己创建的房间
-		$rediska = new Rediska ();
 		$list = new Rediska_Key_List ( 'Socket_Map_0' );
 		$ret = array (
 				'gameuid' => $content,

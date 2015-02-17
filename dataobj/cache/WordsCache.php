@@ -29,7 +29,6 @@ class WordsCache extends WordsModel{
 		// 用户最新的一条信息id,更新的时候使用
 		$keyUserListId = $this->tableName . "_user_self_key_maxid_" . $this->gameuid;
 		
-		$rediska = new Rediska ();
 		$hash = new Rediska_Key_Hash ( $keyUserList );
 		if ($hash->count () == 0) {
 			$this->setToCache ( $keyUserListId, 0 );
@@ -59,7 +58,6 @@ class WordsCache extends WordsModel{
 		// 用户的redis列表
 		$keyUserList = $this->tableName . "_user_self_key_" . $this->gameuid;
 		// 用户最新的一条信息id,更新的时候使用
-		$rediska = new Rediska ();
 		$hash = new Rediska_Key_Hash ( $keyUserList );
 		if ($hash->count () == 0) {
 			$keyUserListId = $this->tableName . "_user_self_key_maxid_" . $this->gameuid;
@@ -109,7 +107,6 @@ class WordsCache extends WordsModel{
 		if(empty($ret)){
 			return 0;
 		}
-		$rediska = new Rediska ();
 		$keyUserList = $this->tableName . "_user_self_key_" . $this->gameuid;
 		$hash = new Rediska_Key_Hash ( $keyUserList );
 		$count = 0;

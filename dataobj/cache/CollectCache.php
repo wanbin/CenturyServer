@@ -31,12 +31,10 @@ class CollectCache extends CollectModel{
 	protected function like($id) {
 		$likeKey = $this->getLikeKey ( $id );
 		$likeUser = $this->getUserLikeKey ( $this->gameuid );
-		$rediska = new Rediska ();
 		$list = new Rediska_Key_Hash ( $likeKey );
 		$hasDo = $list->exists ( $this->gameuid );
 		$list [$this->gameuid] = time ();
 		
-		$rediska = new Rediska ();
 		$list = new Rediska_Key_Hash ( $likeUser );
 		$list [$id] = time ();
 		// 这一块把之前用户喜欢的内容从mongo取出来
@@ -57,7 +55,6 @@ class CollectCache extends CollectModel{
 		$this->setRedisHash ( $dislikeKey, $this->gameuid, time () );
 		$dislikeUser = $this->getUserDislikeKey ( $this->gameuid );
 		
-		$rediska = new Rediska();
 		$list = new Rediska_Key_Hash($dislikeUser);
 		$list[$id]=time();
 		
@@ -66,7 +63,6 @@ class CollectCache extends CollectModel{
 	}
 	protected function getUserListList(){
 		$likeUser = $this->getUserLikeKey ( $this->gameuid );
-		$rediska = new Rediska();
 		$list = new Rediska_Key_Hash($likeUser);
 		return $list->getFieldsAndValues();
 	}

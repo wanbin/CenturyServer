@@ -26,7 +26,6 @@ class Rediska_Key_Hash extends Rediska_Key_Abstract implements IteratorAggregate
      *                                                  rediska           - Rediska instance name, Rediska object or Rediska options for new instance
      * @param string|Rediska_Connection $serverAlias Server alias or Rediska_Connection object where key is placed. Deprecated!
      */
-    public function  __construct($name, $options = array(), $serverAlias = null)
     {
         parent::__construct($name, $options, $serverAlias);
 

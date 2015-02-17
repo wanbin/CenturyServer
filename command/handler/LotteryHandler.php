@@ -140,7 +140,6 @@ class LotteryHandler extends LotteryCache {
 		);
 	}
 	protected function setHasLottery($gameuid,$giftid) {
-		$rediska = new Rediska ();
 		$key = "Lottery_has_lottery_" . $this->gameuid;
 		$hash = new Rediska_Key_Hash ( $key );
 		$hash->set ( $gameuid, $giftid );
@@ -148,7 +147,6 @@ class LotteryHandler extends LotteryCache {
 	}
 	
 	public function getHasLottery() {
-		$rediska = new Rediska ();
 		$key = "Lottery_has_lottery_" . $this->gameuid;
 		$hash = new Rediska_Key_Hash ( $key );
 		return $hash->getFieldsAndValues ();
@@ -177,7 +175,6 @@ class LotteryHandler extends LotteryCache {
 		return $result;
 	}
 	public function LotteryReset() {
-		$rediska = new Rediska ();
 		$key = "Lottery_has_lottery_" . $this->gameuid;
 		$hash = new Rediska_Key_Hash ( $key );
 		$hash->delete ();

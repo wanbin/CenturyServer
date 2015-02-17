@@ -11,14 +11,12 @@ class WXCache extends WXModel{
 		if (empty ( $msg )) {
 			return 0;
 		}
-		$rediska = new Rediska ();
 		$list = new Rediska_Key_SortedSet ( "wx_message_count" );
 		$list->incrementScore ( $msg, 1 );
 		return $list->getScore ( $msg );
 	}
 	
 	protected function getMessageList() {
-		$rediska = new Rediska ();
 		$list = new Rediska_Key_SortedSet ( "wx_message_count" );
 		$ret= $list->getByRank(true,0,100,true,false);
 		$result=array();
@@ -30,7 +28,6 @@ class WXCache extends WXModel{
 		return $result;
 	}
 	protected function delCacheKey($key){
-		$rediska = new Rediska ();
 		$list = new Rediska_Key_SortedSet ( "wx_message_count" );
 		$list->remove($key);
 	}

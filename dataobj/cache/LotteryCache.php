@@ -30,7 +30,6 @@ class LotteryCache extends LotteryModel{
 	protected function shake($roomid) {
 		$keyList = "Lottery_Redis_Shake_List_" . $roomid;
 		$keyCount = "Lottery_Redis_Shake_Count_" . $roomid;
-		$rediska = new Rediska ();
 		$clicknum=0;
 		$clickcount=0;
 		if ($this->isShake ( $roomid )) {
@@ -49,7 +48,6 @@ class LotteryCache extends LotteryModel{
 	
 	protected function getUserShackCount($userarr){
 		$keyCount = "Lottery_Redis_Shake_Count_" . $this->gameuid;
-		$rediska = new Rediska ();
 		$hash = new Rediska_Key_Hash ( $keyCount );
 		$result=array();
 		foreach ($userarr as $gameuid){

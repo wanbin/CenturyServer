@@ -11,7 +11,6 @@ class RoomsCache extends RoomsModel{
 		parent::NewRoom();
 		$roomid=$this->gameuid;
 		$rediskey = $this->getRoomRedisUserKey ( $roomid );
-		$rediska = new Rediska ();
 		$list = new Rediska_Key_Hash ( $rediskey );
 		$list->delete ();
 		$list->set ( $this->gameuid, time () );
@@ -28,7 +27,6 @@ class RoomsCache extends RoomsModel{
 			return -2;
 		}
 		
-		$rediska = new Rediska ();
 		$hash = new Rediska_Key_Hash ( $rediskey );
 		$userRoomidList=new Rediska_Key_Hash ( "Rooms_UserJoinRoomList" );
 		
@@ -63,14 +61,12 @@ class RoomsCache extends RoomsModel{
 	
 	protected function getRoomUserList($roomid){
 		$key = $this->getRoomRedisUserKey ( $roomid );
-		$rediska = new Rediska ();
 		$hash = new Rediska_Key_Hash ( $key );
 		return $hash->getFields();
 	}
 	
 	protected function removeSomeOne($roomid, $gameuid) {
 		$key = $this->getRoomRedisUserKey ( $roomid );
-		$rediska = new Rediska ();
 		
 		//把房间列表里面的用户信息去除
 		$hash = new Rediska_Key_Hash ( $key );

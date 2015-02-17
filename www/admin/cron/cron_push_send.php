@@ -4,7 +4,13 @@ include_once '../model/PushBase.php';
 $push=new PushBase();
 $ret=$push->getNeedSend();
 
-$rediska = new Rediska();
+$rediska = new Rediska(array('servers' => array (
+							array (
+									'host' => REDIS_HOST,
+									'port' => REDIS_PORT,
+									'alias' => REDIS_ALIAS 
+							) 
+					) ));
 $list = new Rediska_Key_List('Redis_push_'.$ret['_id']);
 set_time_limit(600);
 $temcount=0;

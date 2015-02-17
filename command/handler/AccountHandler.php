@@ -50,7 +50,6 @@ class AccountHandler extends AccountCache {
 	 * @param unknown_type $channel
 	 */
 	public function sendPushNodejs($uid,$content,$channel){
-		$rediska = new Rediska();
 		$list = new Rediska_Key_List('Push_Map_0');
 		$date= json_encode(array('message'=>$content,'channel'=>$channel,'alias'=>$uid));
 		$list[]=$date;

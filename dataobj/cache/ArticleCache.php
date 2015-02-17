@@ -12,8 +12,6 @@ class ArticleCache extends ArticleModel {
 	protected function gameCollect($gameid,$type){
 		$keygame="Article_Collect_Gameid_".$gameid;
 		$keyuser="Article_Collect_User_".$this->gameuid;
-		$rediska = new Rediska ();
-		
 		$listGame=new Rediska_Key_Hash ( $keygame );
 		$listUser=new Rediska_Key_Hash ( $keyuser );
 		if($type==1){
@@ -29,7 +27,6 @@ class ArticleCache extends ArticleModel {
 	
 	protected function getCollectList(){
 		$keyuser="Article_Collect_User_".$this->gameuid;
-		$rediska = new Rediska();
 		$list = new Rediska_Key_Hash($keyuser);
 		return $list->getFieldsAndValues();
 	}
@@ -42,7 +39,6 @@ class ArticleCache extends ArticleModel {
 	protected function like($id) {
 		$likeKey = $this->getGameLikeGameKey ( $id );
 		$userKey=$this->getGameLikeUserKey($this->gameuid);
-		$rediska = new Rediska ();
 		$list = new Rediska_Key_Hash ( $likeKey );
 		$useLike = new Rediska_Key_Hash ( $userKey );
 		$list->set ( $this->gameuid, time () );
@@ -58,7 +54,6 @@ class ArticleCache extends ArticleModel {
 	protected function dislike($id) {
 		$likeKey = $this->getGameDisLikeGameKey ( $id );
 		$userKey=$this->getGameDisLikeUserKey($this->gameuid);
-		$rediska = new Rediska();
 		$list = new Rediska_Key_Hash($likeKey);
 		$list->set($this->gameuid,time());
 		$useLike = new Rediska_Key_Hash($likeKey);
@@ -68,7 +63,6 @@ class ArticleCache extends ArticleModel {
 	
 	protected function getLikeList(){
 		$userKey=$this->getGameLikeUserKey($this->gameuid);
-		$rediska = new Rediska();
 		$list = new Rediska_Key_Hash($userKey);
 		return $list->getFieldsAndValues();
 	}
@@ -131,7 +125,6 @@ class ArticleCache extends ArticleModel {
 	}
 	
 	protected function read($id){
-		$rediska = new Rediska ();
 		// 记录阅读次数及阅读人数
 		$readcount = new Rediska_Key_Hash ( "Article_read_count" );
 		$readcount->increment ( $id );
@@ -145,7 +138,6 @@ class ArticleCache extends ArticleModel {
 		}
 	}
 	protected function getReadInfo($id) {
-		$rediska = new Rediska();
 		$readlist = new Rediska_Key_Hash ( "Article_read_count" );
 		$readcount = $readlist [$id];
 		$peoplelist = new Rediska_Key_Hash ( "Article_read_people_" . $id );
