@@ -356,7 +356,7 @@ class DBModel {
 	
 	protected function getMongdb($dbname) {
 		if($this->mongoClient[$dbname] ==null){
-			$this->mongoClient[$dbname] = new MongoClient ( "mongodb://localhost:27017" );
+			$this->mongoClient[$dbname] = new MongoClient ( "mongodb://10.171.59.185:27017" );
 		}
 		$mongoDb = $this->mongoClient[$dbname]->selectDB ( $dbname );
 		return $mongoDb;
