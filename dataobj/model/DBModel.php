@@ -39,7 +39,6 @@ class DBModel {
 		
 		if ($this->redisKa == null) {
 			$this->redisKa = new Rediska ( array (
-					'namespace' => REDIS_NAMESPACE_NAME,
 					'servers' => array (
 							array (
 									'host' => REDIS_HOST,
@@ -333,7 +332,7 @@ class DBModel {
 	}
 	protected function getMongdb($dbname) {
 		if ($this->mongoClient [$dbname] == null) {
-			$this->mongoClient[$dbname]  = new MongoClient ( "mongodb://".MONGO_DB_HOST.":".MONGO_DB_PORT );
+			$this->mongoClient[$dbname] = new MongoClient ( "mongodb://".MONGO_DB_HOST.":".MONGO_DB_PORT );
 		}
 		$mongoDb = $this->mongoClient [$dbname]->selectDB ( $dbname );
 		return $mongoDb;
