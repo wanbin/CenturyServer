@@ -35,10 +35,10 @@ include_once PATH_ROOT."/conf/act.conf.php";
 include_once PATH_ROOT."/conf/caici.conf.php";
 
 date_default_timezone_set ( "Asia/Chongqing" );
-include_once PATH_ROOT . '/conf/config.inc.php'; // 全局配置文件
 if(file_exists(PATH_ROOT . 'config.local.php')){
 	include_once PATH_ROOT . 'config.local.php'; // 全局配置文件	
 }
+include_once PATH_ROOT . '/conf/config.inc.php'; // 全局配置文件
 include_once PATH_COMMAND . 'BaseCommand.php';
 include_once PATH_DATAOBJ.'SystemConstants.php';
 // 加载framework中db操作类与cache操作类

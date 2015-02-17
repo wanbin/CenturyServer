@@ -55,12 +55,26 @@ define('masterSecretIOS', 'fd838eceb6aaf5276b75f542');
 define('platform', 'android');
 
 
-$config ['redis_base_baidu'] = array ('host' => BAIDU_REDIS_HOST, 'port' => BAIDU_REDIS_PORT, 'password' => BAIDU_AK . "-" . BAIDU_SK . "-" . BAIDU_REDIS_DBNAME );
-$config ['redis_base'] = array ('host' => '10.171.59.185', 'port' => 6379, 'password' => '' );	
+
+if (IS_ONLINE) {
+	define ( 'MONGO_DB_HOST', '10.172.239.126' );
+	define ( 'MONGO_DB_PORT', '27017' );
+	define ( 'MEMCACHE_HOST', '10.172.239.126' );
+	define ( 'MEMCACHE_PORT', '11211' );
+	define ( 'REDIS_HOST', '10.172.239.126' );
+	define ( 'REDIS_PORT', '6379' );
+	define ( 'REDIS_ALIAS', 'base' );
+} else {
+	define ( 'MONGO_DB_HOST', 'localhost' );
+	define ( 'MONGO_DB_PORT', '27017' );
+	define ( 'MEMCACHE_HOST', '127.0.0.1' );
+	define ( 'MEMCACHE_PORT', '11211' );
+	define ( 'REDIS_HOST', 'localhost' );
+	define ( 'REDIS_PORT', '6379' );
+	define ( 'REDIS_ALIAS', 'base' );
+}
 
 
-$config['memcache_base_baidu']=array('host' => BAIDU_CACHE_HOST, 'port' => BAIDU_CACHE_PORT,'user'=>BAIDU_AK, 'password' => BAIDU_SK,'cacheid'=>BAIDU_CACHE_DBNAME);
-$config['memcache_base']=array('host' => '10.171.59.185', 'port' => 11211, 'password' => '','cacheid'=>'');
 
 define("SHARE",'<div class="bdsharebuttonbox"><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_more" data-cmd="more"></a></div>
 <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"24"},"share":{},"image":{"viewList":["tsina","qzone","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["tsina","qzone","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName("head")[0]||body).appendChild(createElement("script")).src="http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion="+~(-new Date()/36e5)];</script>');
