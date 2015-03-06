@@ -334,7 +334,7 @@ class DBModel {
 		global $mongoClient;
 		if ($mongoClient [$dbname] == null) {
 			$mongostr="mongodb://".MONGO_DB_HOST.":".MONGO_DB_PORT.",".MONGO_DB_HOST2.":".MONGO_DB_PORT2.",".MONGO_DB_HOST3.":".MONGO_DB_PORT3;
-			$mongoClient = new MongoClient ($mongostr,array('replicaSet'=>'sdsell'));
+			$mongoClient[$dbname] = new MongoClient ($mongostr,array('replicaSet'=>'sdsell'));
 		}
 		$mongoDb = $mongoClient[$dbname]->selectDB ( $dbname );
 		return $mongoDb;
