@@ -331,11 +331,12 @@ class DBModel {
 		return $this->redis->HINCRBY ( "REDIS_KEY_ADD_ID", $idname, 1 );
 	}
 	protected function getMongdb($dbname) {
-		if ($this->mongoClient [$dbname] == null) {
+		global $mongoClient;
+		if ($mongoClient [$dbname] == null) {
 			$mongostr="mongodb://".MONGO_DB_HOST.":".MONGO_DB_PORT.",".MONGO_DB_HOST2.":".MONGO_DB_PORT2.",".MONGO_DB_HOST3.":".MONGO_DB_PORT3;
 			$mongoClient = new MongoClient ($mongostr,array('replicaSet'=>'sdsell'));
 		}
-		$mongoDb = $this->mongoClient [$dbname]->selectDB ( $dbname );
+		$mongoDb = $mongoClient[$dbname]->selectDB ( $dbname );
 		return $mongoDb;
 	}
 	protected function getMongoConnection($dbname, $table) {
