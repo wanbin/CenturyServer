@@ -59,11 +59,19 @@ define('platform', 'android');
 if (IS_ONLINE) {
 	define ( 'MONGO_DB_HOST', '10.172.239.126' );
 	define ( 'MONGO_DB_PORT', '27017' );
+	define ( 'MONGO_DB_HOST2', '10.171.59.185' );
+	define ( 'MONGO_DB_PORT2', '3000' );
+	define ( 'MONGO_DB_HOST3', '10.171.59.185' );
+	define ( 'MONGO_DB_PORT3', '3001' );
+	
+	
 	define ( 'MEMCACHE_HOST', '10.172.239.126' );
 	define ( 'MEMCACHE_PORT', '11211' );
 	define ( 'REDIS_HOST', '10.172.239.126' );
 	define ( 'REDIS_PORT', '6379' );
 	define ( 'REDIS_ALIAS', 'base' );
+	
+	
 } else {
 	define ( 'MONGO_DB_HOST', 'localhost' );
 	define ( 'MONGO_DB_PORT', '27017' );

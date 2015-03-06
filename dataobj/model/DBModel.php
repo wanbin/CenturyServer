@@ -332,7 +332,8 @@ class DBModel {
 	}
 	protected function getMongdb($dbname) {
 		if ($this->mongoClient [$dbname] == null) {
-			$this->mongoClient[$dbname] = new MongoClient ( "mongodb://".MONGO_DB_HOST.":".MONGO_DB_PORT );
+			$mongostr="mongodb://".MONGO_DB_HOST.":".MONGO_DB_PORT.",".MONGO_DB_HOST2.":".MONGO_DB_PORT2.",".MONGO_DB_HOST3.":".MONGO_DB_PORT3;
+			$mongoClient = new MongoClient ($mongostr,array('replicaSet'=>'sdsell'));
 		}
 		$mongoDb = $this->mongoClient [$dbname]->selectDB ( $dbname );
 		return $mongoDb;
