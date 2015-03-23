@@ -24,21 +24,17 @@ class DBModel {
 	protected static $mongoClient = array ();
 	protected static $mongoConnectionPool = array ();
 	public function __construct() {
-		
 		$this->model = get_class ( $this );
-		if ($this->redis == null) {
-			$this->redis = new Redis ();
-			$this->redis->connect ( REDIS_HOST, REDIS_PORT );
-			// $this->redis->auth ( $redis_config ['password'] );
+		
+		global $memcache, $redisKa;
+		if ($memcache == null) {
+			$memcache = new Memcache ();
+			$memcache->pconnect ( MEMCACHE_HOST, MEMCACHE_PORT );
 		}
 		
-		if ($this->memcache == null) {
-			$this->memcache = new Memcache ();
-			$this->memcache->pconnect ( MEMCACHE_HOST, MEMCACHE_PORT );
-		}
-		
-		if ($this->redisKa == null) {
-			$this->redisKa = new Rediska ( array (
+		if ($redisKa == null) {
+			$redisKa = new Rediska ( array (
+					'namespace' => REDIS_NAMESPACE_NAME,
 					'servers' => array (
 							array (
 									'host' => REDIS_HOST,
@@ -154,7 +150,7 @@ class DBModel {
 	
 	/**
 	 * 更新mongo内容
-	 * 
+	 *
 	 * @param
 	 *        	unknown_type array('nickname'=>'wanbin')
 	 * @param
@@ -272,7 +268,7 @@ class DBModel {
 	 * +----------------------------------------------------------
 	 * 连接值的字符串
 	 * +----------------------------------------------------------
-	 * 
+	 *
 	 * @param array $values        	
 	 * @return string
 	 *         +----------------------------------------------------------
@@ -333,10 +329,12 @@ class DBModel {
 	protected function getMongdb($dbname) {
 		global $mongoClient;
 		if ($mongoClient [$dbname] == null) {
-			$mongostr="mongodb://".MONGO_DB_HOST.":".MONGO_DB_PORT.",".MONGO_DB_HOST2.":".MONGO_DB_PORT2.",".MONGO_DB_HOST3.":".MONGO_DB_PORT3;
-			$mongoClient[$dbname] = new MongoClient ($mongostr,array('replicaSet'=>'sdsell'));
+			$mongostr = "mongodb://" . MONGO_DB_HOST . ":" . MONGO_DB_PORT . "," . MONGO_DB_HOST2 . ":" . MONGO_DB_PORT2 . "," . MONGO_DB_HOST3 . ":" . MONGO_DB_PORT3;
+			$mongoClient [$dbname] = new MongoClient ( $mongostr, array (
+					'replicaSet' => 'sdsell' 
+			) );
 		}
-		$mongoDb = $mongoClient[$dbname]->selectDB ( $dbname );
+		$mongoDb = $mongoClient [$dbname]->selectDB ( $dbname );
 		return $mongoDb;
 	}
 	protected function getMongoConnection($dbname, $table) {
