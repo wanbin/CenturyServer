@@ -65,7 +65,6 @@ class PushBase extends AdminBase {
 		return true;
 	}
 	public function getRemain($id) {
-		$rediska = new Rediska ();
 		$list = new Rediska_Key_List ( 'Redis_push_' . $id );
 		return $list->count ();
 	}
@@ -101,7 +100,6 @@ class PushBase extends AdminBase {
 		), 'users', array (
 				'time' - 1 
 		), $index * $this->onesCount, $this->onesCount, 'centurywar' );
-		$rediska = new Rediska ();
 		$list = new Rediska_Key_List ( 'Redis_push_' . $id );
 		foreach ( $ret as $key => $value ) {
 			$list [] = $value ['uid'];
