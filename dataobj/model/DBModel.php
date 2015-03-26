@@ -48,88 +48,19 @@ class DBModel {
 	
 	// 基本cache操作
 	protected function setToCache($key, $value, $expird = 0) {
-		return $this->memcache->set ( $key, $value, false, $expird );
+		global $memcache;
+		return $memcache->set ( $key, $value, false, $expird );
 	}
 	protected function getFromCache($key) {
-		return $this->memcache->get ( $key );
+		global $memcache;
+		return $memcache->get ( $key );
 	}
 	protected function delFromCache($key) {
-		return $this->memcache->delete ( $key );
+		global $memcache;
+		return $memcache->delete ( $key );
 	}
 	
-	// 基本redis操作
-	protected function setRedisHash($key, $field, $value) {
-		return $this->redis->HMSET ( $key, array (
-				$field => $value 
-		) );
-	}
-	protected function getRedisHash($key, $field) {
-		return $this->redis->HGET ( $key, $field );
-	}
-	protected function getRedisHashAll($key) {
-		return $this->redis->HGETALL ( $key );
-	}
-	protected function incrList($key, $field) {
-		return $this->redis->HINCRBY ( $key, $field, 1 );
-	}
-	protected function pushList($key, $field) {
-		return $this->redis->RPUSH ( $key, $field );
-	}
-	protected function pushListLeft($key, $field) {
-		return $this->redis->LPUSH ( $key, $field );
-	}
-	protected function getListAll($key) {
-		return $this->redis->LRANGE ( $key, 0, $this->redis->LLEN ( $key ) );
-	}
-	protected function getListRange($key, $start, $end) {
-		return $this->redis->LRANGE ( $key, $start, $end );
-	}
-	protected function getListLen($key) {
-		return $this->redis->LLEN ( $key );
-	}
-	protected function getHashLen($key) {
-		return $this->redis->HLEN ( $key );
-	}
-	protected function removeList($key, $value) {
-		return $this->redis->LREM ( $key, $value );
-	}
-	protected function removeHash($key, $value) {
-		return $this->redis->HDEL ( $key, $value );
-	}
-	protected function getListValueByIndex($key, $index) {
-		return $this->redis->LINDEX ( $key, $index );
-	}
-	protected function delRedis($key) {
-		return $this->redis->DEL ( $key );
-	}
-	protected function isExit($key, $value) {
-		return $this->redis->HEXISTS ( $key, $value );
-	}
-	
-	// 有序集合
-	protected function sortAdd($key, $souce, $member) {
-		return $this->redis->ZADD ( $key, $souce, $member );
-	}
-	protected function incrSortOne($key, $souce, $member) {
-		return $this->redis->ZINCRBY ( $key, $souce, $member );
-	}
-	protected function getSortRankLowToHigh($key, $member) {
-		return $this->redis->ZREVRANK ( $key, $member );
-	}
-	protected function getSortRank($key, $member) {
-		return $this->redis->ZRANK ( $key, $member );
-	}
-	protected function getSortValue($key, $member) {
-		return $this->redis->ZSCORE ( $key, $member );
-	}
-	protected function getRankString($key, $start, $end) {
-		return $this->redis->ZRANGE ( $key, $start, $end, true );
-	}
-	protected function getRankStringRev($key, $start, $end) {
-		return $this->redis->ZREVRANGE ( $key, $start, $end, true );
-	}
-	
-	// /////////////////////////MONGODB/////////////////////
+	/////////////////////////MONGODB/////////////////////
 	
 	// 这块mongodb 太逆天啦，我单独处理一下试试
 	protected function insertMongo($content, $collectionName, $dbname = 'centurywar') {
@@ -324,7 +255,13 @@ class DBModel {
 		}
 	}
 	protected function getIdNew($idname) {
-		return $this->redis->HINCRBY ( "REDIS_KEY_ADD_ID", $idname, 1 );
+		$list=new Rediska_Key_Hash(MONGO_DB_NAME."_REDIS_KEY_ADD_ID");
+		$ret= $list->increment($idname);
+		if ($ret < 100000) {
+			$ret += 100000;
+			$list->set ( $list->set ( $idname, $ret ) );
+		}
+		return $ret;
 	}
 	protected function getMongdb($dbname) {
 		global $mongoClient;

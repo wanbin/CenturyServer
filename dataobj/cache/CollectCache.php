@@ -12,11 +12,13 @@ class CollectCache extends CollectModel{
 		foreach ( $idarray as $key => $value ) {
 			$likeKey = $this->getLikeKey ( $value );
 			$dislikeKey = $this->getDislikeKey ( $value );
+			$hashLike = new Rediska_Key_Hash ( $likeKey );
+			$hashDisLike = new Rediska_Key_Hash ( $dislikeKey );
 			$tem = array (
-					'like' => $this->getHashLen($likeKey),
-					'dislike' => $this->getHashLen($dislikeKey),
-					'liked' => $this->isExit ( $likeKey, $this->gameuid ),
-					'disliked' => $this->isExit ( $dislikeKey, $this->gameuid ),
+					'like' => $hashLike->count (),
+					'dislike' => $hashDisLike->count (),
+					'liked' => $hashLike->exists ( $this->gameuid ),
+					'disliked' => $hashDisLike->exists ( $this->gameuid ) 
 			);
 			$ret [$value] = $tem;
 		}
@@ -31,15 +33,15 @@ class CollectCache extends CollectModel{
 	protected function like($id) {
 		$likeKey = $this->getLikeKey ( $id );
 		$likeUser = $this->getUserLikeKey ( $this->gameuid );
-		$list = new Rediska_Key_Hash ( $likeKey );
-		$hasDo = $list->exists ( $this->gameuid );
-		$list [$this->gameuid] = time ();
+		$listLike = new Rediska_Key_Hash ( $likeKey );
+		$hasDo = $listLike->exists ( $this->gameuid );
+		$listLike [$this->gameuid] = time ();
 		
-		$list = new Rediska_Key_Hash ( $likeUser );
-		$list [$id] = time ();
+		$listUser = new Rediska_Key_Hash ( $likeUser );
+		$listUser [$id] = time ();
 		// 这一块把之前用户喜欢的内容从mongo取出来
 		return array (
-				'count' => $this->getHashLen ( $likeKey ),
+				'count' => $listLike->count(),
 				'hasdo' => $hasDo 
 		);
 	}
@@ -52,14 +54,13 @@ class CollectCache extends CollectModel{
 	 */
 	protected function dislike($id) {
 		$dislikeKey = $this->getDislikeKey ( $id );
-		$this->setRedisHash ( $dislikeKey, $this->gameuid, time () );
+		$dislistLike = new Rediska_Key_Hash ( $dislikeKey );
+		$dislistLike->set($this->gameuid,time());
 		$dislikeUser = $this->getUserDislikeKey ( $this->gameuid );
 		
 		$list = new Rediska_Key_Hash($dislikeUser);
 		$list[$id]=time();
-		
-//		parent::addLike ( $id, 'dislike' );
-		return $this->getHashLen ($dislikeKey);
+		return $dislistLike->count();
 	}
 	protected function getUserListList(){
 		$likeUser = $this->getUserLikeKey ( $this->gameuid );

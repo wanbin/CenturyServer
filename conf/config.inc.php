@@ -89,4 +89,6 @@ define("SHARE",'<div class="bdsharebuttonbox"><a href="#" class="bds_tsina" data
 
 //定义是否用nodejs推送
 define('USER_NODEJS', false);
+
+define("REDIS_UID_GAMEUID", "REDIS_USER_GAMEUID_314");
 ?>
