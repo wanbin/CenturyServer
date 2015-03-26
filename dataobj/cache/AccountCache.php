@@ -43,11 +43,13 @@ class AccountCache extends AccountModel{
 	
 	public function getPushCount($gameuid){
 		$likeKey = "PUSH_COUNT";
-		return $this->getRedisHash ( $likeKey,$gameuid);
+		$list=new Rediska_Key_Hash($likeKey);
+		return $list->get($gameuid);
 	}
 	public function resetPushCount($gameuid,$count=0){
-		$likeKey = "PUSH_COUNT";
-		return $this->setRedisHash ( $likeKey, $gameuid, $count );
+		$key = "PUSH_COUNT";
+		$list=new Rediska_Key_Hash($key);
+		return $list->set($gameuid,$count);
 	}
 	
 	public function getAccountByUid($uid) {

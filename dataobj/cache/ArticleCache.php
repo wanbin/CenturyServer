@@ -70,11 +70,13 @@ class ArticleCache extends ArticleModel {
 	public function getLikeInfo($id) {
 		$likeKey= $this->getGameLikeGameKey ( $id ) ;
 		$dislikeKey= $this->getGameDisLikeGameKey ( $id ) ;
+		$listLike=new Rediska_Key_Hash($likeKey);
+		$dislistLike=new Rediska_Key_Hash($dislikeKey);
 		return array (
-				'likecount' => $this->redis->HLEN($likeKey),
-				'dislikecount' => $this->redis->HLEN($dislikeKey),
-				'isliked'=>$this->redis->HEXISTS($dislikeKey,$this->gameuid),
-				'isdisliked'=>$this->redis->HEXISTS($dislikeKey,$this->gameuid),
+				'likecount' => $listLike->count(),
+				'dislikecount' => $dislistLike->count(),
+				'isliked'=>$listLike->exists($this->gameuid),
+				'isdisliked'=>$dislistLike->exists($this->gameuid),
 		);
 	}
 	private function getGameLikeGameKey($gameid) {
