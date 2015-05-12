@@ -57,6 +57,7 @@ define('platform', 'android');
 
 
 if (IS_ONLINE) {
+	define ( 'MONGO_CLIENT', false );
 	define ( 'MONGO_DB_HOST', '10.172.239.126' );
 	define ( 'MONGO_DB_PORT', '27017' );
 	define ( 'MONGO_DB_HOST2', '10.171.59.185' );
@@ -73,6 +74,7 @@ if (IS_ONLINE) {
 	
 	
 } else {
+	define ( 'MONGO_CLIENT', false );
 	define ( 'MONGO_DB_HOST', 'localhost' );
 	define ( 'MONGO_DB_PORT', '27017' );
 	define ( 'MEMCACHE_HOST', '127.0.0.1' );
